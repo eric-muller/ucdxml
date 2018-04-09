@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+
+<project name='book-common' default='all'>
+
+  <property name="v">tr42-21</property>
+
+  <path id='classpath'>
+    <pathelement path="../external/saxon9he.jar"/>
+  </path>
+
+
+  <target name='archive'>
+    <copy file='index.xml' tofile='${v}.xml'/>
+  </target>
+
+  <target name='tohtml'>
+    <java classname="net.sf.saxon.Transform" fork="true">
+        <classpath refid="classpath"/>
+        <arg value="-s:index.xml"/>
+        <arg value="-xsl:index2tr.xsl"/>
+        <arg value="v=${v}"/>
+        <arg value="-o:/tmp/foo"/>
+    </java>
+    <java classname="net.sf.saxon.Transform" fork="true">
+        <classpath refid="classpath"/>
+        <arg value="-s:/tmp/foo"/>
+        <arg value="-xsl:tr2html.xsl"/>
+        <arg value="-o:${v}.html"/>
+    </java>
+
+  </target>
+
+
+  <target name='tornc'>
+    <java classname="net.sf.saxon.Transform" fork="true">
+        <classpath refid="classpath"/>
+        <arg value="-s:index.xml"/>
+        <arg value="-xsl:index2lp.xsl"/>
+        <arg value="-o:${v}.rnc"/>
+    </java>
+
+    <copy file='ucd.rnc' tofile='${v}.rnc'/>
+  </target>
+
+  <target name='all' depends='archive, tohtml, tornc'/>
+</project>

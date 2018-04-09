@@ -1,0 +1,1866 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+COPYRIGHT AND PERMISSION NOTICE
+
+Copyright (c) 2006-2017 Unicode Inc.
+
+All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, and/or sell copies of the Software, and to permit persons
+to whom the Software is furnished to do so, provided that the above
+copyright notice(s) and this permission notice appear in all copies of
+the Software and that both the above copyright notice(s) and this
+permission notice appear in supporting documentation.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF THIRD PARTY RIGHTS. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+HOLDERS INCLUDED IN THIS NOTICE BE LIABLE FOR ANY CLAIM, OR ANY
+SPECIAL INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER
+RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
+CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+Except as contained in this notice, the name of a copyright holder
+shall not be used in advertising or otherwise to promote the sale, use
+or other dealings in this Software without prior written authorization
+of the copyright holder.
+-->
+
+<project name='ucd' default='all' basedir='.'>
+
+  <path id='classpath'>
+    <pathelement path='src'/>
+    <pathelement path='external/saxon-6.5.5.jar'/>
+  </path>
+
+  <!--_________________________________________________________ UCD -> XML __-->
+
+  <macrodef name='ucdxml'>
+    <attribute name='v'/>
+    <attribute name='d' default='data/@{v}'/>
+    <sequential>
+      <delete dir='@{d}/xml'/>
+      <mkdir dir='@{d}/xml'/>
+      <mkdir dir='@{d}/xml'/>
+      <mkdir dir='@{d}/xmlzip'/>
+      <java classname='org.unicode.ucd.Ucd' fork='true'>
+	<jvmarg line='-Xmx1024M'/>
+	<classpath refid='classpath'/>
+	<arg value="verbosity = 2"/>
+	<arg value="a = loaducd ('@{d}/ucd', @{v}, exclude=(Unihan))"/>
+	<arg value="internalstats (a)"/>
+        <arg value="toxml (a, '@{d}/xml/ucd.nounihan.flat.xml')"/>
+        <arg value="toxml (a, '@{d}/xml/ucd.nounihan.grouped.xml', grouped)"/>
+      </java>
+      <zip destfile='@{d}/xmlzip/ucd.nounihan.flat.zip' basedir='@{d}/xml'
+           includes='ucd.nounihan.flat.xml'/>
+      <zip destfile='@{d}/xmlzip/ucd.nounihan.grouped.zip' basedir='@{d}/xml'
+           includes='ucd.nounihan.grouped.xml'/>
+
+      <java classname='org.unicode.ucd.Ucd' fork='true'>
+	<jvmarg line='-Xmx1024M'/>
+	<classpath refid='classpath'/>
+	<arg value="verbosity = 2"/>
+        <arg value="b = loaducd ('@{d}/ucd', @{v}, include=(Unihan))"/>
+	<arg value="internalstats (b)"/>
+	<arg value="toxml (b, '@{d}/xml/ucd.unihan.flat.xml')"/>
+	<arg value="toxml (b, '@{d}/xml/ucd.unihan.grouped.xml', grouped)"/>
+      </java>
+      <zip destfile='@{d}/xmlzip/ucd.unihan.flat.zip' basedir='@{d}/xml'
+           includes='ucd.unihan.flat.xml'/>
+      <zip destfile='@{d}/xmlzip/ucd.unihan.grouped.zip' basedir='@{d}/xml'
+           includes='ucd.unihan.grouped.xml'/>
+
+      <java classname='org.unicode.ucd.Ucd' fork='true'>
+	<jvmarg line='-Xmx1024M'/>
+	<classpath refid='classpath'/>
+	<arg value="verbosity = 2"/>
+        <arg value="c = loaducd ('@{d}/ucd', @{v})"/>
+	<arg value="internalstats (c)"/>
+	<arg value="toxml (c, '@{d}/xml/ucd.all.flat.xml')"/>
+	<arg value="toxml (c, '@{d}/xml/ucd.all.grouped.xml', grouped)"/>
+      </java>
+      <zip destfile='@{d}/xmlzip/ucd.all.flat.zip' basedir='@{d}/xml'
+           includes='ucd.all.flat.xml'/>
+      <zip destfile='@{d}/xmlzip/ucd.all.grouped.zip' basedir='@{d}/xml'
+           includes='ucd.all.grouped.xml'/>
+
+    </sequential>
+  </macrodef>
+
+  <target name='ucdxml-all'>
+    <ucdxml v='6.1.0'/>
+    <ucdxml v='6.0.0'/>
+    <ucdxml v='5.2.0'/>
+    <ucdxml v='5.1.0'/>
+    <ucdxml v='5.0.0'/>
+    <ucdxml v='4.1.0'/>
+    <ucdxml v='4.0.1'/>
+    <ucdxml v='4.0.0'/>
+    <ucdxml v='3.2.0'/>
+    <ucdxml v='3.1.1'/>
+    <ucdxml v='3.1.0'/>
+    <ucdxml v='3.0.1'/>
+    <ucdxml v='3.0.0'/>
+    <ucdxml v='2.1.9'/>
+    <ucdxml v='2.1.8'/>
+    <ucdxml v='2.1.5'/>
+    <ucdxml v='2.1.2'/>
+    <ucdxml v='2.0.0'/>
+  </target>
+
+  <!--_______________________________________________________ 10646 -> XML __-->
+
+  <macrodef name='isoxml'>
+    <attribute name='v'/>
+    <attribute name='d' default='data/@{v}'/>
+    <sequential>
+      <delete dir='@{d}/xml'/>
+      <mkdir dir='@{d}/xml'/>
+      <java classname='org.unicode.ucd.Ucd' fork='true'>
+	<jvmarg line='-Xmx1024M'/>
+	<classpath refid='classpath'/>
+	<arg value="verbosity = 2"/>
+	<arg value="a = loadiso ('@{d}/iso', @{v})"/>
+        <arg value="toxml (a, '@{d}/xml/ucd.unihan.flat.xml')"/>
+        <arg value="toxml (a, '@{d}/xml/ucd.unihan.grouped.xml', grouped)"/>
+      </java>
+    </sequential>
+  </macrodef>
+
+  <target name='isoxml-all'>
+    <isoxml v='iso2001'/>
+    <isoxml v='iso2003'/>
+    <isoxml v='iso2003amd1'/>
+    <isoxml v='iso2003amd2'/>
+    <isoxml v='iso2003amd3'/>
+    <isoxml v='iso2003amd4'/>
+    <isoxml v='iso2003amd5'/>
+    <isoxml v='iso2003amd6'/>
+    <isoxml v='iso2003amd7'/>
+    <isoxml v='iso2003amd8'/>
+    <isoxml v='iso2011'/>
+  </target>
+
+  <!--____________________________________________________ XML validation ___-->
+
+  <macrodef name='validate'>
+    <attribute name='f'/>
+    <attribute name='s'/>
+    <sequential>
+      <echo message='----------- validating @{f}' />
+
+      <exec executable="external/uconv.exe">
+        <arg line="-f UTF-8 -t UTF-8 -x Any-NFD -o @{f}.nfd @{f}"/>
+      </exec>
+
+      <exec executable="external/rnv.exe">
+	<arg value="@{s}"/>
+	<arg value="@{f}.nfd"/>
+      </exec>
+
+      <delete file='@{f}.nfd'/>
+
+    </sequential>
+  </macrodef>
+
+  <macrodef name='validate-ucd'>
+    <attribute name='v'/>
+    <attribute name='d' default='data/@{v}'/>
+    <attribute name='s' default='uax42/ucd.rnc'/>
+    <sequential>
+      <validate f='@{d}/xml/ucd.nounihan.grouped.xml' s='@{s}'/>
+      <validate f='@{d}/xml/ucd.unihan.grouped.xml' s='@{s}'/>
+      <validate f='@{d}/xml/ucd.all.grouped.xml' s='@{s}'/>
+      <validate f='@{d}/xml/ucd.nounihan.flat.xml' s='@{s}'/>
+      <validate f='@{d}/xml/ucd.unihan.flat.xml' s='@{s}'/>
+      <validate f='@{d}/xml/ucd.all.flat.xml' s='@{s}'/>
+    </sequential>
+  </macrodef>
+
+  <macrodef name='validate-ucd-nounihan'>
+    <attribute name='v'/>
+    <attribute name='d' default='data/@{v}'/>
+    <attribute name='s' default='uax42/ucd.rnc'/>
+    <sequential>
+      <validate f='@{d}/xml/ucd.nounihan.grouped.xml' s='@{s}'/>
+      <validate f='@{d}/xml/ucd.nounihan.flat.xml' s='@{s}'/>
+    </sequential>
+  </macrodef>
+
+  <macrodef name='validate-iso'>
+    <attribute name='v'/>
+    <attribute name='d' default='data/@{v}'/>
+    <attribute name='s' default='uax42/ucd.rnc'/>
+    <sequential>
+      <validate f='@{d}/xml/ucd.unihan.flat.xml' s='@{s}'/>
+    </sequential>
+  </macrodef>
+
+  <target name='validate-all-ucd'>
+    <validate-ucd v='5.2.0'/>
+    <validate-ucd v='5.1.0'/>
+    <validate-ucd v='5.0.0'/>
+    <validate-ucd-nounihan v='4.1.0'/>
+    <validate-ucd-nounihan v='4.0.1'/>
+    <validate-ucd-nounihan v='4.0.0'/>
+    <validate-ucd-nounihan v='3.2.0'/>
+    <validate-ucd-nounihan v='3.1.1'/>
+    <validate-ucd-nounihan v='3.1.0'/>
+    <validate-ucd-nounihan v='3.0.1'/>
+    <validate-ucd-nounihan v='3.0.0'/>
+    <validate-ucd-nounihan v='2.1.9'/>
+    <validate-ucd-nounihan v='2.1.8'/>
+    <validate-ucd-nounihan v='2.1.5'/>
+    <validate-ucd-nounihan v='2.1.2'/>
+    <validate-ucd-nounihan v='2.0.0'/>
+  </target>
+
+  <target name='validate-all-iso'>
+    <validate-iso v='iso2001'/>
+    <validate-iso v='iso2003'/>
+    <validate-iso v='iso2003amd1'/>
+    <validate-iso v='iso2003amd2'/>
+    <validate-iso v='iso2003amd3'/>
+    <validate-iso v='iso2003amd4'/>
+    <validate-iso v='iso2003amd5'/>
+    <validate-iso v='iso2003amd6'/>
+    <validate-iso v='iso2003amd7'/>
+    <validate-iso v='iso2003amd8'/>
+    <validate-iso v='iso2011'/>
+  </target>
+
+  <target name='validate-all' depends='validate-all-ucd, validate-all-iso'/>
+
+  <!--_____________________________________________________________ diffs ___-->
+
+  <macrodef name='diff'>
+    <attribute name='v1'/>
+    <attribute name='d1' default='data/@{v1}'/>
+    <attribute name='v2'/>
+    <attribute name='d2' default='data/@{v2}'/>
+    <attribute name='f'/>
+    <sequential>
+      <mkdir dir='data/diffs'/>
+      <java classname='org.unicode.ucd.Ucd' fork='true'>
+	<jvmarg line='-Xmx1600M'/>
+	<classpath refid='classpath'/>
+	<arg value="verbosity = 2"/>
+	<arg value="v1 = loadxml ('@{d1}/xml/ucd.@{f}.grouped.xml')"/>
+	<arg value="v2 = loadxml ('@{d2}/xml/ucd.@{f}.grouped.xml')"/>
+	<arg value="diff (v1, v2, 'data/diffs/@{v1}-@{v2}.@{f}.summary.diffs', details=0)"/>
+	<arg value="diff (v1, v2, 'data/diffs/@{v1}-@{v2}.@{f}.changes.diffs', details=1)"/>
+	<arg value="diff (v1, v2, 'data/diffs/@{v1}-@{v2}.@{f}.all.diffs', details=2)"/>
+      </java>
+    </sequential>
+  </macrodef>
+
+  <macrodef name='difffull'>
+    <attribute name='v1'/>
+    <attribute name='v2'/>
+    <sequential>
+      <diff v1='@{v1}' v2='@{v2}' f='nounihan'/>
+      <diff v1='@{v1}' v2='@{v2}' f='unihan'/>
+      <diff v1='@{v1}' v2='@{v2}' f='all'/>
+    </sequential>
+  </macrodef>
+
+  <macrodef name='diffunihan'>
+    <attribute name='v1'/>
+    <attribute name='v2'/>
+    <sequential>
+      <diff v1='@{v1}' v2='@{v2}' f='unihan'/>
+    </sequential>
+  </macrodef>
+
+
+  <target name='diffucd-all'>
+    <difffull v1='5.1.0' v2='5.2.0'/>
+    <difffull v1='5.0.0' v2='5.1.0'/>
+    <difffull v1='4.1.0' v2='5.0.0'/>
+    <difffull v1='4.0.1' v2='4.1.0'/>
+    <difffull v1='4.0.0' v2='4.0.1'/>
+    <difffull v1='3.2.0' v2='4.0.0'/>
+    <difffull v1='3.1.1' v2='3.2.0'/>
+    <difffull v1='3.1.0' v2='3.1.1'/>
+    <difffull v1='3.0.1' v2='3.1.0'/>
+    <difffull v1='3.0.0' v2='3.0.1'/>
+    <difffull v1='2.1.9' v2='3.0.0'/>
+    <difffull v1='2.1.8' v2='2.1.9'/>
+    <difffull v1='2.1.5' v2='2.1.8'/>
+    <difffull v1='2.1.2' v2='2.1.5'/>
+    <difffull v1='2.0.0' v2='2.1.2'/>
+  </target>
+
+  <target name='diffiso-all'>
+    <diffunihan v1='iso2003amd8' v2='iso2011'/>
+    <diffunihan v1='iso2003amd7' v2='iso2003amd8'/>
+    <diffunihan v1='iso2003amd6' v2='iso2003amd7'/>
+    <diffunihan v1='iso2003amd5' v2='iso2003amd6'/>
+    <diffunihan v1='iso2003amd4' v2='iso2003amd5'/>
+    <diffunihan v1='iso2003amd3' v2='iso2003amd4'/>
+    <diffunihan v1='iso2003amd2' v2='iso2003amd3'/>
+    <diffunihan v1='iso2003amd1' v2='iso2003amd2'/>
+    <diffunihan v1='iso2003'     v2='iso2003amd1'/>
+    <diffunihan v1='iso2001'     v2='iso2003'/>
+  </target>
+
+  <target name='diffisoucd-all'>
+    <diffunihan v1='iso2011'     v2='6.0.0'/>
+    <diffunihan v1='iso2003amd6' v2='5.2.0'/>
+    <diffunihan v1='iso2003amd4' v2='5.1.0'/>
+    <diffunihan v1='iso2003amd2' v2='5.0.0'/>
+    <diffunihan v1='iso2003amd1' v2='4.1.0'/>
+    <diffunihan v1='iso2003'     v2='4.0.1'/>
+    <diffunihan v1='iso2001'     v2='3.2.0'/>
+    <diffunihan v1='iso2001'     v2='3.1.1'/>
+    <diffunihan v1='iso2001'     v2='3.1.0'/>
+    <diffunihan v1='iso2001'     v2='3.0.0'/>
+  </target>
+
+
+  <!--______________________________________ getting UCD from unicode.org ___-->
+
+  <property name='Public' value='http://www.unicode.org/Public'/>
+
+  <target name='download-2.0.0'>
+    <delete dir='data/2.0.0'/>
+    <mkdir dir='data/2.0.0/ucd'/>
+
+    <get src='${Public}/2.0-Update/ArabicShaping-1.txt'                                      dest='data/2.0.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/2.0-Update/Blocks-1.txt'                                             dest='data/2.0.0/ucd/Blocks.txt'/>
+    <get src='${Public}/2.0-Update/Index-1.txt'                                              dest='data/2.0.0/ucd/Index.txt'/>
+    <get src='${Public}/2.0-Update/Jamo-1.txt'                                               dest='data/2.0.0/ucd/Jamo.txt'/>
+    <get src='${Public}/2.0-Update/NamesList-1.txt'                                          dest='data/2.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/2.0-Update/Props-2.0.14.txt'                                         dest='data/2.0.0/ucd/Props.txt'/>
+    <get src='${Public}/2.0-Update/PropList-2.0.14.txt'                                      dest='data/2.0.0/ucd/PropList.txt'/>
+    <get src='${Public}/2.0-Update/ReadMe-2.0.14.txt'                                        dest='data/2.0.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/2.0-Update/UnicodeData-2.0.14.txt'                                   dest='data/2.0.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/2.0-Update/Unihan-1.txt'                                             dest='data/2.0.0/ucd/Unihan.txt'/>
+  </target>
+
+  <target name='download-2.1.2'>
+    <delete dir='data/2.1.2'/>
+    <mkdir dir='data/2.1.2/ucd'/>
+
+    <get src='${Public}/2.0-Update/ArabicShaping-1.txt'                                      dest='data/2.1.2/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/2.0-Update/Blocks-1.txt'                                             dest='data/2.1.2/ucd/Blocks.txt'/>
+    <get src='${Public}/2.0-Update/Index-1.txt'                                              dest='data/2.1.2/ucd/Index.txt'/>
+    <get src='${Public}/2.0-Update/Jamo-1.txt'                                               dest='data/2.1.2/ucd/Jamo.txt'/>
+    <get src='${Public}/2.0-Update/NamesList-1.txt'                                          dest='data/2.1.2/ucd/NamesList.txt'/>
+    <get src='${Public}/2.0-Update/Props-2.0.14.txt'                                         dest='data/2.1.2/ucd/Props.txt'/>
+    <get src='${Public}/2.1-Update/PropList-2.1.2.txt'                                       dest='data/2.1.2/ucd/PropList.txt'/>
+    <get src='${Public}/2.1-Update/ReadMe-2.1.1.txt'                                         dest='data/2.1.2/ucd/ReadMe.txt'/>
+    <get src='${Public}/2.1-Update/UnicodeData-2.1.2.txt'                                    dest='data/2.1.2/ucd/UnicodeData.txt'/>
+    <get src='${Public}/2.1-Update/Unihan-2.txt'                                             dest='data/2.1.2/ucd/Unihan.txt'/>
+  </target>
+
+  <target name='download-2.1.5'>
+    <delete dir='data/2.1.5'/>
+    <mkdir dir='data/2.1.5/ucd'/>
+
+    <get src='${Public}/2.0-Update/ArabicShaping-1.txt'                                      dest='data/2.1.5/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/2.0-Update/Blocks-1.txt'                                             dest='data/2.1.5/ucd/Blocks.txt'/>
+    <get src='${Public}/2.0-Update/Index-1.txt'                                              dest='data/2.1.5/ucd/Index.txt'/>
+    <get src='${Public}/2.0-Update/Jamo-1.txt'                                               dest='data/2.1.5/ucd/Jamo.txt'/>
+    <get src='${Public}/2.0-Update/NamesList-1.txt'                                          dest='data/2.1.5/ucd/NamesList.txt'/>
+    <get src='${Public}/2.0-Update/Props-2.0.14.txt'                                         dest='data/2.1.5/ucd/Props.txt'/>
+    <get src='${Public}/2.1-Update/PropList-2.1.2.txt'                                       dest='data/2.1.5/ucd/PropList.txt'/>
+    <get src='${Public}/2.1-Update2/ReadMe-2.1.5.txt'                                        dest='data/2.1.5/ucd/ReadMe.txt'/>
+    <get src='${Public}/2.1-Update2/UnicodeData-2.1.5.txt'                                   dest='data/2.1.5/ucd/UnicodeData.txt'/>
+    <get src='${Public}/2.1-Update/Unihan-2.txt'                                             dest='data/2.1.5/ucd/Unihan.txt'/>
+  </target>
+
+  <target name='download-2.1.8'>
+    <delete dir='data/2.1.8'/>
+    <mkdir dir='data/2.1.8/ucd'/>
+
+    <get src='${Public}/2.0-Update/ArabicShaping-1.txt'                                      dest='data/2.1.8/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/2.0-Update/Blocks-1.txt'                                             dest='data/2.1.8/ucd/Blocks.txt'/>
+    <get src='${Public}/2.0-Update/Index-1.txt'                                              dest='data/2.1.8/ucd/Index.txt'/>
+    <get src='${Public}/2.0-Update/Jamo-1.txt'                                               dest='data/2.1.8/ucd/Jamo.txt'/>
+    <get src='${Public}/2.0-Update/NamesList-1.txt'                                          dest='data/2.1.8/ucd/NamesList.txt'/>
+    <get src='${Public}/2.0-Update/Props-2.0.14.txt'                                         dest='data/2.1.8/ucd/Props.txt'/>
+    <get src='${Public}/2.1-Update3/PropList-2.1.8.txt'                                      dest='data/2.1.8/ucd/PropList.txt'/>
+    <get src='${Public}/2.1-Update3/ReadMe-2.1.8.txt'                                        dest='data/2.1.8/ucd/ReadMe.txt'/>
+    <get src='${Public}/2.1-Update3/SpecialCasing-1.txt'                                     dest='data/2.1.8/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/2.1-Update3/UnicodeData-2.1.8.txt'                                   dest='data/2.1.8/ucd/UnicodeData.txt'/>
+    <get src='${Public}/2.1-Update/Unihan-2.txt'                                             dest='data/2.1.8/ucd/Unihan.txt'/>
+  </target>
+
+  <target name='download-2.1.9'>
+    <delete dir='data/2.1.9'/>
+    <mkdir dir='data/2.1.9/ucd'/>
+
+    <get src='${Public}/2.0-Update/ArabicShaping-1.txt'                                      dest='data/2.1.9/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/2.1-Update4/Blocks-2.txt'                                            dest='data/2.1.9/ucd/Blocks.txt'/>
+    <get src='${Public}/2.0-Update/Index-1.txt'                                              dest='data/2.1.9/ucd/Index.txt'/>
+    <get src='${Public}/2.1-Update4/Jamo-2.txt'                                              dest='data/2.1.9/ucd/Jamo.txt'/>
+    <get src='${Public}/2.0-Update/NamesList-1.txt'                                          dest='data/2.1.9/ucd/NamesList.txt'/>
+    <get src='${Public}/2.0-Update/Props-2.0.14.txt'                                         dest='data/2.1.9/ucd/Props.txt'/>
+    <get src='${Public}/2.1-Update4/PropList-2.1.9.txt'                                      dest='data/2.1.9/ucd/PropList.txt'/>
+    <get src='${Public}/2.1-Update4/ReadMe-2.1.9.txt'                                        dest='data/2.1.9/ucd/ReadMe.txt'/>
+    <get src='${Public}/2.1-Update4/SpecialCasing-2.txt'                                     dest='data/2.1.9/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/2.1-Update4/UnicodeData-2.1.9.txt'                                   dest='data/2.1.9/ucd/UnicodeData.txt'/>
+    <get src='${Public}/2.1-Update/Unihan-2.txt'                                             dest='data/2.1.9/ucd/Unihan.txt'/>
+  </target>
+
+  <target name='download-3.0.0'>
+    <delete dir='data/3.0.0'/>
+    <mkdir dir='data/3.0.0/ucd'/>
+
+    <get src='${Public}/3.0-Update/ArabicShaping-2.txt'                                      dest='data/3.0.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/3.0-Update/Blocks-3.txt'                                             dest='data/3.0.0/ucd/Blocks.txt'/>
+    <get src='${Public}/3.0-Update/CompositionExclusions-1.txt'                              dest='data/3.0.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/3.0-Update/EastAsianWidth-3.txt'                                     dest='data/3.0.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/3.0-Update/Index-3.0.0.txt'                                          dest='data/3.0.0/ucd/Index.txt'/>
+    <get src='${Public}/3.0-Update/Jamo-2.txt'                                               dest='data/3.0.0/ucd/Jamo.txt'/>
+    <get src='${Public}/3.0-Update/LineBreak-5.txt'                                          dest='data/3.0.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/3.0-Update/NamesList-1.html'                                         dest='data/3.0.0/ucd/NamesList.html'/>
+    <get src='${Public}/3.0-Update/NamesList-3.0.0.txt'                                      dest='data/3.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/3.0-Update/PropList-3.0.0.txt'                                       dest='data/3.0.0/ucd/PropList.txt'/>
+    <get src='${Public}/3.0-Update/ReadMe-3.0.0.txt'                                         dest='data/3.0.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/3.0-Update/SpecialCasing-2.txt'                                      dest='data/3.0.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/3.0-Update/UnicodeCharacterDatabase-3.0.0.html'                      dest='data/3.0.0/ucd/UnicodeCharacterDatabase.html'/>
+    <get src='${Public}/3.0-Update/UnicodeData-3.0.0.html'                                   dest='data/3.0.0/ucd/UnicodeData.html'/>
+    <get src='${Public}/3.0-Update/UnicodeData-3.0.0.txt'                                    dest='data/3.0.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/3.0-Update/Unihan-3.txt'                                             dest='data/3.0.0/ucd/Unihan.txt'/>
+  </target>
+
+  <target name='download-3.0.1'>
+    <delete dir='data/3.0.1'/>
+    <mkdir dir='data/3.0.1/ucd'/>
+
+    <get src='${Public}/3.0-Update1/ArabicShaping-3.txt'                                     dest='data/3.0.1/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/3.0-Update1/BidiMirroring-1.txt'                                     dest='data/3.0.1/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/3.0-Update/Blocks-3.txt'                                             dest='data/3.0.1/ucd/Blocks.txt'/>
+    <get src='${Public}/3.0-Update1/CaseFolding-2.txt'                                       dest='data/3.0.1/ucd/CaseFolding.txt'/>
+    <get src='${Public}/3.0-Update1/CompositionExclusions-2.txt'                             dest='data/3.0.1/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/3.0-Update/EastAsianWidth-3.txt'                                     dest='data/3.0.1/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/3.0-Update/Index-3.0.0.txt'                                          dest='data/3.0.1/ucd/Index.txt'/>
+    <get src='${Public}/3.0-Update1/Jamo-3.txt'                                              dest='data/3.0.1/ucd/Jamo.txt'/>
+    <get src='${Public}/3.0-Update/LineBreak-5.txt'                                          dest='data/3.0.1/ucd/LineBreak.txt'/>
+    <get src='${Public}/3.0-Update/NamesList-1.html'                                         dest='data/3.0.1/ucd/NamesList.html'/>
+    <get src='${Public}/3.0-Update/NamesList-3.0.0.txt'                                      dest='data/3.0.1/ucd/NamesList.txt'/>
+    <get src='${Public}/3.0-Update1/NormalizationTest-3.0.1.txt'                             dest='data/3.0.1/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/3.0-Update1/PropList-3.0.1.txt'                                      dest='data/3.0.1/ucd/PropList.txt'/>
+    <get src='${Public}/3.0-Update1/ReadMe-3.0.1.txt'                                        dest='data/3.0.1/ucd/ReadMe.txt'/>
+    <get src='${Public}/3.0-Update1/SpecialCasing-3.txt'                                     dest='data/3.0.1/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/3.0-Update1/UnicodeCharacterDatabase-3.0.1.html'                     dest='data/3.0.1/ucd/UnicodeCharacterDatabase.html'/>
+    <get src='${Public}/3.0-Update1/UnicodeData-3.0.1.html'                                  dest='data/3.0.1/ucd/UnicodeData.html'/>
+    <get src='${Public}/3.0-Update1/UnicodeData-3.0.1.txt'                                   dest='data/3.0.1/ucd/UnicodeData.txt'/>
+    <get src='${Public}/3.0-Update/Unihan-3.txt'                                             dest='data/3.0.1/ucd/Unihan.txt'/>
+  </target>
+
+  <target name='download-3.1.0'>
+    <delete dir='data/3.1.0'/>
+    <mkdir dir='data/3.1.0/ucd'/>
+
+    <get src='${Public}/3.0-Update1/ArabicShaping-3.txt'                                     dest='data/3.1.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/3.0-Update1/BidiMirroring-1.txt'                                     dest='data/3.1.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/3.1-Update/Blocks-4.txt'                                             dest='data/3.1.0/ucd/Blocks.txt'/>
+    <get src='${Public}/3.1-Update/CaseFolding-3.txt'                                        dest='data/3.1.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/3.1-Update/CompositionExclusions-3.txt'                              dest='data/3.1.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/3.1-Update/DerivedBinaryProperties-3.1.0.txt'                        dest='data/3.1.0/ucd/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/3.1-Update/DerivedCombiningClass-3.1.0.txt'                          dest='data/3.1.0/ucd/DerivedCombiningClass.txt'/>
+    <get src='${Public}/3.1-Update/DerivedCoreProperties-3.1.0.txt'                          dest='data/3.1.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/3.1-Update/DerivedDecompositionType-3.1.0.txt'                       dest='data/3.1.0/ucd/DerivedDecompositionType.txt'/>
+    <get src='${Public}/3.1-Update/DerivedEastAsianWidth-3.1.0.txt'                          dest='data/3.1.0/ucd/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/3.1-Update/DerivedGeneralCategory-3.1.0.txt'                         dest='data/3.1.0/ucd/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/3.1-Update/DerivedJoiningGroup-3.1.0.txt'                            dest='data/3.1.0/ucd/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/3.1-Update/DerivedJoiningType-3.1.0.txt'                             dest='data/3.1.0/ucd/DerivedJoiningType.txt'/>
+    <get src='${Public}/3.1-Update/DerivedLineBreak-3.1.0.txt'                               dest='data/3.1.0/ucd/DerivedLineBreak.txt'/>
+    <get src='${Public}/3.1-Update/DerivedNormalizationProperties-3.1.0.txt'                 dest='data/3.1.0/ucd/DerivedNormalizationProperties.txt'/>
+    <get src='${Public}/3.1-Update/DerivedNumericType-3.1.0.txt'                             dest='data/3.1.0/ucd/DerivedNumericType.txt'/>
+    <get src='${Public}/3.1-Update/DerivedNumericValues-3.1.0.txt'                           dest='data/3.1.0/ucd/DerivedNumericValues.txt'/>
+    <get src='${Public}/3.1-Update/DerivedProperties-3.1.0.html'                             dest='data/3.1.0/ucd/DerivedProperties.html'/>
+    <get src='${Public}/3.1-Update/EastAsianWidth-4.txt'                                     dest='data/3.1.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/3.0-Update/Index-3.0.0.txt'                                          dest='data/3.1.0/ucd/Index.txt'/>
+    <get src='${Public}/3.0-Update1/Jamo-3.txt'                                              dest='data/3.1.0/ucd/Jamo.txt'/>
+    <get src='${Public}/3.1-Update/LineBreak-6.txt'                                          dest='data/3.1.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/3.1-Update/NamesList-3.1.0.html'                                     dest='data/3.1.0/ucd/NamesList.html'/>
+    <get src='${Public}/3.1-Update/NamesList-3.1.0.txt'                                      dest='data/3.1.0/ucd/NamesList.txt'/>
+    <get src='${Public}/3.1-Update/NormalizationTest-3.1.0.txt'                              dest='data/3.1.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/3.1-Update/PropList-3.1.0.html'                                      dest='data/3.1.0/ucd/PropList.html'/>
+    <get src='${Public}/3.1-Update/PropList-3.1.0.txt'                                       dest='data/3.1.0/ucd/PropList.txt'/>
+    <get src='${Public}/3.1-Update/ReadMe-3.1.0.txt'                                         dest='data/3.1.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/3.1-Update/Scripts-3.1.0.txt'                                        dest='data/3.1.0/ucd/Scripts.txt'/>
+    <get src='${Public}/3.1-Update/SpecialCasing-4.txt'                                      dest='data/3.1.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/3.1-Update/UnicodeCharacterDatabase-3.1.0.html'                      dest='data/3.1.0/ucd/UnicodeCharacterDatabase.html'/>
+    <get src='${Public}/3.1-Update/UnicodeData-3.1.0.html'                                   dest='data/3.1.0/ucd/UnicodeData.html'/>
+    <get src='${Public}/3.1-Update/UnicodeData-3.1.0.txt'                                    dest='data/3.1.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/3.1-Update/Unihan-3.1.txt'                                           dest='data/3.1.0/ucd/Unihan.txt'/>
+  </target>
+
+  <target name='download-3.1.1'>
+    <delete dir='data/3.1.1'/>
+    <mkdir dir='data/3.1.1/ucd'/>
+
+    <get src='${Public}/3.1-Update1/ArabicShaping-4.txt'                                     dest='data/3.1.1/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/3.0-Update1/BidiMirroring-1.txt'                                     dest='data/3.1.1/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/3.1-Update/Blocks-4.txt'                                             dest='data/3.1.1/ucd/Blocks.txt'/>
+    <get src='${Public}/3.1-Update1/CaseFolding-4.txt'                                       dest='data/3.1.1/ucd/CaseFolding.txt'/>
+    <get src='${Public}/3.1-Update/CompositionExclusions-3.txt'                              dest='data/3.1.1/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/3.1-Update1/DerivedBidiClass-3.1.1.txt'                              dest='data/3.1.1/ucd/DerivedBidiClass.txt'/>
+    <get src='${Public}/3.1-Update/DerivedBinaryProperties-3.1.0.txt'                        dest='data/3.1.1/ucd/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/3.1-Update/DerivedCombiningClass-3.1.0.txt'                          dest='data/3.1.1/ucd/DerivedCombiningClass.txt'/>
+    <get src='${Public}/3.1-Update/DerivedCoreProperties-3.1.0.txt'                          dest='data/3.1.1/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/3.1-Update/DerivedDecompositionType-3.1.0.txt'                       dest='data/3.1.1/ucd/DerivedDecompositionType.txt'/>
+    <get src='${Public}/3.1-Update1/DerivedEastAsianWidth-3.1.1.txt'                         dest='data/3.1.1/ucd/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/3.1-Update/DerivedGeneralCategory-3.1.0.txt'                         dest='data/3.1.1/ucd/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/3.1-Update1/DerivedJoiningGroup-3.1.1.txt'                           dest='data/3.1.1/ucd/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/3.1-Update1/DerivedJoiningType-3.1.1.txt'                            dest='data/3.1.1/ucd/DerivedJoiningType.txt'/>
+    <get src='${Public}/3.1-Update/DerivedLineBreak-3.1.0.txt'                               dest='data/3.1.1/ucd/DerivedLineBreak.txt'/>
+    <get src='${Public}/3.1-Update/DerivedNormalizationProperties-3.1.0.txt'                 dest='data/3.1.1/ucd/DerivedNormalizationProperties.txt'/>
+    <get src='${Public}/3.1-Update/DerivedNumericType-3.1.0.txt'                             dest='data/3.1.1/ucd/DerivedNumericType.txt'/>
+    <get src='${Public}/3.1-Update/DerivedNumericValues-3.1.0.txt'                           dest='data/3.1.1/ucd/DerivedNumericValues.txt'/>
+    <get src='${Public}/3.1-Update1/DerivedProperties-3.1.1.html'                            dest='data/3.1.1/ucd/DerivedProperties.html'/>
+    <get src='${Public}/3.1-Update1/EastAsianWidth-5.txt'                                    dest='data/3.1.1/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/3.0-Update/Index-3.0.0.txt'                                          dest='data/3.1.1/ucd/Index.txt'/>
+    <get src='${Public}/3.0-Update1/Jamo-3.txt'                                              dest='data/3.1.1/ucd/Jamo.txt'/>
+    <get src='${Public}/3.1-Update/LineBreak-6.txt'                                          dest='data/3.1.1/ucd/LineBreak.txt'/>
+    <get src='${Public}/3.1-Update/NamesList-3.1.0.html'                                     dest='data/3.1.1/ucd/NamesList.html'/>
+    <get src='${Public}/3.1-Update/NamesList-3.1.0.txt'                                      dest='data/3.1.1/ucd/NamesList.txt'/>
+    <get src='${Public}/3.1-Update1/NormalizationTest-3.1.1.txt'                             dest='data/3.1.1/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/3.1-Update1/PropList-3.1.1.html'                                     dest='data/3.1.1/ucd/PropList.html'/>
+    <get src='${Public}/3.1-Update1/PropList-3.1.1.txt'                                      dest='data/3.1.1/ucd/PropList.txt'/>
+    <get src='${Public}/3.1-Update1/ReadMe-3.1.1.txt'                                        dest='data/3.1.1/ucd/ReadMe.txt'/>
+    <get src='${Public}/3.1-Update/Scripts-3.1.0.txt'                                        dest='data/3.1.1/ucd/Scripts.txt'/>
+    <get src='${Public}/3.1-Update1/SpecialCasing-5.txt'                                     dest='data/3.1.1/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/3.1-Update/UnicodeCharacterDatabase-3.1.0.html'                      dest='data/3.1.1/ucd/UnicodeCharacterDatabase.html'/>
+    <get src='${Public}/3.1-Update/UnicodeData-3.1.0.html'                                   dest='data/3.1.1/ucd/UnicodeData.html'/>
+    <get src='${Public}/3.1-Update/UnicodeData-3.1.0.txt'                                    dest='data/3.1.1/ucd/UnicodeData.txt'/>
+    <get src='${Public}/3.1-Update1/Unihan-3.1.1.txt'                                        dest='data/3.1.1/ucd/Unihan.txt'/>
+  </target>
+
+  <target name='download-3.2.0'>
+    <delete dir='data/3.2.0'/>
+    <mkdir dir='data/3.2.0/ucd'/>
+    <mkdir dir='data/3.2.0/ucd/extracted'/>
+    <mkdir dir='data/3.2.0/ucd/images'/>
+
+    <get src='${Public}/3.2-Update/ArabicShaping-3.2.0.txt'                                  dest='data/3.2.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/3.2-Update/BidiMirroring-3.2.0.txt'                                  dest='data/3.2.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/3.2-Update/Blocks-3.2.0.txt'                                         dest='data/3.2.0/ucd/Blocks.txt'/>
+    <get src='${Public}/3.2-Update/CaseFolding-3.2.0.txt'                                    dest='data/3.2.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/3.2-Update/CompositionExclusions-3.2.0.txt'                          dest='data/3.2.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/3.2-Update/DerivedAge-3.2.0.txt'                                     dest='data/3.2.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/3.2-Update/DerivedCoreProperties-3.2.0.txt'                          dest='data/3.2.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/3.2-Update/DerivedNormalizationProps-3.2.0.txt'                      dest='data/3.2.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/3.2-Update/DerivedProperties-3.2.0.html'                             dest='data/3.2.0/ucd/DerivedProperties.html'/>
+    <get src='${Public}/3.2-Update/EastAsianWidth-3.2.0.txt'                                 dest='data/3.2.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/3.2-Update/Index-3.2.0.txt'                                          dest='data/3.2.0/ucd/Index.txt'/>
+    <get src='${Public}/3.2-Update/Jamo-3.2.0.txt'                                           dest='data/3.2.0/ucd/Jamo.txt'/>
+    <get src='${Public}/3.2-Update/LineBreak-3.2.0.txt'                                      dest='data/3.2.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/3.2-Update/NamesList-3.2.0.html'                                     dest='data/3.2.0/ucd/NamesList.html'/>
+    <get src='${Public}/3.2-Update/NamesList-3.2.0.txt'                                      dest='data/3.2.0/ucd/NamesList.txt'/>
+    <get src='${Public}/3.2-Update/NormalizationCorrections-3.2.0.txt'                       dest='data/3.2.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/3.2-Update/NormalizationTest-3.2.0.txt'                              dest='data/3.2.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/3.2-Update/PropList-3.2.0.html'                                      dest='data/3.2.0/ucd/PropList.html'/>
+    <get src='${Public}/3.2-Update/PropList-3.2.0.txt'                                       dest='data/3.2.0/ucd/PropList.txt'/>
+    <get src='${Public}/3.2-Update/PropertyAliases-3.2.0.txt'                                dest='data/3.2.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/3.2-Update/PropertyValueAliases-3.2.0.txt'                           dest='data/3.2.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/3.2-Update/ReadMe-3.2.0.txt'                                         dest='data/3.2.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/3.2-Update/Scripts-3.2.0.txt'                                        dest='data/3.2.0/ucd/Scripts.txt'/>
+    <get src='${Public}/3.2-Update/SpecialCasing-3.2.0.txt'                                  dest='data/3.2.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/3.2-Update/StandardizedVariants-3.2.0.html'                          dest='data/3.2.0/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/3.2-Update/UnicodeCharacterDatabase-3.2.0.html'                      dest='data/3.2.0/ucd/UnicodeCharacterDatabase.html'/>
+    <get src='${Public}/3.2-Update/UnicodeData-3.2.0.html'                                   dest='data/3.2.0/ucd/UnicodeData.html'/>
+    <get src='${Public}/3.2-Update/UnicodeData-3.2.0.txt'                                    dest='data/3.2.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/3.2-Update/Unihan-3.2.0.txt'                                         dest='data/3.2.0/ucd/Unihan.txt'/>
+
+    <get src='${Public}/3.2-Update/extracted/DerivedBidiClass-3.2.0.txt'                     dest='data/3.2.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/3.2-Update/extracted/DerivedBinaryProperties-3.2.0.txt'              dest='data/3.2.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/3.2-Update/extracted/DerivedCombiningClass-3.2.0.txt'                dest='data/3.2.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/3.2-Update/extracted/DerivedDecompositionType-3.2.0.txt'             dest='data/3.2.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/3.2-Update/extracted/DerivedEastAsianWidth-3.2.0.txt'                dest='data/3.2.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/3.2-Update/extracted/DerivedGeneralCategory-3.2.0.txt'               dest='data/3.2.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/3.2-Update/extracted/DerivedJoiningGroup-3.2.0.txt'                  dest='data/3.2.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/3.2-Update/extracted/DerivedJoiningType-3.2.0.txt'                   dest='data/3.2.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/3.2-Update/extracted/DerivedLineBreak-3.2.0.txt'                     dest='data/3.2.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/3.2-Update/extracted/DerivedNumericType-3.2.0.txt'                   dest='data/3.2.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/3.2-Update/extracted/DerivedNumericValues-3.2.0.txt'                 dest='data/3.2.0/ucd/extracted/DerivedNumericValues.txt'/>
+
+    <get src='${Public}/3.2-Update/images/U-2225-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2225-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2229-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2229-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-222A-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-222A-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2268-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2268-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2269-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2269-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2272-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2272-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2273-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2273-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2278-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2278-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2279-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2279-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-228A-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-228A-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-228B-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-228B-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2293-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2293-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2294-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2294-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2295-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2295-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2297-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2297-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-229C-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-229C-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-22DA-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-22DA-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-22DB-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-22DB-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2A3C-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2A3C-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2A3D-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2A3D-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2A9D-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2A9D-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2A9E-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2A9E-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2AAC-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2AAC-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2AAD-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2AAD-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2ACB-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2ACB-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U-2ACC-FE00.jpg'                                   dest='data/3.2.0/ucd/images/U-2ACC-FE00.jpg'/>
+    <get src='${Public}/3.2-Update/images/U1820.gif'                                         dest='data/3.2.0/ucd/images/U1820.gif'/>
+    <get src='${Public}/3.2-Update/images/U1820180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U1820180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1820180Bisol.gif'                                 dest='data/3.2.0/ucd/images/U1820180Bisol.gif'/>
+    <get src='${Public}/3.2-Update/images/U1820180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1820180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1820180Cmedi.gif'                                 dest='data/3.2.0/ucd/images/U1820180Cmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1821.gif'                                         dest='data/3.2.0/ucd/images/U1821.gif'/>
+    <get src='${Public}/3.2-Update/images/U1821180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U1821180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1821180Binit.gif'                                 dest='data/3.2.0/ucd/images/U1821180Binit.gif'/>
+    <get src='${Public}/3.2-Update/images/U1822.gif'                                         dest='data/3.2.0/ucd/images/U1822.gif'/>
+    <get src='${Public}/3.2-Update/images/U1822180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1822180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1823.gif'                                         dest='data/3.2.0/ucd/images/U1823.gif'/>
+    <get src='${Public}/3.2-Update/images/U1823180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U1823180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1823180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1823180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1824.gif'                                         dest='data/3.2.0/ucd/images/U1824.gif'/>
+    <get src='${Public}/3.2-Update/images/U1824180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1824180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1825.gif'                                         dest='data/3.2.0/ucd/images/U1825.gif'/>
+    <get src='${Public}/3.2-Update/images/U1825180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U1825180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1825180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1825180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1825180Cmedi.gif'                                 dest='data/3.2.0/ucd/images/U1825180Cmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1826.gif'                                         dest='data/3.2.0/ucd/images/U1826.gif'/>
+    <get src='${Public}/3.2-Update/images/U1826180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U1826180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1826180Bisol.gif'                                 dest='data/3.2.0/ucd/images/U1826180Bisol.gif'/>
+    <get src='${Public}/3.2-Update/images/U1826180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1826180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1826180Cmedi.gif'                                 dest='data/3.2.0/ucd/images/U1826180Cmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1828.gif'                                         dest='data/3.2.0/ucd/images/U1828.gif'/>
+    <get src='${Public}/3.2-Update/images/U1828180Binit.gif'                                 dest='data/3.2.0/ucd/images/U1828180Binit.gif'/>
+    <get src='${Public}/3.2-Update/images/U1828180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1828180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1828180Cmedi.gif'                                 dest='data/3.2.0/ucd/images/U1828180Cmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1828180Dmedi.gif'                                 dest='data/3.2.0/ucd/images/U1828180Dmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U182A.gif'                                         dest='data/3.2.0/ucd/images/U182A.gif'/>
+    <get src='${Public}/3.2-Update/images/U182A180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U182A180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U182C.gif'                                         dest='data/3.2.0/ucd/images/U182C.gif'/>
+    <get src='${Public}/3.2-Update/images/U182C180Binit.gif'                                 dest='data/3.2.0/ucd/images/U182C180Binit.gif'/>
+    <get src='${Public}/3.2-Update/images/U182C180Bisolfem.gif'                              dest='data/3.2.0/ucd/images/U182C180Bisolfem.gif'/>
+    <get src='${Public}/3.2-Update/images/U182C180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U182C180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U182C180Cmedi.gif'                                 dest='data/3.2.0/ucd/images/U182C180Cmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U182C180Dmedi.gif'                                 dest='data/3.2.0/ucd/images/U182C180Dmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U182D.gif'                                         dest='data/3.2.0/ucd/images/U182D.gif'/>
+    <get src='${Public}/3.2-Update/images/U182D180Bfinafem.gif'                              dest='data/3.2.0/ucd/images/U182D180Bfinafem.gif'/>
+    <get src='${Public}/3.2-Update/images/U182D180Binit.gif'                                 dest='data/3.2.0/ucd/images/U182D180Binit.gif'/>
+    <get src='${Public}/3.2-Update/images/U182D180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U182D180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U182D180Cmedi.gif'                                 dest='data/3.2.0/ucd/images/U182D180Cmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U182D180Dmedifem.gif'                              dest='data/3.2.0/ucd/images/U182D180Dmedifem.gif'/>
+    <get src='${Public}/3.2-Update/images/U1830.gif'                                         dest='data/3.2.0/ucd/images/U1830.gif'/>
+    <get src='${Public}/3.2-Update/images/U1830180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U1830180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1830180Cfina.gif'                                 dest='data/3.2.0/ucd/images/U1830180Cfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1832.gif'                                         dest='data/3.2.0/ucd/images/U1832.gif'/>
+    <get src='${Public}/3.2-Update/images/U1832180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1832180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1833.gif'                                         dest='data/3.2.0/ucd/images/U1833.gif'/>
+    <get src='${Public}/3.2-Update/images/U1833180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U1833180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1833180Binit.gif'                                 dest='data/3.2.0/ucd/images/U1833180Binit.gif'/>
+    <get src='${Public}/3.2-Update/images/U1833180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1833180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1835.gif'                                         dest='data/3.2.0/ucd/images/U1835.gif'/>
+    <get src='${Public}/3.2-Update/images/U1835180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1835180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1836.gif'                                         dest='data/3.2.0/ucd/images/U1836.gif'/>
+    <get src='${Public}/3.2-Update/images/U1836180Binit.gif'                                 dest='data/3.2.0/ucd/images/U1836180Binit.gif'/>
+    <get src='${Public}/3.2-Update/images/U1836180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1836180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1836180Cmedi.gif'                                 dest='data/3.2.0/ucd/images/U1836180Cmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1838.gif'                                         dest='data/3.2.0/ucd/images/U1838.gif'/>
+    <get src='${Public}/3.2-Update/images/U1838180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U1838180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1844.gif'                                         dest='data/3.2.0/ucd/images/U1844.gif'/>
+    <get src='${Public}/3.2-Update/images/U1844180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1844180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1845.gif'                                         dest='data/3.2.0/ucd/images/U1845.gif'/>
+    <get src='${Public}/3.2-Update/images/U1845180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1845180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1846.gif'                                         dest='data/3.2.0/ucd/images/U1846.gif'/>
+    <get src='${Public}/3.2-Update/images/U1846180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1846180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1847.gif'                                         dest='data/3.2.0/ucd/images/U1847.gif'/>
+    <get src='${Public}/3.2-Update/images/U1847180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U1847180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1847180Bisol.gif'                                 dest='data/3.2.0/ucd/images/U1847180Bisol.gif'/>
+    <get src='${Public}/3.2-Update/images/U1847180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1847180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1847180Cmedi.gif'                                 dest='data/3.2.0/ucd/images/U1847180Cmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1848.gif'                                         dest='data/3.2.0/ucd/images/U1848.gif'/>
+    <get src='${Public}/3.2-Update/images/U1848180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1848180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1849.gif'                                         dest='data/3.2.0/ucd/images/U1849.gif'/>
+    <get src='${Public}/3.2-Update/images/U1849180Bisol.gif'                                 dest='data/3.2.0/ucd/images/U1849180Bisol.gif'/>
+    <get src='${Public}/3.2-Update/images/U1849180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1849180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U184D.gif'                                         dest='data/3.2.0/ucd/images/U184D.gif'/>
+    <get src='${Public}/3.2-Update/images/U184D180Binit.gif'                                 dest='data/3.2.0/ucd/images/U184D180Binit.gif'/>
+    <get src='${Public}/3.2-Update/images/U184D180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U184D180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U184E.gif'                                         dest='data/3.2.0/ucd/images/U184E.gif'/>
+    <get src='${Public}/3.2-Update/images/U184E180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U184E180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U185D.gif'                                         dest='data/3.2.0/ucd/images/U185D.gif'/>
+    <get src='${Public}/3.2-Update/images/U185D180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U185D180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U185D180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U185D180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U185E.gif'                                         dest='data/3.2.0/ucd/images/U185E.gif'/>
+    <get src='${Public}/3.2-Update/images/U185E180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U185E180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U185E180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U185E180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U185E180Cfina.gif'                                 dest='data/3.2.0/ucd/images/U185E180Cfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U185E180Cmedi.gif'                                 dest='data/3.2.0/ucd/images/U185E180Cmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1860.gif'                                         dest='data/3.2.0/ucd/images/U1860.gif'/>
+    <get src='${Public}/3.2-Update/images/U1860180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U1860180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1860180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1860180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1863.gif'                                         dest='data/3.2.0/ucd/images/U1863.gif'/>
+    <get src='${Public}/3.2-Update/images/U1863180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1863180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1868.gif'                                         dest='data/3.2.0/ucd/images/U1868.gif'/>
+    <get src='${Public}/3.2-Update/images/U1868180Binit.gif'                                 dest='data/3.2.0/ucd/images/U1868180Binit.gif'/>
+    <get src='${Public}/3.2-Update/images/U1868180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1868180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1868180Cmedi.gif'                                 dest='data/3.2.0/ucd/images/U1868180Cmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1869.gif'                                         dest='data/3.2.0/ucd/images/U1869.gif'/>
+    <get src='${Public}/3.2-Update/images/U1869180Binit.gif'                                 dest='data/3.2.0/ucd/images/U1869180Binit.gif'/>
+    <get src='${Public}/3.2-Update/images/U1869180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1869180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U186F.gif'                                         dest='data/3.2.0/ucd/images/U186F.gif'/>
+    <get src='${Public}/3.2-Update/images/U186F180Binit.gif'                                 dest='data/3.2.0/ucd/images/U186F180Binit.gif'/>
+    <get src='${Public}/3.2-Update/images/U186F180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U186F180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1873.gif'                                         dest='data/3.2.0/ucd/images/U1873.gif'/>
+    <get src='${Public}/3.2-Update/images/U1873180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U1873180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1873180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1873180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1873180Cfina.gif'                                 dest='data/3.2.0/ucd/images/U1873180Cfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1873180Cmedi.gif'                                 dest='data/3.2.0/ucd/images/U1873180Cmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1873180Dmedi.gif'                                 dest='data/3.2.0/ucd/images/U1873180Dmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1874.gif'                                         dest='data/3.2.0/ucd/images/U1874.gif'/>
+    <get src='${Public}/3.2-Update/images/U1874180Bfinafem.gif'                              dest='data/3.2.0/ucd/images/U1874180Bfinafem.gif'/>
+    <get src='${Public}/3.2-Update/images/U1874180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1874180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1874180Cfinafem.gif'                              dest='data/3.2.0/ucd/images/U1874180Cfinafem.gif'/>
+    <get src='${Public}/3.2-Update/images/U1874180Cmedifem.gif'                              dest='data/3.2.0/ucd/images/U1874180Cmedifem.gif'/>
+    <get src='${Public}/3.2-Update/images/U1874180Dmedifem.gif'                              dest='data/3.2.0/ucd/images/U1874180Dmedifem.gif'/>
+    <get src='${Public}/3.2-Update/images/U1876.gif'                                         dest='data/3.2.0/ucd/images/U1876.gif'/>
+    <get src='${Public}/3.2-Update/images/U1876180Binit.gif'                                 dest='data/3.2.0/ucd/images/U1876180Binit.gif'/>
+    <get src='${Public}/3.2-Update/images/U1876180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U1876180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U1880.gif'                                         dest='data/3.2.0/ucd/images/U1880.gif'/>
+    <get src='${Public}/3.2-Update/images/U1880180B.gif'                                     dest='data/3.2.0/ucd/images/U1880180B.gif'/>
+    <get src='${Public}/3.2-Update/images/U1881.gif'                                         dest='data/3.2.0/ucd/images/U1881.gif'/>
+    <get src='${Public}/3.2-Update/images/U1881180B.gif'                                     dest='data/3.2.0/ucd/images/U1881180B.gif'/>
+    <get src='${Public}/3.2-Update/images/U1887.gif'                                         dest='data/3.2.0/ucd/images/U1887.gif'/>
+    <get src='${Public}/3.2-Update/images/U1887180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U1887180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1887180Bisol.gif'                                 dest='data/3.2.0/ucd/images/U1887180Bisol.gif'/>
+    <get src='${Public}/3.2-Update/images/U1887180Cfina.gif'                                 dest='data/3.2.0/ucd/images/U1887180Cfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1887180Dfina.gif'                                 dest='data/3.2.0/ucd/images/U1887180Dfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U1888.gif'                                         dest='data/3.2.0/ucd/images/U1888.gif'/>
+    <get src='${Public}/3.2-Update/images/U1888180Bfina.gif'                                 dest='data/3.2.0/ucd/images/U1888180Bfina.gif'/>
+    <get src='${Public}/3.2-Update/images/U188A.gif'                                         dest='data/3.2.0/ucd/images/U188A.gif'/>
+    <get src='${Public}/3.2-Update/images/U188A180Binit.gif'                                 dest='data/3.2.0/ucd/images/U188A180Binit.gif'/>
+    <get src='${Public}/3.2-Update/images/U188A180Bmedi.gif'                                 dest='data/3.2.0/ucd/images/U188A180Bmedi.gif'/>
+    <get src='${Public}/3.2-Update/images/U2229.gif'                                         dest='data/3.2.0/ucd/images/U2229.gif'/>
+    <get src='${Public}/3.2-Update/images/U222A.gif'                                         dest='data/3.2.0/ucd/images/U222A.gif'/>
+    <get src='${Public}/3.2-Update/images/U2268.gif'                                         dest='data/3.2.0/ucd/images/U2268.gif'/>
+    <get src='${Public}/3.2-Update/images/U2269.gif'                                         dest='data/3.2.0/ucd/images/U2269.gif'/>
+    <get src='${Public}/3.2-Update/images/U2272.gif'                                         dest='data/3.2.0/ucd/images/U2272.gif'/>
+    <get src='${Public}/3.2-Update/images/U2273.gif'                                         dest='data/3.2.0/ucd/images/U2273.gif'/>
+    <get src='${Public}/3.2-Update/images/U2278.gif'                                         dest='data/3.2.0/ucd/images/U2278.gif'/>
+    <get src='${Public}/3.2-Update/images/U2279.gif'                                         dest='data/3.2.0/ucd/images/U2279.gif'/>
+    <get src='${Public}/3.2-Update/images/U228A.gif'                                         dest='data/3.2.0/ucd/images/U228A.gif'/>
+    <get src='${Public}/3.2-Update/images/U228B.gif'                                         dest='data/3.2.0/ucd/images/U228B.gif'/>
+    <get src='${Public}/3.2-Update/images/U2293.gif'                                         dest='data/3.2.0/ucd/images/U2293.gif'/>
+    <get src='${Public}/3.2-Update/images/U2294.gif'                                         dest='data/3.2.0/ucd/images/U2294.gif'/>
+    <get src='${Public}/3.2-Update/images/U2295.gif'                                         dest='data/3.2.0/ucd/images/U2295.gif'/>
+    <get src='${Public}/3.2-Update/images/U2297.gif'                                         dest='data/3.2.0/ucd/images/U2297.gif'/>
+    <get src='${Public}/3.2-Update/images/U229C.gif'                                         dest='data/3.2.0/ucd/images/U229C.gif'/>
+    <get src='${Public}/3.2-Update/images/U22DA.gif'                                         dest='data/3.2.0/ucd/images/U22DA.gif'/>
+    <get src='${Public}/3.2-Update/images/U22DB.gif'                                         dest='data/3.2.0/ucd/images/U22DB.gif'/>
+    <get src='${Public}/3.2-Update/images/U2A3C.gif'                                         dest='data/3.2.0/ucd/images/U2A3C.gif'/>
+    <get src='${Public}/3.2-Update/images/U2A3D.gif'                                         dest='data/3.2.0/ucd/images/U2A3D.gif'/>
+    <get src='${Public}/3.2-Update/images/U2A9D.gif'                                         dest='data/3.2.0/ucd/images/U2A9D.gif'/>
+    <get src='${Public}/3.2-Update/images/U2A9E.gif'                                         dest='data/3.2.0/ucd/images/U2A9E.gif'/>
+    <get src='${Public}/3.2-Update/images/U2AAC.gif'                                         dest='data/3.2.0/ucd/images/U2AAC.gif'/>
+    <get src='${Public}/3.2-Update/images/U2AAD.gif'                                         dest='data/3.2.0/ucd/images/U2AAD.gif'/>
+    <get src='${Public}/3.2-Update/images/U2ACB.gif'                                         dest='data/3.2.0/ucd/images/U2ACB.gif'/>
+    <get src='${Public}/3.2-Update/images/U2ACC.gif'                                         dest='data/3.2.0/ucd/images/U2ACC.gif'/>
+  </target>
+
+  <target name='download-4.0.0'>
+    <delete dir='data/4.0.0'/>
+    <mkdir dir='data/4.0.0/ucd'/>
+    <mkdir dir='data/4.0.0/ucd/extracted'/>
+
+    <get src='${Public}/4.0-Update/ArabicShaping-4.0.0.txt'                                  dest='data/4.0.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/4.0-Update/BidiMirroring-4.0.0.txt'                                  dest='data/4.0.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/4.0-Update/Blocks-4.0.0.txt'                                         dest='data/4.0.0/ucd/Blocks.txt'/>
+    <get src='${Public}/4.0-Update/CaseFolding-4.0.0.txt'                                    dest='data/4.0.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/4.0-Update/CompositionExclusions-4.0.0.txt'                          dest='data/4.0.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/4.0-Update/DerivedAge-4.0.0.txt'                                     dest='data/4.0.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/4.0-Update/DerivedCoreProperties-4.0.0.txt'                          dest='data/4.0.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/4.0-Update/DerivedNormalizationProps-4.0.0.txt'                      dest='data/4.0.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/4.0-Update/EastAsianWidth-4.0.0.txt'                                 dest='data/4.0.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/4.0-Update/HangulSyllableType-4.0.0.txt'                             dest='data/4.0.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/3.2-Update/Index-3.2.0.txt'                                          dest='data/4.0.0/ucd/Index.txt'/>
+    <get src='${Public}/3.2-Update/Jamo-3.2.0.txt'                                           dest='data/4.0.0/ucd/Jamo.txt'/>
+    <get src='${Public}/4.0-Update/LineBreak-4.0.0.txt'                                      dest='data/4.0.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/4.0-Update/NamesList-4.0.0.html'                                     dest='data/4.0.0/ucd/NamesList.html'/>
+    <get src='${Public}/4.0-Update/NamesList-4.0.0.txt'                                      dest='data/4.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/4.0-Update/NormalizationCorrections-4.0.0.txt'                       dest='data/4.0.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/4.0-Update/NormalizationTest-4.0.0.txt'                              dest='data/4.0.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/4.0-Update/PropList-4.0.0.txt'                                       dest='data/4.0.0/ucd/PropList.txt'/>
+    <get src='${Public}/4.0-Update/PropertyAliases-4.0.0.txt'                                dest='data/4.0.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/4.0-Update/PropertyValueAliases-4.0.0.txt'                           dest='data/4.0.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/4.0-Update/ReadMe-4.0.0.txt'                                         dest='data/4.0.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/4.0-Update/Scripts-4.0.0.txt'                                        dest='data/4.0.0/ucd/Scripts.txt'/>
+    <get src='${Public}/4.0-Update/SpecialCasing-4.0.0.txt'                                  dest='data/4.0.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/4.0-Update/StandardizedVariants-4.0.0.html'                          dest='data/4.0.0/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/4.0-Update/StandardizedVariants-4.0.0.txt'                           dest='data/4.0.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/4.0-Update/UCD-4.0.0.html'                                           dest='data/4.0.0/ucd/UCD.html'/>
+    <get src='${Public}/4.0-Update/UnicodeData-4.0.0.txt'                                    dest='data/4.0.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/3.2-Update/Unihan-3.2.0.txt'                                         dest='data/4.0.0/ucd/Unihan.txt'/>
+
+    <get src='${Public}/4.0-Update/extracted/DerivedBidiClass-4.0.0.txt'                     dest='data/4.0.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/4.0-Update/extracted/DerivedBinaryProperties-4.0.0.txt'              dest='data/4.0.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/4.0-Update/extracted/DerivedCombiningClass-4.0.0.txt'                dest='data/4.0.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/4.0-Update/extracted/DerivedDecompositionType-4.0.0.txt'             dest='data/4.0.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/4.0-Update/extracted/DerivedEastAsianWidth-4.0.0.txt'                dest='data/4.0.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/4.0-Update/extracted/DerivedGeneralCategory-4.0.0.txt'               dest='data/4.0.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/4.0-Update/extracted/DerivedJoiningGroup-4.0.0.txt'                  dest='data/4.0.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/4.0-Update/extracted/DerivedJoiningType-4.0.0.txt'                   dest='data/4.0.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/4.0-Update/extracted/DerivedLineBreak-4.0.0.txt'                     dest='data/4.0.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/4.0-Update/extracted/DerivedNumericType-4.0.0.txt'                   dest='data/4.0.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/4.0-Update/extracted/DerivedNumericValues-4.0.0.txt'                 dest='data/4.0.0/ucd/extracted/DerivedNumericValues.txt'/>
+  </target>
+
+  <target name='download-4.0.1'>
+    <delete dir='data/4.0.1'/>
+    <mkdir dir='data/4.0.1/ucd'/>
+    <mkdir dir='data/4.0.1/ucd/extracted'/>
+
+    <get src='${Public}/4.0-Update1/ArabicShaping-4.0.1.txt'                                 dest='data/4.0.1/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/4.0-Update/BidiMirroring-4.0.0.txt'                                  dest='data/4.0.1/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/4.0-Update1/Blocks-4.0.1.txt'                                        dest='data/4.0.1/ucd/Blocks.txt'/>
+    <get src='${Public}/4.0-Update1/CaseFolding-4.0.1.txt'                                   dest='data/4.0.1/ucd/CaseFolding.txt'/>
+    <get src='${Public}/4.0-Update/CompositionExclusions-4.0.0.txt'                          dest='data/4.0.1/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/4.0-Update1/DerivedAge-4.0.1.txt'                                    dest='data/4.0.1/ucd/DerivedAge.txt'/>
+    <get src='${Public}/4.0-Update1/DerivedCoreProperties-4.0.1.txt'                         dest='data/4.0.1/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/4.0-Update1/DerivedNormalizationProps-4.0.1.txt'                     dest='data/4.0.1/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/4.0-Update/EastAsianWidth-4.0.0.txt'                                 dest='data/4.0.1/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/4.0-Update1/HangulSyllableType-4.0.1.txt'                            dest='data/4.0.1/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/4.0-Update1/Index-4.0.1.txt'                                         dest='data/4.0.1/ucd/Index.txt'/>
+    <get src='${Public}/4.0-Update1/Jamo-4.0.1.txt'                                          dest='data/4.0.1/ucd/Jamo.txt'/>
+    <get src='${Public}/4.0-Update1/LineBreak-4.0.1.txt'                                     dest='data/4.0.1/ucd/LineBreak.txt'/>
+    <get src='${Public}/4.0-Update/NamesList-4.0.0.html'                                     dest='data/4.0.1/ucd/NamesList.html'/>
+    <get src='${Public}/4.0-Update/NamesList-4.0.0.txt'                                      dest='data/4.0.1/ucd/NamesList.txt'/>
+    <get src='${Public}/4.0-Update/NormalizationCorrections-4.0.0.txt'                       dest='data/4.0.1/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/4.0-Update/NormalizationTest-4.0.0.txt'                              dest='data/4.0.1/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/4.0-Update1/PropList-4.0.1.txt'                                      dest='data/4.0.1/ucd/PropList.txt'/>
+    <get src='${Public}/4.0-Update1/PropertyAliases-4.0.1.txt'                               dest='data/4.0.1/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/4.0-Update1/PropertyValueAliases-4.0.1.txt'                          dest='data/4.0.1/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/4.0-Update1/ReadMe-4.0.1.txt'                                        dest='data/4.0.1/ucd/ReadMe.txt'/>
+    <get src='${Public}/4.0-Update1/Scripts-4.0.1.txt'                                       dest='data/4.0.1/ucd/Scripts.txt'/>
+    <get src='${Public}/4.0-Update1/SpecialCasing-4.0.1.txt'                                 dest='data/4.0.1/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/4.0-Update/StandardizedVariants-4.0.0.html'                          dest='data/4.0.1/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/4.0-Update/StandardizedVariants-4.0.0.txt'                           dest='data/4.0.1/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/4.0-Update1/UCD-4.0.1.html'                                          dest='data/4.0.1/ucd/UCD.html'/>
+    <get src='${Public}/4.0-Update1/UnicodeData-4.0.1.txt'                                   dest='data/4.0.1/ucd/UnicodeData.txt'/>
+    <get src='${Public}/4.0-Update1/Unihan-4.0.1.txt'                                        dest='data/4.0.1/ucd/Unihan.txt'/>
+
+    <get src='${Public}/4.0-Update1/extracted/DerivedBidiClass-4.0.1.txt'                    dest='data/4.0.1/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/4.0-Update1/extracted/DerivedBinaryProperties-4.0.1.txt'             dest='data/4.0.1/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/4.0-Update1/extracted/DerivedCombiningClass-4.0.1.txt'               dest='data/4.0.1/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/4.0-Update1/extracted/DerivedDecompositionType-4.0.1.txt'            dest='data/4.0.1/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/4.0-Update1/extracted/DerivedEastAsianWidth-4.0.1.txt'               dest='data/4.0.1/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/4.0-Update1/extracted/DerivedGeneralCategory-4.0.1.txt'              dest='data/4.0.1/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/4.0-Update1/extracted/DerivedJoiningGroup-4.0.1.txt'                 dest='data/4.0.1/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/4.0-Update1/extracted/DerivedJoiningType-4.0.1.txt'                  dest='data/4.0.1/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/4.0-Update1/extracted/DerivedLineBreak-4.0.1.txt'                    dest='data/4.0.1/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/4.0-Update1/extracted/DerivedNumericType-4.0.1.txt'                  dest='data/4.0.1/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/4.0-Update1/extracted/DerivedNumericValues-4.0.1.txt'                dest='data/4.0.1/ucd/extracted/DerivedNumericValues.txt'/>
+  </target>
+
+  <target name='download-4.1.0'>
+    <delete dir='data/4.1.0'/>
+    <mkdir dir='data/4.1.0/ucd'/>
+    <mkdir dir='data/4.1.0/ucd/auxiliary'/>
+    <mkdir dir='data/4.1.0/ucd/extracted'/>
+
+    <get src='${Public}/4.1.0/ucd/ArabicShaping.txt'                                         dest='data/4.1.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/4.1.0/ucd/BidiMirroring.txt'                                         dest='data/4.1.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/4.1.0/ucd/Blocks.txt'                                                dest='data/4.1.0/ucd/Blocks.txt'/>
+    <get src='${Public}/4.1.0/ucd/CaseFolding.txt'                                           dest='data/4.1.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/4.1.0/ucd/CompositionExclusions.txt'                                 dest='data/4.1.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/4.1.0/ucd/DerivedAge.txt'                                            dest='data/4.1.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/4.1.0/ucd/DerivedCoreProperties.txt'                                 dest='data/4.1.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/4.1.0/ucd/DerivedNormalizationProps.txt'                             dest='data/4.1.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/4.1.0/ucd/DerivedProperties.html'                                    dest='data/4.1.0/ucd/DerivedProperties.html'/>
+    <get src='${Public}/4.1.0/ucd/EastAsianWidth.txt'                                        dest='data/4.1.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/4.1.0/ucd/HangulSyllableType.txt'                                    dest='data/4.1.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/4.1.0/ucd/Index.txt'                                                 dest='data/4.1.0/ucd/Index.txt'/>
+    <get src='${Public}/4.1.0/ucd/Jamo.txt'                                                  dest='data/4.1.0/ucd/Jamo.txt'/>
+    <get src='${Public}/4.1.0/ucd/LineBreak.txt'                                             dest='data/4.1.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/4.1.0/ucd/NamedSequences.txt'                                        dest='data/4.1.0/ucd/NamedSequences.txt'/>
+    <get src='${Public}/4.1.0/ucd/NamesList.html'                                            dest='data/4.1.0/ucd/NamesList.html'/>
+    <get src='${Public}/4.1.0/ucd/NamesList.txt'                                             dest='data/4.1.0/ucd/NamesList.txt'/>
+    <get src='${Public}/4.1.0/ucd/NormalizationCorrections.txt'                              dest='data/4.1.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/4.1.0/ucd/NormalizationTest.txt'                                     dest='data/4.1.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/4.1.0/ucd/PropList.html'                                             dest='data/4.1.0/ucd/PropList.html'/>
+    <get src='${Public}/4.1.0/ucd/PropList.txt'                                              dest='data/4.1.0/ucd/PropList.txt'/>
+    <get src='${Public}/4.1.0/ucd/PropertyAliases.txt'                                       dest='data/4.1.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/4.1.0/ucd/PropertyValueAliases.txt'                                  dest='data/4.1.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/4.1.0/ucd/ReadMe.txt'                                                dest='data/4.1.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/4.1.0/ucd/Scripts.txt'                                               dest='data/4.1.0/ucd/Scripts.txt'/>
+    <get src='${Public}/4.1.0/ucd/SpecialCasing.txt'                                         dest='data/4.1.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/4.1.0/ucd/StandardizedVariants.html'                                 dest='data/4.1.0/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/4.1.0/ucd/StandardizedVariants.txt'                                  dest='data/4.1.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/4.1.0/ucd/UCD.html'                                                  dest='data/4.1.0/ucd/UCD.html'/>
+    <get src='${Public}/4.1.0/ucd/UnicodeCharacterDatabase.html'                             dest='data/4.1.0/ucd/UnicodeCharacterDatabase.html'/>
+    <get src='${Public}/4.1.0/ucd/UnicodeData.txt'                                           dest='data/4.1.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/4.1.0/ucd/Unihan.html'                                               dest='data/4.1.0/ucd/Unihan.html'/>
+    <get src='${Public}/4.1.0/ucd/Unihan.txt'                                                dest='data/4.1.0/ucd/Unihan.txt'/>
+
+    <get src='${Public}/4.1.0/ucd/auxiliary/GraphemeBreakProperty.txt'                       dest='data/4.1.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
+    <get src='${Public}/4.1.0/ucd/auxiliary/GraphemeBreakTest.html'                          dest='data/4.1.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/4.1.0/ucd/auxiliary/GraphemeBreakTest.txt'                           dest='data/4.1.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/4.1.0/ucd/auxiliary/SentenceBreakProperty.txt'                       dest='data/4.1.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/4.1.0/ucd/auxiliary/SentenceBreakTest.html'                          dest='data/4.1.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/4.1.0/ucd/auxiliary/SentenceBreakTest.txt'                           dest='data/4.1.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/4.1.0/ucd/auxiliary/WordBreakProperty.txt'                           dest='data/4.1.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/4.1.0/ucd/auxiliary/WordBreakTest.html'                              dest='data/4.1.0/ucd/auxiliary/WordBreakTest.html'/>
+    <get src='${Public}/4.1.0/ucd/auxiliary/WordBreakTest.txt'                               dest='data/4.1.0/ucd/auxiliary/WordBreakTest.txt'/>
+
+    <get src='${Public}/4.1.0/ucd/extracted/DerivedBidiClass.txt'                            dest='data/4.1.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/4.1.0/ucd/extracted/DerivedBinaryProperties.txt'                     dest='data/4.1.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/4.1.0/ucd/extracted/DerivedCombiningClass.txt'                       dest='data/4.1.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/4.1.0/ucd/extracted/DerivedDecompositionType.txt'                    dest='data/4.1.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/4.1.0/ucd/extracted/DerivedEastAsianWidth.txt'                       dest='data/4.1.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/4.1.0/ucd/extracted/DerivedGeneralCategory.txt'                      dest='data/4.1.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/4.1.0/ucd/extracted/DerivedJoiningGroup.txt'                         dest='data/4.1.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/4.1.0/ucd/extracted/DerivedJoiningType.txt'                          dest='data/4.1.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/4.1.0/ucd/extracted/DerivedLineBreak.txt'                            dest='data/4.1.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/4.1.0/ucd/extracted/DerivedNumericType.txt'                          dest='data/4.1.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/4.1.0/ucd/extracted/DerivedNumericValues.txt'                        dest='data/4.1.0/ucd/extracted/DerivedNumericValues.txt'/>
+  </target>
+
+  <target name='download-5.0.0'>
+    <delete dir='data/5.0.0'/>
+    <mkdir dir='data/5.0.0/ucd'/>
+    <mkdir dir='data/5.0.0/ucd/auxiliary'/>
+    <mkdir dir='data/5.0.0/ucd/extracted'/>
+
+    <get src='${Public}/5.0.0/ucd/ArabicShaping.txt'                                         dest='data/5.0.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/5.0.0/ucd/BidiMirroring.txt'                                         dest='data/5.0.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/5.0.0/ucd/Blocks.txt'                                                dest='data/5.0.0/ucd/Blocks.txt'/>
+    <get src='${Public}/5.0.0/ucd/CaseFolding.txt'                                           dest='data/5.0.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/5.0.0/ucd/CompositionExclusions.txt'                                 dest='data/5.0.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/5.0.0/ucd/DerivedAge.txt'                                            dest='data/5.0.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/5.0.0/ucd/DerivedCoreProperties.txt'                                 dest='data/5.0.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/5.0.0/ucd/DerivedNormalizationProps.txt'                             dest='data/5.0.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/5.0.0/ucd/DerivedProperties.html'                                    dest='data/5.0.0/ucd/DerivedProperties.html'/>
+    <get src='${Public}/5.0.0/ucd/EastAsianWidth.txt'                                        dest='data/5.0.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/5.0.0/ucd/HangulSyllableType.txt'                                    dest='data/5.0.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/5.0.0/ucd/Index.txt'                                                 dest='data/5.0.0/ucd/Index.txt'/>
+    <get src='${Public}/5.0.0/ucd/Jamo.txt'                                                  dest='data/5.0.0/ucd/Jamo.txt'/>
+    <get src='${Public}/5.0.0/ucd/LineBreak.txt'                                             dest='data/5.0.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/5.0.0/ucd/NameAliases.txt'                                           dest='data/5.0.0/ucd/NameAliases.txt'/>
+    <get src='${Public}/5.0.0/ucd/NamedSequences.txt'                                        dest='data/5.0.0/ucd/NamedSequences.txt'/>
+    <get src='${Public}/5.0.0/ucd/NamedSequencesProv.txt'                                    dest='data/5.0.0/ucd/NamedSequencesProv.txt'/>
+    <get src='${Public}/5.0.0/ucd/NamesList.html'                                            dest='data/5.0.0/ucd/NamesList.html'/>
+    <get src='${Public}/5.0.0/ucd/NamesList.txt'                                             dest='data/5.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/5.0.0/ucd/NormalizationCorrections.txt'                              dest='data/5.0.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/5.0.0/ucd/NormalizationTest.txt'                                     dest='data/5.0.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/5.0.0/ucd/PropList.html'                                             dest='data/5.0.0/ucd/PropList.html'/>
+    <get src='${Public}/5.0.0/ucd/PropList.txt'                                              dest='data/5.0.0/ucd/PropList.txt'/>
+    <get src='${Public}/5.0.0/ucd/PropertyAliases.txt'                                       dest='data/5.0.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/5.0.0/ucd/PropertyValueAliases.txt'                                  dest='data/5.0.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/5.0.0/ucd/ReadMe.txt'                                                dest='data/5.0.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/5.0.0/ucd/Scripts.txt'                                               dest='data/5.0.0/ucd/Scripts.txt'/>
+    <get src='${Public}/5.0.0/ucd/SpecialCasing.txt'                                         dest='data/5.0.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/5.0.0/ucd/StandardizedVariants.html'                                 dest='data/5.0.0/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/5.0.0/ucd/StandardizedVariants.txt'                                  dest='data/5.0.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/5.0.0/ucd/UCD.html'                                                  dest='data/5.0.0/ucd/UCD.html'/>
+    <get src='${Public}/5.0.0/ucd/UnicodeCharacterDatabase.html'                             dest='data/5.0.0/ucd/UnicodeCharacterDatabase.html'/>
+    <get src='${Public}/5.0.0/ucd/UnicodeData.txt'                                           dest='data/5.0.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/5.0.0/ucd/Unihan.html'                                               dest='data/5.0.0/ucd/Unihan.html'/>
+    <get src='${Public}/5.0.0/ucd/Unihan.txt'                                                dest='data/5.0.0/ucd/Unihan.txt'/>
+
+    <get src='${Public}/5.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'                       dest='data/5.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
+    <get src='${Public}/5.0.0/ucd/auxiliary/GraphemeBreakTest.html'                          dest='data/5.0.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/5.0.0/ucd/auxiliary/GraphemeBreakTest.txt'                           dest='data/5.0.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/5.0.0/ucd/auxiliary/SentenceBreakProperty.txt'                       dest='data/5.0.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/5.0.0/ucd/auxiliary/SentenceBreakTest.html'                          dest='data/5.0.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/5.0.0/ucd/auxiliary/SentenceBreakTest.txt'                           dest='data/5.0.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/5.0.0/ucd/auxiliary/WordBreakProperty.txt'                           dest='data/5.0.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/5.0.0/ucd/auxiliary/WordBreakTest.html'                              dest='data/5.0.0/ucd/auxiliary/WordBreakTest.html'/>
+    <get src='${Public}/5.0.0/ucd/auxiliary/WordBreakTest.txt'                               dest='data/5.0.0/ucd/auxiliary/WordBreakTest.txt'/>
+
+    <get src='${Public}/5.0.0/ucd/extracted/DerivedBidiClass.txt'                            dest='data/5.0.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/5.0.0/ucd/extracted/DerivedBinaryProperties.txt'                     dest='data/5.0.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/5.0.0/ucd/extracted/DerivedCombiningClass.txt'                       dest='data/5.0.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/5.0.0/ucd/extracted/DerivedDecompositionType.txt'                    dest='data/5.0.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/5.0.0/ucd/extracted/DerivedEastAsianWidth.txt'                       dest='data/5.0.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/5.0.0/ucd/extracted/DerivedGeneralCategory.txt'                      dest='data/5.0.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/5.0.0/ucd/extracted/DerivedJoiningGroup.txt'                         dest='data/5.0.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/5.0.0/ucd/extracted/DerivedJoiningType.txt'                          dest='data/5.0.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/5.0.0/ucd/extracted/DerivedLineBreak.txt'                            dest='data/5.0.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/5.0.0/ucd/extracted/DerivedNumericType.txt'                          dest='data/5.0.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/5.0.0/ucd/extracted/DerivedNumericValues.txt'                        dest='data/5.0.0/ucd/extracted/DerivedNumericValues.txt'/>
+  </target>
+
+  <target name='download-5.1.0'>
+    <delete dir='data/5.1.0'/>
+    <mkdir dir='data/5.1.0/ucd'/>
+    <mkdir dir='data/5.1.0/ucd/auxiliary'/>
+    <mkdir dir='data/5.1.0/ucd/extracted'/>
+
+    <get src='${Public}/5.1.0/ucd/ArabicShaping.txt'                                dest='data/5.1.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/5.1.0/ucd/BidiMirroring.txt'                                dest='data/5.1.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/5.1.0/ucd/Blocks.txt'                                       dest='data/5.1.0/ucd/Blocks.txt'/>
+    <get src='${Public}/5.1.0/ucd/CaseFolding.txt'                                  dest='data/5.1.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/5.1.0/ucd/CompositionExclusions.txt'                        dest='data/5.1.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/5.1.0/ucd/DerivedAge.txt'                                   dest='data/5.1.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/5.1.0/ucd/DerivedCoreProperties.txt'                        dest='data/5.1.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/5.1.0/ucd/DerivedNormalizationProps.txt'                    dest='data/5.1.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/5.1.0/ucd/EastAsianWidth.txt'                               dest='data/5.1.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/5.1.0/ucd/HangulSyllableType.txt'                           dest='data/5.1.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/5.1.0/ucd/Index.txt'                                        dest='data/5.1.0/ucd/Index.txt'/>
+    <get src='${Public}/5.1.0/ucd/Jamo.txt'                                         dest='data/5.1.0/ucd/Jamo.txt'/>
+    <get src='${Public}/5.1.0/ucd/LineBreak.txt'                                    dest='data/5.1.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/5.1.0/ucd/NameAliases.txt'                                  dest='data/5.1.0/ucd/NameAliases.txt'/>
+    <get src='${Public}/5.1.0/ucd/NamedSequences.txt'                               dest='data/5.1.0/ucd/NamedSequences.txt'/>
+    <get src='${Public}/5.1.0/ucd/NamedSequencesProv.txt'                           dest='data/5.1.0/ucd/NamedSequencesProv.txt'/>
+    <get src='${Public}/5.1.0/ucd/NamesList.html'                                   dest='data/5.1.0/ucd/NamesList.html'/>
+    <get src='${Public}/5.1.0/ucd/NamesList.txt'                                    dest='data/5.1.0/ucd/NamesList.txt'/>
+    <get src='${Public}/5.1.0/ucd/NormalizationCorrections.txt'                     dest='data/5.1.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/5.1.0/ucd/NormalizationTest.txt'                            dest='data/5.1.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/5.1.0/ucd/PropList.txt'                                     dest='data/5.1.0/ucd/PropList.txt'/>
+    <get src='${Public}/5.1.0/ucd/PropertyAliases.txt'                              dest='data/5.1.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/5.1.0/ucd/PropertyValueAliases.txt'                         dest='data/5.1.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/5.1.0/ucd/ReadMe.txt'                                       dest='data/5.1.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/5.1.0/ucd/Scripts.txt'                                      dest='data/5.1.0/ucd/Scripts.txt'/>
+    <get src='${Public}/5.1.0/ucd/SpecialCasing.txt'                                dest='data/5.1.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/5.1.0/ucd/StandardizedVariants.html'                        dest='data/5.1.0/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/5.1.0/ucd/StandardizedVariants.txt'                         dest='data/5.1.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/5.1.0/ucd/UCD.html'                                         dest='data/5.1.0/ucd/UCD.html'/>
+    <get src='${Public}/5.1.0/ucd/UnicodeData.txt'                                  dest='data/5.1.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/5.1.0/ucd/Unihan.zip'                                       dest='data/5.1.0/ucd/Unihan.zip'/>
+    <get src='${Public}/5.1.0/ucd/Unihan.html'                                      dest='data/5.1.0/ucd/Unihan.html'/>
+
+    <get src='${Public}/5.1.0/ucd/extracted/DerivedBidiClass.txt'                   dest='data/5.1.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/5.1.0/ucd/extracted/DerivedBinaryProperties.txt'            dest='data/5.1.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/5.1.0/ucd/extracted/DerivedCombiningClass.txt'              dest='data/5.1.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/5.1.0/ucd/extracted/DerivedDecompositionType.txt'           dest='data/5.1.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/5.1.0/ucd/extracted/DerivedEastAsianWidth.txt'              dest='data/5.1.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/5.1.0/ucd/extracted/DerivedGeneralCategory.txt'             dest='data/5.1.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/5.1.0/ucd/extracted/DerivedJoiningGroup.txt'                dest='data/5.1.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/5.1.0/ucd/extracted/DerivedJoiningType.txt'                 dest='data/5.1.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/5.1.0/ucd/extracted/DerivedLineBreak.txt'                   dest='data/5.1.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/5.1.0/ucd/extracted/DerivedNumericType.txt'                 dest='data/5.1.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/5.1.0/ucd/extracted/DerivedNumericValues.txt'               dest='data/5.1.0/ucd/extracted/DerivedNumericValues.txt'/>
+
+    <get src='${Public}/5.1.0/ucd/auxiliary/GraphemeBreakProperty.txt'              dest='data/5.1.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
+    <get src='${Public}/5.1.0/ucd/auxiliary/GraphemeBreakTest.html'                 dest='data/5.1.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/5.1.0/ucd/auxiliary/GraphemeBreakTest.txt'                  dest='data/5.1.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/5.1.0/ucd/auxiliary/LineBreakTest.html'                     dest='data/5.1.0/ucd/auxiliary/LineBreakTest.html'/>
+    <get src='${Public}/5.1.0/ucd/auxiliary/LineBreakTest.txt'                      dest='data/5.1.0/ucd/auxiliary/LineBreakTest.txt'/>
+    <get src='${Public}/5.1.0/ucd/auxiliary/SentenceBreakProperty.txt'              dest='data/5.1.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/5.1.0/ucd/auxiliary/SentenceBreakTest.html'                 dest='data/5.1.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/5.1.0/ucd/auxiliary/SentenceBreakTest.txt'                  dest='data/5.1.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/5.1.0/ucd/auxiliary/WordBreakProperty.txt'                  dest='data/5.1.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/5.1.0/ucd/auxiliary/WordBreakTest.html'                     dest='data/5.1.0/ucd/auxiliary/WordBreakTest.html'/>
+    <get src='${Public}/5.1.0/ucd/auxiliary/WordBreakTest.txt'                      dest='data/5.1.0/ucd/auxiliary/WordBreakTest.txt'/>
+
+    <unzip src='data/5.1.0/ucd/Unihan.zip'  dest='data/5.1.0/ucd'/>
+    <delete file='data/5.1.0/ucd/Unihan.zip'/>
+  </target>
+
+  <target name='download-5.2.0'>
+    <delete dir='data/5.2.0'/>
+    <mkdir dir='data/5.2.0/ucd'/>
+    <mkdir dir='data/5.2.0/ucd/auxiliary'/>
+    <mkdir dir='data/5.2.0/ucd/extracted'/>
+
+    <get src='${Public}/5.2.0/ucd/ArabicShaping.txt'                        dest='data/5.2.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/5.2.0/ucd/BidiMirroring.txt'                        dest='data/5.2.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/5.2.0/ucd/BidiTest.txt'                             dest='data/5.2.0/ucd/BidiTest.txt'/>
+    <get src='${Public}/5.2.0/ucd/Blocks.txt'                               dest='data/5.2.0/ucd/Blocks.txt'/>
+    <get src='${Public}/5.2.0/ucd/CJKRadicals.txt'                          dest='data/5.2.0/ucd/CJKRadicals.txt'/>
+    <get src='${Public}/5.2.0/ucd/CaseFolding.txt'                          dest='data/5.2.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/5.2.0/ucd/CompositionExclusions.txt'                dest='data/5.2.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/5.2.0/ucd/DerivedAge.txt'                           dest='data/5.2.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/5.2.0/ucd/DerivedCoreProperties.txt'                dest='data/5.2.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/5.2.0/ucd/DerivedNormalizationProps.txt'            dest='data/5.2.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/5.2.0/ucd/EastAsianWidth.txt'                       dest='data/5.2.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/5.2.0/ucd/HangulSyllableType.txt'                   dest='data/5.2.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/5.2.0/ucd/Index.txt'                                dest='data/5.2.0/ucd/Index.txt'/>
+    <get src='${Public}/5.2.0/ucd/Jamo.txt'                                 dest='data/5.2.0/ucd/Jamo.txt'/>
+    <get src='${Public}/5.2.0/ucd/LineBreak.txt'                            dest='data/5.2.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/5.2.0/ucd/NameAliases.txt'                          dest='data/5.2.0/ucd/NameAliases.txt'/>
+    <get src='${Public}/5.2.0/ucd/NamedSequences.txt'                       dest='data/5.2.0/ucd/NamedSequences.txt'/>
+    <get src='${Public}/5.2.0/ucd/NamedSequencesProv.txt'                   dest='data/5.2.0/ucd/NamedSequencesProv.txt'/>
+    <get src='${Public}/5.2.0/ucd/NamesList.html'                           dest='data/5.2.0/ucd/NamesList.html'/>
+    <get src='${Public}/5.2.0/ucd/NamesList.txt'                            dest='data/5.2.0/ucd/NamesList.txt'/>
+    <get src='${Public}/5.2.0/ucd/NormalizationCorrections.txt'             dest='data/5.2.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/5.2.0/ucd/NormalizationTest.txt'                    dest='data/5.2.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/5.2.0/ucd/PropList.txt'                             dest='data/5.2.0/ucd/PropList.txt'/>
+    <get src='${Public}/5.2.0/ucd/PropertyAliases.txt'                      dest='data/5.2.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/5.2.0/ucd/PropertyValueAliases.txt'                 dest='data/5.2.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/5.2.0/ucd/ReadMe.txt'                               dest='data/5.2.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/5.2.0/ucd/Scripts.txt'                              dest='data/5.2.0/ucd/Scripts.txt'/>
+    <get src='${Public}/5.2.0/ucd/SpecialCasing.txt'                        dest='data/5.2.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/5.2.0/ucd/StandardizedVariants.html'                dest='data/5.2.0/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/5.2.0/ucd/StandardizedVariants.txt'                 dest='data/5.2.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/5.2.0/ucd/UnicodeData.txt'                          dest='data/5.2.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/5.2.0/ucd/Unihan.zip'                               dest='data/5.2.0/ucd/Unihan.zip'/>
+
+    <get src='${Public}/5.2.0/ucd/extracted/DerivedBidiClass.txt'           dest='data/5.2.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/5.2.0/ucd/extracted/DerivedBinaryProperties.txt'    dest='data/5.2.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/5.2.0/ucd/extracted/DerivedCombiningClass.txt'      dest='data/5.2.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/5.2.0/ucd/extracted/DerivedDecompositionType.txt'   dest='data/5.2.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/5.2.0/ucd/extracted/DerivedEastAsianWidth.txt'      dest='data/5.2.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/5.2.0/ucd/extracted/DerivedGeneralCategory.txt'     dest='data/5.2.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/5.2.0/ucd/extracted/DerivedJoiningGroup.txt'        dest='data/5.2.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/5.2.0/ucd/extracted/DerivedJoiningType.txt'         dest='data/5.2.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/5.2.0/ucd/extracted/DerivedLineBreak.txt'           dest='data/5.2.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/5.2.0/ucd/extracted/DerivedNumericType.txt'         dest='data/5.2.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/5.2.0/ucd/extracted/DerivedNumericValues.txt'       dest='data/5.2.0/ucd/extracted/DerivedNumericValues.txt'/>
+
+    <get src='${Public}/5.2.0/ucd/auxiliary/GraphemeBreakProperty.txt'      dest='data/5.2.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
+    <get src='${Public}/5.2.0/ucd/auxiliary/GraphemeBreakTest.html'         dest='data/5.2.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/5.2.0/ucd/auxiliary/GraphemeBreakTest.txt'          dest='data/5.2.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/5.2.0/ucd/auxiliary/LineBreakTest.html'             dest='data/5.2.0/ucd/auxiliary/LineBreakTest.html'/>
+    <get src='${Public}/5.2.0/ucd/auxiliary/LineBreakTest.txt'              dest='data/5.2.0/ucd/auxiliary/LineBreakTest.txt'/>
+    <get src='${Public}/5.2.0/ucd/auxiliary/SentenceBreakProperty.txt'      dest='data/5.2.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/5.2.0/ucd/auxiliary/SentenceBreakTest.html'         dest='data/5.2.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/5.2.0/ucd/auxiliary/SentenceBreakTest.txt'          dest='data/5.2.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/5.2.0/ucd/auxiliary/WordBreakProperty.txt'          dest='data/5.2.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/5.2.0/ucd/auxiliary/WordBreakTest.html'             dest='data/5.2.0/ucd/auxiliary/WordBreakTest.html'/>
+    <get src='${Public}/5.2.0/ucd/auxiliary/WordBreakTest.txt'              dest='data/5.2.0/ucd/auxiliary/WordBreakTest.txt'/>
+
+    <unzip src='data/5.2.0/ucd/Unihan.zip'  dest='data/5.2.0/ucd'/>
+    <delete file='data/5.2.0/ucd/Unihan.zip'/>
+    <concat encoding='UTF-8' destfile='data/5.2.0/ucd/Unihan.txt'>
+      <fileset dir="data/5.2.0/ucd" includes="Unihan_*.txt"/>
+    </concat>
+  </target>
+
+
+  <target name='download-6.0.0'>
+    <delete dir='data/6.0.0'/>
+    <mkdir dir='data/6.0.0/ucd'/>
+    <mkdir dir='data/6.0.0/ucd/auxiliary'/>
+    <mkdir dir='data/6.0.0/ucd/extracted'/>
+
+    <get src='${Public}/6.0.0/ucd/ArabicShaping.txt'                        dest='data/6.0.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/6.0.0/ucd/BidiMirroring.txt'                        dest='data/6.0.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/6.0.0/ucd/BidiTest.txt'                             dest='data/6.0.0/ucd/BidiTest.txt'/>
+    <get src='${Public}/6.0.0/ucd/Blocks.txt'                               dest='data/6.0.0/ucd/Blocks.txt'/>
+    <get src='${Public}/6.0.0/ucd/CJKRadicals.txt'                          dest='data/6.0.0/ucd/CJKRadicals.txt'/>
+    <get src='${Public}/6.0.0/ucd/CaseFolding.txt'                          dest='data/6.0.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/6.0.0/ucd/CompositionExclusions.txt'                dest='data/6.0.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/6.0.0/ucd/DerivedAge.txt'                           dest='data/6.0.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/6.0.0/ucd/DerivedCoreProperties.txt'                dest='data/6.0.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/6.0.0/ucd/DerivedNormalizationProps.txt'            dest='data/6.0.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/6.0.0/ucd/EastAsianWidth.txt'                       dest='data/6.0.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/6.0.0/ucd/EmojiSources.txt'                         dest='data/6.0.0/ucd/EmojiSources.txt'/>
+    <get src='${Public}/6.0.0/ucd/HangulSyllableType.txt'                   dest='data/6.0.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/6.0.0/ucd/IndicMatraCategory.txt'                   dest='data/6.0.0/ucd/IndicMatraCategory.txt'/>
+    <get src='${Public}/6.0.0/ucd/IndicSyllabicCategory.txt'                dest='data/6.0.0/ucd/IndicSyllabicCategory.txt'/>
+    <get src='${Public}/6.0.0/ucd/Index.txt'                                dest='data/6.0.0/ucd/Index.txt'/>
+    <get src='${Public}/6.0.0/ucd/Jamo.txt'                                 dest='data/6.0.0/ucd/Jamo.txt'/>
+    <get src='${Public}/6.0.0/ucd/LineBreak.txt'                            dest='data/6.0.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/6.0.0/ucd/NameAliases.txt'                          dest='data/6.0.0/ucd/NameAliases.txt'/>
+    <get src='${Public}/6.0.0/ucd/NamedSequences.txt'                       dest='data/6.0.0/ucd/NamedSequences.txt'/>
+    <get src='${Public}/6.0.0/ucd/NamedSequencesProv.txt'                   dest='data/6.0.0/ucd/NamedSequencesProv.txt'/>
+    <get src='${Public}/6.0.0/ucd/NamesList.html'                           dest='data/6.0.0/ucd/NamesList.html'/>
+    <get src='${Public}/6.0.0/ucd/NamesList.txt'                            dest='data/6.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/6.0.0/ucd/NormalizationCorrections.txt'             dest='data/6.0.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/6.0.0/ucd/NormalizationTest.txt'                    dest='data/6.0.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/6.0.0/ucd/PropList.txt'                             dest='data/6.0.0/ucd/PropList.txt'/>
+    <get src='${Public}/6.0.0/ucd/PropertyAliases.txt'                      dest='data/6.0.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/6.0.0/ucd/PropertyValueAliases.txt'                 dest='data/6.0.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/6.0.0/ucd/ReadMe.txt'                               dest='data/6.0.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/6.0.0/ucd/ScriptExtensions.txt'                     dest='data/6.0.0/ucd/ScriptExtensions.txt'/>
+    <get src='${Public}/6.0.0/ucd/Scripts.txt'                              dest='data/6.0.0/ucd/Scripts.txt'/>
+    <get src='${Public}/6.0.0/ucd/SpecialCasing.txt'                        dest='data/6.0.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/6.0.0/ucd/StandardizedVariants.html'                dest='data/6.0.0/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/6.0.0/ucd/StandardizedVariants.txt'                 dest='data/6.0.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/6.0.0/ucd/UnicodeData.txt'                          dest='data/6.0.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/6.0.0/ucd/Unihan.zip'                               dest='data/6.0.0/ucd/Unihan.zip'/>
+
+    <get src='${Public}/6.0.0/ucd/extracted/DerivedBidiClass.txt'           dest='data/6.0.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/6.0.0/ucd/extracted/DerivedBinaryProperties.txt'    dest='data/6.0.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/6.0.0/ucd/extracted/DerivedCombiningClass.txt'      dest='data/6.0.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/6.0.0/ucd/extracted/DerivedDecompositionType.txt'   dest='data/6.0.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/6.0.0/ucd/extracted/DerivedEastAsianWidth.txt'      dest='data/6.0.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/6.0.0/ucd/extracted/DerivedGeneralCategory.txt'     dest='data/6.0.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/6.0.0/ucd/extracted/DerivedJoiningGroup.txt'        dest='data/6.0.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/6.0.0/ucd/extracted/DerivedJoiningType.txt'         dest='data/6.0.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/6.0.0/ucd/extracted/DerivedLineBreak.txt'           dest='data/6.0.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/6.0.0/ucd/extracted/DerivedNumericType.txt'         dest='data/6.0.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/6.0.0/ucd/extracted/DerivedNumericValues.txt'       dest='data/6.0.0/ucd/extracted/DerivedNumericValues.txt'/>
+
+    <get src='${Public}/6.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'      dest='data/6.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
+    <get src='${Public}/6.0.0/ucd/auxiliary/GraphemeBreakTest.html'         dest='data/6.0.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/6.0.0/ucd/auxiliary/GraphemeBreakTest.txt'          dest='data/6.0.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/6.0.0/ucd/auxiliary/LineBreakTest.html'             dest='data/6.0.0/ucd/auxiliary/LineBreakTest.html'/>
+    <get src='${Public}/6.0.0/ucd/auxiliary/LineBreakTest.txt'              dest='data/6.0.0/ucd/auxiliary/LineBreakTest.txt'/>
+    <get src='${Public}/6.0.0/ucd/auxiliary/SentenceBreakProperty.txt'      dest='data/6.0.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/6.0.0/ucd/auxiliary/SentenceBreakTest.html'         dest='data/6.0.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/6.0.0/ucd/auxiliary/SentenceBreakTest.txt'          dest='data/6.0.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/6.0.0/ucd/auxiliary/WordBreakProperty.txt'          dest='data/6.0.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/6.0.0/ucd/auxiliary/WordBreakTest.html'             dest='data/6.0.0/ucd/auxiliary/WordBreakTest.html'/>
+    <get src='${Public}/6.0.0/ucd/auxiliary/WordBreakTest.txt'              dest='data/6.0.0/ucd/auxiliary/WordBreakTest.txt'/>
+
+    <unzip src='data/6.0.0/ucd/Unihan.zip'  dest='data/6.0.0/ucd'/>
+    <delete file='data/6.0.0/ucd/Unihan.zip'/>
+    <concat encoding='UTF-8' destfile='data/6.0.0/ucd/Unihan.txt'>
+      <fileset dir="data/6.0.0/ucd" includes="Unihan_*.txt"/>
+    </concat>
+
+  </target>
+
+  <target name='download-6.1.0'>
+    <delete dir='data/6.1.0'/>
+    <mkdir dir='data/6.1.0/ucd'/>
+    <mkdir dir='data/6.1.0/ucd/auxiliary'/>
+    <mkdir dir='data/6.1.0/ucd/extracted'/>
+
+    <get src='${Public}/6.1.0/ucd/ArabicShaping.txt'                        dest='data/6.1.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/6.1.0/ucd/BidiMirroring.txt'                        dest='data/6.1.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/6.1.0/ucd/BidiTest.txt'                             dest='data/6.1.0/ucd/BidiTest.txt'/>
+    <get src='${Public}/6.1.0/ucd/Blocks.txt'                               dest='data/6.1.0/ucd/Blocks.txt'/>
+    <get src='${Public}/6.1.0/ucd/CJKRadicals.txt'                          dest='data/6.1.0/ucd/CJKRadicals.txt'/>
+    <get src='${Public}/6.1.0/ucd/CaseFolding.txt'                          dest='data/6.1.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/6.1.0/ucd/CompositionExclusions.txt'                dest='data/6.1.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/6.1.0/ucd/DerivedAge.txt'                           dest='data/6.1.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/6.1.0/ucd/DerivedCoreProperties.txt'                dest='data/6.1.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/6.1.0/ucd/DerivedNormalizationProps.txt'            dest='data/6.1.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/6.1.0/ucd/EastAsianWidth.txt'                       dest='data/6.1.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/6.1.0/ucd/EmojiSources.txt'                         dest='data/6.1.0/ucd/EmojiSources.txt'/>
+    <get src='${Public}/6.1.0/ucd/HangulSyllableType.txt'                   dest='data/6.1.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/6.1.0/ucd/Index.txt'                              dest='data/6.1.0/ucd/Index.txt'/>
+    <get src='${Public}/6.1.0/ucd/IndicMatraCategory.txt'                   dest='data/6.1.0/ucd/IndicMatraCategory.txt'/>
+    <get src='${Public}/6.1.0/ucd/IndicSyllabicCategory.txt'                dest='data/6.1.0/ucd/IndicSyllabicCategory.txt'/>
+    <get src='${Public}/6.1.0/ucd/Jamo.txt'                                 dest='data/6.1.0/ucd/Jamo.txt'/>
+    <get src='${Public}/6.1.0/ucd/LineBreak.txt'                            dest='data/6.1.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/6.1.0/ucd/NameAliases.txt'                          dest='data/6.1.0/ucd/NameAliases.txt'/>
+    <get src='${Public}/6.1.0/ucd/NamedSequences.txt'                       dest='data/6.1.0/ucd/NamedSequences.txt'/>
+    <get src='${Public}/6.1.0/ucd/NamedSequencesProv.txt'                   dest='data/6.1.0/ucd/NamedSequencesProv.txt'/>
+    <get src='${Public}/6.1.0/ucd/NamesList.html'                           dest='data/6.1.0/ucd/NamesList.html'/>
+    <get src='${Public}/6.1.0/ucd/NamesList.txt'                            dest='data/6.1.0/ucd/NamesList.txt'/>
+    <get src='${Public}/6.1.0/ucd/NormalizationCorrections.txt'             dest='data/6.1.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/6.1.0/ucd/NormalizationTest.txt'                    dest='data/6.1.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/6.1.0/ucd/PropList.txt'                             dest='data/6.1.0/ucd/PropList.txt'/>
+    <get src='${Public}/6.1.0/ucd/PropertyAliases.txt'                      dest='data/6.1.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/6.1.0/ucd/PropertyValueAliases.txt'                 dest='data/6.1.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/6.1.0/ucd/ReadMe.txt'                               dest='data/6.1.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/6.1.0/ucd/ScriptExtensions.txt'                     dest='data/6.1.0/ucd/ScriptExtensions.txt'/>
+    <get src='${Public}/6.1.0/ucd/Scripts.txt'                              dest='data/6.1.0/ucd/Scripts.txt'/>
+    <get src='${Public}/6.1.0/ucd/SpecialCasing.txt'                        dest='data/6.1.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/6.1.0/ucd/StandardizedVariants.html'                dest='data/6.1.0/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/6.1.0/ucd/StandardizedVariants.txt'                 dest='data/6.1.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/6.1.0/ucd/UnicodeData.txt'                          dest='data/6.1.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/6.1.0/ucd/Unihan.zip'                               dest='data/6.1.0/ucd/Unihan.zip'/>
+
+    <get src='${Public}/6.1.0/ucd/extracted/DerivedBidiClass.txt'           dest='data/6.1.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/6.1.0/ucd/extracted/DerivedBinaryProperties.txt'    dest='data/6.1.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/6.1.0/ucd/extracted/DerivedCombiningClass.txt'      dest='data/6.1.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/6.1.0/ucd/extracted/DerivedDecompositionType.txt'   dest='data/6.1.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/6.1.0/ucd/extracted/DerivedEastAsianWidth.txt'      dest='data/6.1.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/6.1.0/ucd/extracted/DerivedGeneralCategory.txt'     dest='data/6.1.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/6.1.0/ucd/extracted/DerivedJoiningGroup.txt'        dest='data/6.1.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/6.1.0/ucd/extracted/DerivedJoiningType.txt'         dest='data/6.1.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/6.1.0/ucd/extracted/DerivedLineBreak.txt'           dest='data/6.1.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/6.1.0/ucd/extracted/DerivedNumericType.txt'         dest='data/6.1.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/6.1.0/ucd/extracted/DerivedNumericValues.txt'       dest='data/6.1.0/ucd/extracted/DerivedNumericValues.txt'/>
+
+    <get src='${Public}/6.1.0/ucd/auxiliary/GraphemeBreakProperty.txt'      dest='data/6.1.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
+    <get src='${Public}/6.1.0/ucd/auxiliary/GraphemeBreakTest.txt'          dest='data/6.1.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/6.1.0/ucd/auxiliary/GraphemeBreakTest.html'         dest='data/6.1.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/6.1.0/ucd/auxiliary/LineBreakTest.txt'              dest='data/6.1.0/ucd/auxiliary/LineBreakTest.txt'/>
+    <get src='${Public}/6.1.0/ucd/auxiliary/LineBreakTest.html'             dest='data/6.1.0/ucd/auxiliary/LineBreakTest.html'/>
+    <get src='${Public}/6.1.0/ucd/auxiliary/SentenceBreakProperty.txt'      dest='data/6.1.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/6.1.0/ucd/auxiliary/SentenceBreakTest.html'         dest='data/6.1.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/6.1.0/ucd/auxiliary/SentenceBreakTest.txt'          dest='data/6.1.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/6.1.0/ucd/auxiliary/WordBreakProperty.txt'          dest='data/6.1.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/6.1.0/ucd/auxiliary/WordBreakTest.txt'              dest='data/6.1.0/ucd/auxiliary/WordBreakTest.txt'/>
+    <get src='${Public}/6.1.0/ucd/auxiliary/WordBreakTest.html'             dest='data/6.1.0/ucd/auxiliary/WordBreakTest.html'/>
+
+    <unzip src='data/6.1.0/ucd/Unihan.zip'  dest='data/6.1.0/ucd'/>
+    <delete file='data/6.1.0/ucd/Unihan.zip'/>
+
+    <concat encoding='UTF-8' destfile='data/6.1.0/ucd/Unihan.txt'>
+      <fileset dir="data/6.1.0/ucd" includes="Unihan_*.txt"/>
+    </concat>
+
+  </target>
+
+  <target name='download-6.2.0'>
+    <delete dir='data/6.2.0'/>
+    <mkdir dir='data/6.2.0/ucd'/>
+    <mkdir dir='data/6.2.0/ucd/auxiliary'/>
+    <mkdir dir='data/6.2.0/ucd/extracted'/>
+
+    <get src='${Public}/6.2.0/ucd/ArabicShaping.txt'                        dest='data/6.2.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/6.2.0/ucd/BidiMirroring.txt'                        dest='data/6.2.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/6.2.0/ucd/BidiTest.txt'                             dest='data/6.2.0/ucd/BidiTest.txt'/>
+    <get src='${Public}/6.2.0/ucd/Blocks.txt'                               dest='data/6.2.0/ucd/Blocks.txt'/>
+    <get src='${Public}/6.2.0/ucd/CJKRadicals.txt'                          dest='data/6.2.0/ucd/CJKRadicals.txt'/>
+    <get src='${Public}/6.2.0/ucd/CaseFolding.txt'                          dest='data/6.2.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/6.2.0/ucd/CompositionExclusions.txt'                dest='data/6.2.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/6.2.0/ucd/DerivedAge.txt'                           dest='data/6.2.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/6.2.0/ucd/DerivedCoreProperties.txt'                dest='data/6.2.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/6.2.0/ucd/DerivedNormalizationProps.txt'            dest='data/6.2.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/6.2.0/ucd/EastAsianWidth.txt'                       dest='data/6.2.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/6.2.0/ucd/EmojiSources.txt'                         dest='data/6.2.0/ucd/EmojiSources.txt'/>
+    <get src='${Public}/6.2.0/ucd/HangulSyllableType.txt'                   dest='data/6.2.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/6.2.0/ucd/Index.txt'                                dest='data/6.2.0/ucd/Index.txt'/>
+    <get src='${Public}/6.2.0/ucd/IndicMatraCategory.txt'                   dest='data/6.2.0/ucd/IndicMatraCategory.txt'/>
+    <get src='${Public}/6.2.0/ucd/IndicSyllabicCategory.txt'                dest='data/6.2.0/ucd/IndicSyllabicCategory.txt'/>
+    <get src='${Public}/6.2.0/ucd/Jamo.txt'                                 dest='data/6.2.0/ucd/Jamo.txt'/>
+    <get src='${Public}/6.2.0/ucd/LineBreak.txt'                            dest='data/6.2.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/6.2.0/ucd/NameAliases.txt'                          dest='data/6.2.0/ucd/NameAliases.txt'/>
+    <get src='${Public}/6.2.0/ucd/NamedSequences.txt'                       dest='data/6.2.0/ucd/NamedSequences.txt'/>
+    <get src='${Public}/6.2.0/ucd/NamedSequencesProv.txt'                   dest='data/6.2.0/ucd/NamedSequencesProv.txt'/>
+    <get src='${Public}/6.2.0/ucd/NamesList.html'                           dest='data/6.2.0/ucd/NamesList.html'/>
+    <get src='${Public}/6.2.0/ucd/NamesList.txt'                            dest='data/6.2.0/ucd/NamesList.txt'/>
+    <get src='${Public}/6.2.0/ucd/NormalizationCorrections.txt'             dest='data/6.2.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/6.2.0/ucd/NormalizationTest.txt'                    dest='data/6.2.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/6.2.0/ucd/PropList.txt'                             dest='data/6.2.0/ucd/PropList.txt'/>
+    <get src='${Public}/6.2.0/ucd/PropertyAliases.txt'                      dest='data/6.2.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/6.2.0/ucd/PropertyValueAliases.txt'                 dest='data/6.2.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/6.2.0/ucd/ReadMe.txt'                               dest='data/6.2.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/6.2.0/ucd/ScriptExtensions.txt'                     dest='data/6.2.0/ucd/ScriptExtensions.txt'/>
+    <get src='${Public}/6.2.0/ucd/Scripts.txt'                              dest='data/6.2.0/ucd/Scripts.txt'/>
+    <get src='${Public}/6.2.0/ucd/SpecialCasing.txt'                        dest='data/6.2.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/6.2.0/ucd/StandardizedVariants.html'                dest='data/6.2.0/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/6.2.0/ucd/StandardizedVariants.txt'                 dest='data/6.2.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/6.2.0/ucd/USourceData.txt'                          dest='data/6.2.0/ucd/USourceData.txt'/>
+    <get src='${Public}/6.2.0/ucd/UnicodeData.txt'                          dest='data/6.2.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/6.2.0/ucd/Unihan.zip'                               dest='data/6.2.0/ucd/Unihan.zip'/>
+
+    <get src='${Public}/6.2.0/ucd/extracted/DerivedBidiClass.txt'           dest='data/6.2.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/6.2.0/ucd/extracted/DerivedBinaryProperties.txt'    dest='data/6.2.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/6.2.0/ucd/extracted/DerivedCombiningClass.txt'      dest='data/6.2.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/6.2.0/ucd/extracted/DerivedDecompositionType.txt'   dest='data/6.2.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/6.2.0/ucd/extracted/DerivedEastAsianWidth.txt'      dest='data/6.2.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/6.2.0/ucd/extracted/DerivedGeneralCategory.txt'     dest='data/6.2.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/6.2.0/ucd/extracted/DerivedJoiningGroup.txt'        dest='data/6.2.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/6.2.0/ucd/extracted/DerivedJoiningType.txt'         dest='data/6.2.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/6.2.0/ucd/extracted/DerivedLineBreak.txt'           dest='data/6.2.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/6.2.0/ucd/extracted/DerivedNumericType.txt'         dest='data/6.2.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/6.2.0/ucd/extracted/DerivedNumericValues.txt'       dest='data/6.2.0/ucd/extracted/DerivedNumericValues.txt'/>
+
+    <get src='${Public}/6.2.0/ucd/auxiliary/GraphemeBreakProperty.txt'      dest='data/6.2.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
+    <get src='${Public}/6.2.0/ucd/auxiliary/GraphemeBreakTest.html'         dest='data/6.2.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/6.2.0/ucd/auxiliary/GraphemeBreakTest.txt'          dest='data/6.2.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/6.2.0/ucd/auxiliary/LineBreakTest.html'             dest='data/6.2.0/ucd/auxiliary/LineBreakTest.html'/>
+    <get src='${Public}/6.2.0/ucd/auxiliary/LineBreakTest.txt'              dest='data/6.2.0/ucd/auxiliary/LineBreakTest.txt'/>
+    <get src='${Public}/6.2.0/ucd/auxiliary/SentenceBreakProperty.txt'      dest='data/6.2.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/6.2.0/ucd/auxiliary/SentenceBreakTest.html'         dest='data/6.2.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/6.2.0/ucd/auxiliary/SentenceBreakTest.txt'          dest='data/6.2.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/6.2.0/ucd/auxiliary/WordBreakProperty.txt'          dest='data/6.2.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/6.2.0/ucd/auxiliary/WordBreakTest.txt'              dest='data/6.2.0/ucd/auxiliary/WordBreakTest.txt'/>
+    <get src='${Public}/6.2.0/ucd/auxiliary/WordBreakTest.html'             dest='data/6.2.0/ucd/auxiliary/WordBreakTest.html'/>
+
+    <unzip src='data/6.2.0/ucd/Unihan.zip'  dest='data/6.2.0/ucd'/>
+    <delete file='data/6.2.0/ucd/Unihan.zip'/>
+
+    <concat encoding='UTF-8' destfile='data/6.2.0/ucd/Unihan.txt'>
+      <fileset dir="data/6.2.0/ucd" includes="Unihan_*.txt"/>
+    </concat>
+
+  </target>
+
+  <target name='download-6.3.0'>
+    <delete dir='data/6.3.0'/>
+    <mkdir dir='data/6.3.0/ucd'/>
+    <mkdir dir='data/6.3.0/ucd/auxiliary'/>
+    <mkdir dir='data/6.3.0/ucd/extracted'/>
+
+    <get src='${Public}/6.3.0/ucd/ArabicShaping.txt'                        dest='data/6.3.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/6.3.0/ucd/BidiBrackets.txt'                         dest='data/6.3.0/ucd/BidiBrackets.txt'/>
+    <get src='${Public}/6.3.0/ucd/BidiCharacterTest.txt'                    dest='data/6.3.0/ucd/BidiCharacterTest.txt'/>
+    <get src='${Public}/6.3.0/ucd/BidiMirroring.txt'                        dest='data/6.3.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/6.3.0/ucd/BidiTest.txt'                             dest='data/6.3.0/ucd/BidiTest.txt'/>
+    <get src='${Public}/6.3.0/ucd/Blocks.txt'                               dest='data/6.3.0/ucd/Blocks.txt'/>
+    <get src='${Public}/6.3.0/ucd/CJKRadicals.txt'                          dest='data/6.3.0/ucd/CJKRadicals.txt'/>
+    <get src='${Public}/6.3.0/ucd/CaseFolding.txt'                          dest='data/6.3.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/6.3.0/ucd/CompositionExclusions.txt'                dest='data/6.3.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/6.3.0/ucd/DerivedAge.txt'                           dest='data/6.3.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/6.3.0/ucd/DerivedCoreProperties.txt'                dest='data/6.3.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/6.3.0/ucd/DerivedNormalizationProps.txt'            dest='data/6.3.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/6.3.0/ucd/EastAsianWidth.txt'                       dest='data/6.3.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/6.3.0/ucd/EmojiSources.txt'                         dest='data/6.3.0/ucd/EmojiSources.txt'/>
+    <get src='${Public}/6.3.0/ucd/HangulSyllableType.txt'                   dest='data/6.3.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/6.3.0/ucd/Index.txt'                                dest='data/6.3.0/ucd/Index.txt'/>
+    <get src='${Public}/6.3.0/ucd/IndicMatraCategory.txt'                   dest='data/6.3.0/ucd/IndicMatraCategory.txt'/>
+    <get src='${Public}/6.3.0/ucd/IndicSyllabicCategory.txt'                dest='data/6.3.0/ucd/IndicSyllabicCategory.txt'/>
+    <get src='${Public}/6.3.0/ucd/Jamo.txt'                                 dest='data/6.3.0/ucd/Jamo.txt'/>
+    <get src='${Public}/6.3.0/ucd/LineBreak.txt'                            dest='data/6.3.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/6.3.0/ucd/NameAliases.txt'                          dest='data/6.3.0/ucd/NameAliases.txt'/>
+    <get src='${Public}/6.3.0/ucd/NamedSequences.txt'                       dest='data/6.3.0/ucd/NamedSequences.txt'/>
+    <get src='${Public}/6.3.0/ucd/NamedSequencesProv.txt'                   dest='data/6.3.0/ucd/NamedSequencesProv.txt'/>
+    <get src='${Public}/6.3.0/ucd/NamesList.html'                           dest='data/6.3.0/ucd/NamesList.html'/>
+    <get src='${Public}/6.3.0/ucd/NamesList.txt'                            dest='data/6.3.0/ucd/NamesList.txt'/>
+    <get src='${Public}/6.3.0/ucd/NormalizationCorrections.txt'             dest='data/6.3.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/6.3.0/ucd/NormalizationTest.txt'                    dest='data/6.3.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/6.3.0/ucd/PropList.txt'                             dest='data/6.3.0/ucd/PropList.txt'/>
+    <get src='${Public}/6.3.0/ucd/PropertyAliases.txt'                      dest='data/6.3.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/6.3.0/ucd/PropertyValueAliases.txt'                 dest='data/6.3.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/6.3.0/ucd/ReadMe.txt'                               dest='data/6.3.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/6.3.0/ucd/ScriptExtensions.txt'                     dest='data/6.3.0/ucd/ScriptExtensions.txt'/>
+    <get src='${Public}/6.3.0/ucd/Scripts.txt'                              dest='data/6.3.0/ucd/Scripts.txt'/>
+    <get src='${Public}/6.3.0/ucd/SpecialCasing.txt'                        dest='data/6.3.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/6.3.0/ucd/StandardizedVariants.html'                dest='data/6.3.0/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/6.3.0/ucd/StandardizedVariants.txt'                 dest='data/6.3.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/6.3.0/ucd/USourceData.txt'                          dest='data/6.3.0/ucd/USourceData.txt'/>
+    <get src='${Public}/6.3.0/ucd/USourceGlyphs.pdf'                        dest='data/6.3.0/ucd/USourceGlyphs.pdf'/>
+    <get src='${Public}/6.3.0/ucd/UnicodeData.txt'                          dest='data/6.3.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/6.3.0/ucd/Unihan.zip'                               dest='data/6.3.0/ucd/Unihan.zip'/>
+
+    <get src='${Public}/6.3.0/ucd/extracted/DerivedBidiClass.txt'           dest='data/6.3.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/6.3.0/ucd/extracted/DerivedBinaryProperties.txt'    dest='data/6.3.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/6.3.0/ucd/extracted/DerivedCombiningClass.txt'      dest='data/6.3.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/6.3.0/ucd/extracted/DerivedDecompositionType.txt'   dest='data/6.3.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/6.3.0/ucd/extracted/DerivedEastAsianWidth.txt'      dest='data/6.3.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/6.3.0/ucd/extracted/DerivedGeneralCategory.txt'     dest='data/6.3.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/6.3.0/ucd/extracted/DerivedJoiningGroup.txt'        dest='data/6.3.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/6.3.0/ucd/extracted/DerivedJoiningType.txt'         dest='data/6.3.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/6.3.0/ucd/extracted/DerivedLineBreak.txt'           dest='data/6.3.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/6.3.0/ucd/extracted/DerivedNumericType.txt'         dest='data/6.3.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/6.3.0/ucd/extracted/DerivedNumericValues.txt'       dest='data/6.3.0/ucd/extracted/DerivedNumericValues.txt'/>
+
+    <get src='${Public}/6.3.0/ucd/auxiliary/GraphemeBreakProperty.txt'      dest='data/6.3.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
+    <get src='${Public}/6.3.0/ucd/auxiliary/GraphemeBreakTest.html'         dest='data/6.3.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/6.3.0/ucd/auxiliary/GraphemeBreakTest.txt'          dest='data/6.3.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/6.3.0/ucd/auxiliary/LineBreakTest.html'             dest='data/6.3.0/ucd/auxiliary/LineBreakTest.html'/>
+    <get src='${Public}/6.3.0/ucd/auxiliary/LineBreakTest.txt'              dest='data/6.3.0/ucd/auxiliary/LineBreakTest.txt'/>
+    <get src='${Public}/6.3.0/ucd/auxiliary/SentenceBreakProperty.txt'      dest='data/6.3.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/6.3.0/ucd/auxiliary/SentenceBreakTest.html'         dest='data/6.3.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/6.3.0/ucd/auxiliary/SentenceBreakTest.txt'          dest='data/6.3.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/6.3.0/ucd/auxiliary/WordBreakProperty.txt'          dest='data/6.3.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/6.3.0/ucd/auxiliary/WordBreakTest.txt'              dest='data/6.3.0/ucd/auxiliary/WordBreakTest.txt'/>
+    <get src='${Public}/6.3.0/ucd/auxiliary/WordBreakTest.html'             dest='data/6.3.0/ucd/auxiliary/WordBreakTest.html'/>
+
+    <unzip src='data/6.3.0/ucd/Unihan.zip'  dest='data/6.3.0/ucd'/>
+    <delete file='data/6.3.0/ucd/Unihan.zip'/>
+
+    <concat encoding='UTF-8' destfile='data/6.3.0/ucd/Unihan.txt'>
+      <fileset dir="data/6.3.0/ucd" includes="Unihan_*.txt"/>
+    </concat>
+
+  </target>
+
+
+  <target name='download-7.0.0'>
+    <delete dir='data/7.0.0'/>
+    <mkdir dir='data/7.0.0/ucd'/>
+    <mkdir dir='data/7.0.0/ucd/auxiliary'/>
+    <mkdir dir='data/7.0.0/ucd/extracted'/>
+
+    <get src='${Public}/7.0.0/ucd/ArabicShaping.txt'                        dest='data/7.0.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/7.0.0/ucd/BidiBrackets.txt'                         dest='data/7.0.0/ucd/BidiBrackets.txt'/>
+    <get src='${Public}/7.0.0/ucd/BidiCharacterTest.txt'                    dest='data/7.0.0/ucd/BidiCharacterTest.txt'/>
+    <get src='${Public}/7.0.0/ucd/BidiMirroring.txt'                        dest='data/7.0.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/7.0.0/ucd/BidiTest.txt'                             dest='data/7.0.0/ucd/BidiTest.txt'/>
+    <get src='${Public}/7.0.0/ucd/Blocks.txt'                               dest='data/7.0.0/ucd/Blocks.txt'/>
+    <get src='${Public}/7.0.0/ucd/CJKRadicals.txt'                          dest='data/7.0.0/ucd/CJKRadicals.txt'/>
+    <get src='${Public}/7.0.0/ucd/CaseFolding.txt'                          dest='data/7.0.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/7.0.0/ucd/CompositionExclusions.txt'                dest='data/7.0.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/7.0.0/ucd/DerivedAge.txt'                           dest='data/7.0.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/7.0.0/ucd/DerivedCoreProperties.txt'                dest='data/7.0.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/7.0.0/ucd/DerivedNormalizationProps.txt'            dest='data/7.0.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/7.0.0/ucd/EastAsianWidth.txt'                       dest='data/7.0.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/7.0.0/ucd/EmojiSources.txt'                         dest='data/7.0.0/ucd/EmojiSources.txt'/>
+    <get src='${Public}/7.0.0/ucd/HangulSyllableType.txt'                   dest='data/7.0.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/7.0.0/ucd/Index.txt'                                dest='data/7.0.0/ucd/Index.txt'/>
+    <get src='${Public}/7.0.0/ucd/IndicMatraCategory.txt'                   dest='data/7.0.0/ucd/IndicMatraCategory.txt'/>
+    <get src='${Public}/7.0.0/ucd/IndicSyllabicCategory.txt'                dest='data/7.0.0/ucd/IndicSyllabicCategory.txt'/>
+    <get src='${Public}/7.0.0/ucd/Jamo.txt'                                 dest='data/7.0.0/ucd/Jamo.txt'/>
+    <get src='${Public}/7.0.0/ucd/LineBreak.txt'                            dest='data/7.0.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/7.0.0/ucd/NameAliases.txt'                          dest='data/7.0.0/ucd/NameAliases.txt'/>
+    <get src='${Public}/7.0.0/ucd/NamedSequences.txt'                       dest='data/7.0.0/ucd/NamedSequences.txt'/>
+    <get src='${Public}/7.0.0/ucd/NamedSequencesProv.txt'                   dest='data/7.0.0/ucd/NamedSequencesProv.txt'/>
+    <get src='${Public}/7.0.0/ucd/NamesList.html'                           dest='data/7.0.0/ucd/NamesList.html'/>
+    <get src='${Public}/7.0.0/ucd/NamesList.txt'                            dest='data/7.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/7.0.0/ucd/NormalizationCorrections.txt'             dest='data/7.0.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/7.0.0/ucd/NormalizationTest.txt'                    dest='data/7.0.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/7.0.0/ucd/PropList.txt'                             dest='data/7.0.0/ucd/PropList.txt'/>
+    <get src='${Public}/7.0.0/ucd/PropertyAliases.txt'                      dest='data/7.0.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/7.0.0/ucd/PropertyValueAliases.txt'                 dest='data/7.0.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/7.0.0/ucd/ReadMe.txt'                               dest='data/7.0.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/7.0.0/ucd/ScriptExtensions.txt'                     dest='data/7.0.0/ucd/ScriptExtensions.txt'/>
+    <get src='${Public}/7.0.0/ucd/Scripts.txt'                              dest='data/7.0.0/ucd/Scripts.txt'/>
+    <get src='${Public}/7.0.0/ucd/SpecialCasing.txt'                        dest='data/7.0.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/7.0.0/ucd/StandardizedVariants.html'                dest='data/7.0.0/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/7.0.0/ucd/StandardizedVariants.txt'                 dest='data/7.0.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/7.0.0/ucd/USourceData.txt'                          dest='data/7.0.0/ucd/USourceData.txt'/>
+    <get src='${Public}/7.0.0/ucd/USourceGlyphs.pdf'                        dest='data/7.0.0/ucd/USourceGlyphs.pdf'/>
+    <get src='${Public}/7.0.0/ucd/UnicodeData.txt'                          dest='data/7.0.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/7.0.0/ucd/Unihan.zip'                               dest='data/7.0.0/ucd/Unihan.zip'/>
+
+    <get src='${Public}/7.0.0/ucd/extracted/DerivedBidiClass.txt'           dest='data/7.0.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/7.0.0/ucd/extracted/DerivedBinaryProperties.txt'    dest='data/7.0.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/7.0.0/ucd/extracted/DerivedCombiningClass.txt'      dest='data/7.0.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/7.0.0/ucd/extracted/DerivedDecompositionType.txt'   dest='data/7.0.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/7.0.0/ucd/extracted/DerivedEastAsianWidth.txt'      dest='data/7.0.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/7.0.0/ucd/extracted/DerivedGeneralCategory.txt'     dest='data/7.0.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/7.0.0/ucd/extracted/DerivedJoiningGroup.txt'        dest='data/7.0.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/7.0.0/ucd/extracted/DerivedJoiningType.txt'         dest='data/7.0.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/7.0.0/ucd/extracted/DerivedLineBreak.txt'           dest='data/7.0.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/7.0.0/ucd/extracted/DerivedNumericType.txt'         dest='data/7.0.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/7.0.0/ucd/extracted/DerivedNumericValues.txt'       dest='data/7.0.0/ucd/extracted/DerivedNumericValues.txt'/>
+
+    <get src='${Public}/7.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'      dest='data/7.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
+    <get src='${Public}/7.0.0/ucd/auxiliary/GraphemeBreakTest.html'         dest='data/7.0.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/7.0.0/ucd/auxiliary/GraphemeBreakTest.txt'          dest='data/7.0.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/7.0.0/ucd/auxiliary/LineBreakTest.html'             dest='data/7.0.0/ucd/auxiliary/LineBreakTest.html'/>
+    <get src='${Public}/7.0.0/ucd/auxiliary/LineBreakTest.txt'              dest='data/7.0.0/ucd/auxiliary/LineBreakTest.txt'/>
+    <get src='${Public}/7.0.0/ucd/auxiliary/SentenceBreakProperty.txt'      dest='data/7.0.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/7.0.0/ucd/auxiliary/SentenceBreakTest.html'         dest='data/7.0.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/7.0.0/ucd/auxiliary/SentenceBreakTest.txt'          dest='data/7.0.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/7.0.0/ucd/auxiliary/WordBreakProperty.txt'          dest='data/7.0.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/7.0.0/ucd/auxiliary/WordBreakTest.txt'              dest='data/7.0.0/ucd/auxiliary/WordBreakTest.txt'/>
+    <get src='${Public}/7.0.0/ucd/auxiliary/WordBreakTest.html'             dest='data/7.0.0/ucd/auxiliary/WordBreakTest.html'/>
+
+    <unzip src='data/7.0.0/ucd/Unihan.zip'  dest='data/7.0.0/ucd'/>
+    <delete file='data/7.0.0/ucd/Unihan.zip'/>
+
+    <concat encoding='UTF-8' destfile='data/7.0.0/ucd/Unihan.txt'>
+      <fileset dir="data/7.0.0/ucd" includes="Unihan_*.txt"/>
+    </concat>
+
+  </target>
+
+  <target name='download-8.0.0'>
+    <delete dir='data/8.0.0'/>
+    <mkdir dir='data/8.0.0/ucd'/>
+    <mkdir dir='data/8.0.0/ucd/auxiliary'/>
+    <mkdir dir='data/8.0.0/ucd/extracted'/>
+
+    <get src='${Public}/8.0.0/ucd/ArabicShaping.txt'                        dest='data/8.0.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/8.0.0/ucd/BidiBrackets.txt'                         dest='data/8.0.0/ucd/BidiBrackets.txt'/>
+    <get src='${Public}/8.0.0/ucd/BidiCharacterTest.txt'                    dest='data/8.0.0/ucd/BidiCharacterTest.txt'/>
+    <get src='${Public}/8.0.0/ucd/BidiMirroring.txt'                        dest='data/8.0.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/8.0.0/ucd/BidiTest.txt'                             dest='data/8.0.0/ucd/BidiTest.txt'/>
+    <get src='${Public}/8.0.0/ucd/Blocks.txt'                               dest='data/8.0.0/ucd/Blocks.txt'/>
+    <get src='${Public}/8.0.0/ucd/CJKRadicals.txt'                          dest='data/8.0.0/ucd/CJKRadicals.txt'/>
+    <get src='${Public}/8.0.0/ucd/CaseFolding.txt'                          dest='data/8.0.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/8.0.0/ucd/CompositionExclusions.txt'                dest='data/8.0.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/8.0.0/ucd/DerivedAge.txt'                           dest='data/8.0.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/8.0.0/ucd/DerivedCoreProperties.txt'                dest='data/8.0.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/8.0.0/ucd/DerivedNormalizationProps.txt'            dest='data/8.0.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/8.0.0/ucd/EastAsianWidth.txt'                       dest='data/8.0.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/8.0.0/ucd/EmojiSources.txt'                         dest='data/8.0.0/ucd/EmojiSources.txt'/>
+    <get src='${Public}/8.0.0/ucd/HangulSyllableType.txt'                   dest='data/8.0.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/8.0.0/ucd/Index.txt'                                dest='data/8.0.0/ucd/Index.txt'/>
+    <get src='${Public}/8.0.0/ucd/IndicPositionalCategory.txt'              dest='data/8.0.0/ucd/IndicPositionalCategory.txt'/>
+    <get src='${Public}/8.0.0/ucd/IndicSyllabicCategory.txt'                dest='data/8.0.0/ucd/IndicSyllabicCategory.txt'/>
+    <get src='${Public}/8.0.0/ucd/Jamo.txt'                                 dest='data/8.0.0/ucd/Jamo.txt'/>
+    <get src='${Public}/8.0.0/ucd/LineBreak.txt'                            dest='data/8.0.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/8.0.0/ucd/NameAliases.txt'                          dest='data/8.0.0/ucd/NameAliases.txt'/>
+    <get src='${Public}/8.0.0/ucd/NamedSequences.txt'                       dest='data/8.0.0/ucd/NamedSequences.txt'/>
+    <get src='${Public}/8.0.0/ucd/NamedSequencesProv.txt'                   dest='data/8.0.0/ucd/NamedSequencesProv.txt'/>
+    <get src='${Public}/8.0.0/ucd/NamesList.html'                           dest='data/8.0.0/ucd/NamesList.html'/>
+    <get src='${Public}/8.0.0/ucd/NamesList.txt'                            dest='data/8.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/8.0.0/ucd/NormalizationCorrections.txt'             dest='data/8.0.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/8.0.0/ucd/NormalizationTest.txt'                    dest='data/8.0.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/8.0.0/ucd/PropList.txt'                             dest='data/8.0.0/ucd/PropList.txt'/>
+    <get src='${Public}/8.0.0/ucd/PropertyAliases.txt'                      dest='data/8.0.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/8.0.0/ucd/PropertyValueAliases.txt'                 dest='data/8.0.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/8.0.0/ucd/ReadMe.txt'                               dest='data/8.0.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/8.0.0/ucd/ScriptExtensions.txt'                     dest='data/8.0.0/ucd/ScriptExtensions.txt'/>
+    <get src='${Public}/8.0.0/ucd/Scripts.txt'                              dest='data/8.0.0/ucd/Scripts.txt'/>
+    <get src='${Public}/8.0.0/ucd/SpecialCasing.txt'                        dest='data/8.0.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/8.0.0/ucd/StandardizedVariants.html'                dest='data/8.0.0/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/8.0.0/ucd/StandardizedVariants.txt'                 dest='data/8.0.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/8.0.0/ucd/USourceData.txt'                          dest='data/8.0.0/ucd/USourceData.txt'/>
+    <get src='${Public}/8.0.0/ucd/USourceGlyphs.pdf'                        dest='data/8.0.0/ucd/USourceGlyphs.pdf'/>
+    <get src='${Public}/8.0.0/ucd/UnicodeData.txt'                          dest='data/8.0.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/8.0.0/ucd/Unihan.zip'                               dest='data/8.0.0/ucd/Unihan.zip'/>
+
+    <get src='${Public}/8.0.0/ucd/extracted/DerivedBidiClass.txt'           dest='data/8.0.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/8.0.0/ucd/extracted/DerivedBinaryProperties.txt'    dest='data/8.0.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/8.0.0/ucd/extracted/DerivedCombiningClass.txt'      dest='data/8.0.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/8.0.0/ucd/extracted/DerivedDecompositionType.txt'   dest='data/8.0.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/8.0.0/ucd/extracted/DerivedEastAsianWidth.txt'      dest='data/8.0.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/8.0.0/ucd/extracted/DerivedGeneralCategory.txt'     dest='data/8.0.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/8.0.0/ucd/extracted/DerivedJoiningGroup.txt'        dest='data/8.0.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/8.0.0/ucd/extracted/DerivedJoiningType.txt'         dest='data/8.0.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/8.0.0/ucd/extracted/DerivedLineBreak.txt'           dest='data/8.0.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/8.0.0/ucd/extracted/DerivedNumericType.txt'         dest='data/8.0.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/8.0.0/ucd/extracted/DerivedNumericValues.txt'       dest='data/8.0.0/ucd/extracted/DerivedNumericValues.txt'/>
+
+    <get src='${Public}/8.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'      dest='data/8.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
+    <get src='${Public}/8.0.0/ucd/auxiliary/GraphemeBreakTest.html'         dest='data/8.0.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/8.0.0/ucd/auxiliary/GraphemeBreakTest.txt'          dest='data/8.0.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/8.0.0/ucd/auxiliary/LineBreakTest.html'             dest='data/8.0.0/ucd/auxiliary/LineBreakTest.html'/>
+    <get src='${Public}/8.0.0/ucd/auxiliary/LineBreakTest.txt'              dest='data/8.0.0/ucd/auxiliary/LineBreakTest.txt'/>
+    <get src='${Public}/8.0.0/ucd/auxiliary/SentenceBreakProperty.txt'      dest='data/8.0.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/8.0.0/ucd/auxiliary/SentenceBreakTest.html'         dest='data/8.0.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/8.0.0/ucd/auxiliary/SentenceBreakTest.txt'          dest='data/8.0.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/8.0.0/ucd/auxiliary/WordBreakProperty.txt'          dest='data/8.0.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/8.0.0/ucd/auxiliary/WordBreakTest.txt'              dest='data/8.0.0/ucd/auxiliary/WordBreakTest.txt'/>
+    <get src='${Public}/8.0.0/ucd/auxiliary/WordBreakTest.html'             dest='data/8.0.0/ucd/auxiliary/WordBreakTest.html'/>
+
+    <unzip src='data/8.0.0/ucd/Unihan.zip'  dest='data/8.0.0/ucd'/>
+    <delete file='data/8.0.0/ucd/Unihan.zip'/>
+
+    <concat encoding='UTF-8' destfile='data/8.0.0/ucd/Unihan.txt'>
+      <fileset dir="data/8.0.0/ucd" includes="Unihan_*.txt"/>
+    </concat>
+
+  </target>
+
+  <target name='download-9.0.0'>
+    <delete dir='data/9.0.0'/>
+    <mkdir dir='data/9.0.0/ucd'/>
+    <mkdir dir='data/9.0.0/ucd/auxiliary'/>
+    <mkdir dir='data/9.0.0/ucd/extracted'/>
+
+    <get src='${Public}/9.0.0/ucd/ArabicShaping.txt'                        dest='data/9.0.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/9.0.0/ucd/BidiBrackets.txt'                         dest='data/9.0.0/ucd/BidiBrackets.txt'/>
+    <get src='${Public}/9.0.0/ucd/BidiCharacterTest.txt'                    dest='data/9.0.0/ucd/BidiCharacterTest.txt'/>
+    <get src='${Public}/9.0.0/ucd/BidiMirroring.txt'                        dest='data/9.0.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/9.0.0/ucd/BidiTest.txt'                             dest='data/9.0.0/ucd/BidiTest.txt'/>
+    <get src='${Public}/9.0.0/ucd/Blocks.txt'                               dest='data/9.0.0/ucd/Blocks.txt'/>
+    <get src='${Public}/9.0.0/ucd/CJKRadicals.txt'                          dest='data/9.0.0/ucd/CJKRadicals.txt'/>
+    <get src='${Public}/9.0.0/ucd/CaseFolding.txt'                          dest='data/9.0.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/9.0.0/ucd/CompositionExclusions.txt'                dest='data/9.0.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/9.0.0/ucd/DerivedAge.txt'                           dest='data/9.0.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/9.0.0/ucd/DerivedCoreProperties.txt'                dest='data/9.0.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/9.0.0/ucd/DerivedNormalizationProps.txt'            dest='data/9.0.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/9.0.0/ucd/EastAsianWidth.txt'                       dest='data/9.0.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/9.0.0/ucd/EmojiSources.txt'                         dest='data/9.0.0/ucd/EmojiSources.txt'/>
+    <get src='${Public}/9.0.0/ucd/HangulSyllableType.txt'                   dest='data/9.0.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/9.0.0/ucd/Index.txt'                                dest='data/9.0.0/ucd/Index.txt'/>
+    <get src='${Public}/9.0.0/ucd/IndicPositionalCategory.txt'              dest='data/9.0.0/ucd/IndicPositionalCategory.txt'/>
+    <get src='${Public}/9.0.0/ucd/IndicSyllabicCategory.txt'                dest='data/9.0.0/ucd/IndicSyllabicCategory.txt'/>
+    <get src='${Public}/9.0.0/ucd/Jamo.txt'                                 dest='data/9.0.0/ucd/Jamo.txt'/>
+    <get src='${Public}/9.0.0/ucd/LineBreak.txt'                            dest='data/9.0.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/9.0.0/ucd/NameAliases.txt'                          dest='data/9.0.0/ucd/NameAliases.txt'/>
+    <get src='${Public}/9.0.0/ucd/NamedSequences.txt'                       dest='data/9.0.0/ucd/NamedSequences.txt'/>
+    <get src='${Public}/9.0.0/ucd/NamedSequencesProv.txt'                   dest='data/9.0.0/ucd/NamedSequencesProv.txt'/>
+    <get src='${Public}/9.0.0/ucd/NamesList.html'                           dest='data/9.0.0/ucd/NamesList.html'/>
+    <get src='${Public}/9.0.0/ucd/NamesList.txt'                            dest='data/9.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/9.0.0/ucd/NormalizationCorrections.txt'             dest='data/9.0.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/9.0.0/ucd/NormalizationTest.txt'                    dest='data/9.0.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/9.0.0/ucd/PropList.txt'                             dest='data/9.0.0/ucd/PropList.txt'/>
+    <get src='${Public}/9.0.0/ucd/PropertyAliases.txt'                      dest='data/9.0.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/9.0.0/ucd/PropertyValueAliases.txt'                 dest='data/9.0.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/9.0.0/ucd/ReadMe.txt'                               dest='data/9.0.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/9.0.0/ucd/ScriptExtensions.txt'                     dest='data/9.0.0/ucd/ScriptExtensions.txt'/>
+    <get src='${Public}/9.0.0/ucd/Scripts.txt'                              dest='data/9.0.0/ucd/Scripts.txt'/>
+    <get src='${Public}/9.0.0/ucd/SpecialCasing.txt'                        dest='data/9.0.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/9.0.0/ucd/StandardizedVariants.html'                dest='data/9.0.0/ucd/StandardizedVariants.html'/>
+    <get src='${Public}/9.0.0/ucd/StandardizedVariants.txt'                 dest='data/9.0.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/9.0.0/ucd/TangutSources.txt'                        dest='data/9.0.0/ucd/TangutSources.txt'/>
+    <get src='${Public}/9.0.0/ucd/USourceData.txt'                          dest='data/9.0.0/ucd/USourceData.txt'/>
+    <get src='${Public}/9.0.0/ucd/USourceGlyphs.pdf'                        dest='data/9.0.0/ucd/USourceGlyphs.pdf'/>
+    <get src='${Public}/9.0.0/ucd/UnicodeData.txt'                          dest='data/9.0.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/9.0.0/ucd/Unihan.zip'                               dest='data/9.0.0/ucd/Unihan.zip'/>
+
+    <get src='${Public}/9.0.0/ucd/extracted/DerivedBidiClass.txt'           dest='data/9.0.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/9.0.0/ucd/extracted/DerivedBinaryProperties.txt'    dest='data/9.0.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/9.0.0/ucd/extracted/DerivedCombiningClass.txt'      dest='data/9.0.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/9.0.0/ucd/extracted/DerivedDecompositionType.txt'   dest='data/9.0.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/9.0.0/ucd/extracted/DerivedEastAsianWidth.txt'      dest='data/9.0.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/9.0.0/ucd/extracted/DerivedGeneralCategory.txt'     dest='data/9.0.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/9.0.0/ucd/extracted/DerivedJoiningGroup.txt'        dest='data/9.0.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/9.0.0/ucd/extracted/DerivedJoiningType.txt'         dest='data/9.0.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/9.0.0/ucd/extracted/DerivedLineBreak.txt'           dest='data/9.0.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/9.0.0/ucd/extracted/DerivedNumericType.txt'         dest='data/9.0.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/9.0.0/ucd/extracted/DerivedNumericValues.txt'       dest='data/9.0.0/ucd/extracted/DerivedNumericValues.txt'/>
+
+    <get src='${Public}/9.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'      dest='data/9.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
+    <get src='${Public}/9.0.0/ucd/auxiliary/GraphemeBreakTest.html'         dest='data/9.0.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/9.0.0/ucd/auxiliary/GraphemeBreakTest.txt'          dest='data/9.0.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/9.0.0/ucd/auxiliary/LineBreakTest.html'             dest='data/9.0.0/ucd/auxiliary/LineBreakTest.html'/>
+    <get src='${Public}/9.0.0/ucd/auxiliary/LineBreakTest.txt'              dest='data/9.0.0/ucd/auxiliary/LineBreakTest.txt'/>
+    <get src='${Public}/9.0.0/ucd/auxiliary/SentenceBreakProperty.txt'      dest='data/9.0.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/9.0.0/ucd/auxiliary/SentenceBreakTest.html'         dest='data/9.0.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/9.0.0/ucd/auxiliary/SentenceBreakTest.txt'          dest='data/9.0.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/9.0.0/ucd/auxiliary/WordBreakProperty.txt'          dest='data/9.0.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/9.0.0/ucd/auxiliary/WordBreakTest.txt'              dest='data/9.0.0/ucd/auxiliary/WordBreakTest.txt'/>
+    <get src='${Public}/9.0.0/ucd/auxiliary/WordBreakTest.html'             dest='data/9.0.0/ucd/auxiliary/WordBreakTest.html'/>
+
+    <unzip src='data/9.0.0/ucd/Unihan.zip'  dest='data/9.0.0/ucd'/>
+    <delete file='data/9.0.0/ucd/Unihan.zip'/>
+
+    <concat encoding='UTF-8' destfile='data/9.0.0/ucd/Unihan.txt'>
+      <fileset dir="data/9.0.0/ucd" includes="Unihan_*.txt"/>
+    </concat>
+
+  </target>
+
+  <target name='download-10.0.0'>
+    <delete dir='data/10.0.0'/>
+    <mkdir dir='data/10.0.0/ucd'/>
+    <mkdir dir='data/10.0.0/ucd/auxiliary'/>
+    <mkdir dir='data/10.0.0/ucd/extracted'/>
+
+    <get src='${Public}/10.0.0/ucd/ArabicShaping.txt'                        dest='data/10.0.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/10.0.0/ucd/BidiBrackets.txt'                         dest='data/10.0.0/ucd/BidiBrackets.txt'/>
+    <get src='${Public}/10.0.0/ucd/BidiCharacterTest.txt'                    dest='data/10.0.0/ucd/BidiCharacterTest.txt'/>
+    <get src='${Public}/10.0.0/ucd/BidiMirroring.txt'                        dest='data/10.0.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/10.0.0/ucd/BidiTest.txt'                             dest='data/10.0.0/ucd/BidiTest.txt'/>
+    <get src='${Public}/10.0.0/ucd/Blocks.txt'                               dest='data/10.0.0/ucd/Blocks.txt'/>
+    <get src='${Public}/10.0.0/ucd/CJKRadicals.txt'                          dest='data/10.0.0/ucd/CJKRadicals.txt'/>
+    <get src='${Public}/10.0.0/ucd/CaseFolding.txt'                          dest='data/10.0.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/10.0.0/ucd/CompositionExclusions.txt'                dest='data/10.0.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/10.0.0/ucd/DerivedAge.txt'                           dest='data/10.0.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/10.0.0/ucd/DerivedCoreProperties.txt'                dest='data/10.0.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/10.0.0/ucd/DerivedNormalizationProps.txt'            dest='data/10.0.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/10.0.0/ucd/EastAsianWidth.txt'                       dest='data/10.0.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/10.0.0/ucd/EmojiSources.txt'                         dest='data/10.0.0/ucd/EmojiSources.txt'/>
+    <get src='${Public}/10.0.0/ucd/HangulSyllableType.txt'                   dest='data/10.0.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/10.0.0/ucd/Index.txt'                                dest='data/10.0.0/ucd/Index.txt'/>
+    <get src='${Public}/10.0.0/ucd/IndicPositionalCategory.txt'              dest='data/10.0.0/ucd/IndicPositionalCategory.txt'/>
+    <get src='${Public}/10.0.0/ucd/IndicSyllabicCategory.txt'                dest='data/10.0.0/ucd/IndicSyllabicCategory.txt'/>
+    <get src='${Public}/10.0.0/ucd/Jamo.txt'                                 dest='data/10.0.0/ucd/Jamo.txt'/>
+    <get src='${Public}/10.0.0/ucd/LineBreak.txt'                            dest='data/10.0.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/10.0.0/ucd/NameAliases.txt'                          dest='data/10.0.0/ucd/NameAliases.txt'/>
+    <get src='${Public}/10.0.0/ucd/NamedSequences.txt'                       dest='data/10.0.0/ucd/NamedSequences.txt'/>
+    <get src='${Public}/10.0.0/ucd/NamedSequencesProv.txt'                   dest='data/10.0.0/ucd/NamedSequencesProv.txt'/>
+    <get src='${Public}/10.0.0/ucd/NamesList.html'                           dest='data/10.0.0/ucd/NamesList.html'/>
+    <get src='${Public}/10.0.0/ucd/NamesList.txt'                            dest='data/10.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/10.0.0/ucd/NormalizationCorrections.txt'             dest='data/10.0.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/10.0.0/ucd/NormalizationTest.txt'                    dest='data/10.0.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/10.0.0/ucd/NushuSources.txt'                         dest='data/10.0.0/ucd/NushuSources.txt'/>
+    <get src='${Public}/10.0.0/ucd/PropList.txt'                             dest='data/10.0.0/ucd/PropList.txt'/>
+    <get src='${Public}/10.0.0/ucd/PropertyAliases.txt'                      dest='data/10.0.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/10.0.0/ucd/PropertyValueAliases.txt'                 dest='data/10.0.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/10.0.0/ucd/ReadMe.txt'                               dest='data/10.0.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/10.0.0/ucd/ScriptExtensions.txt'                     dest='data/10.0.0/ucd/ScriptExtensions.txt'/>
+    <get src='${Public}/10.0.0/ucd/Scripts.txt'                              dest='data/10.0.0/ucd/Scripts.txt'/>
+    <get src='${Public}/10.0.0/ucd/SpecialCasing.txt'                        dest='data/10.0.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/10.0.0/ucd/StandardizedVariants.txt'                 dest='data/10.0.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/10.0.0/ucd/TangutSources.txt'                        dest='data/10.0.0/ucd/TangutSources.txt'/>
+    <get src='${Public}/10.0.0/ucd/USourceData.txt'                          dest='data/10.0.0/ucd/USourceData.txt'/>
+    <get src='${Public}/10.0.0/ucd/USourceGlyphs.pdf'                        dest='data/10.0.0/ucd/USourceGlyphs.pdf'/>
+    <get src='${Public}/10.0.0/ucd/UnicodeData.txt'                          dest='data/10.0.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/10.0.0/ucd/Unihan.zip'                               dest='data/10.0.0/ucd/Unihan.zip'/>
+    <get src='${Public}/10.0.0/ucd/VerticalOrientation.txt'                  dest='data/10.0.0/ucd/VerticalOrientation.txt'/>
+
+    <get src='${Public}/10.0.0/ucd/extracted/DerivedBidiClass.txt'           dest='data/10.0.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/10.0.0/ucd/extracted/DerivedBinaryProperties.txt'    dest='data/10.0.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/10.0.0/ucd/extracted/DerivedCombiningClass.txt'      dest='data/10.0.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/10.0.0/ucd/extracted/DerivedDecompositionType.txt'   dest='data/10.0.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/10.0.0/ucd/extracted/DerivedEastAsianWidth.txt'      dest='data/10.0.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/10.0.0/ucd/extracted/DerivedGeneralCategory.txt'     dest='data/10.0.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/10.0.0/ucd/extracted/DerivedJoiningGroup.txt'        dest='data/10.0.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/10.0.0/ucd/extracted/DerivedJoiningType.txt'         dest='data/10.0.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/10.0.0/ucd/extracted/DerivedLineBreak.txt'           dest='data/10.0.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/10.0.0/ucd/extracted/DerivedNumericType.txt'         dest='data/10.0.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/10.0.0/ucd/extracted/DerivedNumericValues.txt'       dest='data/10.0.0/ucd/extracted/DerivedNumericValues.txt'/>
+
+    <get src='${Public}/10.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'      dest='data/10.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
+    <get src='${Public}/10.0.0/ucd/auxiliary/GraphemeBreakTest.html'         dest='data/10.0.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/10.0.0/ucd/auxiliary/GraphemeBreakTest.txt'          dest='data/10.0.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/10.0.0/ucd/auxiliary/LineBreakTest.html'             dest='data/10.0.0/ucd/auxiliary/LineBreakTest.html'/>
+    <get src='${Public}/10.0.0/ucd/auxiliary/LineBreakTest.txt'              dest='data/10.0.0/ucd/auxiliary/LineBreakTest.txt'/>
+    <get src='${Public}/10.0.0/ucd/auxiliary/SentenceBreakProperty.txt'      dest='data/10.0.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/10.0.0/ucd/auxiliary/SentenceBreakTest.html'         dest='data/10.0.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/10.0.0/ucd/auxiliary/SentenceBreakTest.txt'          dest='data/10.0.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/10.0.0/ucd/auxiliary/WordBreakProperty.txt'          dest='data/10.0.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/10.0.0/ucd/auxiliary/WordBreakTest.txt'              dest='data/10.0.0/ucd/auxiliary/WordBreakTest.txt'/>
+    <get src='${Public}/10.0.0/ucd/auxiliary/WordBreakTest.html'             dest='data/10.0.0/ucd/auxiliary/WordBreakTest.html'/>
+
+    <unzip src='data/10.0.0/ucd/Unihan.zip'  dest='data/10.0.0/ucd'/>
+    <delete file='data/10.0.0/ucd/Unihan.zip'/>
+
+    <concat encoding='UTF-8' destfile='data/10.0.0/ucd/Unihan.txt'>
+      <fileset dir="data/10.0.0/ucd" includes="Unihan_*.txt"/>
+    </concat>
+
+  </target>
+
+  
+
+
+  <target name='download-ucd' depends='download-2.0.0,
+                                       download-2.1.2,
+                                       download-2.1.5,
+                                       download-2.1.8,
+                                       download-2.1.9,
+                                       download-3.0.0,
+                                       download-3.0.1,
+                                       download-3.1.0,
+                                       download-3.1.1,
+                                       download-3.2.0,
+                                       download-4.0.0,
+                                       download-4.0.1,
+                                       download-4.1.0,
+                                       download-5.0.0,
+                                       download-5.1.0,
+                                       download-5.2.0,
+                                       download-6.0.0,
+                                       download-6.1.0,
+                                       download-6.2.0,
+                                       download-6.3.0,
+                                       download-7.0.0,
+                                       download-8.0.0,
+                                       download-9.0.0,
+                                       download-10.0.0'/>
+
+  <!--______________________________________________________________________-->
+
+  <target name='package'>
+    <zip destfile='ucdxml.zip'>
+      <fileset file='build.xml'/>
+      <fileset dir='.' includes='readmes/*'/>
+      <fileset dir='.' includes='uax42/*'/>
+      <fileset dir='../software/ucd'/>
+    </zip>
+  </target>
+
+  <!--______________________________________________________________________-->
+
+  <target name='all' depends='ucdxml-all,
+                              isoxml-all,
+                              diffucd-all,
+                              diffiso-all,
+                              diffisoucd-all,
+                              validate-all'/>
+
+  <!--______________________________________________________________________-->
+
+  <target name='compile'>
+    <javac srcdir='src' includeantruntime='false'
+           includes='**'>
+      <classpath refid='classpath'/>
+    </javac>
+  </target>      
+
+  <!--______________________________________________________________________-->
+
+  <target name='ucd10'>
+    <ucdxml v='10.0.0'/>
+  </target>
+
+  <target name='validate10'>
+    <validate-ucd v='10.0.0'/>
+  </target>
+
+  <target name='diff10'>
+    <difffull v1='9.0.0' v2='10.0.0'/>
+  </target>
+
+  <target name='10' depends='ucd10, validate10, diff10'/>
+
+
+  <target name='ucd9'>
+    <ucdxml v='9.0.0'/>
+  </target>
+
+  <target name='validate9'>
+    <validate-ucd v='9.0.0'/>
+  </target>
+
+  <target name='diff9'>
+    <difffull v1='8.0.0' v2='9.0.0'/>
+  </target>
+
+  <target name='9' depends='ucd9, validate9, diff9'/>
+
+
+
+  <target name='xsd'>
+    <java jar='libs/trang.jar' fork='true'>
+      <arg value='uax42/ucd.rnc'/>g
+      <arg value='uax42/ucd.xsd'/>
+    </java>
+  </target>
+
+</project>

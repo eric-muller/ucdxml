@@ -1,0 +1,68 @@
+The beta version of the UCD includes nine files which are intended to
+help beta testers evaluate the changes since the previous
+version. Those files are not part of the UCD, and will be present only
+during the beta period.  Those files only informative. While we
+believe that those files present accurate data, there is no guarantee
+that the data is indeed accurate. The files are not intended to be
+machine readable.
+
+
+All files cover:
+
+- the code points which have been assigned
+- the properties which have been added or removed
+- for each property, the code points for which the value of the property
+  has changed
+- the changes to blocks
+- the changes to named sequences
+- the changes to normalization corrections
+- the changes to standardized variant
+
+
+The *.summary.diffs files give only a summary, in the form of the number of
+things which have changed; the *.changes.diffs file add a list of the new
+characters, and a lists of the property changes for existing
+characters; the *.all.diffs file adds the property changes for the new
+characters.
+
+The *.nounihan.* files cover only the properties not in the Unihan
+database. The *.unihan.* files cover only the properties expressed in
+the Unihan database. The *.all.* files cover all the properties.
+
+---
+<x>-<y>.nounihan.summary.diffs contains only the number of things
+(code points, blocks, etc) which have changed between versions
+<x> and <y>. The format is
+
+<before> + <added> - <removed> # <changed> = <after> (<ignored>, <undefined>)
+
+where:
+- <before> is the number of things in <x>
+- <added> is the number of things added in the <y>
+- <removed> is the number of things removed in <y>
+- <changed> is the number of things changed in <y>
+- <ignored> is the number of things which are not accounted
+- <undefined> 
+
+---
+<x>-<y>.nounihan.changes.diffs gives a bit more details: the code points
+which have been assigned are listed, together with the character name; for
+each property, the code points with a changed value are listed, as well
+as the old and the new value. The new or removed blocks, named sequences,
+standardized variants are listed.
+
+---
+
+<x>-<y>.nounihan.all.diffs does not ignore the newly assigned
+characters. The most important consequence is that if a property of a
+newly assigned code point has changed, then the change is counted and
+listed. However, this does not means that all the values of the
+properties for all the newly assigned characters are listed: for
+example, the combining class of unassigned code points is 0, and it
+remains 0 for most newly assigned characters. Hence only a subset
+of the newly assigned characters are listed for the changes to 
+the combining class property.
+
+---
+
+ 

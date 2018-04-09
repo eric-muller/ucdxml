@@ -1,0 +1,22 @@
+namespace unicode = "http://unicode.org/ns/2001"
+
+# _______________________________________________________________________________
+
+# description of a Unicode technical report; goes in info elements
+
+unicode.tr =
+  element unicode:tr {
+    attribute number { text },
+    attribute class { "uax" | "uts" | "utr" },
+    attribute stage { "proposed-draft" | "draft" | "approved" 
+                      | "proposed-update" },
+    attribute status { "working-draft" | "published" }}
+
+
+# ___________________________________________________________________ docbook ___
+
+include "file:///c:/emacs-21.3/site-lisp/nxml-mode-20041004/schema/docbook.rnc" {
+  local.info.class = unicode.tr
+}
+
+
