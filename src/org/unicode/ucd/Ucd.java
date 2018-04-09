@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2017 Unicode Inc.
+// Copyright 2006-2018 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -417,6 +417,10 @@ public class Ucd {
     jgMap.put ("MALAYALAM LLA",                      "Malayalam_Lla");
     jgMap.put ("MALAYALAM LLLA",                     "Malayalam_Llla");
     jgMap.put ("MALAYALAM SSA",                      "Malayalam_Ssa");
+
+    // Unicode 11.0
+    jgMap.put ("HANIFI ROHINGYA KINNA YA",           "Hanifi_Rohingya_Kinna_Ya");
+    jgMap.put ("HANIFI ROHINGYA PA",                 "Hanifi_Rohingya_Pa");
   }
   
   private void parseArabicShaping (Version v, URL baseURL) throws Exception {
@@ -538,6 +542,14 @@ public class Ucd {
               repertoire.put (firstCp, lastCp, Property.age, fields [1]); }}); 
       
       repertoire.putDefault (Property.age, "unassigned"); }
+  }
+  
+  private void parseEquivalentUnifiedIdeograph (Version v, URL baseURL) throws Exception {
+    if (v.isAtLeast (Version.V11_0_0)) {
+      Parser.parseSemiDelimitedFileWithCodePoints (baseURL, "EquivalentUnifiedIdoegraph.txt", 0, "US-ASCII",
+          new LoaderWithCodePoints () {
+            public void process (int firstCp, int lastCp, String[] fields) {
+              repertoire.put (firstCp, lastCp, Property.EqUIdeo, fields [1]); }}); }
   }
   
   private void parseEastAsianWidth (Version v, URL baseURL) throws Exception {   
@@ -851,6 +863,15 @@ public class Ucd {
     scriptMap.put ("NUSHU",                    "Nshu");
     scriptMap.put ("SOYOMBO",                  "Soyo");
     scriptMap.put ("ZANABAZAR_SQUARE",         "Zanb");
+
+    // Unicode 11.0
+    scriptMap.put ("DOGRA",                    "Dogr");
+    scriptMap.put ("GUNJALA_GONDI",            "Gong");
+    scriptMap.put ("MAKASAR",                  "Maka");
+    scriptMap.put ("MEDEFAIDRIN",              "Medf");
+    scriptMap.put ("HANIFI_ROHINGYA",          "Rohg");
+    scriptMap.put ("OLD_SOGDIAN",              "Soga");
+    scriptMap.put ("SOGDIAN",                  "Sogd");
   }
   
   
@@ -960,6 +981,9 @@ public class Ucd {
     wbMap.put ("E_Modifier",         "EM");
     wbMap.put ("Glue_After_Zwj",     "GAZ");
     wbMap.put ("ZWJ",                "ZWJ");
+
+    // Unicode 11.0
+   wbMap.put ("WSegSpace",          "WSegSpace");
   }
   
   private void parseWordBreak (Version v, URL baseURL) throws Exception {
@@ -2145,7 +2169,7 @@ public class Ucd {
         
         char[] c = "\n\n".toCharArray ();
         ch.characters (c, 0, c.length);
-        c = " \u00A9 2017 Unicode\u00AE, Inc. ".toCharArray ();
+        c = " \u00A9 2018 Unicode\u00AE, Inc. ".toCharArray ();
         ch.comment (c, 0, c.length);
         c = "\n".toCharArray ();
         ch.characters (c, 0, c.length);

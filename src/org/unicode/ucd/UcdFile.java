@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2016 Unicode Inc.
+// Copyright 2006-2018 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -49,6 +49,7 @@ public enum UcdFile {
   DerivedNormalizationProps,
   EastAsianWidth,
   EmojiSources,
+  EquivalentUnifiedIdeograph,
   HangulSyllableType,
   IndicSyllabicCategory,
   IndicMatraCategory,

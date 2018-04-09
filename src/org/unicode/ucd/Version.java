@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2016 Unicode Inc.
+// Copyright 2006-2018 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -111,4 +111,5 @@ public final class Version {
   public static final Version V8_0_0 = new Version (8, 0, 0);
   public static final Version V9_0_0 = new Version (9, 0, 0);
   public static final Version V10_0_0 = new Version (10, 0, 0);
+  public static final Version V11_0_0 = new Version (11, 0, 0);
 }

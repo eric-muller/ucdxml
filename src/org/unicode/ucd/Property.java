@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2016 Unicode Inc.
+// Copyright 2006-2018 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -182,6 +182,9 @@ public class Property {
   
   public static Property blk                         = new Property ("blk", "Block", true);
   
+  // Added in 11.0.0
+  public static Property EqUIdeo                     = new Property ("EqUIdeo", "Equivalent_Unified_Ideograph");
+
   public static Property kCompatibilityVariant       = new Property ("kCompatibilityVariant");
 
   public static Property kRSUnicode                  = new Property ("kRSUnicode");
@@ -281,6 +284,13 @@ public class Property {
   public static Property kFourCornerCode             = new Property ("kFourCornerCode");
   public static Property kWubi                       = new Property ("kWubi");
   public static Property kXHC1983                    = new Property ("kXHC1983");
+  // Unicode 11.0
+  public static Property kJinmeiyoKanji              = new Property ("kJinmeiyoKanji");
+  public static Property kJoyoKanji                  = new Property ("kJoyoKanji");
+  public static Property kKoreanEducationHanja       = new Property ("kKoreanEducationHanja");
+  public static Property kKoreanName                 = new Property ("kKoreanName");
+  public static Property kTGH                        = new Property ("kTGH");
+
 
   public static Property kRSKanWa                    = new Property ("kRSKanWa");
   public static Property kRSJapanese                 = new Property ("kRSJapanese");

@@ -2,7 +2,7 @@
 
 <project name='book-common' default='all'>
 
-  <property name="v">tr42-21</property>
+  <property name="v">tr42-22</property>
 
   <path id='classpath'>
     <pathelement path="../external/saxon9he.jar"/>
