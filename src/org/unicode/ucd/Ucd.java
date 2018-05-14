@@ -546,7 +546,7 @@ public class Ucd {
   
   private void parseEquivalentUnifiedIdeograph (Version v, URL baseURL) throws Exception {
     if (v.isAtLeast (Version.V11_0_0)) {
-      Parser.parseSemiDelimitedFileWithCodePoints (baseURL, "EquivalentUnifiedIdoegraph.txt", 0, "US-ASCII",
+      Parser.parseSemiDelimitedFileWithCodePoints (baseURL, "EquivalentUnifiedIdeograph.txt", 0, "US-ASCII",
           new LoaderWithCodePoints () {
             public void process (int firstCp, int lastCp, String[] fields) {
               repertoire.put (firstCp, lastCp, Property.EqUIdeo, fields [1]); }}); }
@@ -1294,6 +1294,9 @@ public class Ucd {
     if (files.contains (UcdFile.SentenceBreakProperty)) {
       parseSentenceBreak (v, baseURL); }
     
+    if (files.contains (UcdFile.EquivalentUnifiedIdeograph)) {
+      parseEquivalentUnifiedIdeograph (v, baseURL); }
+
     if (files.contains (UcdFile.Unihan)) {
       parseUnihan (v, baseURL, false); }
     if (files.contains (UcdFile.UnihanNumeric)) {
