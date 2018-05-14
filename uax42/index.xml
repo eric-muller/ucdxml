@@ -6,7 +6,7 @@
   <title>Unicode Character Database in XML</title>
 
   <articleinfo>
-    <unicode:tr number='42' class='uax' version='11.0.0 (draft 1)'
+    <unicode:tr number='42' class='uax' version='11.0.0 (draft 2)'
                 stage='proposed-update' status='published'
                 schema='rnc' prevrev='21'/>
 
@@ -21,7 +21,7 @@
     <revhistory>
       <revision>
         <revnumber>22</revnumber>
-        <date>2018-04-09</date>
+        <date>2018-05-12</date>
         <revdescription>
           <itemizedlist>
             <listitem><para>New value for the <sgmltag>age</sgmltag> attribute: <sgmltag>11.0</sgmltag>.</para></listitem>
@@ -35,8 +35,6 @@
             <sgmltag>Maka</sgmltag>, <sgmltag>Medf</sgmltag>,
             <sgmltag>Rohg</sgmltag>,
             <sgmltag>Soga</sgmltag>, <sgmltag>Sogd</sgmltag>.</para></listitem>
-
-            <listitem><para>New values for the <sgmltag>gcb</sgmltag> attribute: <sgmltag>LinkC</sgmltag>, <sgmltag>Virama</sgmltag>.</para></listitem>
 
             <listitem><para>New values for the <sgmltag>jg</sgmltag> attribute: <sgmltag>Hanifi_Rohingya_Kinna_Ya</sgmltag>, <sgmltag>Hanifi_Rohingya_Pa</sgmltag>.</para></listitem>
 
@@ -422,7 +420,7 @@
             <listitem><para>For optional elements which acts as
             collections, such as <sgmltag>repertoire</sgmltag> and
             <sgmltag>named-sequences</sgmltag>, impose that there be
-            at least one elements in the collection.</para></listitem>
+            at least one element in the collection.</para></listitem>
 
             <listitem><para>Remove the constraint that the value
             <sgmltag>jg</sgmltag> is limited when
@@ -2160,12 +2158,12 @@
     attribute GCB { "CN" | "CR" 
                   | "EB" | "EBG" | "EM" | "EX" 
                   | "GAZ"
-                  | "L"  | "LF" |  "LV" | "LVT" <phrase revisionflag="added">| "LinkC"</phrase>
+                  | "L"  | "LF" |  "LV" | "LVT"
                   | "PP"
                   | "RI" 
                   | "SM" 
                   | "T"  
-                  | "V" <phrase revisionflag="added">| "Virama"</phrase>
+                  | "V"
                   | "XX"
                   | "ZWJ"
                   }?
@@ -2205,7 +2203,7 @@
       <section>
         <title>Properties related to ideographs</title>
 
-        <para>The properties Ideographic, Unified_Ideograph, <phrase revisionflag="added">EqUIdeo</phrase>, 
+        <para>The properties Ideographic, Unified_Ideograph, <phrase revisionflag="added">Equivalent_Unified_Ideograph</phrase>, 
         IDS_Binary_Operator, IDS_Trinary_Operator and Radical have
         corresponding attributes:</para>
 
