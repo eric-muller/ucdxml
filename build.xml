@@ -1784,7 +1784,7 @@ of the copyright holder.
     <get src='${Public}/11.0.0/ucd/DerivedAge-11.0.0d13.txt'                           dest='data/11.0.0/ucd/DerivedAge.txt'/>
     <get src='${Public}/11.0.0/ucd/DerivedCoreProperties-11.0.0d20.txt'                dest='data/11.0.0/ucd/DerivedCoreProperties.txt'/>
     <get src='${Public}/11.0.0/ucd/DerivedNormalizationProps-11.0.0d13.txt'            dest='data/11.0.0/ucd/DerivedNormalizationProps.txt'/>
-    <get src='${Public}/11.0.0/ucd/EastAsianWidth-11.0.0d7.txt'                       dest='data/11.0.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/11.0.0/ucd/EastAsianWidth-11.0.0d8.txt'                       dest='data/11.0.0/ucd/EastAsianWidth.txt'/>
     <get src='${Public}/11.0.0/ucd/EmojiSources-11.0.0d1.txt'                         dest='data/11.0.0/ucd/EmojiSources.txt'/>
     <get src='${Public}/11.0.0/ucd/EquivalentUnifiedIdeograph-11.0.0d1.txt'      dest='data/11.0.0/ucd/EquivalentUnifiedIdeograph.txt'/>
     <get src='${Public}/11.0.0/ucd/HangulSyllableType-11.0.0d13.txt'                   dest='data/11.0.0/ucd/HangulSyllableType.txt'/>
@@ -1797,7 +1797,7 @@ of the copyright holder.
     <get src='${Public}/11.0.0/ucd/NamedSequences-11.0.0d1.txt'                       dest='data/11.0.0/ucd/NamedSequences.txt'/>
     <get src='${Public}/11.0.0/ucd/NamedSequencesProv-11.0.0d1.txt'                   dest='data/11.0.0/ucd/NamedSequencesProv.txt'/>
     <get src='${Public}/11.0.0/ucd/NamesList-11.0.0d1.html'                           dest='data/11.0.0/ucd/NamesList.html'/>
-    <get src='${Public}/11.0.0/ucd/NamesList-11.0.0d6.txt'                            dest='data/11.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/11.0.0/ucd/NamesList-11.0.0d7.txt'                            dest='data/11.0.0/ucd/NamesList.txt'/>
     <get src='${Public}/11.0.0/ucd/NormalizationCorrections-11.0.0d1.txt'             dest='data/11.0.0/ucd/NormalizationCorrections.txt'/>
     <get src='${Public}/11.0.0/ucd/NormalizationTest-11.0.0d19.txt'                    dest='data/11.0.0/ucd/NormalizationTest.txt'/>
     <get src='${Public}/11.0.0/ucd/NushuSources-11.0.0d1.txt'                         dest='data/11.0.0/ucd/NushuSources.txt'/>
@@ -1810,17 +1810,17 @@ of the copyright holder.
     <get src='${Public}/11.0.0/ucd/SpecialCasing-11.0.0d21.txt'                        dest='data/11.0.0/ucd/SpecialCasing.txt'/>
     <get src='${Public}/11.0.0/ucd/StandardizedVariants-11.0.0d1.txt'                 dest='data/11.0.0/ucd/StandardizedVariants.txt'/>
     <get src='${Public}/11.0.0/ucd/TangutSources-11.0.0d2.txt'                        dest='data/11.0.0/ucd/TangutSources.txt'/>
-    <get src='${Public}/11.0.0/ucd/USourceData-11.0.0d2.txt'                          dest='data/11.0.0/ucd/USourceData.txt'/>
-    <get src='${Public}/11.0.0/ucd/USourceGlyphs-11.0.0d2.pdf'                        dest='data/11.0.0/ucd/USourceGlyphs.pdf'/>
+    <get src='${Public}/11.0.0/ucd/USourceData-11.0.0d3.txt'                          dest='data/11.0.0/ucd/USourceData.txt'/>
+    <get src='${Public}/11.0.0/ucd/USourceGlyphs-11.0.0d3.pdf'                        dest='data/11.0.0/ucd/USourceGlyphs.pdf'/>
     <get src='${Public}/11.0.0/ucd/UnicodeData-11.0.0d14.txt'                          dest='data/11.0.0/ucd/UnicodeData.txt'/>
-    <get src='${Public}/11.0.0/ucd/Unihan-11.0.0d2.zip'                               dest='data/11.0.0/ucd/Unihan.zip'/>
+    <get src='${Public}/11.0.0/ucd/Unihan-11.0.0d3.zip'                               dest='data/11.0.0/ucd/Unihan.zip'/>
     <get src='${Public}/11.0.0/ucd/VerticalOrientation-11.0.0d6.txt'                  dest='data/11.0.0/ucd/VerticalOrientation.txt'/>
 
     <get src='${Public}/11.0.0/ucd/extracted/DerivedBidiClass-11.0.0d20.txt'           dest='data/11.0.0/ucd/extracted/DerivedBidiClass.txt'/>
     <get src='${Public}/11.0.0/ucd/extracted/DerivedBinaryProperties-11.0.0d27.txt'    dest='data/11.0.0/ucd/extracted/DerivedBinaryProperties.txt'/>
     <get src='${Public}/11.0.0/ucd/extracted/DerivedCombiningClass-11.0.0d20.txt'      dest='data/11.0.0/ucd/extracted/DerivedCombiningClass.txt'/>
     <get src='${Public}/11.0.0/ucd/extracted/DerivedDecompositionType-11.0.0d13.txt'   dest='data/11.0.0/ucd/extracted/DerivedDecompositionType.txt'/>
-    <get src='${Public}/11.0.0/ucd/extracted/DerivedEastAsianWidth-11.0.0d20.txt'      dest='data/11.0.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/11.0.0/ucd/extracted/DerivedEastAsianWidth-11.0.0d28.txt'      dest='data/11.0.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
     <get src='${Public}/11.0.0/ucd/extracted/DerivedGeneralCategory-11.0.0d20.txt'     dest='data/11.0.0/ucd/extracted/DerivedGeneralCategory.txt'/>
     <get src='${Public}/11.0.0/ucd/extracted/DerivedJoiningGroup-11.0.0d20.txt'        dest='data/11.0.0/ucd/extracted/DerivedJoiningGroup.txt'/>
     <get src='${Public}/11.0.0/ucd/extracted/DerivedJoiningType-11.0.0d20.txt'         dest='data/11.0.0/ucd/extracted/DerivedJoiningType.txt'/>
@@ -1837,7 +1837,7 @@ of the copyright holder.
     <get src='${Public}/11.0.0/ucd/auxiliary/SentenceBreakProperty-11.0.0d23.txt'      dest='data/11.0.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
     <get src='${Public}/11.0.0/ucd/auxiliary/SentenceBreakTest-11.0.0d6.html'         dest='data/11.0.0/ucd/auxiliary/SentenceBreakTest.html'/>
     <get src='${Public}/11.0.0/ucd/auxiliary/SentenceBreakTest-11.0.0d13.txt'          dest='data/11.0.0/ucd/auxiliary/SentenceBreakTest.txt'/>
-    <get src='${Public}/11.0.0/ucd/auxiliary/WordBreakProperty-11.0.0d24.txt'          dest='data/11.0.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/11.0.0/ucd/auxiliary/WordBreakProperty-11.0.0d29.txt'          dest='data/11.0.0/ucd/auxiliary/WordBreakProperty.txt'/>
     <get src='${Public}/11.0.0/ucd/auxiliary/WordBreakTest-11.0.0d24.txt'              dest='data/11.0.0/ucd/auxiliary/WordBreakTest.txt'/>
     <get src='${Public}/11.0.0/ucd/auxiliary/WordBreakTest-11.0.0d24.html'             dest='data/11.0.0/ucd/auxiliary/WordBreakTest.html'/>
 

@@ -6,7 +6,7 @@
   <title>Unicode Character Database in XML</title>
 
   <articleinfo>
-    <unicode:tr number='42' class='uax' version='11.0.0 (draft 2)'
+    <unicode:tr number='42' class='uax' version='11.0.0 (draft 3)'
                 stage='proposed-update' status='published'
                 schema='rnc' prevrev='21'/>
 
@@ -21,7 +21,7 @@
     <revhistory>
       <revision>
         <revnumber>22</revnumber>
-        <date>2018-05-12</date>
+        <date>2018-05-18</date>
         <revdescription>
           <itemizedlist>
             <listitem><para>New value for the <sgmltag>age</sgmltag> attribute: <sgmltag>11.0</sgmltag>.</para></listitem>
@@ -45,6 +45,10 @@
             <listitem><para>New attributes: <sgmltag>EqUIdeo</sgmltag>, <sgmltag>kJinmeiyoKanji</sgmltag>, <sgmltag>kJoyoKanji</sgmltag>, <sgmltag>kKoreanEducationHanja</sgmltag>, <sgmltag>kKoreanName</sgmltag>, <sgmltag>kTGH</sgmltag>.</para></listitem>
 
             <listitem><para>Modified patterns for the <sgmltag>kTGT_MergedSrc</sgmltag> attribute.</para></listitem>
+
+            <listitem><para>Modified patterns for the <sgmltag>kIRG_GSource</sgmltag>, <sgmltag>kIRG_HSource</sgmltag> and <sgmltag>kIRG_VSource</sgmltag> attribute. (draft 3)</para></listitem>
+
+
           </itemizedlist>
         </revdescription>
       </revision>
@@ -2435,7 +2439,8 @@
           | xsd:string {pattern="GZYS-[0-9]{5}"}
           | xsd:string {pattern="GXHZ-[0-9]{3}"}
           | xsd:string {pattern="GOCD-[0-9]{3}"}
-          | xsd:string {pattern="GLGYJ-[0-9]{4}"} }?
+          | xsd:string {pattern="GLGYJ-[0-9]{4}"}
+          <phrase revisionflag="added">| xsd:string {pattern="GCE-[0-9]{3}"}</phrase> }?
 
   code-point-attributes &amp;= attribute kIRG_HSource
      { "" | xsd:string {pattern="[0-9A-F]{4}"}
@@ -2443,7 +2448,8 @@
           | xsd:string {pattern="H3-[0-9A-F]{4}"}
           | xsd:string {pattern="HB0-[0-9A-F]{4}"}
           | xsd:string {pattern="HB1-[0-9A-F]{4}"}
-          | xsd:string {pattern="HB2-[0-9A-F]{4}"} }?
+          | xsd:string {pattern="HB2-[0-9A-F]{4}"}
+          <phrase revisionflag="added">| xsd:string {pattern="HD-[0-9A-F]{4}"}</phrase> }?
 
   code-point-attributes &amp;= attribute kIRG_JSource
      { "" | xsd:string {pattern="(0|1|3|(3A)|4|A|(ARIB)|K)-[0-9A-F]{4,5}"} 
@@ -2507,7 +2513,8 @@
           | xsd:string {pattern="V1-[0-9A-F]{4}"}
           | xsd:string {pattern="V2-[0-9A-F]{4}"}
           | xsd:string {pattern="V3-[0-9A-F]{4}"}
-          | xsd:string {pattern="V4-[0-9A-F]{4}"} }?
+          | xsd:string {pattern="V4-[0-9A-F]{4}"}
+          <phrase revisionflag="added">| xsd:string {pattern="VU-[02]?[0-9A-F]{4}"}</phrase> }?
 
   code-point-attributes &amp;= attribute kJa
      { xsd:string {pattern="[0-9A-F]{4}S?"} }?
