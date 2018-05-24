@@ -1790,30 +1790,30 @@ of the copyright holder.
     <get src='${Public}/11.0.0/ucd/HangulSyllableType-11.0.0d13.txt'                   dest='data/11.0.0/ucd/HangulSyllableType.txt'/>
     <get src='${Public}/11.0.0/ucd/Index-11.0.0d4.txt'                                dest='data/11.0.0/ucd/Index.txt'/>
     <get src='${Public}/11.0.0/ucd/IndicPositionalCategory-11.0.0d5.txt'              dest='data/11.0.0/ucd/IndicPositionalCategory.txt'/>
-    <get src='${Public}/11.0.0/ucd/IndicSyllabicCategory-11.0.0d6.txt'                dest='data/11.0.0/ucd/IndicSyllabicCategory.txt'/>
+    <get src='${Public}/11.0.0/ucd/IndicSyllabicCategory-11.0.0d7.txt'                dest='data/11.0.0/ucd/IndicSyllabicCategory.txt'/>
     <get src='${Public}/11.0.0/ucd/Jamo-11.0.0d1.txt'                                 dest='data/11.0.0/ucd/Jamo.txt'/>
     <get src='${Public}/11.0.0/ucd/LineBreak-11.0.0d12.txt'                            dest='data/11.0.0/ucd/LineBreak.txt'/>
     <get src='${Public}/11.0.0/ucd/NameAliases-11.0.0d2.txt'                          dest='data/11.0.0/ucd/NameAliases.txt'/>
     <get src='${Public}/11.0.0/ucd/NamedSequences-11.0.0d1.txt'                       dest='data/11.0.0/ucd/NamedSequences.txt'/>
     <get src='${Public}/11.0.0/ucd/NamedSequencesProv-11.0.0d1.txt'                   dest='data/11.0.0/ucd/NamedSequencesProv.txt'/>
     <get src='${Public}/11.0.0/ucd/NamesList-11.0.0d1.html'                           dest='data/11.0.0/ucd/NamesList.html'/>
-    <get src='${Public}/11.0.0/ucd/NamesList-11.0.0d7.txt'                            dest='data/11.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/11.0.0/ucd/NamesList-11.0.0d8.txt'                            dest='data/11.0.0/ucd/NamesList.txt'/>
     <get src='${Public}/11.0.0/ucd/NormalizationCorrections-11.0.0d1.txt'             dest='data/11.0.0/ucd/NormalizationCorrections.txt'/>
     <get src='${Public}/11.0.0/ucd/NormalizationTest-11.0.0d19.txt'                    dest='data/11.0.0/ucd/NormalizationTest.txt'/>
     <get src='${Public}/11.0.0/ucd/NushuSources-11.0.0d1.txt'                         dest='data/11.0.0/ucd/NushuSources.txt'/>
     <get src='${Public}/11.0.0/ucd/PropList-11.0.0d23.txt'                             dest='data/11.0.0/ucd/PropList.txt'/>
     <get src='${Public}/11.0.0/ucd/PropertyAliases-11.0.0d16.txt'                      dest='data/11.0.0/ucd/PropertyAliases.txt'/>
-    <get src='${Public}/11.0.0/ucd/PropertyValueAliases-11.0.0d16.txt'                 dest='data/11.0.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/11.0.0/ucd/PropertyValueAliases-11.0.0d30.txt'                 dest='data/11.0.0/ucd/PropertyValueAliases.txt'/>
     <get src='${Public}/11.0.0/ucd/ReadMe-11.0.0d1.txt'                               dest='data/11.0.0/ucd/ReadMe.txt'/>
     <get src='${Public}/11.0.0/ucd/ScriptExtensions-11.0.0d14.txt'                     dest='data/11.0.0/ucd/ScriptExtensions.txt'/>
     <get src='${Public}/11.0.0/ucd/Scripts-11.0.0d20.txt'                              dest='data/11.0.0/ucd/Scripts.txt'/>
     <get src='${Public}/11.0.0/ucd/SpecialCasing-11.0.0d21.txt'                        dest='data/11.0.0/ucd/SpecialCasing.txt'/>
     <get src='${Public}/11.0.0/ucd/StandardizedVariants-11.0.0d1.txt'                 dest='data/11.0.0/ucd/StandardizedVariants.txt'/>
     <get src='${Public}/11.0.0/ucd/TangutSources-11.0.0d2.txt'                        dest='data/11.0.0/ucd/TangutSources.txt'/>
-    <get src='${Public}/11.0.0/ucd/USourceData-11.0.0d3.txt'                          dest='data/11.0.0/ucd/USourceData.txt'/>
-    <get src='${Public}/11.0.0/ucd/USourceGlyphs-11.0.0d3.pdf'                        dest='data/11.0.0/ucd/USourceGlyphs.pdf'/>
+    <get src='${Public}/11.0.0/ucd/USourceData-11.0.0d4.txt'                          dest='data/11.0.0/ucd/USourceData.txt'/>
+    <get src='${Public}/11.0.0/ucd/USourceGlyphs-11.0.0d4.pdf'                        dest='data/11.0.0/ucd/USourceGlyphs.pdf'/>
     <get src='${Public}/11.0.0/ucd/UnicodeData-11.0.0d14.txt'                          dest='data/11.0.0/ucd/UnicodeData.txt'/>
-    <get src='${Public}/11.0.0/ucd/Unihan-11.0.0d3.zip'                               dest='data/11.0.0/ucd/Unihan.zip'/>
+    <get src='${Public}/11.0.0/ucd/Unihan-11.0.0d4.zip'                               dest='data/11.0.0/ucd/Unihan.zip'/>
     <get src='${Public}/11.0.0/ucd/VerticalOrientation-11.0.0d6.txt'                  dest='data/11.0.0/ucd/VerticalOrientation.txt'/>
 
     <get src='${Public}/11.0.0/ucd/extracted/DerivedBidiClass-11.0.0d20.txt'           dest='data/11.0.0/ucd/extracted/DerivedBidiClass.txt'/>
@@ -1830,10 +1830,10 @@ of the copyright holder.
     <get src='${Public}/11.0.0/ucd/extracted/DerivedNumericValues-11.0.0d27.txt'       dest='data/11.0.0/ucd/extracted/DerivedNumericValues.txt'/>
 
     <get src='${Public}/11.0.0/ucd/auxiliary/GraphemeBreakProperty-11.0.0d24.txt'      dest='data/11.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
-    <get src='${Public}/11.0.0/ucd/auxiliary/GraphemeBreakTest-11.0.0d25.html'         dest='data/11.0.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/11.0.0/ucd/auxiliary/GraphemeBreakTest-11.0.0d30.html'         dest='data/11.0.0/ucd/auxiliary/GraphemeBreakTest.html'/>
     <get src='${Public}/11.0.0/ucd/auxiliary/GraphemeBreakTest-11.0.0d25.txt'          dest='data/11.0.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
-    <get src='${Public}/11.0.0/ucd/auxiliary/LineBreakTest-11.0.0d8.html'             dest='data/11.0.0/ucd/auxiliary/LineBreakTest.html'/>
-    <get src='${Public}/11.0.0/ucd/auxiliary/LineBreakTest-11.0.0d13.txt'              dest='data/11.0.0/ucd/auxiliary/LineBreakTest.txt'/>
+    <get src='${Public}/11.0.0/ucd/auxiliary/LineBreakTest-11.0.0d30.html'             dest='data/11.0.0/ucd/auxiliary/LineBreakTest.html'/>
+    <get src='${Public}/11.0.0/ucd/auxiliary/LineBreakTest-11.0.0d30.txt'              dest='data/11.0.0/ucd/auxiliary/LineBreakTest.txt'/>
     <get src='${Public}/11.0.0/ucd/auxiliary/SentenceBreakProperty-11.0.0d23.txt'      dest='data/11.0.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
     <get src='${Public}/11.0.0/ucd/auxiliary/SentenceBreakTest-11.0.0d6.html'         dest='data/11.0.0/ucd/auxiliary/SentenceBreakTest.html'/>
     <get src='${Public}/11.0.0/ucd/auxiliary/SentenceBreakTest-11.0.0d13.txt'          dest='data/11.0.0/ucd/auxiliary/SentenceBreakTest.txt'/>
