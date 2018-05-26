@@ -591,7 +591,7 @@
 
     <para>This annex presents only the XML representation format of
     the UCD. The data itself is part of the <ulink
-    url='http://www.unicode.org/reports/tr41/tr41-21.html#UCD'>Unicode
+    url='http://www.unicode.org/reports/tr41/tr41-23.html#UCD'>Unicode
     Character Database</ulink>.</para>
   </section>
 
@@ -623,7 +623,7 @@
       subset of the validity constraints can be captured using a
       schema language, thereby simplifying the task of validating
       documents. We have chosen Relax NG [<ulink
-      url='http://www.unicode.org/reports/tr41/tr41-21.html#ISO19757'>ISO
+      url='http://www.unicode.org/reports/tr41/tr41-23.html#ISO19757'>ISO
       19757</ulink>], in the compact syntax , as the schema
       language. It is important to stress that the schema which is
       defined in English imposes more constraints on the documents
@@ -758,7 +758,7 @@
       represent the UCD of some Unicode version, the
       <sgmltag>description</sgmltag> be selected in accord with the
       rules listed in <ulink
-      url='http://www.unicode.org/reports/tr41/tr41-21.html#Versions'>[Versions]</ulink>; and
+      url='http://www.unicode.org/reports/tr41/tr41-23.html#Versions'>[Versions]</ulink>; and
       conversely, that documents which do not purport to represent the
       UCD be described as such.</para>
 
