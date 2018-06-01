@@ -21,7 +21,7 @@
     <revhistory>
       <revision>
         <revnumber>23</revnumber>
-        <date>2018-05-24</date>
+        <date>2018-05-31</date>
         <revdescription>
           <itemizedlist>
             <listitem><para>New value for the <sgmltag>age</sgmltag> attribute: <sgmltag>11.0</sgmltag>.</para></listitem>
@@ -34,7 +34,7 @@
             <sgmltag>Dogr</sgmltag>, <sgmltag>Gong</sgmltag>,
             <sgmltag>Maka</sgmltag>, <sgmltag>Medf</sgmltag>,
             <sgmltag>Rohg</sgmltag>,
-            <sgmltag>Soga</sgmltag>, <sgmltag>Sogd</sgmltag>.</para></listitem>
+            <sgmltag>Sogd</sgmltag>, <sgmltag>Sogo</sgmltag>.</para></listitem>
 
             <listitem><para>New values for the <sgmltag>jg</sgmltag> attribute: <sgmltag>Hanifi_Rohingya_Kinna_Ya</sgmltag>, <sgmltag>Hanifi_Rohingya_Pa</sgmltag>.</para></listitem>
 
@@ -1871,7 +1871,7 @@
          | "Qaai" 
          | "Rohg" | "Rjng" | "Runr" 
          | "Samr" | "Sarb" | "Saur" | "Sgnw" | "Shaw" | "Shrd" | "Sidd" 
-         | "Sind" | "Sinh" | "Soga" | "Sogd" | "Sora" | "Soyo" | "Sund"
+         | "Sind" | "Sinh" | "Sogd" | "Sogo" | "Sora" | "Soyo" | "Sund"
          | "Sylo" | "Syrc" 
          | "Tagb" | "Takr" | "Tale" | "Talu" | "Taml" | "Tang" | "Tavt" 
          | "Telu" | "Tfng" | "Tglg" | "Thaa" | "Thai" | "Tibt" | "Tirh"

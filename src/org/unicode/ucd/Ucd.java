@@ -870,8 +870,8 @@ public class Ucd {
     scriptMap.put ("MAKASAR",                  "Maka");
     scriptMap.put ("MEDEFAIDRIN",              "Medf");
     scriptMap.put ("HANIFI_ROHINGYA",          "Rohg");
-    scriptMap.put ("OLD_SOGDIAN",              "Soga");
     scriptMap.put ("SOGDIAN",                  "Sogd");
+    scriptMap.put ("OLD_SOGDIAN",              "Sogo");
   }
   
   
