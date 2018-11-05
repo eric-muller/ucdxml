@@ -112,4 +112,5 @@ public final class Version {
   public static final Version V9_0_0 = new Version (9, 0, 0);
   public static final Version V10_0_0 = new Version (10, 0, 0);
   public static final Version V11_0_0 = new Version (11, 0, 0);
+  public static final Version V12_0_0 = new Version (12, 0, 0);
 }

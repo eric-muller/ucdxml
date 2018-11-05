@@ -4,12 +4,12 @@
 
 ant compile
 
-ant download-10.0.0
-ant ucd10
-ant validate10
-
 ant download-11.0.0
 ant ucd11
 ant validate11
-ant diff11
+
+ant download-12.0.0
+ant ucd12
+ant validate12
+ant diff12
 

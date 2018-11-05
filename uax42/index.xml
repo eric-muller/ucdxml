@@ -6,9 +6,9 @@
   <title>Unicode Character Database in XML</title>
 
   <articleinfo>
-    <unicode:tr number='42' class='uax' version='11.0.0'
-                stage='approved' status='published'
-                schema='rnc' prevrev='21'/>
+    <unicode:tr number='42' class='uax' version='12.0.0 (draft 1)'
+                stage='proposed-update' status='published'
+                schema='rnc' prevrev='23'/>
 
     <copyright><year>2018</year></copyright>
 
@@ -19,6 +19,16 @@
     </author>
 
     <revhistory>
+      <revision>
+        <revnumber>24</revnumber>
+        <date>2018-11-05</date>
+        <revdescription>
+          <itemizedlist>
+            <listitem><para>New value for the <sgmltag>age</sgmltag> attribute: <sgmltag>12.0</sgmltag>.</para></listitem>
+          </itemizedlist>
+        </revdescription>
+      </revision>
+
       <revision>
         <revnumber>23</revnumber>
         <date>2018-05-31</date>
@@ -591,7 +601,7 @@
 
     <para>This annex presents only the XML representation format of
     the UCD. The data itself is part of the <ulink
-    url='http://www.unicode.org/reports/tr41/tr41-23.html#UCD'>Unicode
+    url='http://www.unicode.org/reports/tr41/tr41-25.html#UCD'>Unicode
     Character Database</ulink>.</para>
   </section>
 
@@ -623,7 +633,7 @@
       subset of the validity constraints can be captured using a
       schema language, thereby simplifying the task of validating
       documents. We have chosen Relax NG [<ulink
-      url='http://www.unicode.org/reports/tr41/tr41-23.html#ISO19757'>ISO
+      url='http://www.unicode.org/reports/tr41/tr41-25.html#ISO19757'>ISO
       19757</ulink>], in the compact syntax , as the schema
       language. It is important to stress that the schema which is
       defined in English imposes more constraints on the documents
@@ -758,7 +768,7 @@
       represent the UCD of some Unicode version, the
       <sgmltag>description</sgmltag> be selected in accord with the
       rules listed in <ulink
-      url='http://www.unicode.org/reports/tr41/tr41-23.html#Versions'>[Versions]</ulink>; and
+      url='http://www.unicode.org/reports/tr41/tr41-25.html#Versions'>[Versions]</ulink>; and
       conversely, that documents which do not purport to represent the
       UCD be described as such.</para>
 
@@ -1000,6 +1010,7 @@
         | "9.0"
         | "10.0"
         | "11.0"
+        <phrase revisionflag='added'>| "12.0"</phrase>
         | "unassigned" }?
 </lp:scrap>
 
