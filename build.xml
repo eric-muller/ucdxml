@@ -2009,7 +2009,7 @@ of the copyright holder.
   </target>
 
   <target name='validate12'>
-    <validate-ucd v='11.0.0'/>
+    <validate-ucd v='12.0.0'/>
   </target>
 
   <target name='diff12'>

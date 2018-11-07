@@ -776,9 +776,9 @@ public class Ucd {
     scriptMap.put ("MONGOLIAN",                "Mong");
     scriptMap.put ("MIAO",                     "Plrd");
     scriptMap.put ("MYANMAR",                  "Mymr");
+    scriptMap.put ("NEW_TAI_LUE",              "Talu");
     scriptMap.put ("NKO",                      "Nkoo");
     scriptMap.put ("OGHAM",                    "Ogam");
-    scriptMap.put ("NEW_TAI_LUE",              "Talu");
     scriptMap.put ("OL_CHIKI",                 "Olck");
     scriptMap.put ("OLD_ITALIC",               "Ital");
     scriptMap.put ("OLD-ITALIC",               "Ital");
@@ -841,7 +841,7 @@ public class Ucd {
     scriptMap.put ("KHUDAWADI",                "Sind");
     scriptMap.put ("TIRHUTA",                  "Tirh");
     scriptMap.put ("WARANG_CITI",              "Wara");
-    
+
     // Unicode 8.0
     scriptMap.put ("AHOM",                     "Ahom");
     scriptMap.put ("ANATOLIAN_HIEROGLYPHS",    "Hluw");
@@ -872,6 +872,12 @@ public class Ucd {
     scriptMap.put ("HANIFI_ROHINGYA",          "Rohg");
     scriptMap.put ("SOGDIAN",                  "Sogd");
     scriptMap.put ("OLD_SOGDIAN",              "Sogo");
+
+    // Unicode 12.0
+    scriptMap.put ("ELYMAIC",                  "Elym");
+    scriptMap.put ("NANDINAGARI",              "Nand");
+    scriptMap.put ("NYIAKENG_PUACHUE_HMONG",   "Hmnp");
+    scriptMap.put ("WANCHO",                   "Wcho");
   }
   
   
