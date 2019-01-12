@@ -1789,7 +1789,7 @@
         properties that simply map or fold to themselves. This is 
         very similar to the situation we encountered with names, and
         we adopted a similar convention: if the value of a case
-        mapping or case folding property the character itself, we
+        mapping or case folding property is the character itself, we
         use the attribute value # (U+0023 &#x0023; NUMBER SIGN) as a 
         shorthand notation; this enables those attributes to be
         captured in groups.</para>

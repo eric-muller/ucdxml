@@ -983,7 +983,7 @@
       <para>Each property, except for the Special_Case_Condition and
       Name_Alias properties, is represented by an attribute. In an XML
       data file, the absence of an attribute (may be only on some
-      <sgmtag>code-point</sgmtag>s) means that the document does not
+      <sgmltag>code-point</sgmltag>s) means that the document does not
       express the value of the corresponding property. Conversely, the
       presence of an attribute is an expression of the corresponding
       property value; the implied null value is represented by the
@@ -1724,7 +1724,7 @@
       <section>
         <title>Linebreak properties</title>
         
-        <para>The linebreak property is represented by the
+        <para>The Line_Break property is represented by the
           <sgmltag>lb</sgmltag> attribute.</para>
 
 <lp:scrap title='linebreak property' id='schema.properties'>
@@ -1789,7 +1789,7 @@
         properties that simply map or fold to themselves. This is 
         very similar to the situation we encountered with names, and
         we adopted a similar convention: if the value of a case
-        mapping or case folding property the character itself, we
+        mapping or case folding property is the character itself, we
         use the attribute value # (U+0023 &#x0023; NUMBER SIGN) as a 
         shorthand notation; this enables those attributes to be
         captured in groups.</para>
