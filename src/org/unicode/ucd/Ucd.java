@@ -2178,7 +2178,7 @@ public class Ucd {
         
         char[] c = "\n\n".toCharArray ();
         ch.characters (c, 0, c.length);
-        c = " \u00A9 2018 Unicode\u00AE, Inc. ".toCharArray ();
+        c = " \u00A9 2019 Unicode\u00AE, Inc. ".toCharArray ();
         ch.comment (c, 0, c.length);
         c = "\n".toCharArray ();
         ch.characters (c, 0, c.length);
