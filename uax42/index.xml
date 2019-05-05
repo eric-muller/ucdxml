@@ -7,7 +7,7 @@
 
   <articleinfo>
     <unicode:tr number='42' class='uax' version='12.1.0'
-                stage='proposed-update' status='published'
+                stage='approved' status='published'
                 schema='rnc' prevrev='25'/>
 
     <copyright><year>2019</year></copyright>
@@ -1042,7 +1042,7 @@
         | "9.0"
         | "10.0"
         | "11.0"
-        | "12.0" <phrase revisionflag='added'>| "12.1"</phrase>
+        | "12.0" | "12.1"
         | "unassigned" }?
 </lp:scrap>
 
