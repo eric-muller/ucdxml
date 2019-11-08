@@ -199,8 +199,12 @@ public class Property {
   public static Property kIRG_HSource                = new Property ("kIRG_HSource");
   public static Property kIRG_USource                = new Property ("kIRG_USource");
   public static Property kIRG_MSource                = new Property ("kIRG_MSource");
+  public static Property kIRG_UKSource               = new Property ("kIRG_UKSource");
+  public static Property kIRG_SSource                = new Property ("kIRG_SSource");
 
   public static Property kIICore                     = new Property ("kIICore");
+
+  public static Property kUnihanCore2020             = new Property ("kUnihanCore2020");
 
   public static Property kGB0                        = new Property ("kGB0");
   public static Property kGB1                        = new Property ("kGB1");
@@ -290,7 +294,9 @@ public class Property {
   public static Property kKoreanEducationHanja       = new Property ("kKoreanEducationHanja");
   public static Property kKoreanName                 = new Property ("kKoreanName");
   public static Property kTGH                        = new Property ("kTGH");
+  public static Property kTGHZ2013                   = new Property ("kTGHZ2013");
 
+  public static Property kSpoofingVariant            = new Property ("kSpoofingVariant");
 
   public static Property kRSKanWa                    = new Property ("kRSKanWa");
   public static Property kRSJapanese                 = new Property ("kRSJapanese");

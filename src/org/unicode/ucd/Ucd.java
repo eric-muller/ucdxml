@@ -228,7 +228,8 @@ public class Ucd {
               || "<CJK Ideograph Extension C, Last>".equals (fields [1])
               || "<CJK Ideograph Extension D, Last>".equals (fields [1])
               || "<CJK Ideograph Extension E, Last>".equals (fields [1])
-              || "<CJK Ideograph Extension F, Last>".equals (fields [1])) {
+              || "<CJK Ideograph Extension F, Last>".equals (fields [1])
+              || "<CJK Ideograph Extension G, Last>".equals (fields [1])) {
             fields [1] = "CJK UNIFIED IDEOGRAPH-#";
             setUnicodeDataFields (firstCp, cp, "char", fields);
             return; }
@@ -253,7 +254,8 @@ public class Ucd {
             setUnicodeDataFields (firstCp, cp, "char", fields);
             return; }
           
-          if ("<Tangut Ideograph, Last>".equals (fields [1])) {
+          if ("<Tangut Ideograph, Last>".equals (fields [1])
+              || "<Tangut Ideograph Supplement, Last>".equals (fields [1])) {
             fields [1] = "TANGUT IDEOGRAPH-#";
             setUnicodeDataFields (firstCp, cp, "char", fields);
             return; }
@@ -878,6 +880,12 @@ public class Ucd {
     scriptMap.put ("NANDINAGARI",              "Nand");
     scriptMap.put ("NYIAKENG_PUACHUE_HMONG",   "Hmnp");
     scriptMap.put ("WANCHO",                   "Wcho");
+
+    // Unicode 13.0
+    scriptMap.put ("CHORASMIAN",               "Chrs");
+    scriptMap.put ("DIVES_AKURU",              "Diak");
+    scriptMap.put ("KHITAN_SMALL_SCRIPT",      "Kits");
+    scriptMap.put ("YEZIDI",                   "Yezi");
   }
   
   
@@ -1095,7 +1103,11 @@ public class Ucd {
                 r.putDefault (Property.kIRG_USource, "");
                 
                 if (vv.isAtLeast (Version.V5_2_0)) {
-                  r.putDefault (Property.kIRG_MSource, ""); }}}}); }
+                  r.putDefault (Property.kIRG_MSource, ""); }
+
+                if (vv.isAtLeast (Version.V13_0_0)) {
+                  r.putDefault (Property.kIRG_UKSource, "");
+                  r.putDefault (Property.kIRG_SSource, ""); }}}}); }
   }
   
   private void parseTangutSources (Version v, URL baseURL) throws Exception {
