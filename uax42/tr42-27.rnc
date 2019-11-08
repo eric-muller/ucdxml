@@ -1478,4 +1478,29 @@ code-point-attributes &= attribute kSpecializedSemanticVariant
         attribute kddi { jis-code-point? },
         attribute softbank { jis-code-point? } } + }?
 
+      
+
+  code-point-attributes &= attribute Emoji { boolean }?
+
+
+
+  code-point-attributes &= attribute EPres { boolean }?
+
+
+
+  code-point-attributes &= attribute EMod { boolean }?
+
+
+
+  code-point-attributes &= attribute EBase { boolean }?
+
+
+
+  code-point-attributes &= attribute EComp { boolean }?
+
+
+
+  code-point-attributes &= attribute ExtPict { boolean }?
+
+
     

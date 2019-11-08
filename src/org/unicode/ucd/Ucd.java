@@ -1231,6 +1231,14 @@ public class Ucd {
             standardizedVariants.add (new StandardizedVariant (fields [0], fields [1], fields [2])); }}); }
   }
   
+  private void parseEmojiVariationSequences (Version v, URL baseURL) throws Exception {
+    if (v.isAtLeast (Version.V13_0_0)) {
+      Parser.parseSemiDelimitedFile (baseURL, "emoji/emoji-variation-sequences.txt",  "US-ASCII",
+        new Loader () {
+          public void process (String[] fields) {
+            standardizedVariants.add (new StandardizedVariant (fields [0], fields [1], fields [2])); }}); }
+  }
+  
   private void parseEmojiSources (Version v, URL baseURL) throws Exception {
     if (v.isAtLeast (Version.V6_0_0)) {
       Parser.parseSemiDelimitedFile (baseURL, "EmojiSources.txt", "US-ASCII",
@@ -1249,6 +1257,10 @@ public class Ucd {
       repertoire.putDefault (Property.vo, "R"); }
   }
 
+  private void parseEmojiData (Version v, URL baseURL) throws Exception {
+    if (v.isAtLeast (Version.V13_0_0)) {
+      parseBinaryPropertyFile (v, baseURL, "emoji/emoji-data.txt", "US-ASCII"); }
+  }
 
   public Ucd fromUCD (Version v, URL baseURL, Set<UcdFile> files) throws Exception {
     
@@ -1344,6 +1356,11 @@ public class Ucd {
     if (files.contains (UcdFile.VerticalOrientation)) {
       parseVerticalOrientation (v, baseURL); }
  
+    if (files.contains (UcdFile.EmojiData)) {
+      parseEmojiData (v, baseURL); }
+    if (files.contains (UcdFile.EmojiVariationSequences)) {
+      parseEmojiVariationSequences (v, baseURL); }
+
     normalize ();
     
     return this;

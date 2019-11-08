@@ -42,10 +42,11 @@
             <sgmltag>Chrs</sgmltag>, <sgmltag>Diak</sgmltag>,
             <sgmltag>Kits</sgmltag>, <sgmltag>Yezi</sgmltag>.</para></listitem>
 
-
             <listitem><para>New value for the <sgmltag>InPC</sgmltag> attribute: <sgmltag>Top_And_Bottom_And_Left</sgmltag>.</para></listitem>
 
-            <listitem><para>New attributes <sgmltag>kSpoofingVariant</sgmltag>, <sgmltag>kUnihanCore2020</sgmltag>, <sgmltag>kIRG_SSource</sgmltag>, <sgmltag>kIRG_UKSource</sgmltag>, <sgmltag>kTGHZ2013</sgmltag>.</para></listitem>
+            <listitem><para>New Unihan attributes <sgmltag>kSpoofingVariant</sgmltag>, <sgmltag>kUnihanCore2020</sgmltag>, <sgmltag>kIRG_SSource</sgmltag>, <sgmltag>kIRG_UKSource</sgmltag>, <sgmltag>kTGHZ2013</sgmltag>.</para></listitem>
+
+            <listitem><para>New Emoji attributes <sgmltag>Emoji</sgmltag>, <sgmltag>EPres</sgmltag>, <sgmltag>EMod</sgmltag>, <sgmltag>EBase</sgmltag>, <sgmltag>EComp</sgmltag>, <sgmltag>ExtPict</sgmltag>.</para></listitem>
 
             <listitem><para>Modified patterns for the <sgmltag>kIRG_GSource</sgmltag>, <sgmltag>kIRG_HSource</sgmltag>, <sgmltag>kIRG_KPSource</sgmltag>, <sgmltag>kIRG_KSource</sgmltag>, <sgmltag>kIRG_TSource</sgmltag>, <sgmltag>kKangXi</sgmltag>, <sgmltag>kSemanticVariant</sgmltag>, <sgmltag>kSimplifiedVariant</sgmltag>, <sgmltag>kSpecializedSemanticVariant</sgmltag>, <sgmltag>kTraditionalVariant</sgmltag> attributes.</para></listitem>
 
@@ -2860,6 +2861,40 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 </lp:scrap>
 
       </section>
+
+      <!--____________________________________________________________________-->
+      <section>
+        <title><phrase revisionflag='added'>Emoji properties</phrase></title>
+        
+        <para><phrase revisionflag='added'>The Emoji properties are represented as attributes.</phrase></para>
+
+<lp:scrap title='Emoji properties' id='schema.emoji-data'>
+<phrase revisionflag='added'>
+  code-point-attributes &amp;= attribute Emoji { boolean }?
+</phrase>
+
+<phrase revisionflag='added'>
+  code-point-attributes &amp;= attribute EPres { boolean }?
+</phrase>
+
+<phrase revisionflag='added'>
+  code-point-attributes &amp;= attribute EMod { boolean }?
+</phrase>
+
+<phrase revisionflag='added'>
+  code-point-attributes &amp;= attribute EBase { boolean }?
+</phrase>
+
+<phrase revisionflag='added'>
+  code-point-attributes &amp;= attribute EComp { boolean }?
+</phrase>
+
+<phrase revisionflag='added'>
+  code-point-attributes &amp;= attribute ExtPict { boolean }?
+</phrase>
+</lp:scrap>
+
+      </section>
     </section>
   </section>
 
@@ -3023,6 +3058,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
       <lp:include linkend='schema.standardized-variants'/>
       <lp:include linkend='schema.cjk-radicals'/>
       <lp:include linkend='schema.emoji-sources'/>
+      <lp:include linkend='schema.emoji-data'/>
     </lp:scrap>
     
     <para>An expanded version is linked from the top of this document.</para>

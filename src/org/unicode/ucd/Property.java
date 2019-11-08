@@ -316,6 +316,13 @@ public class Property {
   
   public static Property nameAlias                   = new Property ("Name_Alias", "Name_Alias");
 
+  // added in 13.0.0
+  public static Property emoji                       = new Property ("Emoji", "Emoji", true);
+  public static Property epres                       = new Property ("EPres", "Emoji_Presentation", true);
+  public static Property emod                        = new Property ("EMod", "Emoji_Modifier", true);
+  public static Property ebase                       = new Property ("EBase", "Emoji_Modifier_Base", true);
+  public static Property ecomp                       = new Property ("EComp", "Emoji_Component", true);
+  public static Property extpict                     = new Property ("ExtPict", "Extended_Pictographic", true);
   
   private String shortName;
   private String longName;

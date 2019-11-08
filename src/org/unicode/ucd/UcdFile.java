@@ -74,6 +74,9 @@ public enum UcdFile {
   UnihanNumeric,
   VerticalOrientation,
 
+  EmojiData,
+  EmojiVariationSequences,
+
   GraphemeBreakProperty,
   SentenceBreakProperty,
   WordBreakProperty,
