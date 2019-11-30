@@ -3,7 +3,7 @@
 <!--
 COPYRIGHT AND PERMISSION NOTICE
 
-Copyright (c) 2006-2018 Unicode Inc.
+Copyright (c) 2006-2019 Unicode Inc.
 
 All rights reserved.
 
@@ -2050,21 +2050,21 @@ of the copyright holder.
     <get src='${Public}/13.0.0/ucd/IndicPositionalCategory-13.0.0d3.txt'              dest='data/13.0.0/ucd/IndicPositionalCategory.txt'/>
     <get src='${Public}/13.0.0/ucd/IndicSyllabicCategory-13.0.0d2.txt'                dest='data/13.0.0/ucd/IndicSyllabicCategory.txt'/>
     <get src='${Public}/13.0.0/ucd/Jamo-13.0.0d1.txt'                                 dest='data/13.0.0/ucd/Jamo.txt'/>
-    <get src='${Public}/13.0.0/ucd/LineBreak-13.0.0d2.txt'                            dest='data/13.0.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/13.0.0/ucd/LineBreak-13.0.0d3.txt'                            dest='data/13.0.0/ucd/LineBreak.txt'/>
     <get src='${Public}/13.0.0/ucd/NameAliases-13.0.0d1.txt'                          dest='data/13.0.0/ucd/NameAliases.txt'/>
     <get src='${Public}/13.0.0/ucd/NamedSequences-13.0.0d1.txt'                       dest='data/13.0.0/ucd/NamedSequences.txt'/>
     <get src='${Public}/13.0.0/ucd/NamedSequencesProv-13.0.0d1.txt'                   dest='data/13.0.0/ucd/NamedSequencesProv.txt'/>
     <get src='${Public}/13.0.0/ucd/NamesList-13.0.0d1.html'                           dest='data/13.0.0/ucd/NamesList.html'/>
-    <get src='${Public}/13.0.0/ucd/NamesList-13.0.0d5.txt'                            dest='data/13.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/13.0.0/ucd/NamesList-13.0.0d6.txt'                            dest='data/13.0.0/ucd/NamesList.txt'/>
     <get src='${Public}/13.0.0/ucd/NormalizationCorrections-13.0.0d1.txt'             dest='data/13.0.0/ucd/NormalizationCorrections.txt'/>
     <get src='${Public}/13.0.0/ucd/NormalizationTest-13.0.0d1.txt'                    dest='data/13.0.0/ucd/NormalizationTest.txt'/>
     <get src='${Public}/13.0.0/ucd/NushuSources-13.0.0d1.txt'                         dest='data/13.0.0/ucd/NushuSources.txt'/>
-    <get src='${Public}/13.0.0/ucd/PropList-13.0.0d4.txt'                             dest='data/13.0.0/ucd/PropList.txt'/>
+    <get src='${Public}/13.0.0/ucd/PropList-13.0.0d13.txt'                             dest='data/13.0.0/ucd/PropList.txt'/>
     <get src='${Public}/13.0.0/ucd/PropertyAliases-13.0.0d7.txt'                      dest='data/13.0.0/ucd/PropertyAliases.txt'/>
-    <get src='${Public}/13.0.0/ucd/PropertyValueAliases-13.0.0d7.txt'                 dest='data/13.0.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/13.0.0/ucd/PropertyValueAliases-13.0.0d9.txt'                 dest='data/13.0.0/ucd/PropertyValueAliases.txt'/>
     <get src='${Public}/13.0.0/ucd/ReadMe-13.0.0d2.txt'                               dest='data/13.0.0/ucd/ReadMe.txt'/>
     <get src='${Public}/13.0.0/ucd/ScriptExtensions-13.0.0d2.txt'                     dest='data/13.0.0/ucd/ScriptExtensions.txt'/>
-    <get src='${Public}/13.0.0/ucd/Scripts-13.0.0d4.txt'                              dest='data/13.0.0/ucd/Scripts.txt'/>
+    <get src='${Public}/13.0.0/ucd/Scripts-13.0.0d13.txt'                              dest='data/13.0.0/ucd/Scripts.txt'/>
     <get src='${Public}/13.0.0/ucd/SpecialCasing-13.0.0d1.txt'                        dest='data/13.0.0/ucd/SpecialCasing.txt'/>
     <get src='${Public}/13.0.0/ucd/StandardizedVariants-13.0.0d1.txt'                 dest='data/13.0.0/ucd/StandardizedVariants.txt'/>
     <get src='${Public}/13.0.0/ucd/TangutSources-13.0.0d1.txt'                        dest='data/13.0.0/ucd/TangutSources.txt'/>
@@ -2077,33 +2077,32 @@ of the copyright holder.
 
     <get src='${Public}/13.0.0/ucd/extracted/DerivedBidiClass-13.0.0d3.txt'           dest='data/13.0.0/ucd/extracted/DerivedBidiClass.txt'/>
     <get src='${Public}/13.0.0/ucd/extracted/DerivedBinaryProperties-13.0.0d1.txt'    dest='data/13.0.0/ucd/extracted/DerivedBinaryProperties.txt'/>
-    <get src='${Public}/13.0.0/ucd/extracted/DerivedCombiningClass-13.0.0d3.txt'      dest='data/13.0.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/13.0.0/ucd/extracted/DerivedCombiningClass-13.0.0d9.txt'      dest='data/13.0.0/ucd/extracted/DerivedCombiningClass.txt'/>
     <get src='${Public}/13.0.0/ucd/extracted/DerivedDecompositionType-13.0.0d1.txt'   dest='data/13.0.0/ucd/extracted/DerivedDecompositionType.txt'/>
     <get src='${Public}/13.0.0/ucd/extracted/DerivedEastAsianWidth-13.0.0d3.txt'      dest='data/13.0.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
     <get src='${Public}/13.0.0/ucd/extracted/DerivedGeneralCategory-13.0.0d3.txt'     dest='data/13.0.0/ucd/extracted/DerivedGeneralCategory.txt'/>
     <get src='${Public}/13.0.0/ucd/extracted/DerivedJoiningGroup-13.0.0d1.txt'        dest='data/13.0.0/ucd/extracted/DerivedJoiningGroup.txt'/>
     <get src='${Public}/13.0.0/ucd/extracted/DerivedJoiningType-13.0.0d3.txt'         dest='data/13.0.0/ucd/extracted/DerivedJoiningType.txt'/>
-    <get src='${Public}/13.0.0/ucd/extracted/DerivedLineBreak-13.0.0d3.txt'           dest='data/13.0.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/13.0.0/ucd/extracted/DerivedLineBreak-13.0.0d13.txt'           dest='data/13.0.0/ucd/extracted/DerivedLineBreak.txt'/>
     <get src='${Public}/13.0.0/ucd/extracted/DerivedName-13.0.0d1.txt'                dest='data/13.0.0/ucd/extracted/DerivedName.txt'/>
     <get src='${Public}/13.0.0/ucd/extracted/DerivedNumericType-13.0.0d1.txt'         dest='data/13.0.0/ucd/extracted/DerivedNumericType.txt'/>
     <get src='${Public}/13.0.0/ucd/extracted/DerivedNumericValues-13.0.0d1.txt'       dest='data/13.0.0/ucd/extracted/DerivedNumericValues.txt'/>
 
     <get src='${Public}/13.0.0/ucd/auxiliary/GraphemeBreakProperty-13.0.0d4.txt'      dest='data/13.0.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
-    <get src='${Public}/13.0.0/ucd/auxiliary/GraphemeBreakTest-13.0.0d6.html'         dest='data/13.0.0/ucd/auxiliary/GraphemeBreakTest.html'/>
-    <get src='${Public}/13.0.0/ucd/auxiliary/GraphemeBreakTest-13.0.0d6.txt'          dest='data/13.0.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
-    <get src='${Public}/13.0.0/ucd/auxiliary/LineBreakTest-13.0.0d2.html'             dest='data/13.0.0/ucd/auxiliary/LineBreakTest.html'/>
-    <get src='${Public}/13.0.0/ucd/auxiliary/LineBreakTest-13.0.0d2.txt'              dest='data/13.0.0/ucd/auxiliary/LineBreakTest.txt'/>
-    <get src='${Public}/13.0.0/ucd/auxiliary/SentenceBreakProperty-13.0.0d4.txt'      dest='data/13.0.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
-    <get src='${Public}/13.0.0/ucd/auxiliary/SentenceBreakTest-13.0.0d1.html'         dest='data/13.0.0/ucd/auxiliary/SentenceBreakTest.html'/>
-    <get src='${Public}/13.0.0/ucd/auxiliary/SentenceBreakTest-13.0.0d1.txt'          dest='data/13.0.0/ucd/auxiliary/SentenceBreakTest.txt'/>
-    <get src='${Public}/13.0.0/ucd/auxiliary/WordBreakProperty-13.0.0d4.txt'          dest='data/13.0.0/ucd/auxiliary/WordBreakProperty.txt'/>
-    <get src='${Public}/13.0.0/ucd/auxiliary/WordBreakTest-13.0.0d8.html'             dest='data/13.0.0/ucd/auxiliary/WordBreakTest.html'/>
-    <get src='${Public}/13.0.0/ucd/auxiliary/WordBreakTest-13.0.0d8.txt'              dest='data/13.0.0/ucd/auxiliary/WordBreakTest.txt'/>
+    <get src='${Public}/13.0.0/ucd/auxiliary/GraphemeBreakTest-13.0.0d10.html'         dest='data/13.0.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/13.0.0/ucd/auxiliary/GraphemeBreakTest-13.0.0d10.txt'          dest='data/13.0.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/13.0.0/ucd/auxiliary/LineBreakTest-13.0.0d12.html'             dest='data/13.0.0/ucd/auxiliary/LineBreakTest.html'/>
+    <get src='${Public}/13.0.0/ucd/auxiliary/LineBreakTest-13.0.0d12.txt'              dest='data/13.0.0/ucd/auxiliary/LineBreakTest.txt'/>
+    <get src='${Public}/13.0.0/ucd/auxiliary/SentenceBreakProperty-13.0.0d13.txt'      dest='data/13.0.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/13.0.0/ucd/auxiliary/SentenceBreakTest-13.0.0d11.html'         dest='data/13.0.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/13.0.0/ucd/auxiliary/SentenceBreakTest-13.0.0d11.txt'          dest='data/13.0.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/13.0.0/ucd/auxiliary/WordBreakProperty-13.0.0d13.txt'          dest='data/13.0.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/13.0.0/ucd/auxiliary/WordBreakTest-13.0.0d11.html'             dest='data/13.0.0/ucd/auxiliary/WordBreakTest.html'/>
+    <get src='${Public}/13.0.0/ucd/auxiliary/WordBreakTest-13.0.0d11.txt'              dest='data/13.0.0/ucd/auxiliary/WordBreakTest.txt'/>
 
-    <get src='${Public}/13.0.0/ucd/emoji/ReadMe.txt'              dest='data/13.0.0/ucd/emoji/ReadMe.txt'/>
-    <get src='${Public}/13.0.0/ucd/emoji/emoji-data.txt'              dest='data/13.0.0/ucd/emoji/emoji-data.txt'/>
-    <get src='${Public}/13.0.0/ucd/emoji/emoji-variation-sequences.txt'              dest='data/13.0.0/ucd/emoji/emoji-variation-sequences.txt'/>
-    
+    <get src='${Public}/13.0.0/ucd/emoji/ReadMe.txt'                                dest='data/13.0.0/ucd/emoji/ReadMe.txt'/>
+    <get src='${Public}/13.0.0/ucd/emoji/emoji-data.txt'                            dest='data/13.0.0/ucd/emoji/emoji-data.txt'/>
+    <get src='${Public}/13.0.0/ucd/emoji/emoji-variation-sequences.txt'             dest='data/13.0.0/ucd/emoji/emoji-variation-sequences.txt'/>
 
     <unzip src='data/13.0.0/ucd/Unihan.zip'  dest='data/13.0.0/ucd'/>
     <delete file='data/13.0.0/ucd/Unihan.zip'/>
