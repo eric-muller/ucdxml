@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2018 Unicode Inc.
+// Copyright 2006-2020 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -2207,7 +2207,7 @@ public class Ucd {
         
         char[] c = "\n\n".toCharArray ();
         ch.characters (c, 0, c.length);
-        c = " \u00A9 2019 Unicode\u00AE, Inc. ".toCharArray ();
+        c = " \u00A9 2020 Unicode\u00AE, Inc. ".toCharArray ();
         ch.comment (c, 0, c.length);
         c = "\n".toCharArray ();
         ch.characters (c, 0, c.length);
