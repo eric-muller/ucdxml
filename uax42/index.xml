@@ -2521,7 +2521,7 @@
           | xsd:string {pattern="GDZ-[0-9]{4}\.[0-9]{2}"}
           | xsd:string {pattern="GFC-[0-9]{3}"}
           | xsd:string {pattern="GFZ"}
-          <phrase revisionflag='changed'>| xsd:string {pattern="GFZ-[0-9A-F]{4,5}"}</phrase>
+          | xsd:string {pattern="GFZ-[0-9A-F]{4,5}"}
           | xsd:string {pattern="GGFZ-[0-9]{6}"}
           | xsd:string {pattern="GGH-[0-9]{4}\.[0-9]{2}"}
           | xsd:string {pattern="GHC"}
@@ -2700,7 +2700,7 @@
      { xsd:string {pattern="[0-9]{4}"} }?
 
   code-point-attributes &amp;= attribute kKangXi
-     <phrase revisionflag='changed'>{ list { xsd:string {pattern="[0-9]{4}\.[0-9]{2}[01]"} +}}?</phrase>
+     { list { xsd:string {pattern="[0-9]{4}\.[0-9]{2}[01]"} +}}?
 
   code-point-attributes &amp;= attribute kKarlgren
      { xsd:string {pattern="[1-9][0-9]{0,3}[A*]?"} }?
@@ -2767,13 +2767,13 @@
      { list { xsd:string {pattern="[0-9]{3}\.[0-9]{2}"} +}}?
 
 code-point-attributes &amp;= attribute kSemanticVariant
-     { list <phrase revisionflag='changed'>{ xsd:string {pattern="U\+[0-9A-F]{4,5}(&lt;k[A-Za-z0-9]+(:[TBZJF]+)?(,k[A-Za-z0-9]+(:[TBZJF]+)?)*)?"}</phrase> +}}?
+     { list { xsd:string {pattern="U\+[0-9A-F]{4,5}(&lt;k[A-Za-z0-9]+(:[TBZJF]+)?(,k[A-Za-z0-9]+(:[TBZJF]+)?)*)?"} +}}?
 
   code-point-attributes &amp;= attribute kSimplifiedVariant
-     { list <phrase revisionflag='changed'>{ xsd:string {pattern="U\+[0-9A-F]{4,5}"}</phrase> +}}?
+     { list { xsd:string {pattern="U\+[0-9A-F]{4,5}"} +}}?
 
 code-point-attributes &amp;= attribute kSpecializedSemanticVariant
-     { list <phrase revisionflag='changed'>{ xsd:string {pattern="U\+[0-9A-F]{4,5}(&lt;k[A-Za-z0-9]+(:[TBZJF]+)?(,k[A-Za-z0-9]+(:[TBZJF]+)?)*)?"}</phrase> +}}?
+     { list { xsd:string {pattern="U\+[0-9A-F]{4,5}(&lt;k[A-Za-z0-9]+(:[TBZJF]+)?(,k[A-Za-z0-9]+(:[TBZJF]+)?)*)?"} +}}?
 
 
   code-point-attributes &amp;= attribute kSpoofingVariant
@@ -2796,7 +2796,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
      { list { xsd:string {pattern="[1-9][0-9]{0,2}"} +}}?
 
   code-point-attributes &amp;= attribute kTraditionalVariant
-     { list <phrase revisionflag='changed'>{ xsd:string {pattern="U\+[0-9A-F]{4,5}"}</phrase> +}}?
+     { list { xsd:string {pattern="U\+[0-9A-F]{4,5}"} +}}?
 
 
   code-point-attributes &amp;= attribute kUnihanCore2020
