@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2018 Unicode Inc.
+// Copyright 2006-2021 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -323,7 +323,11 @@ public class Property {
   public static Property ebase                       = new Property ("EBase", "Emoji_Modifier_Base", true);
   public static Property ecomp                       = new Property ("EComp", "Emoji_Component", true);
   public static Property extpict                     = new Property ("ExtPict", "Extended_Pictographic", true);
-  
+
+  // added in 14.0.0
+  public static Property kStrange                    = new Property ("kStrange");
+
+
   private String shortName;
   private String longName;
   private Set<String> aliases;

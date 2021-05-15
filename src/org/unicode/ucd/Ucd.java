@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2020 Unicode Inc.
+// Copyright 2006-2021 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -423,8 +423,12 @@ public class Ucd {
     // Unicode 11.0
     jgMap.put ("HANIFI ROHINGYA KINNA YA",           "Hanifi_Rohingya_Kinna_Ya");
     jgMap.put ("HANIFI ROHINGYA PA",                 "Hanifi_Rohingya_Pa");
+
+    // Unicode 14.0
+    jgMap.put ("THIN YEH",                           "Thin_Yeh");
+    jgMap.put ("VERTICAL TAIL",                      "Vertical_Tail");
   }
-  
+
   private void parseArabicShaping (Version v, URL baseURL) throws Exception {
     final Version vv = v;
     if (v.isAtLeast (Version.V2_0_0)) {
@@ -886,9 +890,16 @@ public class Ucd {
     scriptMap.put ("DIVES_AKURU",              "Diak");
     scriptMap.put ("KHITAN_SMALL_SCRIPT",      "Kits");
     scriptMap.put ("YEZIDI",                   "Yezi");
+
+    // Unicode 14.0
+    scriptMap.put ("CYPRO_MINOAN",             "Cpmn");
+    scriptMap.put ("OLD_UYGHUR",               "Ougr");
+    scriptMap.put ("TANGSA",                   "Tnsa");
+    scriptMap.put ("TOTO",                     "Toto");
+    scriptMap.put ("VITHKUQI",                 "Vith");
   }
-  
-  
+
+
   private void parseScripts (Version v, URL baseURL) throws Exception {
     if (v.isAtLeast (Version.V3_1_0)) {
       Parser.parseSemiDelimitedFileWithCodePoints (baseURL, "Scripts.txt", 0, "US-ASCII",
