@@ -45,32 +45,32 @@ import org.xml.sax.helpers.AttributesImpl;
 public class NamedSequences {
   SortedMap<String, NamedSequence> sequences = null;
   boolean provisional;
-  
+
   public NamedSequences (boolean provisional) {
     this.sequences = new TreeMap<String, NamedSequence> ();
     this.provisional = provisional;
   }
-  
+
   public void internalStats (PrintStream out) {
-    out.println ("  " + sequences.size () 
-               + (provisional ? " provisional" : "") 
+    out.println ("  " + sequences.size ()
+               + (provisional ? " provisional" : "")
                + " named sequences");
   }
-  
+
   public void add (NamedSequence ns) {
     sequences.put (ns.name, ns);
   }
-  
+
   //-----------------------------------------------------------------------------
   public void fromXML (String qname, Attributes at) {
     if ("named-sequence".equals (qname)) {
       add (NamedSequence.fromXML (at)); }
   }
-  
+
   public void toXML (TransformerHandler ch, String elt, AttributesImpl at) throws Exception {
     if (sequences.isEmpty ()) {
       return; }
-    
+
     ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
       for (NamedSequence ns : sequences.values ()) {
         AttributesImpl at2 = new AttributesImpl ();
@@ -79,11 +79,11 @@ public class NamedSequences {
   }
 
   //----------------------------------------------------------------------------
-  
+
   public void diff (NamedSequences older, PrintStream out, int detailsLevel) {
     DifferenceCounter cc = new DifferenceCounter ();
     boolean includeDetails = detailsLevel >= 1;
-    
+
     out.println ("");
     if (provisional) {
       out.println ("=============================== provisional named sequences"); }
@@ -91,10 +91,10 @@ public class NamedSequences {
       out.println ("=========================================== named sequences"); }
     if (includeDetails) {
       out.println (""); }
-   
+
     for (NamedSequence newNs : sequences.values () ) {
       NamedSequence oldNs = (older == null) ? null : older.sequences.get (newNs.name);
-      
+
       if (oldNs == null) {
         cc.added ();
         if (includeDetails) {
@@ -105,13 +105,13 @@ public class NamedSequences {
           out.println ("changed: from " + oldNs + " to " + newNs); }}
       else {
         cc.unchanged (); }}
-    
+
     for (NamedSequence oldNs : older.sequences.values ()) {
       if (sequences.get (oldNs.name) == null) {
         cc.removed ();
         if (includeDetails) {
           out.println ("removed: " + oldNs); }}}
-    
+
     if (includeDetails) {
       out.println (""); }
 

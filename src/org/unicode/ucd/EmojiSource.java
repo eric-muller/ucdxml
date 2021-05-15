@@ -43,18 +43,18 @@ public class EmojiSource {
   String docomo;
   String kddi;
   String softbank;
-  
+
   public EmojiSource (String unicode, String docomo, String kddi, String softbank) {
     this.unicode = unicode;
     this.docomo = docomo;
     this.kddi = kddi;
     this.softbank = softbank;
   }
-  
+
   public String toString () {
     return "{es: " + unicode + ", " + docomo + ", " + kddi + ", " + softbank + "}";
   }
-  
+
   public boolean equals (Object o) {
     if (o == this) {
       return true; }
@@ -65,11 +65,11 @@ public class EmojiSource {
     EmojiSource other = (EmojiSource) o;
     return unicode.equals (other.unicode) && docomo.equals (other.docomo) && kddi.equals (other.kddi) && softbank.equals (other.softbank);
   }
-  
+
   public int hashCode () {
     return unicode.hashCode ();
   }
-  
+
   //----------------------------------------------------------------------------
   public static EmojiSource fromXML (Attributes at) {
     String unicode = at.getValue ("unicode");
@@ -78,13 +78,13 @@ public class EmojiSource {
     String softbank = at.getValue ("softbank");
     return new EmojiSource (unicode, docomo, kddi, softbank);
   }
-  
+
   public void toXML (TransformerHandler ch, String elt, AttributesImpl at) throws Exception {
     at.addAttribute ("", "unicode", "unicode", "CDATA", unicode);
     at.addAttribute ("", "docomo", "docomo", "CDATA", docomo);
     at.addAttribute ("", "kddi", "kddi", "CDATA", kddi);
     at.addAttribute ("", "softbank", "softbank", "CDATA", softbank);
-    
+
     ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
       ch.endElement (Ucd.NAMESPACE, elt, elt); }
   }

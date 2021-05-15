@@ -46,30 +46,30 @@ import org.xml.sax.helpers.AttributesImpl;
 
 public class CJKRadicals {
   SortedMap<String, CJKRadical> numbers = null;
-  
+
   public CJKRadicals () {
     this.numbers = new TreeMap<String, CJKRadical> ();
   }
-  
+
   public void internalStats (PrintStream out) {
-    out.println ("  " + numbers.size () 
+    out.println ("  " + numbers.size ()
                + " radical numbers");
   }
-  
+
   public void add (CJKRadical ns) {
     numbers.put (ns.number, ns);
   }
-  
+
   //-----------------------------------------------------------------------------
   public void fromXML (String qname, Attributes at) {
     if ("cjk-radical".equals (qname)) {
       add (CJKRadical.fromXML (at)); }
   }
-  
+
   public void toXML (TransformerHandler ch, String elt, AttributesImpl at) throws Exception {
     if (numbers.isEmpty ()) {
       return; }
-    
+
     ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
       SortedSet<CJKRadical> values = new TreeSet<CJKRadical> ();
       for (CJKRadical ns : numbers.values ()) {
@@ -81,19 +81,19 @@ public class CJKRadicals {
   }
 
   //----------------------------------------------------------------------------
-  
+
   public void diff (CJKRadicals older, PrintStream out, int detailsLevel) {
     DifferenceCounter cc = new DifferenceCounter ();
     boolean includeDetails = detailsLevel >= 1;
-    
+
     out.println ("");
     out.println ("=========================================== radical numbers");
     if (includeDetails) {
       out.println (""); }
-   
+
     for (CJKRadical newNs : numbers.values () ) {
       CJKRadical oldNs = (older == null) ? null : older.numbers.get (newNs.number);
-      
+
       if (oldNs == null) {
         cc.added ();
         if (includeDetails) {
@@ -105,13 +105,13 @@ public class CJKRadicals {
           out.println ("changed: from " + oldNs + " to " + newNs); }}
       else {
         cc.unchanged (); }}
-    
+
     for (CJKRadical oldNs : older.numbers.values ()) {
       if (numbers.get (oldNs.number) == null) {
         cc.removed ();
         if (includeDetails) {
           out.println ("removed: " + oldNs); }}}
-    
+
     if (includeDetails) {
       out.println (""); }
 

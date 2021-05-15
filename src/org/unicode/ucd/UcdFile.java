@@ -92,9 +92,9 @@ public enum UcdFile {
   DerivedLineBreak,
   DerivedNumericType,
   DerivedNumericValues;
-  
+
   static final Set<UcdFile> allFiles;
-  
+
   static {
     allFiles = new HashSet<UcdFile> ();
     for (UcdFile f : UcdFile.values ()) {

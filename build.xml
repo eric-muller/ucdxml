@@ -1852,7 +1852,7 @@ of the copyright holder.
     </concat>
 
   </target>
-  
+
   <target name='download-12.0.0'>
     <delete dir='data/12.0.0'/>
     <mkdir dir='data/12.0.0/ucd'/>
@@ -2022,7 +2022,7 @@ of the copyright holder.
     </concat>
 
   </target>
-  
+
   <target name='download-13.0.0'>
     <delete dir='data/13.0.0'/>
     <mkdir dir='data/13.0.0/ucd'/>
@@ -2169,7 +2169,7 @@ of the copyright holder.
            includes='**'>
       <classpath refid='classpath'/>
     </javac>
-  </target>      
+  </target>
 
   <!--______________________________________________________________________-->
 

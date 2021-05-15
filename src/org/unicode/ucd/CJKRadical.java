@@ -42,17 +42,17 @@ public class CJKRadical implements Comparable<CJKRadical> {
   String number;
   String radical;
   String ideograph;
-  
+
   public CJKRadical (String number, String radical, String ideograph) {
     this.number = number;
     this.radical = radical;
     this.ideograph = ideograph;
   }
-  
+
   public String toString () {
     return "{rad: " + number + ", " + radical + ", " + ideograph + "}";
   }
-  
+
   public boolean equals (Object o) {
     if (o == this) {
       return true; }
@@ -64,18 +64,18 @@ public class CJKRadical implements Comparable<CJKRadical> {
     return number.equals (other.number) && radical.equals (other.radical)
       && ideograph.equals (other.ideograph);
   }
-  
+
   public int hashCode () {
     return number.hashCode ();
   }
-  
+
   public float asFloat () {
     if (number.endsWith ("'")) {
       return Integer.parseInt (number.replace ("'", "")) + 0.5f; }
     else {
       return Integer.parseInt (number); }
   }
-  
+
   public int compareTo (CJKRadical other) {
     float me = asFloat ();
     float o = other.asFloat ();
@@ -94,12 +94,12 @@ public class CJKRadical implements Comparable<CJKRadical> {
     String ideograph = at.getValue ("ideograph");
     return new CJKRadical (number, radical, ideograph);
   }
-  
+
   public void toXML (TransformerHandler ch, String elt, AttributesImpl at) throws Exception {
     at.addAttribute ("", "number", "number", "CDATA", number);
     at.addAttribute ("", "radical", "radical", "CDATA", radical);
     at.addAttribute ("", "ideograph", "ideograph", "CDATA", ideograph);
-    
+
     ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
       ch.endElement (Ucd.NAMESPACE, elt, elt); }
   }

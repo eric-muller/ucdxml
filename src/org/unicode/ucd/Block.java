@@ -42,17 +42,17 @@ public final class Block {
   int first;
   int last;
   String name;
-  
+
   public Block (int first, int last, String name) {
     this.first = first;
     this.last = last;
     this.name = name;
   }
-  
+
   public String toString () {
     return "{block: " + name + ", " + Ucd.toU (first) + ".." + Ucd.toU (last) + "}";
   }
-  
+
   public boolean equals (Object o) {
     if (o == this) {
       return true; }
@@ -61,15 +61,15 @@ public final class Block {
     if (! (o instanceof Block)) {
       return false; }
     Block other = (Block) o;
-    return first == other.first 
+    return first == other.first
       && last == other.last
       && name.equals (other.name);
   }
-  
+
   public int hashCode () {
     return first ^ last;
   }
-  
+
   //----------------------------------------------------------------------------
   public static Block fromXML (Attributes at) {
     int first = Integer.parseInt (at.getValue ("first-cp"), 16);
@@ -77,15 +77,15 @@ public final class Block {
     String name = at.getValue ("name");
     return new Block (first, last, name);
   }
-   
+
   public void toXML (TransformerHandler ch, String elt, AttributesImpl at) throws Exception {
     at.addAttribute ("", "first-cp", "first-cp", "CDATA", Ucd.toU (first));
     at.addAttribute ("", "last-cp", "last-cp", "CDATA", Ucd.toU (last));
     at.addAttribute ("", "name", "name", "CDATA", name);
-    
+
     ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
       ch.endElement (Ucd.NAMESPACE, elt, elt); }
   }
-  
+
   //----------------------------------------------------------------------------
 }

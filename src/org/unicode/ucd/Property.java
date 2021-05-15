@@ -42,23 +42,23 @@ public class Property {
   // When we generate the XML representation of a set of properties (as
   // attributes), we could simply enumerate the 'properties' map. However,
   // the attributes would appear either in a random order, or in
-  // alphabetical order (if we use a SortedMap). Instead, we want 
+  // alphabetical order (if we use a SortedMap). Instead, we want
   // some attribute like "cp" to be at the front, "na" not too far, while
-  // the more esoteric attributes like "jg", "ea" or "sc" can go towards 
+  // the more esoteric attributes like "jg", "ea" or "sc" can go towards
   // the end.
   // Our trick is to maintain an ArrayList of all the possible keys. We
   // insert the attributes we care about explicitly, and those will show
   // up first, in the order we inserted them. The remaining attributes
-  // will show up in an order determined by when they were first seen, 
+  // will show up in an order determined by when they were first seen,
   // but that's ok.
-  
+
   static private IdentityHashMap<String, Property> propertiesByName = new IdentityHashMap<String, Property> ();
   static private LinkedHashSet<Property> allProperties = new LinkedHashSet<Property> ();
-  
-  
+
+
 
   public static Property type                        = new Property ("type");
-  
+
   public static Property age                         = new Property ("age", "Age", true);
   public static Property na                          = new Property ("na", "Name");
   public static Property jsn                         = new Property ("JSN", "Jamo_Short_Name", true);
@@ -114,26 +114,26 @@ public class Property {
   public static Property vs                          = new Property ("VS", "Variation_Selector", true);
   public static Property bidi_c                      = new Property ("Bidi_C", "Bidi_Control", true);
   public static Property join_c                      = new Property ("Join_C", "Join_Control", true);
-  
+
   public static Property gr_base                     = new Property ("Gr_Base", "Grapheme_Base", true);
   public static Property gr_ext                      = new Property ("Gr_Ext", "Grapheme_Extend", true);
   public static Property ogr_ext                     = new Property ("OGr_Ext", "Other_Grapheme_Extend", true);
   public static Property gr_link                     = new Property ("Gr_Link", "Grapheme_Link", true);
-  
-  
+
+
   public static Property sterm                       = new Property ("STerm", "Sentence_Terminal", true);
   public static Property ext                         = new Property ("Ext", "Extender", true);
   public static Property term                        = new Property ("Term", "Terminal_Punctuation", true);
   public static Property dia                         = new Property ("Dia", "Diacritic", true);
   public static Property dep                         = new Property ("Dep", "Deprecated", true);
-  
+
   public static Property ids                         = new Property ("IDS", "ID_Start", true);
   public static Property oids                        = new Property ("OIDS", "Other_ID_Start", true);
   public static Property xids                        = new Property ("XIDS", "XID_Start", true);
   public static Property idc                         = new Property ("IDC", "ID_Continue", true);
   public static Property oidc                        = new Property ("OIDC", "Other_ID_Continue", true);
   public static Property xidc                        = new Property ("XIDC", "XID_Continue", true);
-  
+
   public static Property sd                          = new Property ("SD", "Soft_Dotted", true);
   public static Property loe                         = new Property ("LOE", "Logical_Order_Exception", true);
   public static Property pat_ws                      = new Property ("Pat_WS", "Pattern_White_Space", true);
@@ -153,7 +153,7 @@ public class Property {
   public static Property xo_nfkc                     = new Property ("XO_NFKC", "Expands_On_NFKC", true);
   public static Property xo_nfkd                     = new Property ("XO_NFKD", "Expands_On_NFKD", true);
   public static Property fc_nfkc                     = new Property ("FC_NFKC", "FC_NFC_Closure", "FNC");
-  
+
   // Added in 5.2.0
   public static Property ci                          = new Property ("CI", "Case_Ignorable", true);
   public static Property cased                       = new Property ("Cased", "Cased", true);
@@ -172,16 +172,16 @@ public class Property {
   // Added in 8.0.0 (really, InSC renamed InPc)
   public static Property InPC                        = new Property ("InPC", "Indic_Positional_Category", true);
   public static Property kJa                         = new Property ("kJa");
-  
+
   // Added in 9.0.0
   public static Property pcm                         = new Property ("PCM", "Prepended_Concatenation_Mark", true);
-  
+
   // Added in 10.0.0
   public static Property vo                          = new Property ("vo", "Vertical_Orientation", true);
   public static Property RI                          = new Property ("RI", "Regional_Indicator", true);
-  
+
   public static Property blk                         = new Property ("blk", "Block", true);
-  
+
   // Added in 11.0.0
   public static Property EqUIdeo                     = new Property ("EqUIdeo", "Equivalent_Unified_Ideograph");
 
@@ -304,16 +304,16 @@ public class Property {
   public static Property kRSKangXi                   = new Property ("kRSKangXi");
   public static Property kRSAdobe_Japan1_6           = new Property ("kRSAdobe_Japan1_6");
   public static Property kTotalStrokes               = new Property ("kTotalStrokes");
-  
+
   public static Property kRSTUnicode                 = new Property ("kRSTUnicode");
   public static Property kTGT_MergedSrc              = new Property ("kTGT_MergedSrc");
- 
+
   public static Property kSrc_NushuDuben             = new Property ("kSrc_NushuDuben");
   public static Property kReading                    = new Property ("kReading");
-  
+
   public static Property isc                         = new Property ("isc", "ISO_Comment");
   public static Property na1                         = new Property ("na1", "Unicode_1_Name");
-  
+
   public static Property nameAlias                   = new Property ("Name_Alias", "Name_Alias");
 
   // added in 13.0.0
@@ -332,23 +332,23 @@ public class Property {
   private Property (String shortName) {
     this (shortName, shortName);
   }
-  
+
   private Property (String shortName, boolean enumerated) {
     this (shortName, shortName, null, enumerated);
   }
-  
+
   private Property (String shortName, String longName) {
     this (shortName, longName, null);
   }
-  
+
   private Property (String shortName, String longName, boolean enumerated) {
     this (shortName, longName, null, enumerated);
   }
-  
+
   private Property (String shortName, String longName, String alias) {
     this (shortName, longName, alias, false);
   }
-  
+
   private Property (String shortName, String longName, String alias, boolean enumerated) {
     this.shortName = shortName;
     this.longName = longName;
@@ -361,7 +361,7 @@ public class Property {
     propertiesByName.put (longName, this);
   }
 
-  
+
   public String getShortName () {
     return shortName;
   }
@@ -377,13 +377,13 @@ public class Property {
   public boolean isEnumerated () {
     return enumerated;
   }
-  
+
 
   public static Property fromString (String s) {
     { Property p = propertiesByName.get (s);
       if (p != null) {
         return p; }}
-    
+
     for (Property p : allProperties) {
       if (p.shortName.equalsIgnoreCase (s)) {
         return p; }
@@ -392,15 +392,15 @@ public class Property {
       for (String alias : p.aliases) {
         if (alias.equalsIgnoreCase (s)) {
           return p; }}}
-    
+
     System.err.println ("@@@ unknown property " + s);
     return new Property (s);
   }
-  
+
   public static Set<Property> values () {
     return allProperties;
   }
-  
+
   public String toString () {
     return "";
   }

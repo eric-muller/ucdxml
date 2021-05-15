@@ -54,91 +54,91 @@ public class Repertoire implements Iterable<Group> {
 
   public Repertoire () {
     Group g = new Group (0x0000, 0x10ffff);
-    
+
     groups = new Group [0x110000];
     for (int i = 0; i < groups.length; i++) {
       groups [i] = g; }
   }
-   
+
   public class GroupIterator implements Iterator<Group> {
     int currentCp;
     int lastCp;
-    
+
     public GroupIterator (int firstCp, int lastCp) {
-      currentCp = firstCp; 
+      currentCp = firstCp;
       this.lastCp = lastCp;}
-    
+
     public boolean hasNext () {
       return currentCp <= lastCp;
     }
-    
+
     public Group next () {
       Group r = groups [currentCp];
       currentCp = r.lastCp + 1;
       return r;
     }
-    
+
     public void remove () throws UnsupportedOperationException {
       throw new UnsupportedOperationException ("remove not supported on Ranges iterator");
     }
   }
-  
+
   public class IterableGroupSubset implements Iterable<Group> {
     int firstCp, lastCp;
     public IterableGroupSubset (int firstCp, int lastCp) {
       this.firstCp = firstCp;
       this.lastCp = lastCp; }
-    
+
     public Iterator<Group> iterator () {
       return new GroupIterator (firstCp, lastCp); }
   }
-  
+
   public Iterator<Group> iterator () {
     return new GroupIterator (0, groups.length - 1);
   }
-  
+
   public Iterable<Group> onSubset (int firstCp, int lastCp) {
     return new IterableGroupSubset (firstCp, lastCp);
   }
-  
+
   public String get (int cp, Property p) {
     return groups [cp].get (p);
   }
-  
+
   public Object getObject (int cp, Property p) {
     return groups [cp].getObject (p);
   }
-  
+
   public void put (int firstCp, int lastCp, Property p, String v) {
     int cp = firstCp;
     while (cp <= lastCp) {
       createBoundaryBefore (cp);
       if (groups [cp].lastCp > lastCp) {
         createBoundaryBefore (lastCp + 1); }
-      groups [cp].put (p, v); 
+      groups [cp].put (p, v);
       cp = groups [cp].lastCp + 1; }
   }
-  
+
   public void putObject (int firstCp, int lastCp, Property p, Object v) {
     int cp = firstCp;
     while (cp <= lastCp) {
       createBoundaryBefore (cp);
       if (groups [cp].lastCp > lastCp) {
         createBoundaryBefore (lastCp + 1); }
-      groups [cp].putObject (p, v); 
+      groups [cp].putObject (p, v);
       cp = groups [cp].lastCp + 1; }
   }
-  
+
   public void putForced (int firstCp, int lastCp, Property p, String v) {
     int cp = firstCp;
     while (cp <= lastCp) {
       createBoundaryBefore (cp);
       if (groups [cp].lastCp > lastCp) {
         createBoundaryBefore (lastCp + 1); }
-      groups [cp].putForced (p, v); 
+      groups [cp].putForced (p, v);
       cp = groups [cp].lastCp + 1; }
   }
-  
+
   public interface DefaultSetter {
     public void process (Group r);
   }
@@ -147,23 +147,23 @@ public class Repertoire implements Iterable<Group> {
     for (Group r : groups) {
       r.putDefault (p, v); }
   }
-  
+
   public void putDefault (DefaultSetter s) {
     for (Group r : groups) {
       s.process (r); }
   }
-  
+
   public void normalize () {
     Group previous = null;
-    
+
     for (Group r : this) {
-      
+
       if (r.firstCp == r.lastCp) {
-        String na = r.get (Property.na); 
+        String na = r.get (Property.na);
         String cp = Ucd.toU (r.firstCp);
         if (na != null && na.contains (cp)) {
           r.putForced (Property.na, na.replace (cp, "#")); }
-        
+
         if (cp.equals (r.get (Property.dm))) {
           r.putForced (Property.dm, "#"); }
 
@@ -183,31 +183,31 @@ public class Repertoire implements Iterable<Group> {
           r.putForced (Property.scf, "#"); }
         if (cp.equals (r.get (Property.cf))) {
           r.putForced (Property.cf, "#"); }}
-      
+
       if (previous != null && previous.sameProperties (r)) {
         if (previous.lastCp - previous.firstCp > r.lastCp - r.firstCp) {
           for (int cp = r.firstCp; cp <= r.lastCp; cp++) {
             groups [cp] = previous; }
-          r.firstCp = previous.firstCp; 
+          r.firstCp = previous.firstCp;
           previous.lastCp = r.lastCp; }
-        
+
         else {
           for (int cp = previous.firstCp; cp <= previous.lastCp; cp++) {
             groups [cp] = r; }
-          r.firstCp = previous.firstCp; 
+          r.firstCp = previous.firstCp;
           previous.lastCp = r.lastCp;
           previous = r; }}
       else {
         previous = r; }}
   }
-  
+
   public void createBoundaryBefore (int cp) {
     if (cp == 0 || cp >= groups.length) {
       return; }
-    
+
     Group rBefore = groups [cp - 1];
     Group rAfter = groups [cp];
-    
+
     if (rBefore == rAfter) {
       if (cp - rBefore.firstCp > rAfter.lastCp - cp) {
         Group rNew = new Group (cp, rAfter.lastCp, rAfter);
@@ -219,23 +219,23 @@ public class Repertoire implements Iterable<Group> {
         for (int i = rBefore.firstCp; i < cp; i++) {
           groups [i] = rNew; }
         rAfter.firstCp = cp; }}
-  }  
-  
+  }
+
   public void remove (Property p) {
     for (Group r : groups) {
       r.remove (p); }
   }
-  
+
   //----------------------------------------------------------------------------
-  
+
   final static char[] space = {' '};
-  
+
   public void toXML (TransformerHandler ch, String elt, AttributesImpl at, int explodeLimit, Repertoire groups) throws Exception  {
     ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
       if (groups == null) {
         for (Group r : this) {
           r.toXMLElements (ch, explodeLimit, null); }}
-      
+
       else {
         for (Group g : groups) {
           AttributesImpl at2 = new AttributesImpl ();
@@ -244,10 +244,10 @@ public class Repertoire implements Iterable<Group> {
             for (Group r : this.onSubset (g.firstCp, g.lastCp)) {
               r.toXMLElements (ch, explodeLimit, g); }
             ch.endElement (Ucd.NAMESPACE, "group", "group"); }}}
-      
+
       ch.endElement (Ucd.NAMESPACE, elt, elt); }
   }
-  
+
   public Group rangeFromXML (String elt, Attributes at, Map<Property, String> gr) {
     Group r = Group.fromXML (elt, at, gr);
     createBoundaryBefore (r.firstCp);
@@ -256,17 +256,17 @@ public class Repertoire implements Iterable<Group> {
       groups [cp] = r; }
     return r;
   }
-  
+
   //----------------------------------------------------------------------------
   public Set<Property> collectProperties () {
     Set<Property> properties = new HashSet<Property> ();
-    
+
     for (Group r : groups) {
       r.collectProperties (properties); }
-    
+
     return properties;
   }
-    
+
   public String getUsefulCharacterName (int cp) {
     String name;
     if (cp <= 0x1F || (0x80 <= cp && cp <= 0x9F)) {
@@ -277,89 +277,89 @@ public class Repertoire implements Iterable<Group> {
       name = ""; }
     return name;
   }
-  
+
   public void diff (Repertoire older, PrintStream out, int detailsLevel) {
-    
+
     boolean ignoreCodePoint[] = new boolean [0x110000];
-    
+
     out.println ();
     out.println ("================================ changed type ");
-    
+
     DifferenceCounter typeDc = new DifferenceCounter ();
     for (int cp = 0; cp < 0x110000; cp++) {
-      
+
       String newerType = get (cp, Property.type);
       String olderType = older.get (cp, Property.type);
       ignoreCodePoint [cp] = false;
-      
+
       if (newerType == null && olderType == null) {
         typeDc.undefined ();
         continue; }
       else if (olderType == null) {
         ignoreCodePoint [cp] = true;
-        typeDc.added (); 
+        typeDc.added ();
         olderType = "<undefined>"; }
       else if (newerType == null) {
         ignoreCodePoint [cp] = true;
-        typeDc.removed (); 
+        typeDc.removed ();
         newerType = "<undefined>"; }
       else if (newerType.equals (olderType)) {
-        typeDc.unchanged (); 
+        typeDc.unchanged ();
         continue; }
       else {
         ignoreCodePoint [cp] = true;
         typeDc.changed (); }
-      
+
       if (detailsLevel >= 1) {
         out.println (Ucd.toU (cp) + "\t" + olderType + "\t->\t" + newerType + "\t" + getUsefulCharacterName (cp)); }}
-    
+
     if (detailsLevel >= 1) {
       out.println (""); }
     out.println (typeDc);
-    
-      
-    out.println ("");  
+
+
+    out.println ("");
     out.println ("=============================== properties added or removed");
-    
-    Set<Property> propertiesToCompare = new HashSet<Property> ();     
+
+    Set<Property> propertiesToCompare = new HashSet<Property> ();
     Set<Property> newerSet = collectProperties ();
     Set<Property> olderSet = older.collectProperties ();
-    
+
     newerSet.remove (Property.type);
     olderSet.remove (Property.type);
-    
+
     for (Property p : Property.values ()) {
       boolean inNewer = newerSet.contains (p);
       boolean inOlder = olderSet.contains (p);
-      
+
       if (inOlder && inNewer) {
         propertiesToCompare.add (p); }
       else if (inOlder) {
         out.println ("removed property: " + p.getBothNames ()); }
-      
+
       else if (inNewer) {
         out.println ("added property: " + p.getBothNames ()); }}
-    
-        
+
+
     out.println ();
     out.println ("================================ changed properties values ");
 
     for (Property p : Property.values ()) {
       if (! propertiesToCompare.contains (p)) {
         continue; }
-      
+
       out.println ();
       out.println ("----------------------------------------------- " + p.getBothNames ());
       DifferenceCounter dc = new DifferenceCounter ();
-      
+
       for (int cp = 0; cp < 0x110000; cp++) {
         if (ignoreCodePoint [cp] && detailsLevel < 2) {
           dc.ignored ();
           continue; }
-        
+
         Object newerValue = getObject (cp, p);
         Object olderValue = older.getObject (cp, p);
-               
+
         if (newerValue == null && olderValue == null) {
           dc.undefined ();
           continue; }
@@ -368,27 +368,27 @@ public class Repertoire implements Iterable<Group> {
         else if (newerValue == null) {
           dc.removed (); }
         else if (newerValue.equals (olderValue)) {
-          dc.unchanged (); 
+          dc.unchanged ();
           continue; }
         else {
           dc.changed (); }
-                    
+
         if (detailsLevel >= 1) {
-          out.println (p.getShortName () + "\t" + Ucd.toU (cp) + "\t" 
+          out.println (p.getShortName () + "\t" + Ucd.toU (cp) + "\t"
                         + (olderValue == null ? "<undefined>" : ("'" + olderValue + "'"))
                         + "\t->\t"
                         + (newerValue == null ? "<undefined>" : ("'" + newerValue + "'"))
                         + "\t" + getUsefulCharacterName (cp)); }}
-        
+
       if (detailsLevel >= 1) {
         out.println (""); }
-      out.println (dc); }       
+      out.println (dc); }
   }
-  
+
   //----------------------------------------------------------------------------
-  
+
   public void group (Repertoire groups) {
-    
+
     // simplify the character names
     for (Group r : groups) {
       if (r.firstCp == r.lastCp) {
@@ -396,20 +396,20 @@ public class Repertoire implements Iterable<Group> {
         String cpInName = Ucd.toU (r.firstCp);
         if (na != null && na.contains (cpInName)) {
           r.putForced (Property.na, na.replace (cpInName, "*")); }}}
-    
+
     for (Group g : groups) {
-      
+
       for (Property p : Property.values ()) {
-        
+
         if (p == Property.nameAlias) {
           continue; }
-        
+
         boolean groupCanHaveProperty = true;
         int totalCount = 0;
         Map<String, Integer> counters = new HashMap<String, Integer> ();
-        
+
         for (Group r : onSubset (g.firstCp, g.lastCp)) {
-          
+
           String v = r.get (p);
           if (v == null) {
             groupCanHaveProperty = false; }
@@ -419,7 +419,7 @@ public class Repertoire implements Iterable<Group> {
             currentCount += additionalCount;
             totalCount += additionalCount;
             counters.put (v, currentCount); }}
-        
+
         if (groupCanHaveProperty) {
           // find the predominent value, needs to be at least 20% and more than once
           int max = Integer.MIN_VALUE;
@@ -432,25 +432,25 @@ public class Repertoire implements Iterable<Group> {
           if (max > 0.2 * totalCount && max > 1) {
             g.put (p, bestValue); }}}}
   }
-  
+
   public void internalStats (PrintStream out) {
     int nbRanges = 0;
     int nbPropsTotal = 0;
     int maxNbPropsOnARange = Integer.MIN_VALUE;
     int minNbPropsOnARange = Integer.MAX_VALUE;
-    
+
     for (Group r : this) {
-      nbRanges++; 
-      
+      nbRanges++;
+
       int nbProps = r.nbProps ();
       nbPropsTotal += nbProps;
 
       maxNbPropsOnARange = Math.max (maxNbPropsOnARange, nbProps);
       minNbPropsOnARange = Math.min (minNbPropsOnARange, nbProps); }
-    
+
     out.println ("  " + nbRanges + " ranges ");
     out.println ("     " + collectProperties ().size () + " distinct properties");
-    out.println ("     " + nbPropsTotal + " properties assignments (min = " 
+    out.println ("     " + nbPropsTotal + " properties assignments (min = "
                  + minNbPropsOnARange
                  + ", max = " + maxNbPropsOnARange + ")");
   }

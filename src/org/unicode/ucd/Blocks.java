@@ -51,26 +51,26 @@ public class Blocks {
     this.byFirstCp = new TreeMap<Integer, Block> ();
     this.byName = new TreeMap<String, Block> ();
   }
-  
+
   public void internalStats (PrintStream out) {
     out.println ("  " + byName.size () + " blocks");
   }
-  
+
   public void add (Block b) {
     byFirstCp.put (new Integer (b.first), b);
     byName.put (b.name, b);
   }
-     
+
   //-----------------------------------------------------------------------------
   public void fromXML (String qname, Attributes at) {
     if ("block".equals (qname)) {
       add (Block.fromXML (at)); }
   }
- 
+
   public void toXML (TransformerHandler ch, String elt, AttributesImpl at) throws Exception {
     if (byFirstCp.isEmpty ()) {
       return; }
-    
+
     ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
       for (Block b : byFirstCp.values ()) {
         AttributesImpl at2 = new AttributesImpl ();
@@ -78,20 +78,20 @@ public class Blocks {
       ch.endElement(Ucd.NAMESPACE, elt, elt); }
   }
 
-  
+
   //----------------------------------------------------------------------------
   public void diff (Blocks older, PrintStream out, int detailsLevel) {
     DifferenceCounter cc = new DifferenceCounter ();
     boolean includeDetails = detailsLevel >= 1;
-    
+
     out.println ("");
     out.println ("==================================================== blocks");
     if (includeDetails) {
       out.println (""); }
-                      
+
     for (Block newB : byName.values () ) {
       Block oldB = (older == null) ? null : older.byName.get (newB.name);
-        
+
       if (oldB == null) {
         cc.added ();
         if (includeDetails) {
@@ -102,16 +102,16 @@ public class Blocks {
           out.println ("changed: from " + oldB + " to " + newB); }}
       else {
         cc.unchanged (); }}
-    
+
     for (Block oldB : older.byName.values ()) {
       if (byName.get (oldB.name) == null) {
         cc.removed ();
         if (includeDetails) {
           out.println ("removed: " + oldB); }}}
-    
+
     if (includeDetails) {
       out.println (""); }
-    
+
     out.println (cc);
   }
 }

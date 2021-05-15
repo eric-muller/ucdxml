@@ -34,7 +34,7 @@
 package org.unicode.ucd;
 
 public final class DifferenceCounter {
-  
+
   int undefined = 0;
   int ignored = 0;
   int oldCount = 0;
@@ -42,38 +42,38 @@ public final class DifferenceCounter {
   int added = 0;
   int removed = 0;
   int changed = 0;
-  
+
   public void ignored () {
-    ignored++; 
+    ignored++;
   }
-  
+
   public void undefined () {
     undefined++;
   }
-  
+
   public void unchanged () {
     oldCount++;
-    newCount++; 
+    newCount++;
   }
-  
+
   public void added () {
     newCount++;
-    added++; 
+    added++;
   }
-  
+
   public void removed () {
     oldCount++;
     removed++;
   }
-  
+
   public void changed () {
     oldCount++;
     newCount++;
     changed++; }
-  
+
   public String toString () {
-    return "" + oldCount + " + " + added + " - " + removed 
-         + " # " + changed 
+    return "" + oldCount + " + " + added + " - " + removed
+         + " # " + changed
          + " = " + newCount + " (" + ignored + " ignored, " + undefined + " undefined)";
   }
 }

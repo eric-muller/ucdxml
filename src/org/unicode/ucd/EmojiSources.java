@@ -47,7 +47,7 @@ import org.xml.sax.helpers.AttributesImpl;
 public class EmojiSources {
   // The emoji sources, in the order in which they are added
   List<EmojiSource> sources = null;
-  
+
   // The emoji sources, indexed by Unicode code point
   SortedMap<String, EmojiSource> sourcesByUnicode = null;
 
@@ -55,44 +55,44 @@ public class EmojiSources {
     this.sources = new LinkedList<EmojiSource> ();
     this.sourcesByUnicode = new TreeMap<String, EmojiSource> ();
   }
-  
+
   public void internalStats (PrintStream out) {
     out.println ("  " + sourcesByUnicode.size () + " emoji sources");
   }
-  
+
   public void add (EmojiSource es) {
     sources.add (es);
     sourcesByUnicode.put (es.unicode, es);
   }
-  
+
   //-----------------------------------------------------------------------------
   public void fromXML (String qname, Attributes at) {
     if ("emoji-source".equals (qname)) {
       add (EmojiSource.fromXML (at)); }
   }
-  
+
   public void toXML (TransformerHandler ch, String elt, AttributesImpl at) throws Exception {
     if (sources.isEmpty ()) {
       return; }
-    
+
     ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
       for (EmojiSource v : sources) {
         AttributesImpl at2 = new AttributesImpl ();
         v.toXML (ch, "emoji-source", at2); }
       ch.endElement(Ucd.NAMESPACE, elt, elt); }
   }
-  
+
   //----------------------------------------------------------------------------
- 
+
   public void diff (EmojiSources older, PrintStream out, int detailsLevel) {
     DifferenceCounter cc = new DifferenceCounter ();
     boolean includeDetails = detailsLevel >= 1;
-    
+
     out.println ("");
     out.println ("================================= emoji sources");
     if (includeDetails) {
       out.println (""); }
-    
+
     for (EmojiSource newNc : sourcesByUnicode.values () ) {
 
       EmojiSource oldNc = (older == null) ? null : older.sourcesByUnicode.get (newNc.unicode);
@@ -106,13 +106,13 @@ public class EmojiSources {
           out.println ("changed: from " + oldNc + " to " + newNc); }}
       else {
         cc.unchanged (); }}
-    
+
     for (EmojiSource oldNc : older.sourcesByUnicode.values ()) {
       if (sourcesByUnicode.get (oldNc.unicode) == null) {
         cc.removed ();
         if (includeDetails) {
           out.println ("removed: " + oldNc); }}}
-    
+
     if (includeDetails) {
       out.println (""); }
 

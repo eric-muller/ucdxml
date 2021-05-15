@@ -42,17 +42,17 @@ public class StandardizedVariant {
   String sequence;
   String description;
   String condition;
-  
+
   public StandardizedVariant (String sequence, String description, String condition) {
     this.sequence = sequence;
     this.description = description;
     this.condition = condition;
   }
-  
+
   public String toString () {
     return "{sv: " + sequence + ", " + description + ", " + condition + "}";
   }
-  
+
   public boolean equals (Object o) {
     if (o == this) {
       return true; }
@@ -63,11 +63,11 @@ public class StandardizedVariant {
     StandardizedVariant other = (StandardizedVariant) o;
     return sequence.equals (other.sequence) && description.equals (other.description) && condition.equals (other.condition);
   }
-  
+
   public int hashCode () {
     return sequence.hashCode ();
   }
-  
+
   //----------------------------------------------------------------------------
   public static StandardizedVariant fromXML (Attributes at) {
     String sequence = at.getValue ("cps");
@@ -75,12 +75,12 @@ public class StandardizedVariant {
     String condition = at.getValue ("when");
     return new StandardizedVariant (sequence, description, condition);
   }
-  
+
   public void toXML (TransformerHandler ch, String elt, AttributesImpl at) throws Exception {
     at.addAttribute ("", "cps", "cps", "CDATA", sequence);
     at.addAttribute ("", "desc", "desc", "CDATA", description);
     at.addAttribute ("", "when", "when", "CDATA", condition);
-    
+
     ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
       ch.endElement (Ucd.NAMESPACE, elt, elt); }
   }

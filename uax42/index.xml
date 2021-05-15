@@ -27,14 +27,14 @@
             <listitem><para>New value for the <sgmltag>age</sgmltag> attribute: <sgmltag>13.0</sgmltag>.</para></listitem>
 
             <listitem><para>New values for the <sgmltag>blk</sgmltag>
-            attribute: 
+            attribute:
             <sgmltag>Chorasmian</sgmltag>,
             <sgmltag>CJK_Ext_G</sgmltag>,
             <sgmltag>Dives_Akuru</sgmltag>,
-            <sgmltag>Khitan_Small_Script</sgmltag>, 
-            <sgmltag>Lisu_Sup</sgmltag>, 
-            <sgmltag>Symbols_For_Legacy_Computing</sgmltag>, 
-            <sgmltag>Tangut_Sup</sgmltag>, 
+            <sgmltag>Khitan_Small_Script</sgmltag>,
+            <sgmltag>Lisu_Sup</sgmltag>,
+            <sgmltag>Symbols_For_Legacy_Computing</sgmltag>,
+            <sgmltag>Tangut_Sup</sgmltag>,
             <sgmltag>Yezidi</sgmltag>.</para></listitem>
 
             <listitem><para>New values for the
@@ -80,14 +80,14 @@
             <sgmltag>Nand</sgmltag>, <sgmltag>Wcho</sgmltag>.</para></listitem>
 
             <listitem><para>New values for the <sgmltag>blk</sgmltag>
-            attribute: <sgmltag>Egyptian_Hieroglyph_Format_Controls</sgmltag>, 
+            attribute: <sgmltag>Egyptian_Hieroglyph_Format_Controls</sgmltag>,
             <sgmltag>Elymaic</sgmltag>,
             <sgmltag>Nandinagari</sgmltag>,
-            <sgmltag>Nyiakeng_Puachue_Hmong</sgmltag>, 
-            <sgmltag>Ottoman_Siyaq_Numbers</sgmltag>, 
-            <sgmltag>Small_Kana_Ext</sgmltag>, 
-            <sgmltag>Symbols_And_Pictographs_Ext_A</sgmltag>, 
-            <sgmltag>Tamil_Sup</sgmltag>, 
+            <sgmltag>Nyiakeng_Puachue_Hmong</sgmltag>,
+            <sgmltag>Ottoman_Siyaq_Numbers</sgmltag>,
+            <sgmltag>Small_Kana_Ext</sgmltag>,
+            <sgmltag>Symbols_And_Pictographs_Ext_A</sgmltag>,
+            <sgmltag>Tamil_Sup</sgmltag>,
             <sgmltag>Wancho</sgmltag>.</para></listitem>
 
             <listitem><para>Modified patterns for the <sgmltag>kIRG_GSource</sgmltag>, <sgmltag>kIRG_KSource</sgmltag>, <sgmltag>kIRG_TSource</sgmltag>, <sgmltag>kTaiwanTelegraph</sgmltag> attributes.</para></listitem>
@@ -361,7 +361,7 @@
           revisions 7 and 9 are noted here.</para>
         </revdescription>
       </revision>
-      
+
       <revision>
         <revnumber>7</revnumber>
         <date>2010-10-08</date>
@@ -449,7 +449,7 @@
 
             <listitem><para>New value for the <sgmltag>lb</sgmltag>
             attribute: <sgmltag>CP</sgmltag>.</para></listitem>
-            
+
             <listitem><para>New value for the
             <sgmltag>sc</sgmltag> attribute:
             <sgmltag>Zinh</sgmltag>.</para></listitem>
@@ -467,7 +467,7 @@
 
             <listitem><para>New element
             <sgmltag>cjk-radicals</sgmltag></para></listitem>
-            
+
             <listitem><para>Updated the patterns for
             <sgmltag>kIRG_GSource</sgmltag>,
             <sgmltag>kIRG_JSource</sgmltag>,
@@ -514,10 +514,10 @@
             <sgmltag>bmg</sgmltag>/<sgmltag>Bidi_M</sgmltag> and for
             <sgmltag>nv</sgmltag>/<sgmltag>nt</sgmltag>.</para></listitem>
 
-            <listitem><para>Value <sgmltag>NL</sgmltag> added to the 
+            <listitem><para>Value <sgmltag>NL</sgmltag> added to the
             <sgmltag>WB</sgmltag> attribute (for Unicode 5.1).</para></listitem>
 
-            <listitem><para>Value <sgmltag>PP</sgmltag> added to the 
+            <listitem><para>Value <sgmltag>PP</sgmltag> added to the
             <sgmltag>GCB</sgmltag> attribute (for Unicode 5.1).</para></listitem>
 
             <listitem><para>Corrected the <sgmltag>Vai</sgmltag>
@@ -796,7 +796,7 @@
       <sgmltag>ucd</sgmltag>.</para>
 
 <lp:scrap title='schema start' id='schema.start'>
-  start = 
+  start =
     element ucd { ucd.content }
 </lp:scrap>
 
@@ -856,7 +856,7 @@
     <sgmltag>ucd</sgmltag> element describes the code points and their
     properties. As we will see shortly, code points can be described
     individually or as part of a group:</para>
-      
+
 <lp:scrap title='repertoire' id='schema.repertoire'>
   ucd.content &amp;=
     element repertoire { (code-point | group) + }?
@@ -866,7 +866,7 @@
     <!--______________________________________________________________________-->
     <section>
       <title>Sets of code points</title>
-      
+
       <para>It is often the case that successive code points have the
       the same property values, for a given set of properties. The
       most striking example is that of an unallocated plane, where all
@@ -889,7 +889,7 @@
 <lp:scrap title='Set of code points' id='schema.repertoire'>
   set-of-code-points =
      attribute cp { single-code-point }
-   | ( attribute first-cp { single-code-point }, 
+   | ( attribute first-cp { single-code-point },
        attribute last-cp  { single-code-point } )
 </lp:scrap>
 
@@ -902,7 +902,7 @@
     <!--______________________________________________________________________-->
     <section>
       <title>Code point types</title>
-      
+
       <para>When thinking about Unicode code points, it is useful to split
       them into four types:</para>
 
@@ -967,7 +967,7 @@
       hand, this leads to rather large data files, and it also tends
       to obscure the differences between similar characters.</para>
 
-      <para>Our representation accounts for this situation with the 
+      <para>Our representation accounts for this situation with the
       notion of groups. A <sgmltag>group</sgmltag> element is simply a
       container of code points that also holds default values for the
       properties. If a code point inside a <sgmltag>group</sgmltag>
@@ -1019,7 +1019,7 @@
       element.</para>
 
 <lp:scrap title='groups' id='schema.repertoire'>
-  group = 
+  group =
     element group {
       code-point-attributes,
       code-point* }
@@ -1068,8 +1068,8 @@
       character, or made a surrogate or non-character.</para>
 
 <lp:scrap title='age' id='schema.properties'>
-  code-point-attributes &amp;= attribute age { 
-          "1.1" 
+  code-point-attributes &amp;= attribute age {
+          "1.1"
         | "2.0" | "2.1"
         | "3.0" | "3.1" | "3.2"
         | "4.0" | "4.1"
@@ -1097,7 +1097,7 @@
       standard (<sgmltag>na1</sgmltag>).</para>
 
 <lp:scrap title='name pattern' id='schema.datatypes'>
-  character-name = xsd:string { pattern="([A-Z0-9 #\-\(\)]*)|(&lt;control&gt;)" } 
+  character-name = xsd:string { pattern="([A-Z0-9 #\-\(\)]*)|(&lt;control&gt;)" }
 </lp:scrap>
 
 <lp:scrap title='name properties' id='schema.properties'>
@@ -1152,27 +1152,27 @@
       <!--____________________________________________________________________-->
       <section>
         <title>Name Aliases</title>
-        
+
         <para>The Name_Alias property is represented by zero or more
         <sgmltag>name-alias</sgmltag> child elements:</para>
 
 
 <lp:scrap title='name_alias property' id='schema.properties'>
   code-point-attributes &amp;=
-    element name-alias { 
+    element name-alias {
       attribute alias { text }?,
-      attribute type  { "abbreviation" | "alternate" 
-                      | "control" | "correction"  
+      attribute type  { "abbreviation" | "alternate"
+                      | "control" | "correction"
                       | "figment" }? } *
 
 </lp:scrap>
-  </section>    
+  </section>
 
       <!--____________________________________________________________________-->
       <section>
         <title>Block</title>
-        
-        <para>The Block property is represented by the 
+
+        <para>The Block property is represented by the
         <sgmltag>blk</sgmltag> attribute:</para>
 
 <lp:scrap title='block property' id='schema.properties'>
@@ -1488,19 +1488,19 @@
                   | "Zanabazar_Square"
     }?
 </lp:scrap>
-  </section>    
+  </section>
 
       <!--____________________________________________________________________-->
       <section>
         <title>General Category</title>
-        
+
         <para>The general category is represented by the
         <sgmltag>gc</sgmltag> attribute.</para>
 
 <lp:scrap title='gc property' id='schema.properties'>
   code-point-attributes &amp;=
     attribute gc { "Lu" | "Ll" | "Lt" | "Lm" | "Lo"
-                 | "Mn" | "Mc" | "Me" 
+                 | "Mn" | "Mc" | "Me"
                  | "Nd" | "Nl" | "No"
                  | "Pc" | "Pd" | "Ps" | "Pe" | "Pi" | "Pf" | "Po"
                  | "Sm" | "Sc" | "Sk" | "So"
@@ -1513,13 +1513,13 @@
       <!--____________________________________________________________________-->
       <section>
         <title>Combining properties</title>
-        
+
         <para>The combining class is represented by the
         <sgmltag>ccc</sgmltag> attribute, which holds the decimal
         representation of the combining class.</para>
 
         <para>Because the set of values that this property has taken
-        accross the various versions of the UCD is rather large, 
+        accross the various versions of the UCD is rather large,
         our schema does not restrict the possible values to those
         actually used.</para>
 
@@ -1533,19 +1533,19 @@
       <!--____________________________________________________________________-->
       <section>
         <title>Bidirectionality properties</title>
-        
+
         <para>The bidirectional class is represented by the
         <sgmltag>bc</sgmltag> attribute.</para>
 
 <lp:scrap title='bc property' id='schema.properties'>
-  code-point-attributes &amp;= 
-    attribute bc { "AL" | "AN" 
+  code-point-attributes &amp;=
+    attribute bc { "AL" | "AN"
                  | "B " | "BN"
                  | "CS"
                  | "EN" | "ES"  | "ET"
                  | "FSI"
                  | "L"  | "LRE" | "LRI" | "LRO"
-                 | "NSM" 
+                 | "NSM"
                  | "ON"
                  | "PDF" | "PDI"
                  | "R"  | "RLE" | "RLI" | "RLO"
@@ -1597,7 +1597,7 @@
   code-point-attributes &amp;=
     attribute bpb { "#" | single-code-point }?
 </lp:scrap>
-  
+
       </section>
 
       <!--____________________________________________________________________-->
@@ -1681,7 +1681,7 @@
 
         <para>The numeric type is represented by the
         <sgmltag>nt</sgmltag> attribute.</para>
-      
+
         <para>The numeric value is represented by the <sgmltag>nv</sgmltag>
         attribute, represented as a fraction.</para>
 
@@ -1697,7 +1697,7 @@
       <!--____________________________________________________________________-->
       <section>
         <title>Joining properties</title>
-        
+
         <para>The joining class of a character is represented by the
         <sgmltag>jt</sgmltag> attribute.</para>
 
@@ -1710,16 +1710,16 @@
 
   code-point-attributes &amp;=
     attribute jg { "African_Feh" | "African_Noon" | "African_Qaf"
-                 | "Ain" | "Alaph" | "Alef" | "Alef_Maqsurah" 
+                 | "Ain" | "Alaph" | "Alef" | "Alef_Maqsurah"
                  | "Beh" | "Beth" | "Burushaski_Yeh_Barree"
-                 | "Dal" | "Dalath_Rish" | "E" 
+                 | "Dal" | "Dalath_Rish" | "E"
                  | "Farsi_Yeh" | "Fe"  | "Feh" | "Final_Semkath"
-                 | "Gaf" | "Gamal" 
-                 | "Hah" | "Hamza_On_Heh_Goal" | "He" 
-                 | "Heh" | "Heh_Goal" | "Heth" 
+                 | "Gaf" | "Gamal"
+                 | "Hah" | "Hamza_On_Heh_Goal" | "He"
+                 | "Heh" | "Heh_Goal" | "Heth"
                  | "Hanifi_Rohingya_Kinna_Ya" | "Hanifi_Rohingya_Pa"
-                 | "Kaf" | "Kaph" | "Khaph" | "Knotted_Heh" 
-                 | "Lam" | "Lamadh" 
+                 | "Kaf" | "Kaph" | "Khaph" | "Knotted_Heh"
+                 | "Lam" | "Lamadh"
                  | "Malayalam_Nga"
                  | "Malayalam_Ja"
                  | "Malayalam_Nya"
@@ -1758,9 +1758,9 @@
                  | "Manichaean_Waw"
                  | "Manichaean_Yodh"
                  | "Manichaean_Zayin"
-                 | "Meem" | "Mim" 
+                 | "Meem" | "Mim"
                  | "No_Joining_Group" | "Noon" | "Nun" | "Nya"
-                 | "Pe" | "Qaf" | "Qaph" | "Reh" | "Reversed_Pe" 
+                 | "Pe" | "Qaf" | "Qaph" | "Reh" | "Reversed_Pe"
                  | "Rohingya_Yeh"
                  | "Sad" | "Sadhe" | "Seen" | "Semkath" | "Shin" 
                  | "Straight_Waw"
@@ -1778,37 +1778,37 @@
     attribute Join_C { boolean }?
 </lp:scrap>
       </section>
-      
+
       <!--____________________________________________________________________-->
       <section>
         <title>Linebreak properties</title>
-        
+
         <para>The Line_Break property is represented by the
           <sgmltag>lb</sgmltag> attribute.</para>
 
 <lp:scrap title='linebreak property' id='schema.properties'>
-  code-point-attributes &amp;= 
-    attribute lb { "AI" | "AL" 
-                 | "B2" | "BA" | "BB" | "BK" 
-                 | "CB" | "CJ" | "CL" | "CM" | "CP" | "CR" 
-                 | "EB" | "EM" | "EX" 
-                 | "GL" 
-                 | "H2" | "H3" | "HL" | "HY" 
-                 | "ID" | "IN" | "IS" 
-                 | "JL" | "JT" | "JV" 
-                 | "LF" 
-                 | "NL" | "NS" | "NU" 
-                 | "OP" 
-                 | "PO" | "PR" 
-                 | "QU" 
+  code-point-attributes &amp;=
+    attribute lb { "AI" | "AL"
+                 | "B2" | "BA" | "BB" | "BK"
+                 | "CB" | "CJ" | "CL" | "CM" | "CP" | "CR"
+                 | "EB" | "EM" | "EX"
+                 | "GL"
+                 | "H2" | "H3" | "HL" | "HY"
+                 | "ID" | "IN" | "IS"
+                 | "JL" | "JT" | "JV"
+                 | "LF"
+                 | "NL" | "NS" | "NU"
+                 | "OP"
+                 | "PO" | "PR"
+                 | "QU"
                  | "RI"
-                 | "SA" | "SG" | "SP" | "SY" 
-                 | "WJ" 
-                 | "XX" 
+                 | "SA" | "SG" | "SP" | "SY"
+                 | "WJ"
+                 | "XX"
                  | "ZW" | "ZWJ" }?
 </lp:scrap>
       </section>
-      
+
       <!--____________________________________________________________________-->
       <section>
         <title>East Asian Width property</title>
@@ -1817,11 +1817,11 @@
           <sgmltag>ea</sgmltag> attribute.</para>
 
 <lp:scrap title='ea property' id='schema.properties'>
-  code-point-attributes &amp;= 
+  code-point-attributes &amp;=
     attribute ea { "A" | "F" | "H" | "N" | "Na" | "W" }?
 </lp:scrap>
       </section>
-      
+
       <!--____________________________________________________________________-->
       <section>
         <title>Case properties</title>
@@ -1843,13 +1843,13 @@
   code-point-attributes &amp;=
     attribute OLower { boolean }?
 </lp:scrap>
-        
+
         <para>Most characters have a case mapping and case folding
-        properties that simply map or fold to themselves. This is 
+        properties that simply map or fold to themselves. This is
         very similar to the situation we encountered with names, and
         we adopted a similar convention: if the value of a case
         mapping or case folding property is the character itself, we
-        use the attribute value # (U+0023 &#x0023; NUMBER SIGN) as a 
+        use the attribute value # (U+0023 &#x0023; NUMBER SIGN) as a
         shorthand notation; this enables those attributes to be
         captured in groups.</para>
 
@@ -1868,7 +1868,7 @@
     attribute stc { "#" | single-code-point }?
 </lp:scrap>
 
-      <para>The non-simple casing are recorded in 
+      <para>The non-simple casing are recorded in
       the <sgmltag>uc</sgmltag>, <sgmltag>lc</sgmltag> and
       <sgmltag>tc</sgmltag> attributes.</para>
 
@@ -1935,11 +1935,11 @@
         folding than is expressed in the properties, specifically the
         entries in CaseFolding.txt with status T.</para>
       </section>
-      
+
       <!--____________________________________________________________________-->
       <section>
         <title>Script properties</title>
-        
+
         <para>The script and script extension properties are represented by the
           <sgmltag>sc</sgmltag> and <sgmltag>scx</sgmltag> attributes respectively.</para>
 
@@ -1950,37 +1950,37 @@
          | "Cakm" | "Cans" | "Cari" | "Cham" | "Cher" | "Chrs" | "Copt" 
          | "Cprt" | "Cyrl" 
          | "Deva" | "Diak" | "Dogr" | "Dsrt" | "Dupl"
-         | "Elba" | "Elym" | "Egyp" | "Ethi" 
-         | "Geor" | "Glag" | "Gong" | "Gonm" | "Goth" | "Gran" | "Grek" 
-         | "Gujr" | "Guru" 
+         | "Elba" | "Elym" | "Egyp" | "Ethi"
+         | "Geor" | "Glag" | "Gong" | "Gonm" | "Goth" | "Gran" | "Grek"
+         | "Gujr" | "Guru"
          | "Hang" | "Hani" | "Hano" | "Hatr" | "Hebr" | "Hira" | "Hluw"
          | "Hmng" | "Hmnp" | "Hrkt" | "Hung"
-         | "Ital" 
+         | "Ital"
          | "Java"
-         | "Kali" | "Kana" | "Khar" | "Khmr" | "Khoj" | "Kits" | "Knda" 
+         | "Kali" | "Kana" | "Khar" | "Khmr" | "Khoj" | "Kits" | "Knda"
          | "Kthi"
-         | "Lana" | "Laoo" | "Latn" | "Lepc" | "Limb" | "Lina" | "Linb" 
-         | "Lisu" | "Lyci" | "Lydi" 
+         | "Lana" | "Laoo" | "Latn" | "Lepc" | "Limb" | "Lina" | "Linb"
+         | "Lisu" | "Lyci" | "Lydi"
          | "Mahj" | "Maka" | "Mand" | "Mani" | "Marc"
-         | "Medf" | "Mend" | "Merc" | "Mero" | "Mlym" 
-         | "Modi" | "Mong" | "Mroo" | "Mtei" | "Mult" | "Mymr" 
+         | "Medf" | "Mend" | "Merc" | "Mero" | "Mlym"
+         | "Modi" | "Mong" | "Mroo" | "Mtei" | "Mult" | "Mymr"
          | "Nand" | "Narb" | "Nbat" | "Newa" | "Nkoo" | "Nshu"
          | "Ogam" | "Olck" | "Orkh" | "Orya" | "Osge" | "Osma" 
          | "Palm" | "Pauc" | "Perm" | "Phag" | "Phli" | "Phlp" | "Phnx" 
          | "Plrd" | "Prti"
-         | "Qaai" 
-         | "Rohg" | "Rjng" | "Runr" 
-         | "Samr" | "Sarb" | "Saur" | "Sgnw" | "Shaw" | "Shrd" | "Sidd" 
+         | "Qaai"
+         | "Rohg" | "Rjng" | "Runr"
+         | "Samr" | "Sarb" | "Saur" | "Sgnw" | "Shaw" | "Shrd" | "Sidd"
          | "Sind" | "Sinh" | "Sogd" | "Sogo" | "Sora" | "Soyo" | "Sund"
-         | "Sylo" | "Syrc" 
-         | "Tagb" | "Takr" | "Tale" | "Talu" | "Taml" | "Tang" | "Tavt" 
+         | "Sylo" | "Syrc"
+         | "Tagb" | "Takr" | "Tale" | "Talu" | "Taml" | "Tang" | "Tavt"
          | "Telu" | "Tfng" | "Tglg" | "Thaa" | "Thai" | "Tibt" | "Tirh"
          | "Ugar" 
          | "Vaii" 
          | "Wara" | "Wcho"
-         | "Xpeo" | "Xsux" 
-         | "Yezi" | "Yiii" 
-         | "Zanb" | "Zinh" | "Zyyy" | "Zzzz" 
+         | "Xpeo" | "Xsux"
+         | "Yezi" | "Yiii"
+         | "Zanb" | "Zinh" | "Zyyy" | "Zzzz"
 
   code-point-attributes &amp;=
     attribute sc  { script }?
@@ -2003,7 +2003,7 @@
     attribute isc { text }?
 </lp:scrap>
     </section>
-      
+
       <!--____________________________________________________________________-->
       <section>
         <title>Hangul properties</title>
@@ -2012,7 +2012,7 @@
         <sgmltag>hst</sgmltag> attribute.</para>
 
 <lp:scrap title='hst property' id='schema.properties'>
-  code-point-attributes &amp;= 
+  code-point-attributes &amp;=
     attribute hst { "L" | "LV" | "LVT" | "T" | "V" | "NA" }?
 </lp:scrap>
 
@@ -2024,7 +2024,7 @@
      attribute JSN { xsd:string { pattern="[A-Z]{0,3}" }}?
 </lp:scrap>
       </section>
-      
+
       <!--____________________________________________________________________-->
       <section>
         <title>Indic properties</title>
@@ -2033,22 +2033,22 @@
         <sgmltag>InSC</sgmltag> attribute.</para>
 
 <lp:scrap title='InSC property' id='schema.properties'>
-  code-point-attributes &amp;= 
-    attribute InSC { "Avagraha" 
+  code-point-attributes &amp;=
+    attribute InSC { "Avagraha"
                    | "Bindu"
                    | "Brahmi_Joining_Number"
                    | "Cantillation_Mark"
                    | "Consonant"
-                   | "Consonant_Dead" 
+                   | "Consonant_Dead"
                    | "Consonant_Final"
-                   | "Consonant_Head_Letter" 
+                   | "Consonant_Head_Letter"
                    | "Consonant_Initial_Postfixed"
                    | "Consonant_Killer"
                    | "Consonant_Medial"
-                   | "Consonant_Placeholder" 
+                   | "Consonant_Placeholder"
                    | "Consonant_Preceding_Repha"
                    | "Consonant_Prefixed"
-                   | "Consonant_Repha" 
+                   | "Consonant_Repha"
                    | "Consonant_Subjoined"
                    | "Consonant_Succeeding_Repha"
                    | "Consonant_With_Stacker"
@@ -2060,9 +2060,9 @@
                    | "Nukta"
                    | "Number"
                    | "Number_Joiner"
-                   | "Other" 
+                   | "Other"
                    | "Pure_Killer"
-                   | "Register_Shifter" 
+                   | "Register_Shifter"
                    | "Syllable_Modifier"
                    | "Tone_Letter"
                    | "Tone_Mark"
@@ -2083,7 +2083,7 @@
                     | "Visual_Order_Left"
                     | "Left_And_Right"
                     | "Top"
-                    | "Bottom" 
+                    | "Bottom"
                     | "Top_And_Bottom"
                     | "Top_And_Right"
                     | "Top_And_Left"
@@ -2100,7 +2100,7 @@
 
 <lp:scrap title='InPC property' id='schema.properties'>
   code-point-attributes &amp;=
-     attribute InPC { "Bottom" 
+     attribute InPC { "Bottom"
                     | "Bottom_And_Left"
                     | "Bottom_And_Right"
                     | "Left"
@@ -2118,11 +2118,11 @@
                     | "Visual_Order_Left" }?
 </lp:scrap>
       </section>
-      
+
       <!--____________________________________________________________________-->
       <section>
         <title>Identifier and Pattern and programming language properties</title>
-        
+
         <para>The properties ID_Start, Other_ID_Start, XID_Start ,
         ID_Continue, Other_ID_Continue, and XID_Continue are
         represented by corresponding attributes:</para>
@@ -2263,46 +2263,46 @@
     attribute Gr_Link { boolean }?
 
   code-point-attributes &amp;=
-    attribute GCB { "CN" | "CR" 
-                  | "EB" | "EBG" | "EM" | "EX" 
+    attribute GCB { "CN" | "CR"
+                  | "EB" | "EBG" | "EM" | "EX"
                   | "GAZ"
                   | "L"  | "LF" |  "LV" | "LVT"
                   | "PP"
-                  | "RI" 
-                  | "SM" 
-                  | "T"  
+                  | "RI"
+                  | "SM"
+                  | "T"
                   | "V"
                   | "XX"
                   | "ZWJ"
                   }?
 
   code-point-attributes &amp;=
-    attribute WB { "CR" 
-                 | "DQ" 
+    attribute WB { "CR"
+                 | "DQ"
                  | "EB" | "EBG" | "EM" | "EX" | "Extend"
-                 | "FO" 
+                 | "FO"
                  | "GAZ"
-                 | "HL" 
-                 | "KA" 
-                 | "LE" | "LF" 
-                 | "MB" | "ML" | "MN" 
-                 | "NL" | "NU" 
-                 | "RI" 
-                 | "SQ" 
+                 | "HL"
+                 | "KA"
+                 | "LE" | "LF"
+                 | "MB" | "ML" | "MN"
+                 | "NL" | "NU"
+                 | "RI"
+                 | "SQ"
                  | "WSegSpace"
                  | "XX"
                  | "ZWJ"
                  }?
 
   code-point-attributes &amp;=
-    attribute SB { "AT" 
-                 | "CL" | "CR" 
-                 | "EX" 
-                 | "FO" 
-                 | "LE" | "LF" | "LO" 
-                 | "NU" 
-                 | "SC" | "SE" | "SP" | "ST" 
-                 | "UP" 
+    attribute SB { "AT"
+                 | "CL" | "CR"
+                 | "EX"
+                 | "FO"
+                 | "LE" | "LF" | "LO"
+                 | "NU"
+                 | "SC" | "SE" | "SP" | "ST"
+                 | "UP"
                  | "XX" }?
 </lp:scrap>
       </section>
@@ -2351,7 +2351,7 @@
   code-point-attributes &amp;=
     attribute VS { boolean }?
 
-  code-point-attributes &amp;= 
+  code-point-attributes &amp;=
     attribute NChar { boolean }?
 </lp:scrap>
       </section>
@@ -2359,7 +2359,7 @@
       <!--____________________________________________________________________-->
       <section>
         <title>Unihan properties</title>
-        
+
         <para>The Unihan properties (from the Unihan database) are represented
           as attributes.</para>
 
@@ -2379,7 +2379,7 @@
   code-point-attributes &amp;= attribute kAlternateMorohashi
      { text }?
 
-  code-point-attributes &amp;= attribute kBigFive 
+  code-point-attributes &amp;= attribute kBigFive
      { xsd:string {pattern="[0-9A-F]{4}"} }?
 
   code-point-attributes &amp;= attribute kCCCII
@@ -2554,7 +2554,7 @@
 
   code-point-attributes &amp;= attribute kIRG_HSource
      { "" | xsd:string {pattern="[0-9A-F]{4}"}
-          | xsd:string {pattern="H-[0-9A-F]{4}"} 
+          | xsd:string {pattern="H-[0-9A-F]{4}"}
           | xsd:string {pattern="H3-[0-9A-F]{4}"}
           | xsd:string {pattern="HB0-[0-9A-F]{4}"}
           | xsd:string {pattern="HB1-[0-9A-F]{4}"}
@@ -2563,7 +2563,7 @@
           | xsd:string {pattern="HU-[0-9A-F]{5}"} }?
 
   code-point-attributes &amp;= attribute kIRG_JSource
-     { "" | xsd:string {pattern="(0|1|3|(3A)|4|A|(ARIB)|K)-[0-9A-F]{4,5}"} 
+     { "" | xsd:string {pattern="(0|1|3|(3A)|4|A|(ARIB)|K)-[0-9A-F]{4,5}"}
           | xsd:string {pattern="J0-[0-9A-F]{4}"}
           | xsd:string {pattern="J1-[0-9A-F]{4}"}
           | xsd:string {pattern="J3-[0-9A-F]{4}"}
@@ -2577,7 +2577,7 @@
           | xsd:string {pattern="JA4-[0-9A-F]{4}"}
           | xsd:string {pattern="JH-[0-9A-Z]{6,7}"}
           | xsd:string {pattern="JK-[0-9]{5}"}
-          | xsd:string {pattern="JARIB-[0-9A-F]{4}"} 
+          | xsd:string {pattern="JARIB-[0-9A-F]{4}"}
           | xsd:string {pattern="JMJ-[0-9]{6}"} }?
 
   code-point-attributes &amp;= attribute kIRG_KPSource
@@ -2715,7 +2715,7 @@
      { xsd:string {pattern="[0-9]{4}"} }?
 
   code-point-attributes &amp;= attribute kMandarin
-     { list {   xsd:string {pattern="[A-ZÜ&#x308;]+[1-5]"} 
+     { list {   xsd:string {pattern="[A-ZÜ&#x308;]+[1-5]"}
               | xsd:string {pattern="[a-z&#x300;&#x301;&#x302;&#x304;&#x308;&#x30C;]+"} +}}?
 
   code-point-attributes &amp;= attribute kMatthews
@@ -2822,7 +2822,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
       <!--____________________________________________________________________-->
       <section>
         <title>Tangut data</title>
-        
+
         <para>The Tangut data are represented as attributes.</para>
 
 <lp:scrap title='Tangut data' id='schema.tangut'>
@@ -2847,7 +2847,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
       <!--____________________________________________________________________-->
       <section>
         <title>Nushu data</title>
-        
+
         <para>The Nushu data are represented as attributes.</para>
 
 <lp:scrap title='Nushu data' id='schema.nushu'>
@@ -2863,7 +2863,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
       <!--____________________________________________________________________-->
       <section>
         <title>Emoji properties</title>
-        
+
         <para>The Emoji properties are represented as attributes.</para>
 
 <lp:scrap title='Emoji properties' id='schema.emoji-data'>
@@ -2892,7 +2892,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 <lp:scrap title='blocks' id='schema.block'>
   ucd.content &amp;=
     element blocks {
-      element block { 
+      element block {
         attribute first-cp { single-code-point },
         attribute last-cp { single-code-point },
         attribute name { text }} + }?
@@ -2902,7 +2902,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
   <!--========================================================================-->
   <section>
     <title>Named Sequences</title>
-    
+
     <para>The <sgmltag>named-sequences</sgmltag> child of the
     <sgmltag>ucd</sgmltag> describes the named sequences. It has one
     child <sgmltag>named-sequence</sgmltag> element per named sequence, with
@@ -2916,13 +2916,13 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 <lp:scrap title='named sequences' id='schema.named-sequences'>
   ucd.content &amp;=
     element named-sequences {
-      element named-sequence { 
+      element named-sequence {
         attribute cps { one-or-more-code-points },
         attribute name { text }} + }?
 
   ucd.content &amp;=
     element provisional-named-sequences {
-      element named-sequence { 
+      element named-sequence {
         attribute cps { one-or-more-code-points },
         attribute name { text }} + }?
 </lp:scrap>
@@ -2931,7 +2931,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
   <!--========================================================================-->
   <section>
     <title>Normalization Corrections</title>
-    
+
     <para>The <sgmltag>normalization-corrections</sgmltag> child of
     the <sgmltag>ucd</sgmltag> describes the normalization
     corrections. It has one child
@@ -2943,7 +2943,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 <lp:scrap title='normalization corrections' id='schema.normalization-corrections'>
   ucd.content &amp;=
     element normalization-corrections {
-      element normalization-correction { 
+      element normalization-correction {
         attribute cp { single-code-point },
         attribute old { one-or-more-code-points },
         attribute new { one-or-more-code-points },
@@ -2954,10 +2954,10 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
   <!--========================================================================-->
   <section>
     <title>Standardized Variants</title>
-    
+
     <para>The <sgmltag>standardized-variants</sgmltag> child of the
     <sgmltag>ucd</sgmltag> describes the standardized variant. It has one
-    child element <sgmltag>standardized-variant</sgmltag> per variant. The 
+    child element <sgmltag>standardized-variant</sgmltag> per variant. The
     attributes on that last element capture the variation sequence,
     the description of the desired appearance, and the shaping environment under
     which the appearance is different.</para>
@@ -2965,7 +2965,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 <lp:scrap title='standardized variants' id='schema.standardized-variants'>
   ucd.content &amp;=
     element standardized-variants {
-      element standardized-variant { 
+      element standardized-variant {
         attribute cps { two-code-points },
         attribute desc { text },
         attribute when { text }} + }?
@@ -2975,7 +2975,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
   <!--========================================================================-->
   <section>
     <title>CJK Radicals</title>
-    
+
     <para>The <sgmltag>cjk-radicals</sgmltag> child of the
     <sgmltag>ucd</sgmltag> describes the CJK radicals. It has one
     child element <sgmltag>cjk-radical</sgmltag> per radical. The
@@ -2986,7 +2986,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 <lp:scrap title='cjk radicals' id='schema.cjk-radicals'>
   ucd.content &amp;=
     element cjk-radicals {
-      element cjk-radical { 
+      element cjk-radical {
         attribute number { xsd:string {pattern="[0-9]{1,3}'?"}},
         attribute radical { single-code-point },
         attribute ideograph { single-code-point }} + }?
@@ -2997,7 +2997,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
   <section>
     <title>Emoji sources</title>
 
-    <para>The <sgmltag>emoji-sources</sgmltag> child of the 
+    <para>The <sgmltag>emoji-sources</sgmltag> child of the
     <sgmltag>ucd</sgmltag> describes the emoji sources.</para>
 
 <lp:scrap title='datatype for code points' id='schema.datatypes'>
@@ -3020,10 +3020,10 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
   <!--========================================================================-->
   <section>
     <title>The full schema</title>
-    
+
     <para>Our schema is just the accumulation of the pieces we have
     described so far:</para>
-    
+
     <lp:scrap title='UCD RelaxNG schema' file='ucd.rnc' method='text'>
       <lp:include linkend='schema.namespace'/>
       <lp:include linkend='schema.datatypes' title='datatypes'/>
@@ -3042,9 +3042,9 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
       <lp:include linkend='schema.emoji-sources'/>
       <lp:include linkend='schema.emoji-data'/>
     </lp:scrap>
-    
+
     <para>An expanded version is linked from the top of this document.</para>
-    
+
   </section>
 
   <!--========================================================================-->
@@ -3059,7 +3059,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
   <ucd xmlns="http://www.unicode.org/ns/2003/ucd/1.0">
 
     <repertoire>
-      <char cp="001F" age="1.1" na="&lt;control&gt;" na1="UNIT SEPARATOR" 
+      <char cp="001F" age="1.1" na="&lt;control&gt;" na1="UNIT SEPARATOR"
             gc="Cc" bc="S" lb="CM"/>
 
       <char cp="0020" age="1.1" na="SPACE" gc="Zs" bc="WS" ea="Na" lb="SP"/>

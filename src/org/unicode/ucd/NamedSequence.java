@@ -41,16 +41,16 @@ import org.xml.sax.helpers.AttributesImpl;
 public class NamedSequence {
   String name;
   String sequence;
-  
+
   public NamedSequence (String name, String sequence) {
     this.name = name;
     this.sequence = sequence;
   }
-  
+
   public String toString () {
     return "{ns: " + name + ", " + sequence + "}";
   }
-  
+
   public boolean equals (Object o) {
     if (o == this) {
       return true; }
@@ -61,22 +61,22 @@ public class NamedSequence {
     NamedSequence other = (NamedSequence) o;
     return name.equals (other.name) && sequence.equals (other.sequence);
   }
-  
+
   public int hashCode () {
     return name.hashCode ();
   }
-  
+
   //----------------------------------------------------------------------------
   public static NamedSequence fromXML (Attributes at) {
     String name = at.getValue ("name");
     String sequence = at.getValue ("cps");
     return new NamedSequence (name, sequence);
   }
-  
+
   public void toXML (TransformerHandler ch, String elt, AttributesImpl at) throws Exception {
     at.addAttribute ("", "name", "name", "CDATA", name);
     at.addAttribute ("", "cps", "cps", "CDATA", sequence);
-    
+
     ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
       ch.endElement (Ucd.NAMESPACE, elt, elt); }
   }

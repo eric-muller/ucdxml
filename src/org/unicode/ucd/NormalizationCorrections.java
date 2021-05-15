@@ -44,7 +44,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 public class NormalizationCorrections {
   // TODO: in principle, we could have the same code point corrected
-  // differently in different versions 
+  // differently in different versions
   // so the key to corrections should the combination of code point and version
 
   final SortedMap<String, NormalizationCorrection> corrections;
@@ -52,53 +52,53 @@ public class NormalizationCorrections {
   public NormalizationCorrections () {
     this.corrections = new TreeMap<String, NormalizationCorrection> ();
   }
-  
+
   public void internalStats (PrintStream out) {
     out.println ("  " + corrections.size () + " normalization corrections");
   }
-  
+
   public String generateKey (String codePoint) {
     while (codePoint.length () < 6) {
         codePoint = "0" + codePoint; }
     return codePoint;
   }
-  
+
   public void add (NormalizationCorrection nc) {
     corrections.put (generateKey (nc.cp), nc);
   }
-  
+
   public NormalizationCorrection find (String codePoint) {
     return corrections.get (generateKey (codePoint));
   }
-  
+
   //-----------------------------------------------------------------------------
   public void fromXML (String qname, Attributes at) {
     if ("normalization-correction".equals (qname)) {
       add (NormalizationCorrection.fromXML (at)); }
   }
-  
+
   public void toXML (TransformerHandler ch, String elt, AttributesImpl at) throws Exception {
     if (corrections.isEmpty ()) {
       return; }
-    
+
     ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
       for (NormalizationCorrection c : corrections.values ()) {
         AttributesImpl at2 = new AttributesImpl ();
         c.toXML (ch, "normalization-correction", at2); }
       ch.endElement(Ucd.NAMESPACE, elt, elt); }
   }
-  
+
   //----------------------------------------------------------------------------
- 
+
   public void diff (NormalizationCorrections older, PrintStream out, int detailsLevel) {
     DifferenceCounter cc = new DifferenceCounter ();
     boolean includeDetails = detailsLevel >= 1;
-    
+
     out.println ("");
     out.println ("================================= normalization corrections");
     if (includeDetails) {
       out.println (""); }
-    
+
     for (NormalizationCorrection newNc : corrections.values () ) {
       NormalizationCorrection oldNc = (older == null) ? null : older.find (newNc.cp);
       if (oldNc == null) {
@@ -111,13 +111,13 @@ public class NormalizationCorrections {
           out.println ("changed: from " + oldNc + " to " + newNc); }}
       else {
         cc.unchanged (); }}
-    
+
     for (NormalizationCorrection oldNc : older.corrections.values ()) {
       if (find (oldNc.cp) == null) {
         cc.removed ();
         if (includeDetails) {
           out.println ("removed: " + oldNc); }}}
-    
+
     if (includeDetails) {
       out.println (""); }
 

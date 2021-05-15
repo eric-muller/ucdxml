@@ -39,17 +39,17 @@ public final class Version {
   private final int major;
   private final int minor;
   private final int dot;
-  
+
   public Version (int major, int minor, int dot) {
     this.major = major;
     this.minor = minor;
     this.dot = dot;
   }
-  
+
   public String toString () {
-    return major + "." + minor + "." + dot; 
+    return major + "." + minor + "." + dot;
   }
-  
+
   /** Returns true if this version is at least some other version. */
   public boolean isAtLeast (Version v) {
     if (major < v.major) {
@@ -64,7 +64,7 @@ public final class Version {
       else {
         return (dot >= v.dot); }}
   }
-  
+
   public boolean isAtMost (Version v) {
     if (major > v.major) {
       return false; }
@@ -78,7 +78,7 @@ public final class Version {
       else {
         return (dot < v.dot); }}
   }
-  
+
   public boolean equals (Object o) {
     if (o == null) {
       return false; }
@@ -89,7 +89,7 @@ public final class Version {
            && this.minor == v.minor
            && this.dot == v.dot;
   }
-  
+
   public static final Version V2_0_0 = new Version (2, 0, 0);
   public static final Version V2_1_5 = new Version (2, 1, 5);
   public static final Version V2_1_8 = new Version (2, 1, 8);

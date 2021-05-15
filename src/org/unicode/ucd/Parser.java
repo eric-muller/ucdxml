@@ -39,7 +39,7 @@ import java.net.URL;
 
 public class Parser {
   static int verbosity = 0;
-  
+
   static public abstract class Loader {
     public int currentLine = 0;
     public abstract void process (String[] fields) throws Exception;
@@ -49,47 +49,47 @@ public class Parser {
   throws Exception {
     parseDelimitedFile (baseURL, filename, l, '\t', false, charset);
   }
-      
+
   static public void parseSemiDelimitedFile (URL baseURL, String filename, String charset, Loader l)
   throws Exception {
     parseDelimitedFile (baseURL, filename, l, ';', false, charset);
   }
-    
+
   static public void parseSemiDelimitedFileWithHeader (URL baseURL, String filename, String charset, Loader l)
   throws Exception {
     parseDelimitedFile (baseURL, filename, l, ';', true, charset);
   }
-  
-  static public void parseDelimitedFile (URL baseURL, String filename, Loader l, char delimiter, boolean header, String charset)  
+
+  static public void parseDelimitedFile (URL baseURL, String filename, Loader l, char delimiter, boolean header, String charset)
   throws Exception {
-    URL url = new URL (baseURL, filename);   
+    URL url = new URL (baseURL, filename);
     LineNumberReader rd = new LineNumberReader (new InputStreamReader (url.openStream (), charset));
 
     if (verbosity >= 3) {
       System.out.println ("      ... " + url); }
-    
+
     if (header) {
       String s;
       do {
         s = rd.readLine ();
         l.currentLine = rd.getLineNumber (); }
       while (s.length () != 0); }
-    
+
     do {
       String s = rd.readLine ();
       l.currentLine = rd.getLineNumber ();
       if (s == null) {
         break; }
-      
+
       int comment = s.indexOf ('#');
       if (comment != -1) {
         s = s.substring (0, comment); }
-      
+
       if (s.length () < 2) {
         continue; }
-      
-      // Unfortunately, both String.split and StringTokenizer do not 
-      // behave the way we need on empty fields; so we have to split the 
+
+      // Unfortunately, both String.split and StringTokenizer do not
+      // behave the way we need on empty fields; so we have to split the
       // fields by hand.
       int start = 0;
       int length = s.length ();
@@ -98,29 +98,29 @@ public class Parser {
         int semi = s.indexOf (delimiter, start);
         if (semi == -1) {
            break; }
-        nFields++; 
+        nFields++;
         start = semi + 1; }
       String[] fields = new String [nFields];
-      
+
       start = 0;
       for (int f = 0; f < nFields - 1; f++) {
-        int semi = s.indexOf (delimiter, start); 
+        int semi = s.indexOf (delimiter, start);
         fields [f] = s.substring (start, semi).trim ();
         start = semi + 1; }
       if (start >= length) {
         fields [nFields-1] = ""; }
       else {
         fields [nFields-1] = s.substring (start).trim (); }
-      
+
       l.process (fields); }
-    
+
     while (true);
   }
-  
+
   public interface LoaderWithCodePoints {
     public abstract void process (int first, int last, String[] fields) throws Exception;
   }
-      
+
   static public void parseSemiDelimitedFileWithCodePoints (URL baseURL, String filename, int field, String charset, LoaderWithCodePoints l)
   throws Exception {
     final int cpField = field;
@@ -138,7 +138,7 @@ public class Parser {
           last = first; }
         l2.process (first, last, fields); }});
   }
-  
+
   static public void parseSemiDelimitedFileWithUCodePoints (URL baseURL, String filename, int field, String charset, LoaderWithCodePoints l)
   throws Exception {
     final int cpField = field;
@@ -159,34 +159,33 @@ public class Parser {
           last = first; }
         l2.process (first, last, fields); }});
   }
-  
-  
-  
-  
+
+
+
+
   static public void parseTabularFileWithHeader (URL baseURL, String filename, String charset, int[] cols, Loader l)
   throws Exception {
-    URL url = new URL (baseURL, filename);   
+    URL url = new URL (baseURL, filename);
     LineNumberReader rd = new LineNumberReader (new InputStreamReader (url.openStream (), charset));
-    
+
     if (verbosity >= 3) {
       System.out.println ("      ... " + url); }
 
     String s;
     String[] fields = new String [cols.length -1];
-    
+
     // Skip the header, which is terminated by a blank line.
     do {
       s = rd.readLine (); }
     while (s.length () != 0);
-    
+
     do {
       s = rd.readLine ();
-      
+
       if (s != null) {
         for (int f = 0; f < cols.length - 1; f++) {
           fields [f] = s.substring (cols [f]-1, cols [f+1]-1).trim () ; }
         l.process (fields); }
-    }  while (s != null); 
+    }  while (s != null);
   }
 }
-

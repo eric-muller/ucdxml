@@ -41,16 +41,16 @@ import org.xml.sax.helpers.AttributesImpl;
 public class NameAlias implements Comparable {
   String alias;
   String type;
-  
+
   public NameAlias (String alias, String type) {
     this.alias = alias;
     this.type = type;
   }
-  
+
   public String toString () {
     return "{na: " + alias + (type == null ? "" : ", " + type) + "}";
   }
-  
+
   public boolean equals (Object o) {
     if (o == this) {
       return true; }
@@ -61,7 +61,7 @@ public class NameAlias implements Comparable {
     NameAlias other = (NameAlias) o;
     return alias.equals (other.alias) && type.equals (other.type);
   }
-  
+
   @Override
   public int compareTo (Object o) {
     NameAlias other = (NameAlias) o;
@@ -80,19 +80,19 @@ public class NameAlias implements Comparable {
   public int hashCode () {
     return (alias + type).hashCode ();
   }
-  
+
   //----------------------------------------------------------------------------
   public static NameAlias fromXML (Attributes at) {
     String alias = at.getValue ("alias");
     String type = at.getValue ("type");
     return new NameAlias (alias, type);
   }
-  
+
   public void toXML (TransformerHandler ch, String elt, AttributesImpl at) throws Exception {
     at.addAttribute ("", "alias", "alias", "CDATA", alias);
     if (type != null) {
       at.addAttribute ("", "type", "type", "CDATA", type); }
-    
+
     ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
       ch.endElement (Ucd.NAMESPACE, elt, elt); }
   }
