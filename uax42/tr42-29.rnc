@@ -1254,8 +1254,8 @@
           | xsd:string {pattern="V2-[0-9A-F]{4}"}
           | xsd:string {pattern="V3-[0-9A-F]{4}"}
           | xsd:string {pattern="V4-[0-9A-F]{4}"}
-          | xsd:string {pattern="VU-[0-9A-F]{4,5}"}
-          | xsd:string {pattern="V-[0-9A-F]{4,5}"} }?
+          | xsd:string {pattern="VN-[0-9A-F]{4,5}"}
+          | xsd:string {pattern="VU-[0-9A-F]{4,5}"} }?
 
   code-point-attributes &= attribute kJa
      { xsd:string {pattern="[0-9A-F]{4}S?"} }?
@@ -1383,7 +1383,7 @@ code-point-attributes &= attribute kSpecializedSemanticVariant
 
 
   code-point-attributes &= attribute kSpoofingVariant
-     { xsd:string {pattern="U\+[0-9A-F]{4,5}"} }?
+     { list { xsd:string {pattern="U\+[0-9A-F]{4,5}"} + }}?
 
   code-point-attributes &= attribute kTaiwanTelegraph
      { list { xsd:string {pattern="[0-9]{4}"} +}}?

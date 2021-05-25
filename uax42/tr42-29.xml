@@ -6,7 +6,7 @@
   <title>Unicode Character Database in XML</title>
 
   <articleinfo>
-    <unicode:tr number='42' class='uax' version='14.0.0 (draft 1)'
+    <unicode:tr number='42' class='uax' version='14.0.0 (draft 2)'
                 stage='proposed-update' status='published'
                 schema='rnc' prevrev='28'/>
 
@@ -21,7 +21,7 @@
     <revhistory>
       <revision>
         <revnumber>29</revnumber>
-        <date>2021-05-14</date>
+        <date>2021-05-24</date>
         <revdescription>
           <itemizedlist>
             <listitem><para>New value for the <sgmltag>age</sgmltag> attribute: <sgmltag>14.0</sgmltag>.</para></listitem>
@@ -53,7 +53,7 @@
 
             <listitem><para>New Unihan attribute: <sgmltag>kStrange</sgmltag>.</para></listitem>
 
-            <listitem><para>Modified patterns for the <sgmltag>kIRG_GSource</sgmltag>, <sgmltag>kIRG_MSource</sgmltag>, <sgmltag>kPhonetic</sgmltag> attributes.</para></listitem>
+            <listitem><para>Modified patterns for the <sgmltag>kIRG_GSource</sgmltag>, <sgmltag>kIRG_MSource</sgmltag>, <sgmltag>kPhonetic</sgmltag>, <sgmltag>kSpoofingVariant</sgmltag> attributes.</para></listitem>
 
           </itemizedlist>
         </revdescription>
@@ -2713,8 +2713,8 @@
           | xsd:string {pattern="V2-[0-9A-F]{4}"}
           | xsd:string {pattern="V3-[0-9A-F]{4}"}
           | xsd:string {pattern="V4-[0-9A-F]{4}"}
-          | xsd:string {pattern="<phrase revisionflag='changed'>VU-[0-9A-F]{4,5}</phrase>"}
-          <phrase revisionflag='added'>| xsd:string {pattern="V-[0-9A-F]{4,5}"}</phrase> }?
+          <phrase revisionflag='added'>| xsd:string {pattern="VN-[0-9A-F]{4,5}"}</phrase>
+          | xsd:string {pattern="<phrase revisionflag='changed'>VU-[0-9A-F]{4,5}</phrase>"} }?
 
   code-point-attributes &amp;= attribute kJa
      { xsd:string {pattern="[0-9A-F]{4}S?"} }?
@@ -2842,7 +2842,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 
 
   code-point-attributes &amp;= attribute kSpoofingVariant
-     { xsd:string {pattern="U\+[0-9A-F]{4,5}"} }?
+     { <phrase revisionflag='added'>list {</phrase> xsd:string {pattern="U\+[0-9A-F]{4,5}"} <phrase revisionflag='added'>+ }</phrase>}?
 
   code-point-attributes &amp;= attribute kTaiwanTelegraph
      { list { xsd:string {pattern="[0-9]{4}"} +}}?
