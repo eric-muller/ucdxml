@@ -1254,7 +1254,7 @@
           | xsd:string {pattern="V2-[0-9A-F]{4}"}
           | xsd:string {pattern="V3-[0-9A-F]{4}"}
           | xsd:string {pattern="V4-[0-9A-F]{4}"}
-          | xsd:string {pattern="VN-[0-9A-F]{4,5}"}
+          | xsd:string {pattern="VN-[0-9A-F]{5}"}
           | xsd:string {pattern="VU-[0-9A-F]{4,5}"} }?
 
   code-point-attributes &= attribute kJa
@@ -1410,9 +1410,6 @@ code-point-attributes &= attribute kSpecializedSemanticVariant
 
   code-point-attributes &= attribute kXHC1983
      { list { xsd:string {pattern="[0-9,.*]+:[a-zǜ́̄̈̌]+"} +}} ?
-
-  code-point-attributes &= attribute kWubi
-     { text }?
 
   code-point-attributes &= attribute kXerox
      { xsd:string {pattern="[0-9]{3}:[0-9]{3}"} }?

@@ -34,7 +34,7 @@
             <tbody>
                <tr>
                   <td valign="top" width="20%">Version</td>
-                  <td valign="top">Unicode <span style="background-color: #ffff00; border-style:dotted; border-width:1px">14.0.0 (draft 2)</span>
+                  <td valign="top">Unicode <span style="background-color: #ffff00; border-style:dotted; border-width:1px">14.0.0 (draft 3)</span>
                   </td>
                </tr>
                <tr>
@@ -45,7 +45,7 @@
                <tr>
                   <td valign="top">Date</td>
                   <td valign="top">
-                     <span style="background-color: #ffff00; border-style:dotted; border-width:1px">2021-05-24</span>
+                     <span style="background-color: #ffff00; border-style:dotted; border-width:1px">2021-08-11</span>
                   </td>
                </tr>
                <tr>
@@ -137,110 +137,110 @@
          </p>
          <h4>Contents</h4>
          <ul class="toc">
-            <li>1     <a href="#d1e2183">Introduction</a>
+            <li>1     <a href="#d1e2193">Introduction</a>
             </li>
-            <li>2     <a href="#d1e2220">Overall schema</a>
+            <li>2     <a href="#d1e2230">Overall schema</a>
                <ul class="toc">
-                  <li>2.1     <a href="#d1e2227">General principles</a>
+                  <li>2.1     <a href="#d1e2237">General principles</a>
                   </li>
-                  <li>2.2     <a href="#d1e2260">Namespace</a>
+                  <li>2.2     <a href="#d1e2270">Namespace</a>
                   </li>
-                  <li>2.3     <a href="#d1e2284">Datatypes</a>
+                  <li>2.3     <a href="#d1e2294">Datatypes</a>
                   </li>
-                  <li>2.4     <a href="#d1e2316">Root Element</a>
+                  <li>2.4     <a href="#d1e2326">Root Element</a>
                   </li>
-                  <li>2.5     <a href="#d1e2339">Common attributes</a>
+                  <li>2.5     <a href="#d1e2349">Common attributes</a>
                   </li>
-                  <li>2.6     <a href="#d1e2366">Ordering of elements</a>
+                  <li>2.6     <a href="#d1e2376">Ordering of elements</a>
                   </li>
                </ul>
             </li>
-            <li>3     <a href="#d1e2387">Description</a>
+            <li>3     <a href="#d1e2397">Description</a>
             </li>
-            <li>4     <a href="#d1e2419">Repertoire</a>
+            <li>4     <a href="#d1e2429">Repertoire</a>
                <ul class="toc">
-                  <li>4.1     <a href="#d1e2444">Sets of code points</a>
+                  <li>4.1     <a href="#d1e2454">Sets of code points</a>
                   </li>
-                  <li>4.2     <a href="#d1e2486">Code point types</a>
+                  <li>4.2     <a href="#d1e2496">Code point types</a>
                   </li>
                   <li>4.3     <a href="#group">Group</a>
                   </li>
-                  <li>4.4     <a href="#d1e2606">Properties</a>
+                  <li>4.4     <a href="#d1e2616">Properties</a>
                      <ul class="toc">
-                        <li>4.4.1     <a href="#d1e2635">Age property</a>
+                        <li>4.4.1     <a href="#d1e2645">Age property</a>
                         </li>
-                        <li>4.4.2     <a href="#d1e2661">Name properties</a>
+                        <li>4.4.2     <a href="#d1e2671">Name properties</a>
                         </li>
-                        <li>4.4.3     <a href="#d1e2735">Name Aliases</a>
+                        <li>4.4.3     <a href="#d1e2745">Name Aliases</a>
                         </li>
-                        <li>4.4.4     <a href="#d1e2758">Block</a>
+                        <li>4.4.4     <a href="#d1e2768">Block</a>
                         </li>
-                        <li>4.4.5     <a href="#d1e2819">General Category</a>
+                        <li>4.4.5     <a href="#d1e2829">General Category</a>
                         </li>
-                        <li>4.4.6     <a href="#d1e2843">Combining properties</a>
+                        <li>4.4.6     <a href="#d1e2853">Combining properties</a>
                         </li>
-                        <li>4.4.7     <a href="#d1e2869">Bidirectionality properties</a>
+                        <li>4.4.7     <a href="#d1e2879">Bidirectionality properties</a>
                         </li>
-                        <li>4.4.8     <a href="#d1e2960">Decomposition properties</a>
+                        <li>4.4.8     <a href="#d1e2970">Decomposition properties</a>
                         </li>
-                        <li>4.4.9     <a href="#d1e3021">Numeric Properties</a>
+                        <li>4.4.9     <a href="#d1e3031">Numeric Properties</a>
                         </li>
-                        <li>4.4.10     <a href="#d1e3050">Joining properties</a>
+                        <li>4.4.10     <a href="#d1e3060">Joining properties</a>
                         </li>
-                        <li>4.4.11     <a href="#d1e3101">Linebreak properties</a>
+                        <li>4.4.11     <a href="#d1e3111">Linebreak properties</a>
                         </li>
-                        <li>4.4.12     <a href="#d1e3125">East Asian Width property</a>
+                        <li>4.4.12     <a href="#d1e3135">East Asian Width property</a>
                         </li>
-                        <li>4.4.13     <a href="#d1e3148">Case properties</a>
+                        <li>4.4.13     <a href="#d1e3158">Case properties</a>
                         </li>
-                        <li>4.4.14     <a href="#d1e3248">Script properties</a>
+                        <li>4.4.14     <a href="#d1e3258">Script properties</a>
                         </li>
-                        <li>4.4.15     <a href="#d1e3287">ISO Comment properties</a>
+                        <li>4.4.15     <a href="#d1e3297">ISO Comment properties</a>
                         </li>
-                        <li>4.4.16     <a href="#d1e3310">Hangul properties</a>
+                        <li>4.4.16     <a href="#d1e3320">Hangul properties</a>
                         </li>
-                        <li>4.4.17     <a href="#d1e3348">Indic properties</a>
+                        <li>4.4.17     <a href="#d1e3358">Indic properties</a>
                         </li>
-                        <li>4.4.18     <a href="#d1e3403">Identifier and Pattern and programming language properties</a>
+                        <li>4.4.18     <a href="#d1e3413">Identifier and Pattern and programming language properties</a>
                         </li>
-                        <li>4.4.19     <a href="#d1e3435">Properties related to function and graphic characteristics</a>
+                        <li>4.4.19     <a href="#d1e3445">Properties related to function and graphic characteristics</a>
                         </li>
-                        <li>4.4.20     <a href="#d1e3455">Properties related to boundaries</a>
+                        <li>4.4.20     <a href="#d1e3465">Properties related to boundaries</a>
                         </li>
-                        <li>4.4.21     <a href="#d1e3476">Properties related to ideographs</a>
+                        <li>4.4.21     <a href="#d1e3486">Properties related to ideographs</a>
                         </li>
-                        <li>4.4.22     <a href="#d1e3496">Miscellaneous properties</a>
+                        <li>4.4.22     <a href="#d1e3506">Miscellaneous properties</a>
                         </li>
-                        <li>4.4.23     <a href="#d1e3516">Unihan properties</a>
+                        <li>4.4.23     <a href="#d1e3526">Unihan properties</a>
                         </li>
-                        <li>4.4.24     <a href="#d1e3580">Tangut data</a>
+                        <li>4.4.24     <a href="#d1e3590">Tangut data</a>
                         </li>
-                        <li>4.4.25     <a href="#d1e3600">Nushu data</a>
+                        <li>4.4.25     <a href="#d1e3610">Nushu data</a>
                         </li>
-                        <li>4.4.26     <a href="#d1e3620">Emoji properties</a>
+                        <li>4.4.26     <a href="#d1e3630">Emoji properties</a>
                         </li>
                      </ul>
                   </li>
                </ul>
             </li>
-            <li>5     <a href="#d1e3643">Blocks</a>
+            <li>5     <a href="#d1e3653">Blocks</a>
             </li>
-            <li>6     <a href="#d1e3672">Named Sequences</a>
+            <li>6     <a href="#d1e3682">Named Sequences</a>
             </li>
-            <li>7     <a href="#d1e3710">Normalization Corrections</a>
+            <li>7     <a href="#d1e3720">Normalization Corrections</a>
             </li>
-            <li>8     <a href="#d1e3740">Standardized Variants</a>
+            <li>8     <a href="#d1e3750">Standardized Variants</a>
             </li>
-            <li>9     <a href="#d1e3769">CJK Radicals</a>
+            <li>9     <a href="#d1e3779">CJK Radicals</a>
             </li>
-            <li>10     <a href="#d1e3798">Emoji sources</a>
+            <li>10     <a href="#d1e3808">Emoji sources</a>
             </li>
-            <li>11     <a href="#d1e3834">The full schema</a>
+            <li>11     <a href="#d1e3844">The full schema</a>
             </li>
-            <li>12     <a href="#d1e4122">Examples</a>
+            <li>12     <a href="#d1e4132">Examples</a>
             </li>
             <li>
-               <a href="#d1e4136">Acknowledgments</a>
+               <a href="#d1e4146">Acknowledgments</a>
             </li>
             <li>
                <a href="#Modifications">Modifications</a>
@@ -248,7 +248,7 @@
          </ul>
          <hr/>
          <h2>
-            <a name="d1e2183">1 Introduction</a>
+            <a name="d1e2193">1 Introduction</a>
          </h2>
 
          <p>In working on Unicode implementations, it is often useful to
@@ -303,13 +303,13 @@
     Character Database</a>.</p>
   
          <h2>
-            <a name="d1e2220">2 Overall schema</a>
+            <a name="d1e2230">2 Overall schema</a>
          </h2>
 
     
     
          <h3>
-            <a name="d1e2227">2.1 General principles</a>
+            <a name="d1e2237">2.1 General principles</a>
          </h3>
 
          <p>Our schema can be used to create and validate documents
@@ -364,7 +364,7 @@
     
     
          <h3>
-            <a name="d1e2260">2.2 Namespace</a>
+            <a name="d1e2270">2.2 Namespace</a>
          </h3>
 
          <p>The namespace for our elements is
@@ -373,7 +373,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2266">[namespace declaration, 1]</a> =</i>
+               <a name="lp:d1e2276">[namespace declaration, 1]</a> =</i>
             <tt style="white-space: pre;">
   default namespace ucd = "http://www.unicode.org/ns/2003/ucd/1.0"
 </tt>
@@ -387,14 +387,14 @@
     
     
          <h3>
-            <a name="d1e2284">2.3 Datatypes</a>
+            <a name="d1e2294">2.3 Datatypes</a>
          </h3>
 
          <p>We use a standard XML Schema datatypes:</p>
 
          <p>
             <i>
-               <a name="lp:d1e2284">[datatypes declaration, 2]</a> =</i>
+               <a name="lp:d1e2294">[datatypes declaration, 2]</a> =</i>
             <tt style="white-space: pre;">
   # default; datatypes xsd = "http://www.w3.org/2001/XMLSchema-datatypes"
 </tt>
@@ -420,7 +420,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2290">[datatype for code points, 3]</a> =</i>
+               <a name="lp:d1e2300">[datatype for code points, 3]</a> =</i>
             <tt style="white-space: pre;">
   single-code-point = xsd:string { pattern = "(|[1-9A-F]|(10))[0-9A-F]{4}" }
 
@@ -434,7 +434,7 @@
     
     
          <h3>
-            <a name="d1e2316">2.4 Root Element</a>
+            <a name="d1e2326">2.4 Root Element</a>
          </h3>
 
          <p>The root element of valid documents is a
@@ -442,7 +442,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2307">[schema start, 4]</a> =</i>
+               <a name="lp:d1e2317">[schema start, 4]</a> =</i>
             <tt style="white-space: pre;">
   start =
     element ucd { ucd.content }
@@ -454,7 +454,7 @@
     
     
          <h3>
-            <a name="d1e2339">2.5 Common attributes</a>
+            <a name="d1e2349">2.5 Common attributes</a>
          </h3>
 
          <p>A large number of properties are boolean. We
@@ -463,7 +463,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2327">[boolean type, 5]</a> =</i>
+               <a name="lp:d1e2337">[boolean type, 5]</a> =</i>
             <tt style="white-space: pre;">
   boolean = "Y" | "N"
 </tt>
@@ -474,7 +474,7 @@
     
     
          <h3>
-            <a name="d1e2366">2.6 Ordering of elements</a>
+            <a name="d1e2376">2.6 Ordering of elements</a>
          </h3>
 
          <p>In elements that hold lists of child elements, such as <tt>repertoire</tt>, <tt>group</tt>, or <tt>standardized-variants</tt>, the schema does not require that the child elements be in any particular order.</p>
@@ -483,7 +483,7 @@
 
   
          <h2>
-            <a name="d1e2387">3 Description</a>
+            <a name="d1e2397">3 Description</a>
          </h2>
 
          <p>The root element may have a <tt>description</tt>
@@ -499,7 +499,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2375">[description, 6]</a> =</i>
+               <a name="lp:d1e2385">[description, 6]</a> =</i>
             <tt style="white-space: pre;">
   ucd.content &amp;=
     element description { text }?
@@ -507,7 +507,7 @@
          </p>
   
          <h2>
-            <a name="d1e2419">4 Repertoire</a>
+            <a name="d1e2429">4 Repertoire</a>
          </h2>
 
          <p>The <tt>repertoire</tt> child element of the
@@ -517,7 +517,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2395">[repertoire, 7]</a> =</i>
+               <a name="lp:d1e2405">[repertoire, 7]</a> =</i>
             <tt style="white-space: pre;">
   ucd.content &amp;=
     element repertoire { (code-point | group) + }?
@@ -528,7 +528,7 @@
     
     
          <h3>
-            <a name="d1e2444">4.1 Sets of code points</a>
+            <a name="d1e2454">4.1 Sets of code points</a>
          </h3>
 
          <p>It is often the case that successive code points have the
@@ -552,7 +552,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2420">[Set of code points, 8]</a> =</i>
+               <a name="lp:d1e2430">[Set of code points, 8]</a> =</i>
             <tt style="white-space: pre;">
   set-of-code-points =
      attribute cp { single-code-point }
@@ -570,7 +570,7 @@
     
     
          <h3>
-            <a name="d1e2486">4.2 Code point types</a>
+            <a name="d1e2496">4.2 Code point types</a>
          </h3>
 
          <p>When thinking about Unicode code points, it is useful to split
@@ -597,7 +597,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2474">[Code points, 9]</a> =</i>
+               <a name="lp:d1e2484">[Code points, 9]</a> =</i>
             <tt style="white-space: pre;">
   code-point |=
     element reserved {
@@ -692,7 +692,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2540">[groups, 10]</a> =</i>
+               <a name="lp:d1e2550">[groups, 10]</a> =</i>
             <tt style="white-space: pre;">
   group =
     element group {
@@ -705,7 +705,7 @@
 
     
          <h3>
-            <a name="d1e2606">4.4 Properties</a>
+            <a name="d1e2616">4.4 Properties</a>
          </h3>
 
          <p>Each property, except for the Special_Case_Condition and
@@ -740,7 +740,7 @@
     
     
          <h4>
-            <a name="d1e2635">4.4.1 Age property</a>
+            <a name="d1e2645">4.4.1 Age property</a>
          </h4>
 
          <p>The <tt>age</tt> attribute captures the version
@@ -749,7 +749,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2584">[age, 11]</a> =</i>
+               <a name="lp:d1e2594">[age, 11]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;= attribute age {
           "1.1"
@@ -777,7 +777,7 @@
     
     
          <h4>
-            <a name="d1e2661">4.4.2 Name properties</a>
+            <a name="d1e2671">4.4.2 Name properties</a>
          </h4>
 
          <p>There are two name properties: the name given by the
@@ -787,7 +787,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2607">[name pattern, 12]</a> =</i>
+               <a name="lp:d1e2617">[name pattern, 12]</a> =</i>
             <tt style="white-space: pre;">
   character-name = xsd:string { pattern="([A-Z0-9 #\-\(\)]*)|(&lt;control&gt;)" }
 </tt>
@@ -795,7 +795,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2610">[name properties, 13]</a> =</i>
+               <a name="lp:d1e2620">[name properties, 13]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;= attribute na { character-name }?
   code-point-attributes &amp;= attribute na1 { character-name }?
@@ -839,7 +839,7 @@
       
       
         <h4>
-            <a name="d1e2735">4.4.3 Name Aliases</a>
+            <a name="d1e2745">4.4.3 Name Aliases</a>
          </h4>
 
         <p>The Name_Alias property is represented by zero or more
@@ -848,7 +848,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2666">[name_alias property, 14]</a> =</i>
+               <a name="lp:d1e2676">[name_alias property, 14]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     element name-alias {
@@ -864,7 +864,7 @@
       
       
         <h4>
-            <a name="d1e2758">4.4.4 Block</a>
+            <a name="d1e2768">4.4.4 Block</a>
          </h4>
 
         <p>The Block property is represented by the
@@ -872,7 +872,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2683">[block property, 15]</a> =</i>
+               <a name="lp:d1e2693">[block property, 15]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute blk { "Adlam"
@@ -1228,7 +1228,7 @@
       
       
         <h4>
-            <a name="d1e2819">4.4.5 General Category</a>
+            <a name="d1e2829">4.4.5 General Category</a>
          </h4>
 
         <p>The general category is represented by the
@@ -1236,7 +1236,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2738">[gc property, 16]</a> =</i>
+               <a name="lp:d1e2748">[gc property, 16]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute gc { "Lu" | "Ll" | "Lt" | "Lm" | "Lo"
@@ -1254,7 +1254,7 @@
       
       
         <h4>
-            <a name="d1e2843">4.4.6 Combining properties</a>
+            <a name="d1e2853">4.4.6 Combining properties</a>
          </h4>
 
         <p>The combining class is represented by the
@@ -1268,7 +1268,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2759">[ccc property, 17]</a> =</i>
+               <a name="lp:d1e2769">[ccc property, 17]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute ccc { xsd:integer { minInclusive="0" maxInclusive="254" }}?
@@ -1280,7 +1280,7 @@
       
       
         <h4>
-            <a name="d1e2869">4.4.7 Bidirectionality properties</a>
+            <a name="d1e2879">4.4.7 Bidirectionality properties</a>
          </h4>
 
         <p>The bidirectional class is represented by the
@@ -1288,7 +1288,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2776">[bc property, 18]</a> =</i>
+               <a name="lp:d1e2786">[bc property, 18]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute bc { "AL" | "AN"
@@ -1313,7 +1313,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2785">[bidi_M property, 19]</a> =</i>
+               <a name="lp:d1e2795">[bidi_M property, 19]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute Bidi_M { boolean }?
@@ -1327,7 +1327,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2795">[bmg property, 20]</a> =</i>
+               <a name="lp:d1e2805">[bmg property, 20]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute bmg    { "" | single-code-point }?
@@ -1346,7 +1346,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2807">[Bidi_C property, 21]</a> =</i>
+               <a name="lp:d1e2817">[Bidi_C property, 21]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute Bidi_C { boolean }?
@@ -1357,7 +1357,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2820">[bpt and bpb attributes, 22]</a> =</i>
+               <a name="lp:d1e2830">[bpt and bpb attributes, 22]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute bpt { "o" | "c" | "n" }?
@@ -1372,7 +1372,7 @@
       
       
         <h4>
-            <a name="d1e2960">4.4.8 Decomposition properties</a>
+            <a name="d1e2970">4.4.8 Decomposition properties</a>
          </h4>
 
         <p>The decomposition type and decomposition mapping
@@ -1389,7 +1389,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2843">[decomposition properties, 23]</a> =</i>
+               <a name="lp:d1e2853">[decomposition properties, 23]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute dt { "can"  | "com" | "enc" | "fin"  | "font" | "fra"
@@ -1407,7 +1407,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2856">[composition properties, 24]</a> =</i>
+               <a name="lp:d1e2866">[composition properties, 24]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute CE { boolean }?
@@ -1424,7 +1424,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2862">[quick check properties, 25]</a> =</i>
+               <a name="lp:d1e2872">[quick check properties, 25]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute NFC_QC { "Y" | "N" | "M" }?
@@ -1461,7 +1461,7 @@
       
       
         <h4>
-            <a name="d1e3021">4.4.9 Numeric Properties</a>
+            <a name="d1e3031">4.4.9 Numeric Properties</a>
          </h4>
 
         <p>The numeric type is represented by the
@@ -1472,7 +1472,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2886">[numeric properties, 26]</a> =</i>
+               <a name="lp:d1e2896">[numeric properties, 26]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute nt { "None" | "De" | "Di" | "Nu" }?
@@ -1486,7 +1486,7 @@
       
       
         <h4>
-            <a name="d1e3050">4.4.10 Joining properties</a>
+            <a name="d1e3060">4.4.10 Joining properties</a>
          </h4>
 
         <p>The joining class of a character is represented by the
@@ -1497,7 +1497,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2909">[joining properties, 27]</a> =</i>
+               <a name="lp:d1e2919">[joining properties, 27]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute jt { "U" | "C" | "T" | "D" | "L" | "R" }?
@@ -1576,7 +1576,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2925">[joining properties, 28]</a> =</i>
+               <a name="lp:d1e2935">[joining properties, 28]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute Join_C { boolean }?
@@ -1587,7 +1587,7 @@
       
       
         <h4>
-            <a name="d1e3101">4.4.11 Linebreak properties</a>
+            <a name="d1e3111">4.4.11 Linebreak properties</a>
          </h4>
 
         <p>The Line_Break property is represented by the
@@ -1595,7 +1595,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2942">[linebreak property, 29]</a> =</i>
+               <a name="lp:d1e2952">[linebreak property, 29]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute lb { "AI" | "AL"
@@ -1623,7 +1623,7 @@
       
       
         <h4>
-            <a name="d1e3125">4.4.12 East Asian Width property</a>
+            <a name="d1e3135">4.4.12 East Asian Width property</a>
          </h4>
 
         <p>The East Asian width property is represented by the
@@ -1631,7 +1631,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2960">[ea property, 30]</a> =</i>
+               <a name="lp:d1e2970">[ea property, 30]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute ea { "A" | "F" | "H" | "N" | "Na" | "W" }?
@@ -1642,7 +1642,7 @@
       
       
         <h4>
-            <a name="d1e3148">4.4.13 Case properties</a>
+            <a name="d1e3158">4.4.13 Case properties</a>
          </h4>
 
         <p>The Uppercase, Lowercase, Other_Uppercase and
@@ -1651,7 +1651,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2974">[casing properties, 31]</a> =</i>
+               <a name="lp:d1e2984">[casing properties, 31]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute Upper { boolean }?
@@ -1682,7 +1682,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e2993">[casing properties, 32]</a> =</i>
+               <a name="lp:d1e3003">[casing properties, 32]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute suc { "#" | single-code-point }?
@@ -1701,7 +1701,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3008">[casing properties, 33]</a> =</i>
+               <a name="lp:d1e3018">[casing properties, 33]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute uc { "#" | one-or-more-code-points }?
@@ -1720,7 +1720,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3020">[casing properties, 34]</a> =</i>
+               <a name="lp:d1e3030">[casing properties, 34]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute scf { "#" | single-code-point }?
@@ -1739,7 +1739,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3027">[casing properties, 35]</a> =</i>
+               <a name="lp:d1e3037">[casing properties, 35]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute CI { boolean }?
@@ -1778,7 +1778,7 @@
       
       
         <h4>
-            <a name="d1e3248">4.4.14 Script properties</a>
+            <a name="d1e3258">4.4.14 Script properties</a>
          </h4>
 
         <p>The script and script extension properties are represented by the
@@ -1786,7 +1786,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3050">[script property, 36]</a> =</i>
+               <a name="lp:d1e3060">[script property, 36]</a> =</i>
             <tt style="white-space: pre;">
   script = "Adlm" | "Aghb" | "Ahom" | "Arab" | "Armi" | "Armn" | "Avst"
          | "Bali" | "Bamu" | "Bass" | "Batk" | "Beng" | "Bhks"
@@ -1848,7 +1848,7 @@
       
       
         <h4>
-            <a name="d1e3287">4.4.15 ISO Comment properties</a>
+            <a name="d1e3297">4.4.15 ISO Comment properties</a>
          </h4>
 
         <p>The ISO 10646 comment field is represented by the
@@ -1856,7 +1856,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3080">[isc property, 37]</a> =</i>
+               <a name="lp:d1e3090">[isc property, 37]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute isc { text }?
@@ -1867,7 +1867,7 @@
       
       
         <h4>
-            <a name="d1e3310">4.4.16 Hangul properties</a>
+            <a name="d1e3320">4.4.16 Hangul properties</a>
          </h4>
 
         <p>The property Hangul_Syllable_Type is represented by the
@@ -1875,7 +1875,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3097">[hst property, 38]</a> =</i>
+               <a name="lp:d1e3107">[hst property, 38]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute hst { "L" | "LV" | "LVT" | "T" | "V" | "NA" }?
@@ -1887,7 +1887,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3106">[jamo property, 39]</a> =</i>
+               <a name="lp:d1e3116">[jamo property, 39]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
      attribute JSN { xsd:string { pattern="[A-Z]{0,3}" }}?
@@ -1898,7 +1898,7 @@
       
       
         <h4>
-            <a name="d1e3348">4.4.17 Indic properties</a>
+            <a name="d1e3358">4.4.17 Indic properties</a>
          </h4>
 
         <p>The property Indic_Syllabic_Category is represented by the
@@ -1906,7 +1906,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3123">[InSC property, 40]</a> =</i>
+               <a name="lp:d1e3133">[InSC property, 40]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute InSC { "Avagraha"
@@ -1954,7 +1954,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3132">[InMC property, 41]</a> =</i>
+               <a name="lp:d1e3142">[InMC property, 41]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
      attribute InMC { "Right"
@@ -1980,7 +1980,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3142">[InPC property, 42]</a> =</i>
+               <a name="lp:d1e3152">[InPC property, 42]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
      attribute InPC { "Bottom"
@@ -2006,7 +2006,7 @@
       
       
         <h4>
-            <a name="d1e3403">4.4.18 Identifier and Pattern and programming language properties</a>
+            <a name="d1e3413">4.4.18 Identifier and Pattern and programming language properties</a>
          </h4>
 
         <p>The properties ID_Start, Other_ID_Start, XID_Start ,
@@ -2015,7 +2015,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3157">[identifier properties, 43]</a> =</i>
+               <a name="lp:d1e3167">[identifier properties, 43]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute IDS { boolean }?
@@ -2042,7 +2042,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3163">[pattern properties, 44]</a> =</i>
+               <a name="lp:d1e3173">[pattern properties, 44]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute Pat_Syn { boolean }?
@@ -2057,7 +2057,7 @@
       
       
         <h4>
-            <a name="d1e3435">4.4.19 Properties related to function and graphic characteristics</a>
+            <a name="d1e3445">4.4.19 Properties related to function and graphic characteristics</a>
          </h4>
 
         <p>The properties Dash, Hyphen, Quotation_Mark,
@@ -2072,7 +2072,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3177">[properties related to function and graphic characteristics, 45]</a> =</i>
+               <a name="lp:d1e3187">[properties related to function and graphic characteristics, 45]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute Dash { boolean }?
@@ -2143,7 +2143,7 @@
       
       
         <h4>
-            <a name="d1e3455">4.4.20 Properties related to boundaries</a>
+            <a name="d1e3465">4.4.20 Properties related to boundaries</a>
          </h4>
 
         <p>The properties Grapheme_Base, Grapheme_Extend,
@@ -2153,7 +2153,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3191">[properties related to boundaries, 46]</a> =</i>
+               <a name="lp:d1e3201">[properties related to boundaries, 46]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute Gr_Base { boolean }?
@@ -2216,7 +2216,7 @@
       
       
         <h4>
-            <a name="d1e3476">4.4.21 Properties related to ideographs</a>
+            <a name="d1e3486">4.4.21 Properties related to ideographs</a>
          </h4>
 
         <p>The properties Ideographic, Unified_Ideograph,
@@ -2226,7 +2226,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3206">[properties related to ideographs, 47]</a> =</i>
+               <a name="lp:d1e3216">[properties related to ideographs, 47]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute Ideo { boolean }?
@@ -2252,7 +2252,7 @@
       
       
         <h4>
-            <a name="d1e3496">4.4.22 Miscellaneous properties</a>
+            <a name="d1e3506">4.4.22 Miscellaneous properties</a>
          </h4>
 
         <p>The properties Deprecated, Variation_Selector, and
@@ -2260,7 +2260,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3220">[miscellaneous properties, 48]</a> =</i>
+               <a name="lp:d1e3230">[miscellaneous properties, 48]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;=
     attribute Dep { boolean }?
@@ -2277,7 +2277,7 @@
       
       
         <h4>
-            <a name="d1e3516">4.4.23 Unihan properties</a>
+            <a name="d1e3526">4.4.23 Unihan properties</a>
          </h4>
 
         <p>The Unihan properties (from the Unihan database) are represented
@@ -2285,7 +2285,7 @@
 
          <p>
             <i>
-               <a name="lp:d1e3234">[Unihan properties, 49]</a> =</i>
+               <a name="lp:d1e3244">[Unihan properties, 49]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;= attribute kAccountingNumeric
      { xsd:string {pattern="[0-9]+"} }?
@@ -2595,7 +2595,7 @@
           | xsd:string {pattern="V3-[0-9A-F]{4}"}
           | xsd:string {pattern="V4-[0-9A-F]{4}"}
           </tt>
-            <span style="background-color: #ffff00; border-style:dotted; border-width:1px">| xsd:string {pattern="VN-[0-9A-F]{4,5}"}</span>
+            <span style="background-color: #ffff00; border-style:dotted; border-width:1px">| xsd:string {pattern="VN-[0-9A-F]{5}"}</span>
             <tt style="white-space: pre;">
           | xsd:string {pattern="</tt>
             <span style="background-color: #ffff00; border-style:dotted; border-width:1px">VU-[0-9A-F]{4,5}</span>
@@ -2762,9 +2762,6 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
   code-point-attributes &amp;= attribute kXHC1983
      { list { xsd:string {pattern="[0-9,.*]+:[a-zǜ́̄̈̌]+"} +}} ?
 
-  code-point-attributes &amp;= attribute kWubi
-     { text }?
-
   code-point-attributes &amp;= attribute kXerox
      { xsd:string {pattern="[0-9]{3}:[0-9]{3}"} }?
 
@@ -2793,14 +2790,14 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
       
       
         <h4>
-            <a name="d1e3580">4.4.24 Tangut data</a>
+            <a name="d1e3590">4.4.24 Tangut data</a>
          </h4>
 
         <p>The Tangut data are represented as attributes.</p>
 
          <p>
             <i>
-               <a name="lp:d1e3292">[Tangut data, 50]</a> =</i>
+               <a name="lp:d1e3302">[Tangut data, 50]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;= attribute kRSTUnicode
      { xsd:string {pattern="[0-9]+\.[0-9]+"} }?
@@ -2824,14 +2821,14 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
       
       
         <h4>
-            <a name="d1e3600">4.4.25 Nushu data</a>
+            <a name="d1e3610">4.4.25 Nushu data</a>
          </h4>
 
         <p>The Nushu data are represented as attributes.</p>
 
          <p>
             <i>
-               <a name="lp:d1e3306">[Nushu data, 51]</a> =</i>
+               <a name="lp:d1e3316">[Nushu data, 51]</a> =</i>
             <tt style="white-space: pre;">
   code-point-attributes &amp;= attribute kSrc_NushuDuben
      { xsd:string {pattern="[0-9]+\.[0-9]+"} }?
@@ -2846,14 +2843,14 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
       
       
         <h4>
-            <a name="d1e3620">4.4.26 Emoji properties</a>
+            <a name="d1e3630">4.4.26 Emoji properties</a>
          </h4>
 
         <p>The Emoji properties are represented as attributes.</p>
 
          <p>
             <i>
-               <a name="lp:d1e3320">[Emoji properties, 52]</a> =</i>
+               <a name="lp:d1e3330">[Emoji properties, 52]</a> =</i>
             <tt style="white-space: pre;">
 
   code-point-attributes &amp;= attribute Emoji { boolean }?
@@ -2869,7 +2866,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
     
   
          <h2>
-            <a name="d1e3643">5 Blocks</a>
+            <a name="d1e3653">5 Blocks</a>
          </h2>
 
          <p>The <tt>blocks</tt> child of the
@@ -2879,7 +2876,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 
          <p>
             <i>
-               <a name="lp:d1e3346">[blocks, 53]</a> =</i>
+               <a name="lp:d1e3356">[blocks, 53]</a> =</i>
             <tt style="white-space: pre;">
   ucd.content &amp;=
     element blocks {
@@ -2891,7 +2888,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
          </p>
   
          <h2>
-            <a name="d1e3672">6 Named Sequences</a>
+            <a name="d1e3682">6 Named Sequences</a>
          </h2>
 
          <p>The <tt>named-sequences</tt> child of the
@@ -2906,7 +2903,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 
          <p>
             <i>
-               <a name="lp:d1e3378">[named sequences, 54]</a> =</i>
+               <a name="lp:d1e3388">[named sequences, 54]</a> =</i>
             <tt style="white-space: pre;">
   ucd.content &amp;=
     element named-sequences {
@@ -2923,7 +2920,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
          </p>
   
          <h2>
-            <a name="d1e3710">7 Normalization Corrections</a>
+            <a name="d1e3720">7 Normalization Corrections</a>
          </h2>
 
          <p>The <tt>normalization-corrections</tt> child of
@@ -2936,7 +2933,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 
          <p>
             <i>
-               <a name="lp:d1e3401">[normalization corrections, 55]</a> =</i>
+               <a name="lp:d1e3411">[normalization corrections, 55]</a> =</i>
             <tt style="white-space: pre;">
   ucd.content &amp;=
     element normalization-corrections {
@@ -2949,7 +2946,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
          </p>
   
          <h2>
-            <a name="d1e3740">8 Standardized Variants</a>
+            <a name="d1e3750">8 Standardized Variants</a>
          </h2>
 
          <p>The <tt>standardized-variants</tt> child of the
@@ -2961,7 +2958,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 
          <p>
             <i>
-               <a name="lp:d1e3425">[standardized variants, 56]</a> =</i>
+               <a name="lp:d1e3435">[standardized variants, 56]</a> =</i>
             <tt style="white-space: pre;">
   ucd.content &amp;=
     element standardized-variants {
@@ -2973,7 +2970,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
          </p>
   
          <h2>
-            <a name="d1e3769">9 CJK Radicals</a>
+            <a name="d1e3779">9 CJK Radicals</a>
          </h2>
 
          <p>The <tt>cjk-radicals</tt> child of the
@@ -2985,7 +2982,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 
          <p>
             <i>
-               <a name="lp:d1e3448">[cjk radicals, 57]</a> =</i>
+               <a name="lp:d1e3458">[cjk radicals, 57]</a> =</i>
             <tt style="white-space: pre;">
   ucd.content &amp;=
     element cjk-radicals {
@@ -2997,7 +2994,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
          </p>
   
          <h2>
-            <a name="d1e3798">10 Emoji sources</a>
+            <a name="d1e3808">10 Emoji sources</a>
          </h2>
 
          <p>The <tt>emoji-sources</tt> child of the
@@ -3005,7 +3002,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 
          <p>
             <i>
-               <a name="lp:d1e3468">[datatype for code points, 58]</a> =</i>
+               <a name="lp:d1e3478">[datatype for code points, 58]</a> =</i>
             <tt style="white-space: pre;">
   jis-code-point = xsd:string { pattern = "[0-9A-F]{4}" }
 </tt>
@@ -3014,7 +3011,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 
          <p>
             <i>
-               <a name="lp:d1e3471">[emoji sources, 59]</a> =</i>
+               <a name="lp:d1e3481">[emoji sources, 59]</a> =</i>
             <tt style="white-space: pre;">
   ucd.content &amp;=
     element emoji-sources {
@@ -3028,7 +3025,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 
   
          <h2>
-            <a name="d1e3834">11 The full schema</a>
+            <a name="d1e3844">11 The full schema</a>
          </h2>
 
          <p>Our schema is just the accumulation of the pieces we have
@@ -3036,55 +3033,55 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 
          <p>
             <i>
-               <a name="lp:d1e3486">[UCD RelaxNG schema, 60]</a> =</i>
+               <a name="lp:d1e3496">[UCD RelaxNG schema, 60]</a> =</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[namespace declaration: <a href="#lp:d1e2266">1</a>]</i>
+            <i>[namespace declaration: <a href="#lp:d1e2276">1</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[datatypes: <a href="#lp:d1e2284">2</a>, <a href="#lp:d1e2290">3</a>, <a href="#lp:d1e2607">12</a>, <a href="#lp:d1e3468">58</a>]</i>
+            <i>[datatypes: <a href="#lp:d1e2294">2</a>, <a href="#lp:d1e2300">3</a>, <a href="#lp:d1e2617">12</a>, <a href="#lp:d1e3478">58</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[schema start: <a href="#lp:d1e2307">4</a>]</i>
+            <i>[schema start: <a href="#lp:d1e2317">4</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[boolean type: <a href="#lp:d1e2327">5</a>]</i>
+            <i>[boolean type: <a href="#lp:d1e2337">5</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[description: <a href="#lp:d1e2375">6</a>]</i>
+            <i>[description: <a href="#lp:d1e2385">6</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[repertoire: <a href="#lp:d1e2395">7</a>, <a href="#lp:d1e2420">8</a>, <a href="#lp:d1e2474">9</a>, <a href="#lp:d1e2540">10</a>]</i>
+            <i>[repertoire: <a href="#lp:d1e2405">7</a>, <a href="#lp:d1e2430">8</a>, <a href="#lp:d1e2484">9</a>, <a href="#lp:d1e2550">10</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[attributes: <a href="#lp:d1e2584">11</a>, <a href="#lp:d1e2610">13</a>, <a href="#lp:d1e2666">14</a>, <a href="#lp:d1e2683">15</a>, <a href="#lp:d1e2738">16</a>, <a href="#lp:d1e2759">17</a>, <a href="#lp:d1e2776">18</a>, <a href="#lp:d1e2785">19</a>, <a href="#lp:d1e2795">20</a>, <a href="#lp:d1e2807">21</a>, <a href="#lp:d1e2820">22</a>, <a href="#lp:d1e2843">23</a>, <a href="#lp:d1e2856">24</a>, <a href="#lp:d1e2862">25</a>, <a href="#lp:d1e2886">26</a>, <a href="#lp:d1e2909">27</a>, <a href="#lp:d1e2925">28</a>, <a href="#lp:d1e2942">29</a>, <a href="#lp:d1e2960">30</a>, <a href="#lp:d1e2974">31</a>, <a href="#lp:d1e2993">32</a>, <a href="#lp:d1e3008">33</a>, <a href="#lp:d1e3020">34</a>, <a href="#lp:d1e3027">35</a>, <a href="#lp:d1e3050">36</a>, <a href="#lp:d1e3080">37</a>, <a href="#lp:d1e3097">38</a>, <a href="#lp:d1e3106">39</a>, <a href="#lp:d1e3123">40</a>, <a href="#lp:d1e3132">41</a>, <a href="#lp:d1e3142">42</a>, <a href="#lp:d1e3157">43</a>, <a href="#lp:d1e3163">44</a>, <a href="#lp:d1e3177">45</a>, <a href="#lp:d1e3191">46</a>, <a href="#lp:d1e3206">47</a>, <a href="#lp:d1e3220">48</a>, <a href="#lp:d1e3234">49</a>]</i>
+            <i>[attributes: <a href="#lp:d1e2594">11</a>, <a href="#lp:d1e2620">13</a>, <a href="#lp:d1e2676">14</a>, <a href="#lp:d1e2693">15</a>, <a href="#lp:d1e2748">16</a>, <a href="#lp:d1e2769">17</a>, <a href="#lp:d1e2786">18</a>, <a href="#lp:d1e2795">19</a>, <a href="#lp:d1e2805">20</a>, <a href="#lp:d1e2817">21</a>, <a href="#lp:d1e2830">22</a>, <a href="#lp:d1e2853">23</a>, <a href="#lp:d1e2866">24</a>, <a href="#lp:d1e2872">25</a>, <a href="#lp:d1e2896">26</a>, <a href="#lp:d1e2919">27</a>, <a href="#lp:d1e2935">28</a>, <a href="#lp:d1e2952">29</a>, <a href="#lp:d1e2970">30</a>, <a href="#lp:d1e2984">31</a>, <a href="#lp:d1e3003">32</a>, <a href="#lp:d1e3018">33</a>, <a href="#lp:d1e3030">34</a>, <a href="#lp:d1e3037">35</a>, <a href="#lp:d1e3060">36</a>, <a href="#lp:d1e3090">37</a>, <a href="#lp:d1e3107">38</a>, <a href="#lp:d1e3116">39</a>, <a href="#lp:d1e3133">40</a>, <a href="#lp:d1e3142">41</a>, <a href="#lp:d1e3152">42</a>, <a href="#lp:d1e3167">43</a>, <a href="#lp:d1e3173">44</a>, <a href="#lp:d1e3187">45</a>, <a href="#lp:d1e3201">46</a>, <a href="#lp:d1e3216">47</a>, <a href="#lp:d1e3230">48</a>, <a href="#lp:d1e3244">49</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[Tangut data: <a href="#lp:d1e3292">50</a>]</i>
+            <i>[Tangut data: <a href="#lp:d1e3302">50</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[Nushu data: <a href="#lp:d1e3306">51</a>]</i>
+            <i>[Nushu data: <a href="#lp:d1e3316">51</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[blocks: <a href="#lp:d1e3346">53</a>]</i>
+            <i>[blocks: <a href="#lp:d1e3356">53</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[named sequences: <a href="#lp:d1e3378">54</a>]</i>
+            <i>[named sequences: <a href="#lp:d1e3388">54</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[normalization corrections: <a href="#lp:d1e3401">55</a>]</i>
+            <i>[normalization corrections: <a href="#lp:d1e3411">55</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[standardized variants: <a href="#lp:d1e3425">56</a>]</i>
+            <i>[standardized variants: <a href="#lp:d1e3435">56</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[cjk radicals: <a href="#lp:d1e3448">57</a>]</i>
+            <i>[cjk radicals: <a href="#lp:d1e3458">57</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[emoji sources: <a href="#lp:d1e3471">59</a>]</i>
+            <i>[emoji sources: <a href="#lp:d1e3481">59</a>]</i>
             <tt style="white-space: pre;">
       </tt>
-            <i>[Emoji properties: <a href="#lp:d1e3320">52</a>]</i>
+            <i>[Emoji properties: <a href="#lp:d1e3330">52</a>]</i>
             <tt style="white-space: pre;">
     </tt>
          </p>
@@ -3093,7 +3090,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 
   
          <h2>
-            <a name="d1e4122">12 Examples</a>
+            <a name="d1e4132">12 Examples</a>
          </h2>
 
          <p>Here is a fragment of the UCD for a few representative
@@ -3135,7 +3132,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 
   
     <h2>
-            <a name="d1e4136">Acknowledgments</a>
+            <a name="d1e4146">Acknowledgments</a>
          </h2>
          <p>Thanks to Markus Scherer and Mark Davis for their help
     developing this XML representation. Thanks to the reviewers: Julie
@@ -3191,7 +3188,11 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
                </li>
 
                <li>
-                  <p>Modified patterns for the <tt>kIRG_GSource</tt>, <tt>kIRG_MSource</tt>, <tt>kPhonetic</tt>, <tt>kSpoofingVariant</tt> attributes.</p>
+                  <p>Modified patterns for the <tt>kIRG_GSource</tt>, <tt>kIRG_MSource</tt>, <tt>kIRG_VSource</tt>, <tt>kPhonetic</tt>, <tt>kSpoofingVariant</tt> attributes.</p>
+               </li>
+
+               <li>
+                  <p>Removal of the <tt>kWubi</tt> attribute, which has never been present in released versions of the UCD.</p>
                </li>
 
             </ul>
