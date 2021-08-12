@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<xsl:stylesheet 
+<xsl:stylesheet
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:unicode='http://unicode.org/ns/2001'
   xmlns='http://www.w3.org/1999/xhtml'
   exclude-result-prefixes='unicode'
   version="2.0">
 
-<xsl:output 
+<xsl:output
   method="xml"
   omit-xml-declaration='yes'
   indent="yes"
   doctype-public='-//W3C//DTD XHTML 1.0 Transitional//EN'
   doctype-system='http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'
   encoding="UTF-8"/>
- 
+
 
 <xsl:template match='article'>
   <html>
@@ -55,7 +55,7 @@
 	</tbody>
       </table>
 
-      <div class="body"> 
+      <div class="body">
 
 	<xsl:if test='articleinfo/unicode:tr/@status = "working-draft"'>
 	  <h2 style='text-align:center; background-color: #ffff00; border-style:dotted; border-width:1px'><i>Working draft of</i></h2>
@@ -340,7 +340,7 @@
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
- 
+
 <xsl:template match='section/title' mode='ref'>
   <xsl:param name='id'>
     <xsl:call-template name='myparentid'/>
@@ -504,7 +504,7 @@
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
-      
+
 <xsl:template name="cr-replace">
   <xsl:param name="text"/>
   <xsl:variable name="cr"><xsl:text>&#xa;</xsl:text></xsl:variable>
@@ -577,7 +577,7 @@
 <xsl:template match='tgroup//footnote'>
   <sup><xsl:number level='any' from='tgroup' format='a'/></sup>
 </xsl:template>
- 
+
 <xsl:template match='thead'>
   <thead><xsl:apply-templates/></thead>
 </xsl:template>
@@ -585,12 +585,12 @@
 <xsl:template match='tbody'>
   <tbody><xsl:apply-templates/></tbody>
 </xsl:template>
-  
+
 <xsl:template match='row'>
   <tr><xsl:apply-templates/></tr>
 </xsl:template>
 
-  
+
 <xsl:template name="colspec.colnum">
   <xsl:param name="colspec" select="."/>
   <xsl:choose>
@@ -653,11 +653,11 @@
 	<xsl:value-of select="@morerows+1"/>
       </xsl:attribute>
     </xsl:if>
-    
+
     <xsl:apply-templates/>
   </td>
 </xsl:template>
-  
+
 
 
 <!--_______________________________________________________ document tracking -->
@@ -767,7 +767,7 @@
 	  </xsl:choose>
 	</td>
       </tr>
-      
+
       <tr>
 	<td valign='top'>Latest Version</td>
 	<td valign='top'>
@@ -810,7 +810,7 @@
 <xsl:template match='author'>
   <xsl:value-of select='firstname'/>
   <xsl:text> </xsl:text>
-  <xsl:value-of select='surname'/> 
+  <xsl:value-of select='surname'/>
   <xsl:apply-templates select='email'/><br/>
 </xsl:template>
 
@@ -871,7 +871,7 @@
       href='http://www.unicode.org/reporting.html'>Feedback</a>]. Related
       information that is useful in understanding this annex is found
       in Unicode Standard Annex #41, &#x201C;<a
-      href="http://www.unicode.org/reports/tr41/tr41-26.html">Common
+      href="http://www.unicode.org/reports/tr41/tr41-28.html">Common
       References for Unicode Standard Annexes.</a>&#x201D; For the
       latest version of the Unicode Standard, see [<a
       href="http://www.unicode.org/versions/latest/">Unicode</a>]. For

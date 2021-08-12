@@ -6,8 +6,8 @@
   <title>Unicode Character Database in XML</title>
 
   <articleinfo>
-    <unicode:tr number='42' class='uax' version='14.0.0 (draft 3)'
-                stage='proposed-update' status='published'
+    <unicode:tr number='42' class='uax' version='14.0.0'
+                stage='approved' status='published'
                 schema='rnc' prevrev='28'/>
 
     <copyright><year>2021</year></copyright>
@@ -20,8 +20,8 @@
 
     <revhistory>
       <revision>
-        <revnumber>29</revnumber>
-        <date>2021-08-11</date>
+        <revnumber>30</revnumber>
+        <date>2021-08-12</date>
         <revdescription>
           <itemizedlist>
             <listitem><para>New value for the <sgmltag>age</sgmltag> attribute: <sgmltag>14.0</sgmltag>.</para></listitem>
@@ -58,6 +58,9 @@
             <listitem><para>Removal of the <sgmltag>kWubi</sgmltag> attribute, which has never been present in released versions of the UCD.</para></listitem>
 
           </itemizedlist>
+
+          <para>Revision 29 being a proposed update, only changes between
+          revisions 28 and 30 are noted here.</para>
         </revdescription>
       </revision>
 
@@ -1124,7 +1127,7 @@
         | "11.0"
         | "12.0" | "12.1"
         | "13.0"
-        <phrase revisionflag='added'>| "14.0"</phrase>
+        | "14.0"
         | "unassigned" }?
 </lp:scrap>
 
@@ -1231,7 +1234,7 @@
                   | "Ancient_Symbols"
                   | "Arabic"
                   | "Arabic_Ext_A"
-                  <phrase revisionflag='added'>| "Arabic_Ext_B"</phrase>
+                  | "Arabic_Ext_B"
                   | "Arabic_Math"
                   | "Arabic_PF_A"
                   | "Arabic_PF_B"
@@ -1288,7 +1291,7 @@
                   | "Cuneiform_Numbers"
                   | "Currency_Symbols"
                   | "Cypriot_Syllabary"
-                  <phrase revisionflag='added'>| "Cypro_Minoan"</phrase>
+                  | "Cypro_Minoan"
                   | "Cyrillic"
                   | "Cyrillic_Ext_A"
                   | "Cyrillic_Ext_B"
@@ -1319,7 +1322,7 @@
                   | "Ethiopic"
                   | "Ethiopic_Ext"
                   | "Ethiopic_Ext_A"
-                  <phrase revisionflag='added'>| "Ethiopic_Ext_B"</phrase>
+                  | "Ethiopic_Ext_B"
                   | "Ethiopic_Sup"
                   | "Geometric_Shapes"
                   | "Geometric_Shapes_Ext"
@@ -1365,7 +1368,7 @@
                   | "Kannada"
                   | "Katakana"
                   | "Katakana_Ext"
-                  <phrase revisionflag='added'>| "Kana_Ext_B"</phrase>
+                  | "Kana_Ext_B"
                   | "Kayah_Li"
                   | "Kharoshthi"
                   | "Khitan_Small_Script"
@@ -1381,8 +1384,8 @@
                   | "Latin_Ext_C"
                   | "Latin_Ext_D"
                   | "Latin_Ext_E"
-                  <phrase revisionflag='added'>| "Latin_Ext_F"</phrase>
-                  <phrase revisionflag='added'>| "Latin_Ext_G"</phrase>
+                  | "Latin_Ext_F"
+                  | "Latin_Ext_G"
                   | "Lepcha"
                   | "Letterlike_Symbols"
                   | "Limbu"
@@ -1449,7 +1452,7 @@
                   | "Old_Sogdian"
                   | "Old_South_Arabian"
                   | "Old_Turkic"
-                  <phrase revisionflag='added'>| "Old_Uyghur"</phrase>
+                  | "Old_Uyghur"
                   | "Oriya"
                   | "Ornamental_Dingbats"
                   | "Osage"
@@ -1511,7 +1514,7 @@
                   | "Takri"
                   | "Tamil"
                   | "Tamil_Sup"
-                  <phrase revisionflag='added'>| "Tangsa"</phrase>
+                  | "Tangsa"
                   | "Tangut"
                   | "Tangut_Components"
                   | "Tangut_Sup"
@@ -1521,16 +1524,16 @@
                   | "Tibetan"
                   | "Tifinagh"
                   | "Tirhuta"
-                  <phrase revisionflag='added'>| "Toto"</phrase>
+                  | "Toto"
                   | "Transport_And_Map"
                   | "UCAS"
                   | "UCAS_Ext"
-                  <phrase revisionflag='added'>| "UCAS_Ext_A"</phrase>
+                  | "UCAS_Ext_A"
                   | "Ugaritic"
                   | "Vai"
                   | "Vedic_Ext"
                   | "Vertical_Forms"
-                  <phrase revisionflag='added'>| "Vithkuqi"</phrase>
+                  | "Vithkuqi"
                   | "VS"
                   | "VS_Sup"
                   | "Wancho"
@@ -1540,7 +1543,7 @@
                   | "Yi_Syllables"
                   | "Yijing"
                   | "Zanabazar_Square"
-                  <phrase revisionflag='added'>| "Znamenny_Music"</phrase>
+                  | "Znamenny_Music"
     }?
 </lp:scrap>
   </section>
@@ -1820,8 +1823,8 @@
                  | "Sad" | "Sadhe" | "Seen" | "Semkath" | "Shin" | "Straight_Waw"
                  | "Swash_Kaf" | "Syriac_Waw"
                  | "Tah" | "Taw" | "Teh_Marbuta" | "Teh_Marbuta_Goal" | "Teth"
-                 <phrase revisionflag='added'>| "Thin_Yeh"</phrase>
-                 <phrase revisionflag='added'>| "Vertical_Tail"</phrase>
+                 | "Thin_Yeh"
+                 | "Vertical_Tail"
                  | "Waw"
                  | "Yeh" | "Yeh_Barree" | "Yeh_With_Tail" | "Yudh" | "Yudh_He"
                  | "Zain" | "Zhain" }?
@@ -2005,7 +2008,7 @@
          | "Bali" | "Bamu" | "Bass" | "Batk" | "Beng" | "Bhks"
          | "Bopo" | "Brah" | "Brai" | "Bugi" | "Buhd"
          | "Cakm" | "Cans" | "Cari" | "Cham" | "Cher" | "Chrs" | "Copt"
-         <phrase revisionflag='added'>| "Cpmn" </phrase>| "Cprt" | "Cyrl"
+         | "Cpmn" | "Cprt" | "Cyrl"
          | "Deva" | "Diak" | "Dogr" | "Dsrt" | "Dupl"
          | "Elba" | "Elym" | "Egyp" | "Ethi"
          | "Geor" | "Glag" | "Gong" | "Gonm" | "Goth" | "Gran" | "Grek"
@@ -2022,7 +2025,7 @@
          | "Medf" | "Mend" | "Merc" | "Mero" | "Mlym"
          | "Modi" | "Mong" | "Mroo" | "Mtei" | "Mult" | "Mymr"
          | "Nand" | "Narb" | "Nbat" | "Newa" | "Nkoo" | "Nshu"
-         | "Ogam" | "Olck" | "Orkh" | "Orya" | "Osge" | "Osma" <phrase revisionflag='added'>| "Ougr"</phrase>
+         | "Ogam" | "Olck" | "Orkh" | "Orya" | "Osge" | "Osma" | "Ougr"
          | "Palm" | "Pauc" | "Perm" | "Phag" | "Phli" | "Phlp" | "Phnx"
          | "Plrd" | "Prti"
          | "Qaai"
@@ -2032,9 +2035,9 @@
          | "Sylo" | "Syrc"
          | "Tagb" | "Takr" | "Tale" | "Talu" | "Taml" | "Tang" | "Tavt"
          | "Telu" | "Tfng" | "Tglg" | "Thaa" | "Thai" | "Tibt" | "Tirh"
-         <phrase revisionflag='added'>| "Tnsa" | "Toto"</phrase>
+         | "Tnsa" | "Toto"
          | "Ugar"
-         | "Vaii" <phrase revisionflag='added'>| "Vith"</phrase>
+         | "Vaii" | "Vith"
          | "Wara" | "Wcho"
          | "Xpeo" | "Xsux"
          | "Yezi" | "Yiii"
@@ -2576,7 +2579,7 @@
           | xsd:string {pattern="GCY"}
           | xsd:string {pattern="GCY-[0-9]{4}\.[0-9]{2}"}
           | xsd:string {pattern="GCYY-[0-9]{5}"}
-          <phrase revisionflag='added'>| xsd:string {pattern="GDM-[0-9]{5}"}</phrase>
+          | xsd:string {pattern="GDM-[0-9]{5}"}
           | xsd:string {pattern="GDZ-[0-9]{4}\.[0-9]{2}"}
           | xsd:string {pattern="GFC-[0-9]{3}"}
           | xsd:string {pattern="GFZ"}
@@ -2659,12 +2662,12 @@
   code-point-attributes &amp;= attribute kIRG_MSource
      { "" | xsd:string {pattern="MAC[0-9]{5}"}
           | xsd:string {pattern="MAC-[0-9]{5}"}
-          <phrase revisionflag='added'>| xsd:string {pattern="MA-[0-9A-F]{4}"} </phrase>
-          <phrase revisionflag='added'>| xsd:string {pattern="MB1-[0-9A-F]{4}"} </phrase>
-          <phrase revisionflag='added'>| xsd:string {pattern="MB2-[0-9A-F]{4}"} </phrase>
-          <phrase revisionflag='added'>| xsd:string {pattern="MC-[0-9]{5}"} </phrase>
-          <phrase revisionflag='added'>| xsd:string {pattern="MD-[0-9A-F]{4,5}"} </phrase>
-          <phrase revisionflag='added'>| xsd:string {pattern="MDH-[0-9A-F]{4,5}"} </phrase>
+          | xsd:string {pattern="MA-[0-9A-F]{4}"}
+          | xsd:string {pattern="MB1-[0-9A-F]{4}"}
+          | xsd:string {pattern="MB2-[0-9A-F]{4}"}
+          | xsd:string {pattern="MC-[0-9]{5}"}
+          | xsd:string {pattern="MD-[0-9A-F]{4,5}"}
+          | xsd:string {pattern="MDH-[0-9A-F]{4,5}"}
            }?
 
 
@@ -2715,8 +2718,8 @@
           | xsd:string {pattern="V2-[0-9A-F]{4}"}
           | xsd:string {pattern="V3-[0-9A-F]{4}"}
           | xsd:string {pattern="V4-[0-9A-F]{4}"}
-          <phrase revisionflag='added'>| xsd:string {pattern="VN-[0-9A-F]{5}"}</phrase>
-          | xsd:string {pattern="<phrase revisionflag='changed'>VU-[0-9A-F]{4,5}</phrase>"} }?
+          | xsd:string {pattern="VN-[0-9A-F]{5}"}
+          | xsd:string {pattern="VU-[0-9A-F]{4,5}"} }?
 
   code-point-attributes &amp;= attribute kJa
      { xsd:string {pattern="[0-9A-F]{4}S?"} }?
@@ -2801,7 +2804,7 @@
      { list { xsd:string {pattern="[0-9]+"} +}}?
 
   code-point-attributes &amp;= attribute kPhonetic
-     { list { xsd:string {pattern="<phrase revisionflag='changed'>[1-9][0-9]{0,3}[A-Dx]?\*?"</phrase>} +}}?
+     { list { xsd:string {pattern="[1-9][0-9]{0,3}[A-Dx]?\*?"} +}}?
 
   code-point-attributes &amp;= attribute kPrimaryNumeric
      { xsd:string {pattern="[0-9]+"} }?
@@ -2844,7 +2847,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
 
 
   code-point-attributes &amp;= attribute kSpoofingVariant
-     { <phrase revisionflag='added'>list {</phrase> xsd:string {pattern="U\+[0-9A-F]{4,5}"} <phrase revisionflag='added'>+ }</phrase>}?
+     { list { xsd:string {pattern="U\+[0-9A-F]{4,5}"} + }}?
 
   code-point-attributes &amp;= attribute kTaiwanTelegraph
      { list { xsd:string {pattern="[0-9]{4}"} +}}?
@@ -2881,7 +2884,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
   code-point-attributes &amp;= attribute kZVariant
      { list { xsd:string {pattern="U\+2?[0-9A-F]{4}((&lt;k[A-Za-z0-9]+(:[TBZ]+)?(,k[A-Za-z0-9]+(:[TBZ]+)?)*)|(:k[A-Za-z]+))?"} +}} ?
 
-     <phrase revisionflag='added'>code-point-attributes &amp;= attribute kStrange
+  code-point-attributes &amp;= attribute kStrange
      { list { ( xsd:string {pattern="A"}
               | xsd:string {pattern="B(:U\+[0-9A-F]{4,5})"}
               | xsd:string {pattern="C"}
@@ -2893,7 +2896,7 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
               | xsd:string {pattern="O(:U\+[0-9A-F]{4,5})?"}
               | xsd:string {pattern="R(:U\+[0-9A-F]{4,5})?"}
               | xsd:string {pattern="S(:[4-9][0-9])"}
-              | xsd:string {pattern="U"} ) + }}?</phrase>
+              | xsd:string {pattern="U"} ) + }}?
 </lp:scrap>
 
     </section>
