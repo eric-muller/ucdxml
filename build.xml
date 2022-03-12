@@ -152,7 +152,7 @@ of the copyright holder.
   <!--____________________________________________________ XML validation ___-->
 
   <condition property='uconv'
-             value='uconv'
+             value='/usr/local/opt/icu4c/bin/uconv'
              else='external/uconv.exe'>
     <os family='mac'/>
   </condition>
