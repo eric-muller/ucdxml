@@ -1,5 +1,10 @@
 # ucdxml
 
+On mac:
+ brew install icu4c
+ brew install rnv
+
+
 (cd uax42; ant all)
 
 ant compile
@@ -16,4 +21,8 @@ ant validate14
 
 ant diff14
 
+
+
 RNV (validateur Relax NG): http://www.davidashen.net/rnv.html
+
+ 
