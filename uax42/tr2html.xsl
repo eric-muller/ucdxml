@@ -22,7 +22,7 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
       <link rel="stylesheet"
 	    type="text/css"
-	    href="http://www.unicode.org/reports/reports-v2.css"/>
+	    href="https://www.unicode.org/reports/reports-v2.css"/>
       <title>
 	<xsl:choose>
 	  <xsl:when test='articleinfo/unicode:tr/@class="uax"'>
@@ -46,8 +46,8 @@
       <table class="header" cellpadding='0' cellspacing='0' width="100%">
 	<tbody>
 	  <tr>
-	    <td class="icon"><a href="http://www.unicode.org/">
-	    <img style='vertical-align:middle;border:0' alt="[Unicode]" src="http://www.unicode.org/webscripts/logo60s2.gif" height="33" width="34"/></a>&#x00A0;&#x00A0;<a class="bar" href="http://www.unicode.org/reports/">Technical Reports</a></td>
+	    <td class="icon"><a href="https://www.unicode.org/">
+	    <img style='vertical-align:middle;border:0' alt="[Unicode]" src="https://www.unicode.org/webscripts/logo60s2.gif" height="33" width="34"/></a>&#x00A0;&#x00A0;<a class="bar" href="https://www.unicode.org/reports/">Technical Reports</a></td>
 	  </tr>
 	  <tr>
 	    <td class="gray">&#x00A0;</td>
@@ -672,7 +672,7 @@
   </xsl:param>
 
   <xsl:param name='thisurl'>
-    <xsl:text>http://www.unicode.org/reports/tr</xsl:text>
+    <xsl:text>https://www.unicode.org/reports/tr</xsl:text>
     <xsl:value-of select='$thisnumber'/>
     <xsl:text>/tr</xsl:text>
     <xsl:value-of select='$thisnumber'/>
@@ -686,7 +686,7 @@
   </xsl:param>
 
   <xsl:param name='prevurl'>
-    <xsl:text>http://www.unicode.org/reports/tr</xsl:text>
+    <xsl:text>https://www.unicode.org/reports/tr</xsl:text>
     <xsl:value-of select='$thisnumber'/>
     <xsl:text>/tr</xsl:text>
     <xsl:value-of select='$thisnumber'/>
@@ -696,13 +696,13 @@
   </xsl:param>
 
   <xsl:param name='latesturl'>
-    <xsl:text>http://www.unicode.org/reports/tr</xsl:text>
+    <xsl:text>https://www.unicode.org/reports/tr</xsl:text>
     <xsl:value-of select='$thisnumber'/>
     <xsl:text>/</xsl:text>
   </xsl:param>
 
   <xsl:param name='thisschema'>
-    <xsl:text>http://www.unicode.org/reports/tr</xsl:text>
+    <xsl:text>https://www.unicode.org/reports/tr</xsl:text>
     <xsl:value-of select='$thisnumber'/>
     <xsl:text>/tr</xsl:text>
     <xsl:value-of select='$thisnumber'/>
@@ -868,17 +868,17 @@
 
       <p><i>Please submit corrigenda and other comments with the
       online reporting form [<a
-      href='http://www.unicode.org/reporting.html'>Feedback</a>]. Related
+      href='https://www.unicode.org/reporting.html'>Feedback</a>]. Related
       information that is useful in understanding this annex is found
       in Unicode Standard Annex #41, &#x201C;<a
-      href="http://www.unicode.org/reports/tr41/tr41-28.html">Common
+      href="https://www.unicode.org/reports/tr41/tr41-28.html">Common
       References for Unicode Standard Annexes.</a>&#x201D; For the
       latest version of the Unicode Standard, see [<a
-      href="http://www.unicode.org/versions/latest/">Unicode</a>]. For
+      href="https://www.unicode.org/versions/latest/">Unicode</a>]. For
       a list of current Unicode Technical Reports, see [<a
-      href="http://www.unicode.org/reports/">Reports</a>]. For
+      href="https://www.unicode.org/reports/">Reports</a>]. For
       more information about versions of the Unicode Standard, see [<a
-      href="http://www.unicode.org/versions/">Versions</a>]. For any errata which may apply to this annex, see [<a href="http://www.unicode.org/errata/">Errata</a>].</i></p>
+      href="https://www.unicode.org/versions/">Versions</a>]. For any errata which may apply to this annex, see [<a href="https://www.unicode.org/errata/">Errata</a>].</i></p>
 
     </xsl:when>
     <xsl:when test='articleinfo/unicode:tr/@class="uts"'>
@@ -935,7 +935,7 @@
   is assumed for incidental and consequential damages in connection
   with or arising out of the use of the information or programs
   contained or accompanying this technical report. The Unicode <a
-  href="http://www.unicode.org/copyright.html">Terms of Use</a>
+  href="https://www.unicode.org/copyright.html">Terms of Use</a>
   apply.</p>
 
   <p class='copyright'>Unicode and the Unicode logo are trademarks of
