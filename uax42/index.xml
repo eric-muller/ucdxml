@@ -2067,7 +2067,7 @@
          | "Mahj" | "Maka" | "Mand" | "Mani" | "Marc"
          | "Medf" | "Mend" | "Merc" | "Mero" | "Mlym"
          | "Modi" | "Mong" | "Mroo" | "Mtei" | "Mult" | "Mymr"
-         | "Nand" | "Narb" | "Nbat" | "Newa" | "Nkoo" | "Nshu"
+         <phrase revisionflag='added'>| "Nagm"</phrase> | "Nand" | "Narb" | "Nbat" | "Newa" | "Nkoo" | "Nshu"
          | "Ogam" | "Olck" | "Orkh" | "Orya" | "Osge" | "Osma" | "Ougr"
          | "Palm" | "Pauc" | "Perm" | "Phag" | "Phli" | "Phlp" | "Phnx"
          | "Plrd" | "Prti"
