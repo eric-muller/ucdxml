@@ -1156,7 +1156,9 @@
           | xsd:string {pattern="GXC-[0-9]{4}\.[0-9]{2}"}
           | xsd:string {pattern="GXH-[0-9]{4}\.[0-9]{2}"}
           | xsd:string {pattern="GXHZ-[0-9]{3}"}
+          | xsd:string {pattern="GXM-[0-9]{5}"}
           | xsd:string {pattern="GZ-[0-9]{7}"}
+          | xsd:string {pattern="GZA-[123467][0-9]{5}"}
           | xsd:string {pattern="GZFY-[0-9]{5}"}
           | xsd:string {pattern="GZH-[0-9]{4}\.[0-9]{2}"}
           | xsd:string {pattern="GZJW-[0-9]{5}"}
@@ -1169,7 +1171,7 @@
           | xsd:string {pattern="HB0-[0-9A-F]{4}"}
           | xsd:string {pattern="HB1-[0-9A-F]{4}"}
           | xsd:string {pattern="HB2-[0-9A-F]{4}"}
-          | xsd:string {pattern="HD-[0-9A-F]{4}"}
+          | xsd:string {pattern="HD-[23]?[0-9A-F]{4}"}
           | xsd:string {pattern="HU-[0-9A-F]{5}"} }?
 
   code-point-attributes &= attribute kIRG_JSource
@@ -1241,6 +1243,7 @@
           | xsd:string {pattern="T5-[0-9A-F]{4}"}
           | xsd:string {pattern="T6-[0-9A-F]{4}"}
           | xsd:string {pattern="T7-[0-9A-F]{4}"}
+          | xsd:string {pattern="T12-[0-9A-F]{4}"}
           | xsd:string {pattern="T13-[0-9A-F]{4}"}
           | xsd:string {pattern="TA-[0-9A-F]{4}"}
           | xsd:string {pattern="TB-[0-9A-F]{4}"}
