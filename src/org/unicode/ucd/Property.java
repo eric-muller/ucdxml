@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2021 Unicode Inc.
+// Copyright 2006-2022 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -327,6 +327,8 @@ public class Property {
   // added in 14.0.0
   public static Property kStrange                    = new Property ("kStrange");
 
+  // added in 15.0.0
+  public static Property kAlternateTotalStrokes      = new Property ("kAlternateTotalStrokes");
 
   private String shortName;
   private String longName;

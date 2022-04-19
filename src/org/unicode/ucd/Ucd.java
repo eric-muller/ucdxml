@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2021 Unicode Inc.
+// Copyright 2006-2022 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -229,7 +229,8 @@ public class Ucd {
               || "<CJK Ideograph Extension D, Last>".equals (fields [1])
               || "<CJK Ideograph Extension E, Last>".equals (fields [1])
               || "<CJK Ideograph Extension F, Last>".equals (fields [1])
-              || "<CJK Ideograph Extension G, Last>".equals (fields [1])) {
+              || "<CJK Ideograph Extension G, Last>".equals (fields [1])
+              || "<CJK Ideograph Extension H, Last>".equals (fields [1])) {
             fields [1] = "CJK UNIFIED IDEOGRAPH-#";
             setUnicodeDataFields (firstCp, cp, "char", fields);
             return; }
@@ -897,6 +898,10 @@ public class Ucd {
     scriptMap.put ("TANGSA",                   "Tnsa");
     scriptMap.put ("TOTO",                     "Toto");
     scriptMap.put ("VITHKUQI",                 "Vith");
+
+    // Unicode 15.0
+    scriptMap.put ("KAWI",                     "Kawi");
+    scriptMap.put ("NAG_MUNDARI",              "Nagm");
   }
 
 
@@ -2218,7 +2223,7 @@ public class Ucd {
 
         char[] c = "\n\n".toCharArray ();
         ch.characters (c, 0, c.length);
-        c = " \u00A9 2020 Unicode\u00AE, Inc. ".toCharArray ();
+        c = " \u00A9 2022 Unicode\u00AE, Inc. ".toCharArray ();
         ch.comment (c, 0, c.length);
         c = "\n".toCharArray ();
         ch.characters (c, 0, c.length);
