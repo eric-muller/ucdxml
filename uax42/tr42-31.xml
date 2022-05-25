@@ -6,7 +6,7 @@
   <title>Unicode Character Database in XML</title>
 
   <articleinfo>
-    <unicode:tr number='42' class='uax' version='15.0.0 (draft 1)'
+    <unicode:tr number='42' class='uax' version='15.0.0 (draft 2)'
                 stage='proposed-update' status='published'
                 schema='rnc' prevrev='30'/>
 
@@ -21,7 +21,7 @@
     <revhistory>
       <revision>
         <revnumber>31</revnumber>
-        <date>2022-03-31</date>
+        <date>2022-05-24</date>
         <revdescription>
           <itemizedlist>
             <listitem><para>New value for the <sgmltag>age</sgmltag> attribute:
@@ -2487,8 +2487,7 @@
      { text }?
 
   <phrase revisionflag='added'>code-point-attributes &amp;= attribute kAlternateTotalStrokes
-     { list { ( xsd:string {pattern="[0-9]+:[BHJKMPSUV]+"}
-              | xsd:string {pattern="\-"} ) + }}?</phrase>
+     { "-" | list { xsd:string {pattern="[0-9]+:[BHJKMPSUV]+"} +}}?</phrase>
 
   code-point-attributes &amp;= attribute kBigFive
      { xsd:string {pattern="[0-9A-F]{4}"} }?
@@ -2660,7 +2659,7 @@
           | xsd:string {pattern="GXHZ-[0-9]{3}"}
           <phrase revisionflag='added'>| xsd:string {pattern="GXM-[0-9]{5}"}</phrase>
           | xsd:string {pattern="GZ-[0-9]{7}"}
-          <phrase revisionflag='added'>| xsd:string {pattern="GZA-[123467][0-9]{5}"}</phrase>
+          <phrase revisionflag='added'>| xsd:string {pattern="GZA-[0-9]{6}"}</phrase>
           | xsd:string {pattern="GZFY-[0-9]{5}"}
           | xsd:string {pattern="GZH-[0-9]{4}\.[0-9]{2}"}
           | xsd:string {pattern="GZJW-[0-9]{5}"}

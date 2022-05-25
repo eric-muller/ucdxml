@@ -1,7 +1,7 @@
 The beta version of the UCD includes nine files which are intended to
 help beta testers evaluate the changes since the previous
 version. Those files are not part of the UCD, and will be present only
-during the beta period.  Those files only informative. While we
+during the beta period. Those files are only informative. While we
 believe that those files present accurate data, there is no guarantee
 that the data is indeed accurate. The files are not intended to be
 machine readable.
@@ -16,12 +16,12 @@ All files cover:
 - the changes to blocks
 - the changes to named sequences
 - the changes to normalization corrections
-- the changes to standardized variant
+- the changes to standardized variants
 
 
 The *.summary.diffs files give only a summary, in the form of the number of
 things which have changed; the *.changes.diffs file add a list of the new
-characters, and a lists of the property changes for existing
+characters, and a list of the property changes for existing
 characters; the *.all.diffs file adds the property changes for the new
 characters.
 
@@ -31,7 +31,7 @@ the Unihan database. The *.all.* files cover all the properties.
 
 ---
 <x>-<y>.nounihan.summary.diffs contains only the number of things
-(code points, blocks, etc) which have changed between versions
+(code points, blocks, etc.) which have changed between versions
 <x> and <y>. The format is
 
 <before> + <added> - <removed> # <changed> = <after> (<ignored>, <undefined>)
@@ -56,7 +56,7 @@ standardized variants are listed.
 <x>-<y>.nounihan.all.diffs does not ignore the newly assigned
 characters. The most important consequence is that if a property of a
 newly assigned code point has changed, then the change is counted and
-listed. However, this does not means that all the values of the
+listed. However, this does not mean that all the values of the
 properties for all the newly assigned characters are listed: for
 example, the combining class of unassigned code points is 0, and it
 remains 0 for most newly assigned characters. Hence only a subset
