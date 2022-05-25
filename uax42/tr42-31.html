@@ -34,7 +34,7 @@
             <tbody>
                <tr>
                   <td valign="top" width="20%">Version</td>
-                  <td valign="top">Unicode <span style="background-color: #ffff00; border-style:dotted; border-width:1px">15.0.0 (draft 1)</span>
+                  <td valign="top">Unicode <span style="background-color: #ffff00; border-style:dotted; border-width:1px">15.0.0 (draft 2)</span>
                   </td>
                </tr>
                <tr>
@@ -45,7 +45,7 @@
                <tr>
                   <td valign="top">Date</td>
                   <td valign="top">
-                     <span style="background-color: #ffff00; border-style:dotted; border-width:1px">2022-03-31</span>
+                     <span style="background-color: #ffff00; border-style:dotted; border-width:1px">2022-05-24</span>
                   </td>
                </tr>
                <tr>
@@ -2294,8 +2294,7 @@
 
   </tt>
             <span style="background-color: #ffff00; border-style:dotted; border-width:1px">code-point-attributes &amp;= attribute kAlternateTotalStrokes
-     { list { ( xsd:string {pattern="[0-9]+:[BHJKMPSUV]+"}
-              | xsd:string {pattern="\-"} ) + }}?</span>
+     { "-" | list { xsd:string {pattern="[0-9]+:[BHJKMPSUV]+"} +}}?</span>
             <tt style="white-space: pre;">
 
   code-point-attributes &amp;= attribute kBigFive
@@ -2471,7 +2470,7 @@
             <tt style="white-space: pre;">
           | xsd:string {pattern="GZ-[0-9]{7}"}
           </tt>
-            <span style="background-color: #ffff00; border-style:dotted; border-width:1px">| xsd:string {pattern="GZA-[123467][0-9]{5}"}</span>
+            <span style="background-color: #ffff00; border-style:dotted; border-width:1px">| xsd:string {pattern="GZA-[0-9]{6}"}</span>
             <tt style="white-space: pre;">
           | xsd:string {pattern="GZFY-[0-9]{5}"}
           | xsd:string {pattern="GZH-[0-9]{4}\.[0-9]{2}"}

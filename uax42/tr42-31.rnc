@@ -985,8 +985,7 @@
      { text }?
 
   code-point-attributes &= attribute kAlternateTotalStrokes
-     { list { ( xsd:string {pattern="[0-9]+:[BHJKMPSUV]+"}
-              | xsd:string {pattern="\-"} ) + }}?
+     { "-" | list { xsd:string {pattern="[0-9]+:[BHJKMPSUV]+"} +}}?
 
   code-point-attributes &= attribute kBigFive
      { xsd:string {pattern="[0-9A-F]{4}"} }?
@@ -1158,7 +1157,7 @@
           | xsd:string {pattern="GXHZ-[0-9]{3}"}
           | xsd:string {pattern="GXM-[0-9]{5}"}
           | xsd:string {pattern="GZ-[0-9]{7}"}
-          | xsd:string {pattern="GZA-[123467][0-9]{5}"}
+          | xsd:string {pattern="GZA-[0-9]{6}"}
           | xsd:string {pattern="GZFY-[0-9]{5}"}
           | xsd:string {pattern="GZH-[0-9]{4}\.[0-9]{2}"}
           | xsd:string {pattern="GZJW-[0-9]{5}"}

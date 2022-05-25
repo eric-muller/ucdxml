@@ -1,13 +1,13 @@
-XML Representation of Unicode 13.0.0 UCD
+XML Representation of Unicode 15.0.0 UCD
 
 
-© 2020 Unicode®, Inc.
-For terms of use, see http://www.unicode.org/terms_of_use.html
+© 2022 Unicode®, Inc.
+For terms of use, see https://www.unicode.org/terms_of_use.html
 
 
-This directory contains the representation in XML of version 13.0.0 of
-the UCD, using the schema defined by UAX 42, "Unicode Character
-Database in XML".
+This directory contains the representation in XML of Version 15.0.0 of
+the UCD, using the schema defined by UAX #42: Unicode Character
+Database in XML, at https://www.unicode.org/reports/tr42/
 
 While every effort has been made to ensure consistency of the 
 XML representation with the UCD files, there may be some errors;
@@ -19,9 +19,9 @@ the archive:
 
                     flat         grouped
 
-no Unihan data       936 KB          568 KB
-Unihan data only   6,116 KB        6,124 KB
-complete UCD       8,024 KB        6,652 KB
+no Unihan data       959 KB          580 KB
+Unihan data only   6,383 KB        6,387 KB
+complete UCD       8,357 KB        6,650 KB
 
 The flat versions do not use the group mechanism. The grouped versions
 use the group mechanism, with groups corresponding approximately to
@@ -30,4 +30,4 @@ the blocks (a few blocks have been subdivided).
 The "no Unihan data" files do not contain the properties expressed only
 in the Unihan database. The "Unihan data only" files contain only
 the properties and code points expressed in the Unihan database.
-The "complete  UCD" files reflect the complete UCD data.
+The "complete UCD" files reflect the complete UCD data.
