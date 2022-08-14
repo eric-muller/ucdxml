@@ -117,8 +117,87 @@ public class Parser {
     while (true);
   }
 
+  static public void parseSemiDelimitedFileWithAtmissings (URL baseURL, String filename, String charset, Loader l)
+  throws Exception {
+    final String atmissing = "# @missing: ";
+    final String allcodespace = "0000..10FFFF; Left_To_Right";
+    final char delimiter = ';';
+    URL url = new URL (baseURL, filename);
+    LineNumberReader rd = new LineNumberReader (new InputStreamReader (url.openStream (), charset));
+
+    if (verbosity >= 3) {
+      System.out.println ("      ... " + url); }
+
+    do {
+      String s = rd.readLine ();
+      l.currentLine = rd.getLineNumber ();
+      if (s == null) {
+        break; }
+
+      int comment = s.indexOf ('#');
+      if (comment != -1) {
+        if (s.startsWith (atmissing)) {  // @missing line
+          s = s.substring (atmissing.length ());
+          if (allcodespace.equals (s)) {
+            // Skip the @missing line that covers the entire codespace,
+            // because it would try to create too many boundaries.
+            // We will fill in the gaps with the L default before the end.
+            continue; }}
+        else {                           // regular comment line
+          s = s.substring (0, comment); }}
+
+      if (s.length () < 2) {
+        continue; }
+
+      // Unfortunately, both String.split and StringTokenizer do not
+      // behave the way we need on empty fields; so we have to split the
+      // fields by hand.
+      int start = 0;
+      int length = s.length ();
+      int nFields = 1;
+      while (start < length) {
+        int semi = s.indexOf (delimiter, start);
+        if (semi == -1) {
+           break; }
+        nFields++;
+        start = semi + 1; }
+      String[] fields = new String [nFields];
+
+      start = 0;
+      for (int f = 0; f < nFields - 1; f++) {
+        int semi = s.indexOf (delimiter, start);
+        fields [f] = s.substring (start, semi).trim ();
+        start = semi + 1; }
+      if (start >= length) {
+        fields [nFields-1] = ""; }
+      else {
+        fields [nFields-1] = s.substring (start).trim (); }
+
+      l.process (fields); }
+
+    while (true);
+  }
+
   public interface LoaderWithCodePoints {
     public abstract void process (int first, int last, String[] fields) throws Exception;
+  }
+
+  static public void parseSemiDelimitedFileWithCodePointsAndAtmissings (URL baseURL, String filename, int field, String charset, LoaderWithCodePoints l)
+  throws Exception {
+    final int cpField = field;
+    final LoaderWithCodePoints l2 = l;
+    parseSemiDelimitedFileWithAtmissings (baseURL, filename, charset,
+                                          new Loader ()  {
+      public void process (String [] fields) throws Exception {
+        int first, last;
+        int dotdot = fields [cpField].indexOf ("..");
+        if (dotdot != -1) {
+          first = Integer.parseInt (fields [cpField].substring (0, dotdot), 16);
+          last = Integer.parseInt (fields [cpField].substring (dotdot+2), 16); }
+        else {
+          first = Integer.parseInt (fields [cpField], 16);
+          last = first; }
+        l2.process (first, last, fields); }});
   }
 
   static public void parseSemiDelimitedFileWithCodePoints (URL baseURL, String filename, int field, String charset, LoaderWithCodePoints l)
