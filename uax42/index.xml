@@ -6,7 +6,7 @@
   <title>Unicode Character Database in XML</title>
 
   <articleinfo>
-    <unicode:tr number='42' class='uax' version='15.0.0 (draft 2)'
+    <unicode:tr number='42' class='uax' version='15.0.0 (draft 3)'
                 stage='proposed-update' status='published'
                 schema='rnc' prevrev='30'/>
 
@@ -17,11 +17,16 @@
       <firstname>Eric</firstname>
       <email>eric.muller@efele.net</email>
     </author>
+    <author revisionflag='added'>
+      <firstname>Lauren&#x021B;iu</firstname>
+      <surname>Iancu</surname>
+      <email>liancu@unicode.org</email>
+    </author>
 
     <revhistory>
       <revision>
         <revnumber>31</revnumber>
-        <date>2022-05-24</date>
+        <date>2022-08-14</date>
         <revdescription>
           <itemizedlist>
             <listitem><para>New value for the <sgmltag>age</sgmltag> attribute:
@@ -779,7 +784,7 @@
       values.</para>
 
       <para>Valid documents may provide values for only some of the
-      the code points, or some of the Unicode properties. Furthermore,
+      code points, or some of the Unicode properties. Furthermore,
       they may also incorporate non-Unicode properties.</para>
 
       <para>Our schema is defined using English. However, a useful
@@ -799,7 +804,7 @@
       schema is relatively straightforward and can be converted
       mechanically to other schema languages.</para>
 
-      <para>While our XML representation is not intented to be used
+      <para>While our XML representation is not intended to be used
       during processing of characters and strings, it is still a
       design principle for our schema to support the relatively
       efficient representation of the UCD. This is achieved by an
@@ -950,7 +955,7 @@
     <section>
       <title>Sets of code points</title>
 
-      <para>It is often the case that successive code points have the
+      <para>It is often the case that successive code points have
       the same property values, for a given set of properties. The
       most striking example is that of an unallocated plane, where all
       but the last two code points are reserved and have the same
@@ -1195,7 +1200,7 @@
       point&gt;. It also happens that character names cannot contain
       the character U+0023 &#x0023; NUMBER SIGN, so we adopted the
       following convention: if a code point has the attribute
-      <sgmltag>na</sgmltag> (either directly or by inheritence from an
+      <sgmltag>na</sgmltag> (either directly or by inheritance from an
       enclosing group), then occurrences of the character # in the
       name are to be interpreted as the value of the code point. For
       example:</para>
@@ -1623,7 +1628,7 @@
         representation of the combining class.</para>
 
         <para>Because the set of values that this property has taken
-        accross the various versions of the UCD is rather large,
+        across the various versions of the UCD is rather large,
         our schema does not restrict the possible values to those
         actually used.</para>
 
@@ -1745,7 +1750,7 @@
         <para>The properties NFC_Quick_Check, NFD_Quick_Check,
         NFKC_Quick_Check, NFKD_Quick_Check, Expands_On_NFC,
         Expands_On_NFD, Expands_On_NFKC, Expands_On_NKFD,
-        FC_NFKC_Closure have corresponding attribues.</para>
+        FC_NFKC_Closure have corresponding attributes.</para>
 
 <lp:scrap title='quick check properties' id='schema.properties'>
   code-point-attributes &amp;=
@@ -1876,7 +1881,7 @@
                  | "Zain" | "Zhain" }?
 </lp:scrap>
 
-        <para>The Join_Control property is representedy by the
+        <para>The Join_Control property is represented by the
         <sgmltag>Join_C</sgmltag> attribute.</para>
 
 <lp:scrap title='joining properties' id='schema.properties'>

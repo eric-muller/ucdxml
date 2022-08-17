@@ -1061,13 +1061,28 @@ public class Ucd {
   }
 
   private void parseDerivedBidiClass (Version v, URL baseURL) throws Exception {
-    if (v.isAtLeast (Version.V3_2_0)) {
+    if (v.isAtLeast (Version.V15_0_0)) {
+      Parser.parseSemiDelimitedFileWithCodePointsAndAtmissings (baseURL, "extracted/DerivedBidiClass.txt", 0, "US-ASCII",
+        new LoaderWithCodePoints () {
+          public void process (int firstCp, int lastCp, String[] fields) {
+            if ((fields [1]).length () > 3) {
+              if ("Left_To_Right".equals (fields [1])) {
+                fields [1] = "L"; }
+              else if ("Right_To_Left".equals (fields [1])) {
+                fields [1] = "R"; }
+              else if ("Arabic_Letter".equals (fields [1])) {
+                fields [1] = "AL"; }
+              else if ("European_Terminator".equals (fields [1])) {
+                fields [1] = "ET"; }}
+            repertoire.putForced (firstCp, lastCp, Property.bc, fields [1]); }}); }
+
+    else if (v.isAtLeast (Version.V3_2_0)) {
       Parser.parseSemiDelimitedFileWithCodePoints (baseURL, "extracted/DerivedBidiClass.txt", 0, "US-ASCII",
         new LoaderWithCodePoints () {
           public void process (int firstCp, int lastCp, String[] fields) {
-            repertoire.put (firstCp, lastCp, Property.bc, fields [1]); }});
+            repertoire.put (firstCp, lastCp, Property.bc, fields [1]); }}); }
 
-      repertoire.putDefault (Property.bc, "L"); }
+      repertoire.putDefault (Property.bc, "L");
   }
 
   private void parseUnihan (Version v, URL baseURL, boolean numericValuesOnly) throws Exception {

@@ -374,6 +374,12 @@
   </span>
 </xsl:template>
 
+<xsl:template match='author[@revisionflag="added"]'>
+  <span style='background-color: #ffff00; border-style:dotted; border-width:1px'>
+    <xsl:apply-templates/>
+  </span>
+</xsl:template>
+
 <xsl:template match='phrase[@revisionflag="changed"]'>
   <span style='background-color: #ffff00; border-style:dotted; border-width:1px'>
     <xsl:apply-templates/>
