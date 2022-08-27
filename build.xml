@@ -2230,7 +2230,7 @@ of the copyright holder.
     <get src='${Public}/15.0.0/ucd/CJKRadicals-15.0.0d1.txt'                    dest='data/15.0.0/ucd/CJKRadicals.txt'/>
     <get src='${Public}/15.0.0/ucd/CaseFolding-15.0.0d1.txt'                    dest='data/15.0.0/ucd/CaseFolding.txt'/>
     <get src='${Public}/15.0.0/ucd/CompositionExclusions-15.0.0d1.txt'          dest='data/15.0.0/ucd/CompositionExclusions.txt'/>
-    <get src='${Public}/15.0.0/ucd/DerivedAge-15.0.0d3.txt'                     dest='data/15.0.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/15.0.0/ucd/DerivedAge-15.0.0d2.txt'                     dest='data/15.0.0/ucd/DerivedAge.txt'/>
     <get src='${Public}/15.0.0/ucd/DerivedCoreProperties-15.0.0d2.txt'          dest='data/15.0.0/ucd/DerivedCoreProperties.txt'/>
     <get src='${Public}/15.0.0/ucd/DerivedNormalizationProps-15.0.0d1.txt'      dest='data/15.0.0/ucd/DerivedNormalizationProps.txt'/>
     <get src='${Public}/15.0.0/ucd/EastAsianWidth-15.0.0d5.txt'                 dest='data/15.0.0/ucd/EastAsianWidth.txt'/>
@@ -2246,7 +2246,7 @@ of the copyright holder.
     <get src='${Public}/15.0.0/ucd/NamedSequences-15.0.0d1.txt'                 dest='data/15.0.0/ucd/NamedSequences.txt'/>
     <get src='${Public}/15.0.0/ucd/NamedSequencesProv-15.0.0d1.txt'             dest='data/15.0.0/ucd/NamedSequencesProv.txt'/>
     <get src='${Public}/15.0.0/ucd/NamesList-15.0.0d2.html'                     dest='data/15.0.0/ucd/NamesList.html'/>
-    <get src='${Public}/15.0.0/ucd/NamesList-15.0.0d5.txt'                      dest='data/15.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/15.0.0/ucd/NamesList-15.0.0d6.txt'                      dest='data/15.0.0/ucd/NamesList.txt'/>
     <get src='${Public}/15.0.0/ucd/NormalizationCorrections-15.0.0d1.txt'       dest='data/15.0.0/ucd/NormalizationCorrections.txt'/>
     <get src='${Public}/15.0.0/ucd/NormalizationTest-15.0.0d1.txt'              dest='data/15.0.0/ucd/NormalizationTest.txt'/>
     <get src='${Public}/15.0.0/ucd/NushuSources-15.0.0d1.txt'                   dest='data/15.0.0/ucd/NushuSources.txt'/>
@@ -2257,7 +2257,7 @@ of the copyright holder.
     <get src='${Public}/15.0.0/ucd/ScriptExtensions-15.0.0d1.txt'               dest='data/15.0.0/ucd/ScriptExtensions.txt'/>
     <get src='${Public}/15.0.0/ucd/Scripts-15.0.0d5.txt'                        dest='data/15.0.0/ucd/Scripts.txt'/>
     <get src='${Public}/15.0.0/ucd/SpecialCasing-15.0.0d1.txt'                  dest='data/15.0.0/ucd/SpecialCasing.txt'/>
-    <get src='${Public}/15.0.0/ucd/StandardizedVariants-15.0.0d2.txt'           dest='data/15.0.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/15.0.0/ucd/StandardizedVariants-15.0.0d3.txt'           dest='data/15.0.0/ucd/StandardizedVariants.txt'/>
     <get src='${Public}/15.0.0/ucd/TangutSources-15.0.0d1.txt'                  dest='data/15.0.0/ucd/TangutSources.txt'/>
     <get src='${Public}/15.0.0/ucd/USourceData-15.0.0d5.txt'                    dest='data/15.0.0/ucd/USourceData.txt'/>
     <get src='${Public}/15.0.0/ucd/USourceGlyphs-15.0.0d5.pdf'                  dest='data/15.0.0/ucd/USourceGlyphs.pdf'/>
@@ -2287,7 +2287,7 @@ of the copyright holder.
     <get src='${Public}/15.0.0/ucd/auxiliary/SentenceBreakProperty-15.0.0d2.txt'        dest='data/15.0.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
     <get src='${Public}/15.0.0/ucd/auxiliary/SentenceBreakTest-15.0.0d1.html'           dest='data/15.0.0/ucd/auxiliary/SentenceBreakTest.html'/>
     <get src='${Public}/15.0.0/ucd/auxiliary/SentenceBreakTest-15.0.0d1.txt'            dest='data/15.0.0/ucd/auxiliary/SentenceBreakTest.txt'/>
-    <get src='${Public}/15.0.0/ucd/auxiliary/WordBreakProperty-15.0.0d1.txt'            dest='data/15.0.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/15.0.0/ucd/auxiliary/WordBreakProperty-15.0.0d2.txt'            dest='data/15.0.0/ucd/auxiliary/WordBreakProperty.txt'/>
     <get src='${Public}/15.0.0/ucd/auxiliary/WordBreakTest-15.0.0d1.html'               dest='data/15.0.0/ucd/auxiliary/WordBreakTest.html'/>
     <get src='${Public}/15.0.0/ucd/auxiliary/WordBreakTest-15.0.0d1.txt'                dest='data/15.0.0/ucd/auxiliary/WordBreakTest.txt'/>
 
