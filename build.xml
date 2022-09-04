@@ -2246,14 +2246,14 @@ of the copyright holder.
     <get src='${Public}/15.0.0/ucd/NamedSequences-15.0.0d1.txt'                 dest='data/15.0.0/ucd/NamedSequences.txt'/>
     <get src='${Public}/15.0.0/ucd/NamedSequencesProv-15.0.0d1.txt'             dest='data/15.0.0/ucd/NamedSequencesProv.txt'/>
     <get src='${Public}/15.0.0/ucd/NamesList-15.0.0d2.html'                     dest='data/15.0.0/ucd/NamesList.html'/>
-    <get src='${Public}/15.0.0/ucd/NamesList-15.0.0d6.txt'                      dest='data/15.0.0/ucd/NamesList.txt'/>
+    <get src='${Public}/15.0.0/ucd/NamesList-15.0.0d7.txt'                      dest='data/15.0.0/ucd/NamesList.txt'/>
     <get src='${Public}/15.0.0/ucd/NormalizationCorrections-15.0.0d1.txt'       dest='data/15.0.0/ucd/NormalizationCorrections.txt'/>
     <get src='${Public}/15.0.0/ucd/NormalizationTest-15.0.0d1.txt'              dest='data/15.0.0/ucd/NormalizationTest.txt'/>
     <get src='${Public}/15.0.0/ucd/NushuSources-15.0.0d1.txt'                   dest='data/15.0.0/ucd/NushuSources.txt'/>
     <get src='${Public}/15.0.0/ucd/PropList-15.0.0d4.txt'                       dest='data/15.0.0/ucd/PropList.txt'/>
     <get src='${Public}/15.0.0/ucd/PropertyAliases-15.0.0d1.txt'                dest='data/15.0.0/ucd/PropertyAliases.txt'/>
     <get src='${Public}/15.0.0/ucd/PropertyValueAliases-15.0.0d2.txt'           dest='data/15.0.0/ucd/PropertyValueAliases.txt'/>
-    <get src='${Public}/15.0.0/ucd/ReadMe-15.0.0d1.txt'                         dest='data/15.0.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/15.0.0/ucd/ReadMe-15.0.0d2.txt'                         dest='data/15.0.0/ucd/ReadMe.txt'/>
     <get src='${Public}/15.0.0/ucd/ScriptExtensions-15.0.0d1.txt'               dest='data/15.0.0/ucd/ScriptExtensions.txt'/>
     <get src='${Public}/15.0.0/ucd/Scripts-15.0.0d5.txt'                        dest='data/15.0.0/ucd/Scripts.txt'/>
     <get src='${Public}/15.0.0/ucd/SpecialCasing-15.0.0d1.txt'                  dest='data/15.0.0/ucd/SpecialCasing.txt'/>
