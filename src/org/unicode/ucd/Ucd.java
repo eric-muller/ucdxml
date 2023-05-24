@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2022 Unicode Inc.
+// Copyright 2006-2023 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -230,7 +230,8 @@ public class Ucd {
               || "<CJK Ideograph Extension E, Last>".equals (fields [1])
               || "<CJK Ideograph Extension F, Last>".equals (fields [1])
               || "<CJK Ideograph Extension G, Last>".equals (fields [1])
-              || "<CJK Ideograph Extension H, Last>".equals (fields [1])) {
+              || "<CJK Ideograph Extension H, Last>".equals (fields [1])
+              || "<CJK Ideograph Extension I, Last>".equals (fields [1])) {
             fields [1] = "CJK UNIFIED IDEOGRAPH-#";
             setUnicodeDataFields (firstCp, cp, "char", fields);
             return; }
@@ -710,7 +711,10 @@ public class Ucd {
 
       if (v.isAtLeast (Version.V5_2_0)) {
         repertoire.putDefault (Property.cwkcf, "N");
-        repertoire.putDefault (Property.nfkc_cf, "#"); }
+        repertoire.putDefault (Property.nfkc_cf, "#");
+
+        if (v.isAtLeast (Version.V15_1_0)) {
+            repertoire.putDefault (Property.NFKC_SCF, "#"); }}
     }
   }
 
@@ -2238,7 +2242,7 @@ public class Ucd {
 
         char[] c = "\n\n".toCharArray ();
         ch.characters (c, 0, c.length);
-        c = " \u00A9 2022 Unicode\u00AE, Inc. ".toCharArray ();
+        c = " \u00A9 2023 Unicode\u00AE, Inc. ".toCharArray ();
         ch.comment (c, 0, c.length);
         c = "\n".toCharArray ();
         ch.characters (c, 0, c.length);

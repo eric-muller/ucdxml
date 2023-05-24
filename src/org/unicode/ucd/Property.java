@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2022 Unicode Inc.
+// Copyright 2006-2023 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -329,6 +329,18 @@ public class Property {
 
   // added in 15.0.0
   public static Property kAlternateTotalStrokes      = new Property ("kAlternateTotalStrokes");
+
+  // added in 15.1.0
+  public static Property NFKC_SCF                    = new Property ("NFKC_SCF", "NFKC_Simple_Casefold");
+  public static Property ID_Compat_Math_Start        = new Property ("ID_Compat_Math_Start", "ID_Compat_Math_Start", true);
+  public static Property ID_Compat_Math_Continue     = new Property ("ID_Compat_Math_Continue", "ID_Compat_Math_Continue", true);
+  public static Property IDSU                        = new Property ("IDSU", "IDS_Unary_Operator", true);
+  public static Property kJapanese                   = new Property ("kJapanese");
+  public static Property kMojiJoho                   = new Property ("kMojiJoho");
+  public static Property kSMSZD2003Index             = new Property ("kSMSZD2003Index");
+  public static Property kSMSZD2003Readings          = new Property ("kSMSZD2003Readings");
+  public static Property kVietnameseNumeric          = new Property ("kVietnameseNumeric");
+  public static Property kZhuangNumeric              = new Property ("kZhuangNumeric");
 
   private String shortName;
   private String longName;

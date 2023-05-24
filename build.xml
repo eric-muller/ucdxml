@@ -3,7 +3,7 @@
 <!--
 COPYRIGHT AND PERMISSION NOTICE
 
-Copyright (c) 2006-2022 Unicode Inc.
+Copyright (c) 2006-2023 Unicode Inc.
 
 All rights reserved.
 
@@ -2303,6 +2303,95 @@ of the copyright holder.
     </concat>
   </target>
 
+  <target name='download-15.1.0'>
+    <delete dir='data/15.1.0'/>
+    <mkdir dir='data/15.1.0/ucd'/>
+    <mkdir dir='data/15.1.0/ucd/auxiliary'/>
+    <mkdir dir='data/15.1.0/ucd/extracted'/>
+    <mkdir dir='data/15.1.0/ucd/emoji'/>
+
+    <get src='${Public}/draft/UCD/ucd/ArabicShaping.txt'                  dest='data/15.1.0/ucd/ArabicShaping.txt'/>
+    <get src='${Public}/draft/UCD/ucd/BidiBrackets.txt'                   dest='data/15.1.0/ucd/BidiBrackets.txt'/>
+    <get src='${Public}/draft/UCD/ucd/BidiCharacterTest.txt'              dest='data/15.1.0/ucd/BidiCharacterTest.txt'/>
+    <get src='${Public}/draft/UCD/ucd/BidiMirroring.txt'                  dest='data/15.1.0/ucd/BidiMirroring.txt'/>
+    <get src='${Public}/draft/UCD/ucd/BidiTest.txt'                       dest='data/15.1.0/ucd/BidiTest.txt'/>
+    <get src='${Public}/draft/UCD/ucd/Blocks.txt'                         dest='data/15.1.0/ucd/Blocks.txt'/>
+    <get src='${Public}/draft/UCD/ucd/CJKRadicals.txt'                    dest='data/15.1.0/ucd/CJKRadicals.txt'/>
+    <get src='${Public}/draft/UCD/ucd/CaseFolding.txt'                    dest='data/15.1.0/ucd/CaseFolding.txt'/>
+    <get src='${Public}/draft/UCD/ucd/CompositionExclusions.txt'          dest='data/15.1.0/ucd/CompositionExclusions.txt'/>
+    <get src='${Public}/draft/UCD/ucd/DerivedAge.txt'                     dest='data/15.1.0/ucd/DerivedAge.txt'/>
+    <get src='${Public}/draft/UCD/ucd/DerivedCoreProperties.txt'          dest='data/15.1.0/ucd/DerivedCoreProperties.txt'/>
+    <get src='${Public}/draft/UCD/ucd/DerivedNormalizationProps.txt'      dest='data/15.1.0/ucd/DerivedNormalizationProps.txt'/>
+    <get src='${Public}/draft/UCD/ucd/EastAsianWidth.txt'                 dest='data/15.1.0/ucd/EastAsianWidth.txt'/>
+    <get src='${Public}/draft/UCD/ucd/EmojiSources.txt'                   dest='data/15.1.0/ucd/EmojiSources.txt'/>
+    <get src='${Public}/draft/UCD/ucd/EquivalentUnifiedIdeograph.txt'     dest='data/15.1.0/ucd/EquivalentUnifiedIdeograph.txt'/>
+    <get src='${Public}/draft/UCD/ucd/HangulSyllableType.txt'             dest='data/15.1.0/ucd/HangulSyllableType.txt'/>
+    <get src='${Public}/draft/UCD/ucd/Index.txt'                          dest='data/15.1.0/ucd/Index.txt'/>
+    <get src='${Public}/draft/UCD/ucd/IndicPositionalCategory.txt'        dest='data/15.1.0/ucd/IndicPositionalCategory.txt'/>
+    <get src='${Public}/draft/UCD/ucd/IndicSyllabicCategory.txt'          dest='data/15.1.0/ucd/IndicSyllabicCategory.txt'/>
+    <get src='${Public}/draft/UCD/ucd/Jamo.txt'                           dest='data/15.1.0/ucd/Jamo.txt'/>
+    <get src='${Public}/draft/UCD/ucd/LineBreak.txt'                      dest='data/15.1.0/ucd/LineBreak.txt'/>
+    <get src='${Public}/draft/UCD/ucd/NameAliases.txt'                    dest='data/15.1.0/ucd/NameAliases.txt'/>
+    <get src='${Public}/draft/UCD/ucd/NamedSequences.txt'                 dest='data/15.1.0/ucd/NamedSequences.txt'/>
+    <get src='${Public}/draft/UCD/ucd/NamedSequencesProv.txt'             dest='data/15.1.0/ucd/NamedSequencesProv.txt'/>
+    <get src='${Public}/draft/UCD/ucd/NamesList.html'                     dest='data/15.1.0/ucd/NamesList.html'/>
+    <get src='${Public}/draft/UCD/ucd/NamesList.txt'                      dest='data/15.1.0/ucd/NamesList.txt'/>
+    <get src='${Public}/draft/UCD/ucd/NormalizationCorrections.txt'       dest='data/15.1.0/ucd/NormalizationCorrections.txt'/>
+    <get src='${Public}/draft/UCD/ucd/NormalizationTest.txt'              dest='data/15.1.0/ucd/NormalizationTest.txt'/>
+    <get src='${Public}/draft/UCD/ucd/NushuSources.txt'                   dest='data/15.1.0/ucd/NushuSources.txt'/>
+    <get src='${Public}/draft/UCD/ucd/PropList.txt'                       dest='data/15.1.0/ucd/PropList.txt'/>
+    <get src='${Public}/draft/UCD/ucd/PropertyAliases.txt'                dest='data/15.1.0/ucd/PropertyAliases.txt'/>
+    <get src='${Public}/draft/UCD/ucd/PropertyValueAliases.txt'           dest='data/15.1.0/ucd/PropertyValueAliases.txt'/>
+    <get src='${Public}/draft/UCD/ucd/ReadMe.txt'                         dest='data/15.1.0/ucd/ReadMe.txt'/>
+    <get src='${Public}/draft/UCD/ucd/ScriptExtensions.txt'               dest='data/15.1.0/ucd/ScriptExtensions.txt'/>
+    <get src='${Public}/draft/UCD/ucd/Scripts.txt'                        dest='data/15.1.0/ucd/Scripts.txt'/>
+    <get src='${Public}/draft/UCD/ucd/SpecialCasing.txt'                  dest='data/15.1.0/ucd/SpecialCasing.txt'/>
+    <get src='${Public}/draft/UCD/ucd/StandardizedVariants.txt'           dest='data/15.1.0/ucd/StandardizedVariants.txt'/>
+    <get src='${Public}/draft/UCD/ucd/TangutSources.txt'                  dest='data/15.1.0/ucd/TangutSources.txt'/>
+    <get src='${Public}/draft/UCD/ucd/USourceData.txt'                    dest='data/15.1.0/ucd/USourceData.txt'/>
+    <get src='${Public}/draft/UCD/ucd/USourceGlyphs.pdf'                  dest='data/15.1.0/ucd/USourceGlyphs.pdf'/>
+    <get src='${Public}/draft/UCD/ucd/USourceRSChart.pdf'                 dest='data/15.1.0/ucd/USourceRSChart.pdf'/>
+    <get src='${Public}/draft/UCD/ucd/UnicodeData.txt'                    dest='data/15.1.0/ucd/UnicodeData.txt'/>
+    <get src='${Public}/draft/UCD/ucd/Unihan.zip'                         dest='data/15.1.0/ucd/Unihan.zip'/>
+    <get src='${Public}/draft/UCD/ucd/VerticalOrientation.txt'            dest='data/15.1.0/ucd/VerticalOrientation.txt'/>
+
+    <get src='${Public}/draft/UCD/ucd/extracted/DerivedBidiClass.txt'             dest='data/15.1.0/ucd/extracted/DerivedBidiClass.txt'/>
+    <get src='${Public}/draft/UCD/ucd/extracted/DerivedBinaryProperties.txt'      dest='data/15.1.0/ucd/extracted/DerivedBinaryProperties.txt'/>
+    <get src='${Public}/draft/UCD/ucd/extracted/DerivedCombiningClass.txt'        dest='data/15.1.0/ucd/extracted/DerivedCombiningClass.txt'/>
+    <get src='${Public}/draft/UCD/ucd/extracted/DerivedDecompositionType.txt'     dest='data/15.1.0/ucd/extracted/DerivedDecompositionType.txt'/>
+    <get src='${Public}/draft/UCD/ucd/extracted/DerivedEastAsianWidth.txt'        dest='data/15.1.0/ucd/extracted/DerivedEastAsianWidth.txt'/>
+    <get src='${Public}/draft/UCD/ucd/extracted/DerivedGeneralCategory.txt'       dest='data/15.1.0/ucd/extracted/DerivedGeneralCategory.txt'/>
+    <get src='${Public}/draft/UCD/ucd/extracted/DerivedJoiningGroup.txt'          dest='data/15.1.0/ucd/extracted/DerivedJoiningGroup.txt'/>
+    <get src='${Public}/draft/UCD/ucd/extracted/DerivedJoiningType.txt'           dest='data/15.1.0/ucd/extracted/DerivedJoiningType.txt'/>
+    <get src='${Public}/draft/UCD/ucd/extracted/DerivedLineBreak.txt'             dest='data/15.1.0/ucd/extracted/DerivedLineBreak.txt'/>
+    <get src='${Public}/draft/UCD/ucd/extracted/DerivedName.txt'                  dest='data/15.1.0/ucd/extracted/DerivedName.txt'/>
+    <get src='${Public}/draft/UCD/ucd/extracted/DerivedNumericType.txt'           dest='data/15.1.0/ucd/extracted/DerivedNumericType.txt'/>
+    <get src='${Public}/draft/UCD/ucd/extracted/DerivedNumericValues.txt'         dest='data/15.1.0/ucd/extracted/DerivedNumericValues.txt'/>
+
+    <get src='${Public}/draft/UCD/ucd/auxiliary/GraphemeBreakProperty.txt'        dest='data/15.1.0/ucd/auxiliary/GraphemeBreakProperty.txt'/>
+    <get src='${Public}/draft/UCD/ucd/auxiliary/GraphemeBreakTest.html'           dest='data/15.1.0/ucd/auxiliary/GraphemeBreakTest.html'/>
+    <get src='${Public}/draft/UCD/ucd/auxiliary/GraphemeBreakTest.txt'            dest='data/15.1.0/ucd/auxiliary/GraphemeBreakTest.txt'/>
+    <get src='${Public}/draft/UCD/ucd/auxiliary/LineBreakTest.html'               dest='data/15.1.0/ucd/auxiliary/LineBreakTest.html'/>
+    <get src='${Public}/draft/UCD/ucd/auxiliary/LineBreakTest.txt'                dest='data/15.1.0/ucd/auxiliary/LineBreakTest.txt'/>
+    <get src='${Public}/draft/UCD/ucd/auxiliary/SentenceBreakProperty.txt'        dest='data/15.1.0/ucd/auxiliary/SentenceBreakProperty.txt'/>
+    <get src='${Public}/draft/UCD/ucd/auxiliary/SentenceBreakTest.html'           dest='data/15.1.0/ucd/auxiliary/SentenceBreakTest.html'/>
+    <get src='${Public}/draft/UCD/ucd/auxiliary/SentenceBreakTest.txt'            dest='data/15.1.0/ucd/auxiliary/SentenceBreakTest.txt'/>
+    <get src='${Public}/draft/UCD/ucd/auxiliary/WordBreakProperty.txt'            dest='data/15.1.0/ucd/auxiliary/WordBreakProperty.txt'/>
+    <get src='${Public}/draft/UCD/ucd/auxiliary/WordBreakTest.html'               dest='data/15.1.0/ucd/auxiliary/WordBreakTest.html'/>
+    <get src='${Public}/draft/UCD/ucd/auxiliary/WordBreakTest.txt'                dest='data/15.1.0/ucd/auxiliary/WordBreakTest.txt'/>
+
+    <get src='${Public}/draft/UCD/ucd/emoji/ReadMe.txt'                           dest='data/15.1.0/ucd/emoji/ReadMe.txt'/>
+    <get src='${Public}/draft/UCD/ucd/emoji/emoji-data.txt'                       dest='data/15.1.0/ucd/emoji/emoji-data.txt'/>
+    <get src='${Public}/draft/UCD/ucd/emoji/emoji-variation-sequences.txt'        dest='data/15.1.0/ucd/emoji/emoji-variation-sequences.txt'/>
+
+    <unzip src='data/15.1.0/ucd/Unihan.zip' dest='data/15.1.0/ucd'/>
+    <delete file='data/15.1.0/ucd/Unihan.zip'/>
+
+    <concat encoding='UTF-8' destfile='data/15.1.0/ucd/Unihan.txt'>
+      <fileset dir="data/15.1.0/ucd" includes="Unihan/Unihan_*.txt"/>
+    </concat>
+  </target>
+
   <target name='download-ucd' depends='download-2.0.0,
                                        download-2.1.2,
                                        download-2.1.5,
@@ -2407,6 +2496,18 @@ of the copyright holder.
 
   <target name='diff15'>
     <difffull v1='14.0.0' v2='15.0.0'/>
+  </target>
+
+  <target name='ucd15.1'>
+    <ucdxml v='15.1.0'/>
+  </target>
+
+  <target name='validate15.1'>
+    <validate-ucd v='15.0.0'/>
+  </target>
+
+  <target name='diff15.1'>
+    <difffull v1='15.0.0' v2='15.1.0'/>
   </target>
 
   <target name='xsd'>

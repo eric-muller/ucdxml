@@ -9,17 +9,17 @@ On mac:
 
 ant compile
 
-ant download-14.0.0
-
-ant ucd14
-
 ant download-15.0.0
 
 ant ucd15
 
-ant validate15
+ant download-15.1.0
 
-ant diff15
+ant ucd15.1
+
+ant validate15.1
+
+ant diff15.1
 
 
 RNV (validateur Relax NG): http://www.davidashen.net/rnv.html
