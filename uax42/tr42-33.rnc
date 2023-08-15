@@ -808,6 +808,12 @@
                     | "Visual_Order_Left" }?
 
   code-point-attributes &=
+     attribute InCB { "Consonant"
+                    | "Extend"
+                    | "Linker"
+                    | "None" }?
+
+  code-point-attributes &=
     attribute IDS { boolean }?
 
   code-point-attributes &=
@@ -1094,10 +1100,10 @@
      { list { xsd:string {pattern="[1-8][0-9]{4}\.[0-9]{2}[0-3]"} +}}?
 
   code-point-attributes &= attribute kHanyuPinlu
-     { list { xsd:string {pattern="[a-z̀-̂̄̈̌]+\([0-9]+\)"} +}}?
+     { list { xsd:string {pattern="[a-z\x{300}-\x{302}\x{304}\x{308}\x{30C}]+\([0-9]+\)"} +}}?
 
   code-point-attributes &= attribute kHanyuPinyin
-     { list { xsd:string {pattern="([0-9]{5}\.[0-9]{2}0,)*[0-9]{5}\.[0-9]{2}0:([a-z̀-̂̄̈̌]+,)*[a-z̀-̂̄̈̌]+"} +}}?
+     { list { xsd:string {pattern="([0-9]{5}\.[0-9]{2}0,)*[0-9]{5}\.[0-9]{2}0:([a-z\x{300}-\x{302}\x{304}\x{308}\x{30C}]+,)*[a-z\x{300}-\x{302}\x{304}\x{308}\x{30C}]+"} +}}?
 
   code-point-attributes &= attribute kHDZRadBreak
      { xsd:string {pattern="[⼀-⿕]\[U\+2?[0-9A-F]{4}\]:[1-8][0-9]{4}\.[0-9]{2}[012]"} }?
@@ -1361,8 +1367,8 @@
      { xsd:string {pattern="[0-9]{4}"} }?
 
   code-point-attributes &= attribute kMandarin
-     { list {   xsd:string {pattern="[A-ZÜ̈]+[1-5]"}
-              | xsd:string {pattern="[a-z̀́̂̄̈̌]+"} +}}?
+     { list {   xsd:string {pattern="[A-ZÜ\x{308}]+[1-5]"}
+              | xsd:string {pattern="[a-z\x{300}-\x{302}\x{304}\x{308}\x{30C}]+"} +}}?
 
   code-point-attributes &= attribute kMatthews
      { xsd:string {pattern="[0-9]{1,4}(a|\.5)?"} }?
@@ -1425,7 +1431,7 @@ code-point-attributes &= attribute kSemanticVariant
      { list { xsd:string {pattern="[0-9]{1,3}\.[0-9]{2}"} +}}?
 
   code-point-attributes &= attribute kSMSZD2003Readings
-     { list { xsd:string {pattern="[a-z̀́̂̄̈̌]+(,[a-z̀́̂̄̈̌]+)*粵[a-z]+[1-6]([a-z]+[1-6])?(,[a-z]+[1-6]([a-z]+[1-6])?)*"} +}}?
+     { list { xsd:string {pattern="[a-z\x{300}-\x{302}\x{304}\x{308}\x{30C}]+(,[a-z\x{300}-\x{302}\x{304}\x{308}\x{30C}]+)*粵[a-z]+[1-6]([a-z]+[1-6])?(,[a-z]+[1-6]([a-z]+[1-6])?)*"} +}}?
 
 code-point-attributes &= attribute kSpecializedSemanticVariant
      { list { xsd:string {pattern="U\+[0-9A-F]{4,5}(<[ks][A-Za-z0-9]+(:[TBZJF]+)?(,[ks][A-Za-z0-9]+(:[TBZJF]+)?)*)?"} +}}?
@@ -1437,7 +1443,7 @@ code-point-attributes &= attribute kSpecializedSemanticVariant
      { list { xsd:string {pattern="[0-9]{4}"} +}}?
 
   code-point-attributes &= attribute kTang
-     { list { xsd:string {pattern="\*?[A-Za-z\(\)æɑəɛ̀̌]+"} +}}?
+     { list { xsd:string {pattern="\*?[A-Za-z\(\)æɑəɛ\x{300}\x{30C}]+"} +}}?
 
 
   code-point-attributes &= attribute kTGHZ2013 { text }?
@@ -1454,7 +1460,7 @@ code-point-attributes &= attribute kSpecializedSemanticVariant
      { xsd:string {pattern="G?H?J?K?M?P?T?"} }?
 
   code-point-attributes &= attribute kVietnamese
-     { list { xsd:string {pattern="[A-Za-zà-ừ-̛̣̆̉ạ-ỹ]+"} +}}?
+     { list { xsd:string {pattern="[A-Za-zà-ư\x{300}-\x{306}\x{309}\x{31b}\x{323}ạ-ỹ]+"} +}}?
 
   code-point-attributes &= attribute kVietnameseNumeric
      { xsd:string {pattern="[0-9]+"} }?

@@ -667,7 +667,24 @@ public class Ucd {
   }
 
   private void parseDerivedCoreProperties (Version v, URL baseURL) throws Exception {
-    if (v.isAtLeast (Version.V3_1_0)) {
+    final Set<Property> binaryProperties = new HashSet<Property> ();
+
+    if (v.isAtLeast (Version.V15_1_0)) {
+      Parser.parseSemiDelimitedFileWithCodePoints (baseURL, "DerivedCoreProperties.txt", 0, "US-ASCII",
+        new LoaderWithCodePoints () {
+          public void process (int firstCp, int lastCp, String[] fields) {
+            Property p = Property.fromString(fields [1]);
+            if (fields.length == 2) {
+              binaryProperties.add (p);
+              repertoire.put (firstCp, lastCp, p, "Y"); }
+            else {
+              repertoire.put (firstCp, lastCp, p, fields[2]); }}});
+
+      for (Property p : binaryProperties) {
+        repertoire.putDefault (p, "N"); }
+      repertoire.putDefault (Property.InCB, "None"); }
+
+    else if (v.isAtLeast (Version.V3_1_0)) {
       parseBinaryPropertyFile (v, baseURL, "DerivedCoreProperties.txt", "US-ASCII"); }
   }
 

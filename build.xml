@@ -2388,7 +2388,7 @@ of the copyright holder.
     <delete file='data/15.1.0/ucd/Unihan.zip'/>
 
     <concat encoding='UTF-8' destfile='data/15.1.0/ucd/Unihan.txt'>
-      <fileset dir="data/15.1.0/ucd" includes="Unihan/Unihan_*.txt"/>
+      <fileset dir="data/15.1.0/ucd" includes="Unihan_*.txt"/>
     </concat>
   </target>
 
