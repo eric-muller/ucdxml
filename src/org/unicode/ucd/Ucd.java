@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2023 Unicode Inc.
+// Copyright 2006-2024 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -94,6 +94,7 @@ public class Ucd {
   public StandardizedVariants standardizedVariants;
   public CJKRadicals cjkRadicals;
   public EmojiSources emojiSources;
+  public DoNotEmit doNotEmit;
 
   //----------------------------------------------------------------------------
   void normalize () {
@@ -923,6 +924,15 @@ public class Ucd {
     // Unicode 15.0
     scriptMap.put ("KAWI",                     "Kawi");
     scriptMap.put ("NAG_MUNDARI",              "Nagm");
+
+    // Unicode 16.0
+    scriptMap.put ("GARAY",                    "Gara");
+    scriptMap.put ("GURUNG_KHEMA",             "Gukh");
+    scriptMap.put ("KIRAT_RAI",                "Krai");
+    scriptMap.put ("OL_ONAL",                  "Onao");
+    scriptMap.put ("SUNUWAR",                  "Sunu");
+    scriptMap.put ("TODHRI",                   "Todr");
+    scriptMap.put ("TULU_TIGALARI",            "Tutg");
   }
 
 
@@ -1299,6 +1309,14 @@ public class Ucd {
             emojiSources.add (new EmojiSource (fields [0], fields [1], fields [2], fields [3])); }}); }
   }
 
+  private void parseDoNotEmit (Version v, URL baseURL) throws Exception {
+    if (v.isAtLeast (Version.V16_0_0)) {
+      Parser.parseSemiDelimitedFile (baseURL, "DoNotEmit.txt", "US-ASCII",
+        new Loader () {
+          public void process (String[] fields) {
+            doNotEmit.add (new Instead (fields [0], fields [1], fields [2])); }}); }
+  }
+
   private void parseVerticalOrientation (Version v, URL baseURL) throws Exception {
     if (v.isAtLeast (Version.V10_0_0)) {
       Parser.parseSemiDelimitedFileWithCodePoints (baseURL, "VerticalOrientation.txt", 0, "US-ASCII",
@@ -1325,7 +1343,8 @@ public class Ucd {
     standardizedVariants = new StandardizedVariants ();
     cjkRadicals = new CJKRadicals ();
     emojiSources = new EmojiSources ();
-
+    doNotEmit = new DoNotEmit ();
+    
     if (files.contains (UcdFile.UnicodeData)) {
       parseUnicodeData (v, baseURL); }
     if (files.contains (UcdFile.DerivedBidiClass)) {
@@ -1405,6 +1424,9 @@ public class Ucd {
     if (files.contains (UcdFile.NameAliases)) {
       parseNameAliases (v, baseURL); }
 
+    if (files.contains (UcdFile.DoNotEmit)) {
+      parseDoNotEmit (v, baseURL); }
+    
     if (files.contains (UcdFile.VerticalOrientation)) {
       parseVerticalOrientation (v, baseURL); }
 
@@ -2196,6 +2218,14 @@ public class Ucd {
       else if ("emoji-source".equals (qname)) {
         emojiSources.fromXML (qname, at); }
 
+      else if ("do-not-emit".equals (qname)) {
+        doNotEmit = new DoNotEmit ();
+        doNotEmit.fromXML (qname, at); }
+
+      else if ("instead".equals (qname)) {
+        doNotEmit.fromXML (qname, at); }
+
+
 //      else if ("name-aliases".equals (qname)) {
 //        nameAliases = new NameAliases ();
 //        nameAliases.fromXML (qname, at); }
@@ -2309,6 +2339,10 @@ public class Ucd {
             AttributesImpl atb = new AttributesImpl ();
             emojiSources.toXML (ch, "emoji-sources", atb); }
 
+          if (doNotEmit != null) {
+            AttributesImpl atb = new AttributesImpl ();
+            doNotEmit.toXML (ch, "do-not-emit", atb); }
+
           ch.endElement (NAMESPACE, "ucd", "ucd"); }
 
         ch.endDocument (); }
@@ -2364,6 +2398,8 @@ public class Ucd {
       cjkRadicals.diff (other.cjkRadicals, out, detailsLevel); }
     if (emojiSources != null && other.emojiSources != null) {
       emojiSources.diff (other.emojiSources, out, detailsLevel); }
+    if (doNotEmit != null && other.doNotEmit != null) {
+      doNotEmit.diff (other.doNotEmit, out, detailsLevel); }
 
     out.println ("");
     out.println ("============================================= end of report");
@@ -2410,6 +2446,7 @@ public class Ucd {
     standardizedVariants.internalStats (out);
     cjkRadicals.internalStats (out);
     emojiSources.internalStats (out);
+    doNotEmit.internalStats (out);
   }
 
   public static long getActiveMemory () {

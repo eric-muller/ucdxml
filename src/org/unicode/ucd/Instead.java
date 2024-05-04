@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2024 Unicode Inc.
+// Copyright 2024 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -33,73 +33,57 @@
 
 package org.unicode.ucd;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.xml.transform.sax.TransformerHandler;
 
-public enum UcdFile {
-  ArabicShaping,
-  BidiBrackets,
-  BidiMirroring,
-  Blocks,
-  CaseFolding,
-  CJKRadicalNumbers,
-  CompositionExclusions,
-  DerivedAge,
-  DerivedCoreProperties,
-  DerivedNormalizationProps,
-  EastAsianWidth,
-  EmojiSources,
-  EquivalentUnifiedIdeograph,
-  HangulSyllableType,
-  IndicSyllabicCategory,
-  IndicMatraCategory,
-  IndicPositionalCategory,
-  Jamo,
-  LineBreak,
-  NameAliases,
-  NamedSequences,
-  NamedSequencesProv,
-  NormalizationCorrections,
-  NushuSources,
-  PropList,
-  PropertyAliases,
-  PropertyValueAliases,
-  Scripts,
-  ScriptExtensions,
-  SpecialCasing,
-  StandardizedVariants,
-  TangutSources,
-  UnicodeData,
-  Unihan,
-  UnihanNumeric,
-  VerticalOrientation,
+import org.xml.sax.Attributes;
+import org.xml.sax.helpers.AttributesImpl;
 
-  EmojiData,
-  EmojiVariationSequences,
+public class Instead {
+  String of;
+  String use;
+  String because;
 
-  DoNotEmit,
-  
-  GraphemeBreakProperty,
-  SentenceBreakProperty,
-  WordBreakProperty,
-
-  DerivedBidiClass,
-  DerivedBinaryProperties,
-  DerivedCombiningClass,
-  DerivedDecompositionType,
-  DerivedEastAsianWidth,
-  DerivedGeneralCategory,
-  DerivedJoiningGroup,
-  DerivedJoiningType,
-  DerivedLineBreak,
-  DerivedNumericType,
-  DerivedNumericValues;
-
-  static final Set<UcdFile> allFiles;
-
-  static {
-    allFiles = new HashSet<UcdFile> ();
-    for (UcdFile f : UcdFile.values ()) {
-      allFiles.add (f); }
+  public Instead (String of, String use, String because) {
+    this.of = of;
+    this.use = use;
+    this.because = because;
   }
+
+  public String toString () {
+    return "{dnu: " + of + ", " + use + ", " + because + "}";
+  }
+
+  public boolean equals (Object o) {
+    if (o == this) {
+      return true; }
+    if (o == null) {
+      return false; }
+    if (! (o instanceof Instead)) {
+      return false; }
+    Instead other = (Instead) o;
+    return of.equals (other.of) && use.equals (other.use) && because.equals (other.because);
+  }
+
+  public int hashCode () {
+    return of.hashCode ();
+  }
+
+  //----------------------------------------------------------------------------
+  public static Instead fromXML (Attributes at) {
+    String of = at.getValue ("of");
+    String use = at.getValue ("use");
+    String because = at.getValue ("because");
+    return new Instead (of, use, because);
+  }
+
+  public void toXML (TransformerHandler ch, String elt, AttributesImpl at) throws Exception {
+    at.addAttribute ("", "of", "of", "CDATA", of);
+    at.addAttribute ("", "use", "use", "CDATA", use);
+    at.addAttribute ("", "because", "because", "CDATA", because);
+
+    ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
+      ch.endElement (Ucd.NAMESPACE, elt, elt); }
+  }
+
+  //----------------------------------------------------------------------------
 }

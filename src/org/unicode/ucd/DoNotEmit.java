@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2016 Unicode Inc.
+// Copyright 2024 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -44,79 +44,75 @@ import javax.xml.transform.sax.TransformerHandler;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.AttributesImpl;
 
-public class EmojiSources {
-  // The emoji sources, in the order in which they are added
-  List<EmojiSource> sources = null;
-
-  // The emoji sources, indexed by Unicode code point
-  SortedMap<String, EmojiSource> sourcesByUnicode = null;
-
-  public EmojiSources () {
-    this.sources = new LinkedList<EmojiSource> ();
-    this.sourcesByUnicode = new TreeMap<String, EmojiSource> ();
+public class DoNotEmit {
+  List<Instead> insteads = null;
+  SortedMap<String, Instead> insteadsByOf = null;
+  
+  public DoNotEmit () {
+    this.insteads = new LinkedList<Instead> ();
+    this.insteadsByOf = new TreeMap<String, Instead> ();
   }
 
   public void internalStats (PrintStream out) {
-    out.println ("  " + sourcesByUnicode.size () + " emoji sources");
+    out.println ("  " + insteadsByOf.size () + " do not emi");
   }
 
-  public void add (EmojiSource es) {
-    sources.add (es);
-    sourcesByUnicode.put (es.unicode, es);
+  public void add (Instead instead) {
+    insteads.add (instead);
+    insteadsByOf.put (instead.of, instead);
   }
 
   //-----------------------------------------------------------------------------
   public void fromXML (String qname, Attributes at) {
-    if ("emoji-source".equals (qname)) {
-      add (EmojiSource.fromXML (at)); }
+    if ("instead".equals (qname)) {
+      add (Instead.fromXML (at)); }
   }
 
   public void toXML (TransformerHandler ch, String elt, AttributesImpl at) throws Exception {
-    if (sources.isEmpty ()) {
+    if (insteads.isEmpty ()) {
       return; }
 
     ch.startElement (Ucd.NAMESPACE, elt, elt, at); {
-      for (EmojiSource v : sources) {
+      for (Instead instead : insteads) {
         AttributesImpl at2 = new AttributesImpl ();
-        v.toXML (ch, "emoji-source", at2); }
+        instead.toXML (ch, "instead", at2); }
       ch.endElement(Ucd.NAMESPACE, elt, elt); }
   }
 
   //----------------------------------------------------------------------------
 
-  public void diff (EmojiSources older, PrintStream out, int detailsLevel) {
+  public void diff (DoNotEmit older, PrintStream out, int detailsLevel) {
     DifferenceCounter cc = new DifferenceCounter ();
     boolean includeDetails = detailsLevel >= 1;
 
     out.println ("");
-    out.println ("================================= emoji sources");
+    out.println ("================================= do not emit");
     if (includeDetails) {
       out.println (""); }
 
-    for (EmojiSource newNc : sourcesByUnicode.values ()) {
+    for (Instead newInstead : insteadsByOf.values ()) {
 
-      EmojiSource oldNc = (older == null) ? null : older.sourcesByUnicode.get (newNc.unicode);
-      if (oldNc == null) {
+      Instead oldInstead = (older == null) ? null : older.insteadsByOf.get (newInstead.of);
+      if (oldInstead == null) {
         cc.added ();
         if (includeDetails) {
-          out.println ("new: " + newNc); }}
-      else if (! newNc.equals (oldNc)) {
+          out.println ("new: " + newInstead); }}
+      else if (! newInstead.equals (oldInstead)) {
         cc.changed ();
         if (includeDetails) {
-          out.println ("changed: from " + oldNc + " to " + newNc); }}
+          out.println ("changed: from " + oldInstead + " to " + newInstead); }}
       else {
         cc.unchanged (); }}
 
-    for (EmojiSource oldNc : older.sourcesByUnicode.values ()) {
-      if (sourcesByUnicode.get (oldNc.unicode) == null) {
+    for (Instead oldInstead : older.insteadsByOf.values ()) {
+      if (insteadsByOf.get (oldInstead.of) == null) {
         cc.removed ();
         if (includeDetails) {
-          out.println ("removed: " + oldNc); }}}
+          out.println ("removed: " + oldInstead); }}}
 
     if (includeDetails) {
       out.println (""); }
 
     out.println (cc);
   }
-
 }

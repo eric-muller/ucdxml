@@ -1,6 +1,6 @@
 // COPYRIGHT AND PERMISSION NOTICE
 //
-// Copyright 2006-2023 Unicode Inc.
+// Copyright 2006-2024 Unicode Inc.
 //
 // All rights reserved.
 //
@@ -342,6 +342,10 @@ public class Property {
   public static Property kVietnameseNumeric          = new Property ("kVietnameseNumeric");
   public static Property kZhuangNumeric              = new Property ("kZhuangNumeric");
   public static Property InCB                        = new Property ("InCB", "Indic_Conjunct_Break", true);
+
+  // added in 16.0.0
+  public static Property MCM                         = new Property ("MCM", "Modifier_Combining_Mark", false);
+  public static Property kFanqie                     = new Property ("kFanqie");
 
   private String shortName;
   private String longName;
