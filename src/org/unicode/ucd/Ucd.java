@@ -1144,7 +1144,10 @@ public class Ucd {
               // UnicodeData.txt, and we need to override them,
               // hence the "putForced" rather than the the usual "put".
               repertoire.putForced (cp, cp, Property.nt, "Nu");
-              repertoire.putForced (cp, cp, Property.nv, fields [2]); }}});
+              String nv = fields [2];
+              if (v.isAtLeast (Version.V16_0_0)) {
+                nv = nv.split (" ") [0]; }
+              repertoire.putForced (cp, cp, Property.nv, nv); }}});
 
     if (! numericValuesOnly) {
       final Version vv = v;
