@@ -26,7 +26,7 @@
     <revhistory>
       <revision>
         <revnumber>35</revnumber>
-        <date>2024-05-06</date>
+        <date>2024-05-04</date>
         <revdescription>
           <itemizedlist>
             <listitem><para>New value for the <sgmltag>age</sgmltag> attribute:
@@ -55,12 +55,12 @@
 
             <listitem><para>New value for the <sgmltag>InSC</sgmltag> attribute: <sgmltag>Reordering_Killer</sgmltag>.</para></listitem>
 
+
             <listitem><para>New attributes: <sgmltag>MCM</sgmltag>, <sgmltag>kFanqie</sgmltag>.</para></listitem>
 
             <listitem><para>Added the <sgmltag>do-not-emit</sgmltag>
             element.</para></listitem>
 
-            <listitem><para>The <sgmltag>nv</sgmltag> attribute is now restricted to a single number.</para></listitem>
           </itemizedlist>
         </revdescription>
       </revision>
@@ -1908,7 +1908,7 @@
     attribute nt { "None" | "De" | "Di" | "Nu" }?
 
   code-point-attributes &amp;=
-    attribute nv { "NaN" | <phrase revisionflag='deleted'>list { </phrase>xsd:string { pattern = "-?[0-9]+(/[0-9]+)?" } <phrase revisionflag='deleted'>+}</phrase>}?
+    attribute nv { "NaN" | list { xsd:string { pattern = "-?[0-9]+(/[0-9]+)?" } +}}?
 </lp:scrap>
       </section>
 
