@@ -340,6 +340,7 @@ public class Property {
   public static Property kSMSZD2003Index             = new Property ("kSMSZD2003Index");
   public static Property kSMSZD2003Readings          = new Property ("kSMSZD2003Readings");
   public static Property kVietnameseNumeric          = new Property ("kVietnameseNumeric");
+  public static Property kZhuang                     = new Property ("kZhuang");
   public static Property kZhuangNumeric              = new Property ("kZhuangNumeric");
   public static Property InCB                        = new Property ("InCB", "Indic_Conjunct_Break", true);
 
