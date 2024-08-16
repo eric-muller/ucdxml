@@ -330,6 +330,7 @@ public class Ucd {
     jgMap.put ("HETH",                   "Heth");
     jgMap.put ("KAF",                    "Kaf");
     jgMap.put ("CAF",                    "Kaf"); // 2.x
+    jgMap.put ("KASHMIRI YEH",           "Kashmiri_Yeh");
     jgMap.put ("KAPH",                   "Kaph");
     jgMap.put ("KHAPH",                  "Khaph");
     jgMap.put ("KNOTTED HEH",            "Knotted_Heh");

@@ -54,7 +54,7 @@ public class DoNotEmit {
   }
 
   public void internalStats (PrintStream out) {
-    out.println ("  " + insteadsByOf.size () + " do not emi");
+    out.println ("  " + insteadsByOf.size () + " do not emit");
   }
 
   public void add (Instead instead) {

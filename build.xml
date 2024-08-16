@@ -2443,6 +2443,7 @@ of the copyright holder.
     <get src='${Public}/16.0.0/ucd/USourceRSChart.pdf'                 dest='data/16.0.0/ucd/USourceRSChart.pdf'/>
     <get src='${Public}/16.0.0/ucd/UnicodeData.txt'                    dest='data/16.0.0/ucd/UnicodeData.txt'/>
     <get src='${Public}/16.0.0/ucd/Unihan.zip'                         dest='data/16.0.0/ucd/Unihan.zip'/>
+    <get src='${Public}/16.0.0/ucd/Unikemet.txt'                       dest='data/16.0.0/ucd/Unikemet.txt'/>
     <get src='${Public}/16.0.0/ucd/VerticalOrientation.txt'            dest='data/16.0.0/ucd/VerticalOrientation.txt'/>
 
     <get src='${Public}/16.0.0/ucd/extracted/DerivedBidiClass.txt'             dest='data/16.0.0/ucd/extracted/DerivedBidiClass.txt'/>
