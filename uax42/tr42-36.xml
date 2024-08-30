@@ -17,16 +17,11 @@
       <firstname>Eric</firstname>
       <email>eric.muller@efele.net</email>
     </author>
-    <author>
-      <surname>Iancu</surname>
-      <firstname>Lauren&#x021B;iu</firstname>
-      <email>liancu@unicode.org</email>
-    </author>
 
     <revhistory>
       <revision>
         <revnumber>36</revnumber>
-        <date>2024-08-15</date>
+        <date>2024-08-30</date>
         <revdescription>
           <itemizedlist>
             <listitem><para>New value for the <sgmltag>age</sgmltag> attribute:
@@ -3436,7 +3431,8 @@ code-point-attributes &amp;= attribute kSpecializedSemanticVariant
     <para>Thanks to Markus Scherer and Mark Davis for their help
     developing this XML representation. Thanks to the reviewers: Julie
     Allen, Ernest van den Boogaard, Daniel B&#x00FC;nzli, John Cowan,
-    Asmus Freytag, Felix Sasaki, Andrew West.</para>
+    Asmus Freytag, Felix Sasaki, Andrew West. Special thanks to
+    Lauren&#x021B;iu Iancu.</para>
   </acknowledgments>
 
 </article>
