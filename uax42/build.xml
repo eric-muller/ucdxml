@@ -3,11 +3,11 @@
 <project name='book-common' default='all'>
 
   <property name="v">tr42-36</property>
+  <property name="tr41">tr41-34</property>
 
   <path id='classpath'>
     <pathelement path="../external/saxon9he.jar"/>
   </path>
-
 
   <target name='archive'>
     <copy file='index.xml' tofile='${v}.xml'/>
@@ -27,7 +27,7 @@
         <arg value="-xsl:tr2html.xsl"/>
         <arg value="-o:${v}.html"/>
     </java>
-
+    <replace file="${v}.html" token="tr41-xx" value="${tr41}"/>
   </target>
 
 
