@@ -2,3 +2,4 @@ data/
 src/**/*.class
 schema/ucd.rnc
 uax42/ucd.rnc
+**/.DS_Store
